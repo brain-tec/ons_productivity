@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: budget_report.xml
+  Module: ons_productivity_budget
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <record model="ir.actions.report.xml" id="ons_account_report_trial_balance_s_budget">
+             <field name="report_type">webkit</field>
+             <field name="report_name">account.ons_account_report_trial_balance_s_budget</field>
+             <field eval="[(6,0,[])]" name="groups_id"/>
+             <field eval="0" name="multi"/>
+             <field eval="0" name="auto"/>
+             <field eval="1" name="header"/>
+             <field name="model">account.account</field>
+             <field name="type">ir.actions.report.xml</field>
+             <field name="name">Simplified Trial Balance Budget by Open-Net</field>
+             <field name="report_rml">ons_productivity_budget/report/trial_balance_s_budget.mako</field>
+             <field name="report_file">ons_productivity_budget/report/trial_balance_s_budget.mako</field>
+         </record>
+
+        <record model="ir.actions.report.xml" id="ons_account_report_trial_balance_f_budget">
+             <field name="report_type">webkit</field>
+             <field name="report_name">account.ons_account_report_trial_balance_f_budget</field>
+             <field eval="[(6,0,[])]" name="groups_id"/>
+             <field eval="0" name="multi"/>
+             <field eval="0" name="auto"/>
+             <field eval="1" name="header"/>
+             <field name="model">account.account</field>
+             <field name="type">ir.actions.report.xml</field>
+             <field name="name">Complete Trial Balance Budget by Open-Net</field>
+             <field name="report_rml">ons_productivity_budget/report/trial_balance_f_budget.mako</field>
+             <field name="report_file">ons_productivity_budget/report/trial_balance_f_budget.mako</field>
+         </record>
+
+        <record model="ir.actions.report.xml" id="ons_account_report_trial_balance_simplified">
+             <field name="report_type">webkit</field>
+             <field name="report_name">account.ons_account_report_trial_balance_simplified</field>
+             <field eval="[(6,0,[])]" name="groups_id"/>
+             <field eval="0" name="multi"/>
+             <field eval="0" name="auto"/>
+             <field eval="1" name="header"/>
+             <field name="model">account.account</field>
+             <field name="type">ir.actions.report.xml</field>
+             <field name="name">Trial Balance Simplified by Open-Net</field>
+             <field name="report_rml">ons_productivity_budget/report/trial_balance_simplified.mako</field>
+             <field name="report_file">ons_productivity_budget/report/trial_balance_simplified.mako</field>
+         </record>
+
+        <record model="ir.actions.report.xml" id="ons_account_report_open_invoices_webkit">
+             <field name="report_type">webkit</field>
+             <field name="report_name">account.ons_account_report_open_invoices_webkit</field>
+             <field eval="[(6,0,[])]" name="groups_id"/>
+             <field eval="0" name="multi"/>
+             <field eval="0" name="auto"/>
+             <field eval="1" name="header"/>
+             <field name="model">account.account</field>
+             <field name="type">ir.actions.report.xml</field>
+             <field name="name">Open Invoices Report by Open-Net</field>
+             <field name="report_rml">ons_productivity_budget/report/open_invoices.mako</field>
+             <field name="report_file">ons_productivity_budget/report/open_invoices.mako</field>
+         </record>
+        
+        <report 
+            auto="False" 
+            header="True" 
+            id="ons_account_report_budget_webkit" 
+            model="account.account" 
+            name="ons_budget_webkit"  
+            file="ons_productivity_budget/report/budget.mako"
+            string="Budget by Open-Net" 
+            report_type="webkit" />
+
+    </data>
+</openerp>

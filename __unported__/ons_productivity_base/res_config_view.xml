@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: res_config_view.xml
+  Module: ons_productivity_acocunting
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+    <!-- Configuration -->
+        <record model="ir.ui.view" id="onsp_view_base_config">
+            <field name="name">onsp base settings inh01</field>
+            <field name="model">base.config.settings</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base_setup.view_general_configuration"/>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <div name="multi_company" position="after">
+                    <div name="ons_base_options">
+                        <field name="default_onsp_company_parent_company" class="oe_inline"/>
+                        <label for="default_onsp_company_parent_company"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: wizard/open_invoices_wizard_view.xml
+  Module: ons_productivity_budget
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="onsp_account_open_invoices_webkit">
+            <field name="name">Open-Net wizard: Open Invoices Report</field>
+            <field name="model">open.invoices.webkit</field>
+            <field name="inherit_id" ref="account_financial_report_webkit.account_open_invoices_view_webkit"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/form/notebook[1]/page[@string='Layout Options']/group[1]" position="inside">
+                        <field name="customer_layout"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</openerp>

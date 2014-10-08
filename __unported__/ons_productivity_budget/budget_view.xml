@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: budget_view.xml
+  Module: ons_productivity_budget
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+<data>
+
+        <!--
+            Complement to crossovered.budget.lines
+        -->
+        <record model="ir.ui.view" id="onsp_view_budget_post_form">
+            <field name="name">onsp_view_budget_post_form</field>
+            <field name="model">account.budget.post</field>
+            <field name="inherit_id" ref="account_budget.view_budget_post_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/notebook/page[@string='Budget Lines']/field[@name='crossovered_budget_line']/tree/field[@name='analytic_account_id']" position="before">
+                    <field name="name"/>
+                </xpath>
+                <xpath expr="/form/notebook/page[@string='Budget Lines']/field[@name='crossovered_budget_line']/form/group[1]/field[@name='analytic_account_id']" position="before">
+                    <field name="name"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="onsp_crossovered_budget_view_form">
+            <field name="name">onsp_crossovered_budget_view_form</field>
+            <field name="model">crossovered.budget</field>
+            <field name="inherit_id" ref="account_budget.crossovered_budget_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[@string='Budget Lines']/field[@name='crossovered_budget_line']/tree/field[@name='analytic_account_id']" position="before">
+                    <field name="name"/>
+                </xpath>
+                <xpath expr="/form/sheet/notebook/page[@string='Budget Lines']/field[@name='crossovered_budget_line']/form/group[1]/group[1]/field[@name='analytic_account_id']" position="before">
+                    <field name="name"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="onsp_view_crossovered_budget_line_tree">
+            <field name="name">onsp_view_crossovered_budget_line_tree</field>
+            <field name="model">crossovered.budget.lines</field>
+            <field name="inherit_id" ref="account_budget.view_crossovered_budget_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="analytic_account_id" position="before">
+                    <field name="name"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="onsp_view_crossovered_budget_line_form">
+            <field name="name">onsp_view_crossovered_budget_line_form</field>
+            <field name="model">crossovered.budget.lines</field>
+            <field name="inherit_id" ref="account_budget.view_crossovered_budget_line_form"/>
+            <field name="arch" type="xml">
+                <field name="analytic_account_id" position="before">
+                    <field name="name"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="onsp_view_account_analytic_account_form_inherit_budget">
+            <field name="name">onsp_view_account_analytic_account_form_inherit_budget</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="account_budget.view_account_analytic_account_form_inherit_budget"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[@string='Budget Lines']/field[@name='crossovered_budget_line']/tree/field[@name='general_budget_id']" position="after">
+                    <field name="name"/>
+                </xpath>
+                <xpath expr="/form/sheet/notebook/page[@string='Budget Lines']/field[@name='crossovered_budget_line']/form/field[@name='general_budget_id']" position="after">
+                    <field name="name"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--
+            Budget positions
+        -->
+
+        <record model="ir.ui.view" id="onsp_budget_pos_account_form">
+            <field name="name">Open-Net: budget pos. in account form</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/group[1]" position="after">
+                    <field name="onsp_budget_pos_ids">
+                        <tree string="Budget positions">
+<!--
+                            <field name="id" invisible="1"/>
+-->
+                            <field name="fiscalyear_id"/>
+                            <field name="amount"/>
+                            <field name="nb_periods"/>
+<!--
+                            <button name="%(onsp_wiz_setup_budget_periods_action)d" type="action" icon="gtk-execute" attrs="{'invisible':[('id','=',False)]}"/>
+-->
+                        </tree>
+                        <form string="Budget position" version="7.0">
+                            <group colspan="6">
+                                <group colspan="6">
+                                    <field name="fiscalyear_id" colspan="2"/>
+                                    <field name="amount" colspan="2"/>
+                                    <field name="nb_periods" colspan="2"/>
+                                </group>
+                            </group>
+                            <field name="period_ids">
+                                <tree string="Periods" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                        </form>
+                    </field>
+                </xpath>
+                <field name="balance" position="after">
+                    <field name="onsp_budget_rate" string="Budget [%%]"/>
+                </field>
+            </field>
+        </record>
+
+
+</data>
+</openerp>

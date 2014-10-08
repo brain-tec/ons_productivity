@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: pickings_view.xml
+  Module: ons_productivity_reports
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2014 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+<data>
+
+        <!--
+            Complements to out picking's form
+        -->
+        <record model="ir.ui.view" id="onsp_out_picking_form_inh01">
+            <field name="name">onsp_out_picking.form.inh01</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="stock.view_picking_out_form"/>
+            <field name="priority" eval="18"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/form/header//button[@name='%(stock.report_picking_list_out)d']" position="replace">
+                        <button name="print_delivery_slip" string="Print Delivery Slip" states="done" type="object" class="oe_highlight"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="onsp_out_picking_form_inh02">
+            <field name="name">onsp_out_picking.form.inh02</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="delivery.view_delivery_order_inherit_stock"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <data>
+                    <!-- Note that the "delivery" module adds two buttons with the same label -->
+                    <xpath expr="/form/header/button[@name='%(delivery.report_shipping)d']" position="replace"/>
+                    <xpath expr="/form/header/button[@name='%(delivery.report_shipping)d']" position="replace"/>
+                </data>
+            </field>
+        </record>
+
+</data>
+</openerp>

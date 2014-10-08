@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: res_config_view.xml
+  Module: ons_productivity_accounting
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+    <!-- Configuration -->
+        <record model="ir.ui.view" id="onsp_view_account_config">
+            <field name="name">onsp account settings inh01</field>
+            <field name="model">account.config.settings</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_account_config_settings"/>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <separator string="eInvoicing &amp; Payments" position="after">
+                    <group>
+                        <label for="id" string="Bank statements"/>
+                        <div>
+                            <div>
+                                <label for="default_onsp_use_bnk_stmt_date" />
+                                <field name="default_onsp_use_bnk_stmt_date" class="oe_inline"/>
+                            </div>
+                        </div>
+                    </group>
+                </separator>
+                <div name="account_config" position="after">
+                    <label for="id" string="Tools"/>
+                    <div name="ons_accounting_tools">
+                        <div>
+                            <button type="object" name="ons_tools_recomp_acc_hierarchy" string="Recompute the hierarchy of the accounts" icon="gtk-execute" class="oe_inline oe_link" confirm="Recompute the hierarchy?"/>
+                        </div>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+</openerp>

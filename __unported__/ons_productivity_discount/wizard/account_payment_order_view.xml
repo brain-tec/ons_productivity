@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: wizard/account_payment_order_view.xml
+  Module: ons_productivity_discount
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="onsp_wiz_create_payment_order_lines">
+            <field name="name">Open-Net wizard: create payment order lines</field>
+            <field name="model">payment.order.create</field>
+            <field name="arch" type="xml">
+                <form string="Search Payment lines" version="7.0">
+                    <group string="Entries">
+                        <field name="entries">
+                            <tree colors="red:state == 'draft';black:state == 'valid'" string="Journal Items" create="true" on_write="on_create_write" version="7.0" editable="top">
+                                <field name="journal_id" options="{&quot;no_open&quot;:True}" invisible="context.get('journal_id',False)"/>
+                                <field name="period_id" options="{&quot;no_open&quot;:True}" invisible="context.get('period_id',False)"/>
+                                <field name="date"/>
+                                <field name="name"/>
+                                <field name="ref"/>
+                                <field name="partner_id" on_change="onchange_partner_id(move_id, partner_id, account_id, debit, credit, date, journal_id)"/>
+                                <field name="account_id" options="{&quot;no_open&quot;:True}" domain="[('journal_id','=',journal_id), ('company_id', '=', company_id)]" on_change="onchange_account_id(account_id, partner_id, context)"/>
+                                <field name="account_tax_id" options="{&quot;no_open&quot;:True}" invisible="context.get('journal_type', False) not in ['sale','sale_refund','purchase','purchase_refund','general']"/>
+                                <field name="analytic_account_id" groups="analytic.group_analytic_accounting" domain="[('type','not in',['view','template'])]" invisible="not context.get('analytic_journal_id',False)"/>
+                                <field name="move_id" required="0"/>
+                                <field name="debit" sum="Total Debit"/>
+                                <field name="credit" sum="Total Credit"/>
+                                <field name="amount_to_pay"/>
+                                <field name="date_maturity"/>
+                                <field name="amount_currency" readonly="True" invisible="not context.get('currency',False)"/>
+                                <field name="currency_id" readonly="True" invisible="not context.get('currency',False)"/>
+                                <field name="cash_discount_rate" string="Cash %% rate"/>
+                                <field name="cash_discount_date" string="Cash %% date"/>
+                                <field name="state" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button name="create_payment" string="_Add to payment order" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

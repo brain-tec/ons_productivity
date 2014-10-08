@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<!--
+  File: accounting_view.xml
+  Module: ons_productivity_credit_control
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+	<data>
+    
+		<!--
+				Payment term lines
+		-->
+		<record model="ir.ui.view" id="onsp_pament_term_line_list">
+			<field name="name">Open-Net: payment term line list</field>
+			<field name="model">account.payment.term.line</field>
+            <field name="inherit_id" ref="account.view_payment_term_line_tree"/>
+			<field name="arch" type="xml">
+				<field name="days2" position="after">
+                    <field name="cash_discount_rate" string="Cash %% rate"/>
+                    <field name="cash_discount_days" string="Cash %% days"/>
+				</field>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="onsp_pament_term_line_form">
+			<field name="name">Open-Net: payment term line form</field>
+			<field name="model">account.payment.term.line</field>
+            <field name="inherit_id" ref="account.view_payment_term_line_form"/>
+			<field name="arch" type="xml">
+                <xpath expr="//form/group[1]" position="inside">
+                    <group string="Cash discount">
+                        <field name="cash_discount_rate"/>
+                        <field name="cash_discount_days"/>
+                    </group>
+                </xpath>
+			</field>
+		</record>
+
+		<!--
+				Invoices search
+		-->
+		<record model="ir.ui.view" id="onsp_invoices_search">
+			<field name="name">Open-Net: invoices search</field>
+			<field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+			<field name="arch" type="xml">
+				<filter string="Due Date" position="after">
+                    <filter string="Cash discount date" icon="terp-go-month" domain="[]"  context="{'group_by':'cash_discount_date'}"/>
+				</filter>
+			</field>
+		</record>
+
+		<!--
+				Invoices list
+		-->
+		<record model="ir.ui.view" id="onsp_invoices_list">
+			<field name="name">Open-Net: invoices list</field>
+			<field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+			<field name="arch" type="xml">
+				<field name="date_invoice" position="after">
+                    <field name="cash_discount_rate" string="Cash %% rate"/>
+                    <field name="cash_discount_date" string="Cash %% date"/>
+				</field>
+			</field>
+		</record>
+
+		<!--
+				Customer invoices form
+		-->
+		<record model="ir.ui.view" id="onsp_cust_inv_form">
+			<field name="name">Open-Net: customer invoice form</field>
+			<field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+			<field name="arch" type="xml">
+				<field name="date_invoice" position="replace">
+                    <field name="date_invoice" on_change="on_change_payment_term(date_invoice, payment_term)"/>
+				</field>
+				<xpath expr="//form/sheet/notebook/page[@string='Invoice Lines']/group[2]/field[@name='payment_term']" position="replace">
+                    <field name="payment_term" class="oe_inline" on_change="on_change_payment_term(date_invoice, payment_term)"/>
+				</xpath>
+				<xpath expr="//form/sheet/notebook/page[@string='Other Info']/group[1]/group[2]/field[@name='move_id']" position="after">
+                    <field name="cash_discount_rate" string="Cash %% rate"/>
+                    <field name="cash_discount_date" string="Cash %% date"/>
+				</xpath>
+			</field>
+		</record>
+
+		<!--
+				Supplier invoices form
+		-->
+		<record model="ir.ui.view" id="onsp_suppl_inv_form">
+			<field name="name">Open-Net: supplier invoice form</field>
+			<field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+			<field name="arch" type="xml">
+				<field name="date_invoice" position="replace">
+                    <field name="date_invoice" on_change="on_change_payment_term(date_invoice, payment_term)"/>
+				</field>
+				<xpath expr="//form/sheet/notebook/page[@string='Other Info']/group[1]/group[1]/field[@name='payment_term']" position="replace">
+                    <field name="payment_term" class="oe_inline" on_change="on_change_payment_term(date_invoice, payment_term)"/>
+				</xpath>
+				<xpath expr="//form/sheet/notebook/page[@string='Other Info']/group[1]/group[2]/field[@name='company_id']" position="after">
+                    <field name="cash_discount_rate" string="Cash %% rate"/>
+                    <field name="cash_discount_date" string="Cash %% date"/>
+				</xpath>
+			</field>
+		</record>
+
+		<!--
+				Account move form
+		-->
+		<record model="ir.ui.view" id="onsp_account_move_form">
+			<field name="name">Open-Net: account move form</field>
+			<field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//form/sheet/notebook/page[@string='Journal Items']/field[@name='line_id']/tree/field[@name='credit']" position="after">
+                    <field name="cash_discount_rate" string="Cash %% rate"/>
+                    <field name="cash_discount_date" string="Cash %% date"/>
+				</xpath>
+			</field>
+		</record>
+
+		<!--
+				Account move line list
+		-->
+		<record model="ir.ui.view" id="onsp_account_move_line_list">
+			<field name="name">Open-Net: account move line list</field>
+			<field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree"/>
+			<field name="arch" type="xml">
+                <field name="reconcile" position="before">
+                    <field name="cash_discount_rate" string="Cash %% rate"/>
+                    <field name="cash_discount_date" string="Cash %% date"/>
+				</field>
+			</field>
+		</record>
+
+		<!--
+				Payment form
+		-->
+		<record model="ir.ui.view" id="onsp_payment_line_list">
+			<field name="name">Open-Net: payment line list</field>
+			<field name="model">payment.order</field>
+            <field name="inherit_id" ref="account_payment.view_payment_order_form"/>
+			<field name="arch" type="xml">
+                <xpath expr="//form/sheet/field[@name='line_ids']/form/notebook/page[@string='Information']/group/separator[@string='Entry Information']" position="before">
+                    <separator colspan="4" string="Cash Discount Informations"/>
+                    <field name="cash_discount_rate" groups="base.group_multi_currency"/>
+                    <field name="cash_discount_applied" groups="base.group_multi_currency"/>
+                    <field name="cash_discount_date" groups="base.group_multi_currency"/>
+                    <field name="cash_discount_org" groups="base.group_multi_currency" attrs="{'invisible':[('cash_discount_applied','=',False)]}"/>
+				</xpath>
+			</field>
+		</record>
+
+		<!--
+				Tax form
+		-->
+		<record model="ir.ui.view" id="onsp_account_tax_form">
+			<field name="name">Open-Net: cash discounts on tax form</field>
+			<field name="model">account.tax</field>
+            <field name="inherit_id" ref="account.view_tax_form"/>
+			<field name="arch" type="xml">
+                <group string="Refunds" position="after">
+                    <group string="Cash discounts">
+                        <field name="cash_discount_account1_id" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]"/>
+                        <field name="cash_discount_account2_id" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]"/>
+                        <field name="cash_discount_woff_tx_acc_id"/>
+                    </group>
+				</group>
+			</field>
+		</record>
+
+    </data>
+</openerp>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: data/account_data.xml
+  Module: ons_cust_edsi_tech
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2014 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data noupdate="1">
+
+        <record id="ons_acc_statement_config" model="ons.account_statement.params">
+            <field name="name">Account statement configuration</field>
+        </record>
+
+    </data>
+</openerp>

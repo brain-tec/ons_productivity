@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+  File: partners_view.xml
+  Module: ons_productivity_credit_control
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+	<data>
+    
+		<!--
+				Res.partner form
+		-->
+
+		<record model="ir.ui.view" id="onsp_res_partner_form">
+			<field name="name">Open-Net: partner form</field>
+			<field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//form/sheet/notebook" position="inside">
+                    <page string="Invoices">
+                        <field name="ons_invoice_ids"/>
+                    </page>
+                    <page string="Refunds">
+                        <field name="ons_refund_ids"/>
+                    </page>
+				</xpath>
+			</field>
+		</record>
+
+    </data>
+</openerp>

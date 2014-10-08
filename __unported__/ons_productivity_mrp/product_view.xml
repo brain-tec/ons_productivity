@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: product_view.xml
+  Module: ons_productivity_mrp
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+<data>
+
+        <!--
+            Extends the product form with everything to compute the stadnard price from the BoM stuff
+        -->
+        <record model="ir.ui.view" id="onsp_mrp_product_form_inh01">
+            <field name="name">onsp.mrp.product.form.inh01</field>
+            <field name="model">product.product</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="priority" eval="3"/>
+            <field name="arch" type="xml">
+                <div name="options" position="inside">
+                    <field name="calculate_price"/>
+                    <label for="calculate_price"/>
+                </div>
+                <div name="buttons" position="inside">
+                    <div attrs="{'invisible':[('calculate_price','=',False)]}">
+                        <button name="compute_price" type="object" string="Compute standard price"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+    </data>
+</openerp>

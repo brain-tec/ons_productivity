@@ -1,0 +1,7 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_ons_acc_stmt_managers","ons_acc_stmt_managers","model_ons_account_statement","group_acc_stmt_managers","1","1","1","1"
+"access_ons_acc_stmt_users","ons_acc_stmt_users","model_ons_account_statement","group_acc_stmt_users","1","0","0","0"
+"access_ons_acc_stmt_settings_usr","ons_acc_stmt_settings_usr","model_ons_account_statement_settings","group_acc_stmt_users","1","0","0","0"
+"access_ons_acc_stmt_params_usr","ons_acc_stmt_params_usr","model_ons_account_statement_params","group_acc_stmt_users","1","0","0","0"
+"access_ons_acc_stmt_settings_mgr","ons_acc_stmt_settings_mgr","model_ons_account_statement_settings","group_acc_stmt_managers","1","1","1","1"
+"access_ons_acc_stmt_params_mgr","ons_acc_stmt_params_mgr","model_ons_account_statement_params","group_acc_stmt_managers","1","1","1","1"

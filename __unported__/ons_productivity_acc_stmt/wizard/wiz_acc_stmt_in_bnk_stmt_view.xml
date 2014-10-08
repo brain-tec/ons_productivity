@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: wizard/wiz_acc_stmt_in_bnk_stmt_view.xml
+  Module: ons_productivity_acc_stmt
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="onsp_acc_stmt_2_bnk_stmt_wiz">
+        <field name="name">Open-Net wizard: import account statements in bnk stmts</field>
+        <field name="model">ons.wiz_acc_stmt_in_bnk_stmt</field>
+        <field name="arch" type="xml">
+            <form string="Lines to import" version="7.0">
+                <group>
+                    <field name="journal_id" invisible="1"/>
+                	<field name="account_stmt_ids" domain="[('reconciliation','=',False),('op','=','D')]"/>
+                </group>
+                <separator string="" colspan="4" />
+				<group col="4" colspan="4">
+					<button special="cancel" string="Cancel" icon="gtk-cancel"/>
+					<button name="do_it" string="Import" type="object" icon="gtk-ok"/>
+				</group>
+            </form>
+        </field>
+    </record>
+
+	<record model="ir.actions.act_window" id="onsp_acc_stmt_2_bnk_stmt_wiz_action">
+		<field name="name">Import account statements in bnk stmts</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">ons.wiz_acc_stmt_in_bnk_stmt</field>
+		<field name="view_type">form</field>
+		<field name="view_type">form</field>
+		<field name="view_id" ref="onsp_acc_stmt_2_bnk_stmt_wiz"/>
+		<field name="target">new</field>
+	</record>
+
+
+    <record model="ir.ui.view" id="onsp_acc_stmt_2_bnk_stmt_inh">
+        <field name="name">Open-Net wizard: button 2 import account statements in bnk stmts</field>
+        <field name="model">account.bank.statement</field>
+        <field name="inherit_id" ref="account.view_bank_statement_form"/>
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <button name="%(onsp_acc_stmt_2_bnk_stmt_wiz_action)d" string="Account statements" type="action"/>
+            </field>
+        </field>
+    </record>
+
+</data>
+</openerp>
+

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: config/config_view.xml
+  Module: ons_productivity_acc_stmt
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2014 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="ons_module_settings_form">
+            <field name="name">Account statment settings</field>
+            <field name="model">ons.account_statement.settings</field>
+            <field name="arch" type="xml">
+                <form string="Account statment settings" version="7.0" class="oe_form_configuration">
+                    <header>
+                        <div  groups="ons_productivity_acc_stmt.group_acc_stmt_managers">
+                            <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                            or
+                            <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                        </div>
+                    </header>
+
+                    <separator string="Account statment settings"/>
+                    <group>
+                        <label for="id" string="Directories"/>
+                        <div name="Files management">
+                            <div>
+                                <label for="directory_in"/>
+                                <field name="directory_in" class="oe_inline"/>
+                            </div>
+                            <div>
+                                <label for="directory_out"/>
+                                <field name="directory_out" class="oe_inline"/>
+                            </div>
+                            <div>
+                                <label for="file_name_mask"/>
+                                <field name="file_name_mask" class="oe_inline"/>
+                            </div>
+                            <div>
+                                <label for="last_imported_file"/>
+                                <field name="last_imported_file"/>
+                            </div>
+                            <div>
+                                <label for="ref_mask"/>
+                                <field name="ref_mask" class="oe_inline"/>
+                                <label string="Reg. expr. - example: '.+([iI]{1,1}[nN]{1,1}[vV]{2,2}.+)$' to look for 'INVVnnnnnn' at the end of the :86: record"/>
+                            </div>
+                        </div>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="ons_module_settings_action">
+            <field name="name">Account statment settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ons.account_statement.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem 
+            name="Account statment settings" 
+            id="ons_module_settings_menu" 
+            action="ons_module_settings_action" 
+            parent="base.menu_config"
+            sequence="50"
+            groups="ons_productivity_acc_stmt.group_acc_stmt_managers,ons_productivity_acc_stmt.group_acc_stmt_users"/>
+
+    </data>
+</openerp>

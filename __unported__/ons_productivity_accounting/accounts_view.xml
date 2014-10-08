@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: accounts_view.xml
+  Module: ons_productivity_acocunting
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="onsp_view_account_list">
+            <field name="name">account.account.onsp.list</field>
+            <field name="model">account.account</field>
+            <field name="arch" type="xml">
+                <tree colors="blue:type == 'view';black:type in ('other','receivable','payable','consolidation');gray:type == 'closed'" string="Inconsistencies: accounts with inactive parent" toolbar="1" >
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="parent_id" invisible="1"/>
+                    <field name="user_type" invisible="1"/>
+                    <field name="debit"/>
+                    <field name="credit"/>
+                    <field name="balance"/>
+                    <field name="type"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="company_currency_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="onsp_action_inconsistent_accounts_form">
+            <field name="name">Inconsistencies</field>
+            <field name="res_model">account.account</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="search_view_id" ref="account.view_account_search"/>
+            <field name="view_id" ref="onsp_view_account_list"/>
+            <field name="context">{'ons_filter_inactive_parents':1}</field>
+        </record>
+        <menuitem action="onsp_action_inconsistent_accounts_form" id="onsp_menu_action_inconsistent_accounts" parent="account.menu_action_account_form"/>
+
+    </data>
+</openerp>

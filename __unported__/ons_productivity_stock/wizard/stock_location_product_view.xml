@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: wizard/stock_location_product_view.xml
+  Module: ons_productivity_stock
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+    	<record model="ir.ui.view" id="onsp_view_stock_location_product">
+            <field name="name">Products by Location</field>
+            <field name="model">stock.location.product</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="stock.view_stock_location_product"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/group[2]" position="after">
+       				<label string=""/>
+       				<label string="Please note that only the products with an effective stock will be displayed" align="0.0" colspan="3"/>
+    			</xpath>
+            </field>
+		</record>
+
+
+        <act_window name="Products by Location"		    
+		    res_model="stock.location.product"
+		    src_model="stock.location"
+		    view_mode="form"
+		    target="new"        
+            key2="client_action_multi"    
+		    id="stock.action_view_stock_location_product"/>			
+
+    </data>
+</openerp>

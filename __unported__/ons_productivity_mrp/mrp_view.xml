@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: mrp_view.xml
+  Module: ons_productivity_mrp
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+<data>
+
+        <!--
+            Restores the hierarchical view of the BoMs
+        -->
+        <record model="ir.actions.act_window" id="onsp_mrp_bom_tree_action">
+            <field name="name">Bill of Materials Structure</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.bom</field>
+            <field name="view_type">tree</field>
+            <field name="domain">[('bom_id','=',False)]</field>
+        </record>
+        <menuitem name="Bill of Materials Structure" 
+            id="onsp_menu_mrp_product_form" 
+            action="onsp_mrp_bom_tree_action"
+            parent="mrp.menu_mrp_bom"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!--
+  File: account_statements_view.xml
+  Module: ons_productivity_acc_stmt
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+	<data>
+
+		<!--
+				Specific contract positions menu item
+		-->
+
+		<record model="ir.ui.view" id="onsp_acc_stmt_tree">
+			<field name="name">Open-Net Productivity: account statment list</field>
+			<field name="model">ons.account_statement</field>
+            <field name="priority" eval="60"/>
+			<field name="arch" type="xml">
+				<tree string="Positions">
+					<field name="name"/>
+					<field name="date_value"/>
+					<field name="date_acc"/>
+					<field name="amount"/>
+					<field name="ref"/>
+					<field name="dest"/>
+					<field name="compl"/>
+					<field name="op"/>
+                    <field name="reconciliation" string="" widget="many2onebutton" options="{'label':{'edit':'Bank statement line'}}" readonly="1"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="onsp_acc_stmt_form">
+			<field name="name">Open-Net Productivity: account statment form</field>
+			<field name="model">ons.account_statement</field>
+            <field name="priority" eval="60"/>
+			<field name="arch" type="xml">
+				<form string="Position" version="7.0">
+                    <group>
+                        <group>
+        					<field name="name" readonly="1"/>
+        					<field name="date_value" readonly="1"/>
+        					<field name="date_acc" readonly="1"/>
+        					<field name="amount" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+        					<field name="ref"/>
+        					<field name="dest"/>
+        					<field name="compl"/>
+                            <field name="msg"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group>
+		          			<field name="op" readonly="1"/>
+                            <field name="reconciliation" string="" options="{'label':{'edit':'Bank statement line'}}" readonly="1"/>
+                        </group>
+                    </group>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="onsp_acc_stmt_filter">
+			<field name="name">Open-Net Productivity: account statment filter</field>
+			<field name="model">ons.account_statement</field>
+			<field name="arch" type="xml">
+				<search string="Search account statments">
+                    <filter icon="terp-stock_symbol-selection" string="Unreconciled" domain="[('reconciliation','=',False)]"/>
+                    <filter icon="terp-stock_symbol-selection" string="Reconciled" domain="[('reconciliation','!=',False)]"/>
+					<field name="date_value" select="1"/>
+					<field name="date_acc" select="1"/>
+					<field name="dest" select="1"/>
+                    <field name="compl" select="1"/>
+                    <group expand="1" string="Group By...">
+                        <filter string="Date value" name="date_value" context="{'group_by': 'date_value'}" icon="terp-stock_effects-object-colorize"/>
+                        <filter string="Date accounting" name="date_acc" context="{'group_by': 'date_acc'}" icon="terp-stock_effects-object-colorize"/>
+                        <filter string="Operation" name="op" context="{'group_by': 'op'}" icon="terp-stock_symbol-selection"/>
+                    </group>
+				</search>
+			</field>
+		</record>
+
+        <record model="ir.actions.act_window" id="onsp_acc_stmt_action">
+            <field name="name">Account statments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ons.account_statement</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="onsp_acc_stmt_tree"/>
+        </record>
+
+		<menuitem 
+			name="Account statments" 
+			id="onsp_acc_stmt_menu" 
+			action="onsp_acc_stmt_action" 
+			parent="account.menu_finance_entries" 
+			icon="terp-accessories-archiver" 
+			sequence="50"
+            groups="ons_productivity_acc_stmt.group_acc_stmt_managers,ons_productivity_acc_stmt.group_acc_stmt_users"/>
+
+        <record model="ir.ui.view" id="ons_view_bank_statement_form">
+            <field name="name">ons.account.bank.statement.inherit</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form"/>
+            <field name="arch" type="xml">
+                <page string="Transactions" position="after">
+                    <page string="Account statements" >
+                        <field name="ons_account_statement_ids"/>
+                    </page>
+                </page>
+                <xpath expr="//page[@name='statement_line_ids']/field[@name='line_ids']/tree/field[@name='amount']" position="after">
+                    <field name="ons_account_statement_id" string="" widget="many2onebutton" options="{'label':{'create':'Account statement','edit':'Account statement'}}"/>
+                </xpath>
+                <xpath expr="//page[@name='statement_line_ids']/field[@name='line_ids']/form/group/field[@name='sequence']" position="before">
+                    <field name="ons_account_statement_id" widget="many2onebutton" options="{'label':{'Account statement','edit':'Account statement'}}"/>
+                </xpath>
+            </field>
+        </record>
+
+	</data>
+</openerp>
