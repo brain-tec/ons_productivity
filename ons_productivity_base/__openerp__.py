@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: base',
-    'version' : '1.0',
+    'version' : '1.0.1',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -49,8 +49,11 @@ These modules are included in all our hosting solutions.
 
 V1.0: 2014-10-29/Cyp
     - CSS entry to enlarge the forms
+
+V1.0: 2014-10-29/Sge
+    - CSS entry to enlarge the forms pass to 98%
     """,
-    'website': 'https://www.odoo.com/page/billing',
+    'website': 'https://www.open-net.ch',
     'images' : [],
     'depends' : [],
     'data': [
