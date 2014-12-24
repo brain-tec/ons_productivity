@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: products_view.xml
+  Module: ons_productivity_base
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <!-- 
+            More for the products 
+        -->
+        <record model="ir.ui.view" id="onsp_products_search">
+            <field name="name">Open-Net productivity: products search</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_search_form_view"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="seller_ids"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="onsp_products_list">
+            <field name="name">Open-Net productivity: products list</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <field name="categ_id" position="after">
+                    <field name="seller_ids" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

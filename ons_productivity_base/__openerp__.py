@@ -55,9 +55,10 @@ V1.0: 2014-10-29/Sge
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
-    'depends' : [],
+    'depends' : ['product'],
     'data': [
         'views/onsp_base.xml',
+        'views/products_view.xml',
     ],
     'qweb' : [
     ],
