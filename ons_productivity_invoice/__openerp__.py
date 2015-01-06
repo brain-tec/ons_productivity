@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: invoice',
-    'version' : '1.0.03',
+    'version' : '1.0.05',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -50,6 +50,9 @@ These modules are included in all our hosting solutions.
 
 V1.0.03: 2014-12-23/Cyp
     - Scratch writing
+
+V1.0.05: 2015-01-05/Cyp
+    - New format for the invoice report: lines are grouped by sale order.
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],

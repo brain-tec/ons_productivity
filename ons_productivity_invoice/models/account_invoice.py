@@ -28,9 +28,24 @@
 
 from openerp import models, api, _
 from openerp.osv import fields
+from itertools import groupby
 
 import logging
 _logger = logging.getLogger(__name__)
+
+def group_inv_lines(self, ordered_lines, sortkey):
+    """Return lines from a specified invoice grouped by sale order"""
+    grouped_lines = []
+    for key, valuesiter in groupby(ordered_lines, sortkey):
+        group = {}
+        group['category'] = key
+        group['lines'] = list(v for v in valuesiter)
+
+        if 'amount_untaxed' in key and key.amount_untaxed != 0:
+            group['subtotal'] = sum(line.price_subtotal for line in group['lines'])
+        grouped_lines.append(group)
+
+    return grouped_lines
 
 class account_invoice(models.Model):
     _inherit = 'account.invoice'
@@ -67,6 +82,20 @@ class account_invoice(models.Model):
         assert len(self) == 1, 'This option should only be used for a single id at a time.'
         self.sent = True
         return self.env['report'].get_action(self, 'ons_productivity_invoice.report_invoice_by_so')
+
+    def ons_sale_layout_lines(self, cr, uid, ids, invoice_id=None, context=None):
+        """
+        Returns invoice lines from a specified invoice ordered by sale order. 
+        Used in sale_layout module.
+
+        :Parameters:
+            -'invoice_id' (int): specify the concerned invoice.
+        """
+        ordered_lines = self.browse(cr, uid, invoice_id, context=context).ordered_lines
+        # We chose to group first by sale order name
+        sortkey = lambda x: x.sale_order if x.sale_order else ''
+
+        return group_inv_lines(self, ordered_lines, sortkey)
 
 class account_invoice_lines(models.Model):
     _inherit = 'account.invoice.line'

@@ -33,7 +33,7 @@
             model="account.invoice"
             string="Invoices by SO"
             report_type="qweb-pdf"
-            name="ons_productivity_invoice.report_invoice_by_so"
+            name="ons_productivity_invoice.report_invoice_grouped_by_so"
             file="ons_productivity_invoice.report_invoice_so"/>
 
     </data>
