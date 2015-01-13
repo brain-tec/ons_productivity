@@ -5,7 +5,7 @@
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2014-TODAY Open-Net Ltd. <http://www.open-net.ch>
+#  Copyright (c) 2014-TODAY Open Net Sàrl <http://www.open-net.ch>
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: invoice',
-    'version' : '1.0.05',
+    'version' : '1.0.07',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -53,6 +53,9 @@ V1.0.03: 2014-12-23/Cyp
 
 V1.0.05: 2015-01-05/Cyp
     - New format for the invoice report: lines are grouped by sale order.
+
+V1.0.05: 2015-01-13/Cyp
+    - New repport nammed Invoices by SO (ons_productivity_invoice.report_invoice_grouped_by_so)
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],

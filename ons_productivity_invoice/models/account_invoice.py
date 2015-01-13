@@ -81,7 +81,7 @@ class account_invoice(models.Model):
         """
         assert len(self) == 1, 'This option should only be used for a single id at a time.'
         self.sent = True
-        return self.env['report'].get_action(self, 'ons_productivity_invoice.report_invoice_by_so')
+        return self.env['report'].get_action(self, 'ons_productivity_invoice.report_invoice_grouped_by_so')
 
     def ons_sale_layout_lines(self, cr, uid, ids, invoice_id=None, context=None):
         """

@@ -9,17 +9,7 @@
 -->
 <openerp>
 <data>
-
-<!-- <template id="ons_productivity_invoice.minimal_layout" name="ons_productivity_invoice minimal layout" inherit_id="report.minimal_layout"> -->
-<!--     <xpath expr="." position="inside"> -->
-<!--         <link rel="stylesheet" href="/ons_productivity_invoice/static/src/css/invoice.css"/> -->
-<!--     </xpath> -->
-<!-- </template> -->
-
 <template id="report_invoice_by_so_document">
-    <style>
-        tr > td {border-top: 0px;}
-    </style>
     <t t-call="report.external_layout">
         <div class="page">
             <div class="row">
@@ -240,9 +230,9 @@
     <!-- Sale order name -->
     <t t-if="p['category']">
         <tr>
-            <td colspan="100" class="active" style="font-weight: bold; background-color: #FFFFFF;">Bon de commande
+            <td colspan="100" class="active" style="font-weight: bold; border-bottom: 1px solid black;">&amp;bull; 
                 <t t-if="p['category'].name">
-                    <t t-esc="p['category'].name.replace('Vente','')"></t>
+                    <t t-esc="p['category'].name"></t>
                 </t>
                 <t t-if="not p['category'].name">
                     Uncategorized
@@ -257,7 +247,7 @@
     <t t-if="'subtotal' in p">
         <tr class="text-right">
             <td colspan="100">
-                <strong>Sous-total:</strong> <span>&amp;nbsp;</span>
+                <strong>Subtotal: </strong>
                 <span t-esc="p['subtotal']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
             </td>
         </tr>
@@ -276,9 +266,6 @@
 </template>
 
 <template id="report_invoice_grouped_by_so_document">
-    <style>
-        td {border-top: 0px;}
-    </style>
     <t t-call="report.external_layout">
         <div class="page">
             <div class="row">
@@ -315,11 +302,6 @@
                 </div>
             </div>
 
-            <div style="marging-left: 15px;">
-                <span style="marging-left: 15px;" t-esc="o.company_id.city + ', le ' + time.strftime('%d.%m.%Y')"/>
-                <br/>
-            </div>
-
             <table class="table table-condensed">
                 <thead>
                     <tr>
@@ -341,13 +323,7 @@
                         <!-- Lines associated -->
                         <t t-foreach="p['lines']" t-as="l">
                             <tr>
-                                <td>
-                                    <span t-if="l.product_id">
-                                        <span t-field="l.product_id.name"/>
-                                        <br/>
-                                    </span>
-                                    <span t-field="l.name"/>
-                                </td>
+                                <td><span t-field="l.name"/></td>
                                 <td><span t-field="l.quantity"/></td>
                                 <td groups="product.group_uom"><span t-field="l.uos_id"/></td>
                                 <td class="text-right">

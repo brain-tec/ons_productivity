@@ -19,11 +19,11 @@
             <field name="inherit_id" ref="account.invoice_form"/>
             <field name="priority" eval="17"/>
             <field name="arch" type="xml">
-                <button string="Print" position="after">
-                    <button name="invoice_by_so_print" string="Print" type="object" attrs="{'invisible':['|',('sent','=',True), ('state', '!=', 'open')]}" class="oe_highlight" groups="base.group_user"/>
+                <button string="Print" position="replace">
+                    <button name="invoice_print" string="Print" type="object" attrs="{'invisible':['|',('sent','=',True), ('state', '!=', 'open')]}" class="oe_highlight" groups="base.group_user"/>
                 </button>
-                <button string="Print Invoice" position="after">
-                    <button name="invoice_by_so_print" string="Print Invoice" type="object" attrs="{'invisible':['|',('sent','=',True), ('state', '!=', 'open')]}" class="oe_highlight" groups="base.group_user"/>
+                <button string="Print Invoice" position="replace">
+                    <button name="invoice_print" string="Print Invoice" type="object" attrs="{'invisible':['|',('sent','=',False), ('state', '!=', 'open')]}" class="oe_highlight" groups="base.group_user"/>
                 </button>
             </field>
         </record>
@@ -31,7 +31,7 @@
         <report 
             id="account_invoices_by_so"
             model="account.invoice"
-            string="Invoices by SO"
+            string="Invoices grouped by Sales"
             report_type="qweb-pdf"
             name="ons_productivity_invoice.report_invoice_grouped_by_so"
             file="ons_productivity_invoice.report_invoice_so"/>
