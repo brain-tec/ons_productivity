@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 #
-#  File: __init__.py
-#  Module: ons_productivity_base
+#  File: models/__init__.py
+#  Module: ons_productivity_invoice
 #
-#  Created by cyp@open-net.ch
+#  Created by sge@open-net.ch
 #
-#  Copyright (c) 2014-TODAY Open-Net Ltd. <http://www.open-net.ch>
+#  Copyright (c) 2015-TODAY Open Net Sàrl <http://www.open-net.ch>
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-TODAY OpenERP S.A. <http://www.openerp.com>
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -26,4 +26,4 @@
 #
 ##############################################################################
 
-import models
+import mail_followers

@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: base',
-    'version' : '1.0.1',
+    'version' : '1.0.2',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -52,6 +52,9 @@ V1.0: 2014-10-29/Cyp
 
 V1.0: 2014-10-29/Sge
     - CSS entry to enlarge the forms pass to 98%
+
+V1.0.2: 2015-01-30/Sge
+    - Remove e-mail signature
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
