@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 #
-#  File: __init__.py
-#  Module: ons_productivity_base
+#  File: models/__init__.py
+#  Module: ons_productivity_bac
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2014-TODAY Open-Net Ltd. <http://www.open-net.ch>
+#  Copyright (c) 2015-TODAY Open-Net Ltd. <http://www.open-net.ch>
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -26,5 +26,23 @@
 #
 ##############################################################################
 
-import models
-import wizard
+from openerp.osv import osv, fields
+
+class stock_picking(osv.osv):
+    _inherit = "stock.picking"
+
+    _columns = {
+        'cost_imputed': fields.boolean('Cost Imputed', help="This box indicate if you already have imputed the cost \
+                of that picking on the given analytical account", readonly="True"),
+     }
+    _defaults = {
+        'cost_imputed': lambda *a: False,
+    }
+
+    def copy(self, cr, uid, id, default=None, context=None):
+        if default is None:
+            default = {}
+        default = default.copy()
+        default.update({'cost_imputed':False})
+
+        return super(stock_picking, self).copy(cr, uid, id, default, context=context)

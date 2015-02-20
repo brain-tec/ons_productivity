@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: base',
-    'version' : '1.0.2',
+    'version' : '1.0.3',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -53,15 +53,20 @@ V1.0: 2014-10-29/Cyp
 V1.0: 2014-10-29/Sge
     - CSS entry to enlarge the forms pass to 98%
 
-V1.0.2: 2015-01-30/Sge
-    - Remove e-mail signature
+V1.0.2: 2014-11-28/Cyp
+    - Overloaded the "Create invoice" wizard from the "sale" module to allow the selection of a product even if it's in "percent" mode
+      >>> This means new dependency: 'sale'
+
+V1.0.3: 2015-02-20/Cyp
+    - Products: ability to search by supplier, but hide the column in the list
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
-    'depends' : ['product'],
+    'depends' : ['sale'],
     'data': [
         'views/onsp_base.xml',
         'views/products_view.xml',
+        'wizard/sale_make_invoice_advance.xml',
     ],
     'qweb' : [
     ],

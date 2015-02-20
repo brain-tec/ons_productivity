@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: wizard/impute_cost_view.xml
+  Module: ons_productivity_bac
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2015-TODAY Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="ons_view_impute_cost_wizard">
+            <field name="name">Impute Analytical Costs</field>
+            <field name="model">ons.impute.cost</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Impute Analytical Costs">
+                    <field name="journal_id" />
+                    <separator string="Choose the packing you want to impute the cost of.                " colspan="4"/>
+<!--
+                    <field nolabel="1" name="pickings_ids" colspan="4" domain="[('cost_imputed','=',False),('type','in',['in','out']),('state','=','done'),('analytic_cost_id','&lt;&gt;',False)]"/>
+-->
+                    <field nolabel="1" name="pickings_ids" colspan="4" domain="[('cost_imputed','=',False),('picking_type_id.code','in',['incoming','outgoing']),('state','=','done'),('analytic_cost_id','&lt;&gt;',False)]"/>
+                    <button icon='gtk-cancel' special="cancel" string="_Cancel" />
+                    <button name="impute" string="Ok" type="object" icon="gtk-ok" />
+                    <separator string=" " colspan="4"/>
+            </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="ons_act_impute_cost">
+            <field name="name">Impute Analytical Costs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ons.impute.cost</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="ons_view_impute_cost_wizard"/>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem  id="ons_menu_impute_cost" name="Impute Analytical Costs" action="ons_act_impute_cost" parent="stock.menu_stock_warehouse_mgmt"/>
+        
+        
+    </data>
+</openerp>

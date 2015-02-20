@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 #
-#  File: __init__.py
-#  Module: ons_productivity_base
+#  File: models/__init__.py
+#  Module: ons_productivity_bac
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2014-TODAY Open-Net Ltd. <http://www.open-net.ch>
+#  Copyright (c) 2015-TODAY Open-Net Ltd. <http://www.open-net.ch>
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -26,5 +26,4 @@
 #
 ##############################################################################
 
-import models
-import wizard
+import stock

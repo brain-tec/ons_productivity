@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#  File: __init__.py
+#  File: wizard/__init__.py
 #  Module: ons_productivity_base
 #
 #  Created by cyp@open-net.ch
@@ -26,5 +26,4 @@
 #
 ##############################################################################
 
-import models
-import wizard
+import sale_make_invoice_advance

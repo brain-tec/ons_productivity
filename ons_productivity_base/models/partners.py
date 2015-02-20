@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#  File: __init__.py
+#  File: partners.py
 #  Module: ons_productivity_base
 #
 #  Created by cyp@open-net.ch
@@ -26,5 +26,17 @@
 #
 ##############################################################################
 
-import models
-import wizard
+from openerp.osv import osv
+
+class res_partner(osv.osv):
+    _inherit = 'res.partner'
+
+    def onsp_update_thumbnails(self, cr, uid, ids, context={}):
+        partner_ids = ids or self.search(cr, uid, [('image', '!=', False)], context=context)
+        while partner_ids:
+            self._store_set_values(cr, uid, partner_ids[:1000], ['image_small', 'image_medium'], context=context)
+            partner_ids = partner_ids[1000:]
+        
+        return True
+
+res_partner()

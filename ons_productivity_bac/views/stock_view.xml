@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: views/stock_view.xml
+  Module: ons_productivity_bac
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2015-TODAY Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <!-- 
+            More for the picking's form 
+        -->
+        <record model="ir.ui.view" id="onsp_view_picking_form">
+            <field name="name">Open-Net productivity: analytical informations for the pickings</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="ons_cust_solstis.onsp_solstis_stock_picking_view"/>
+            <field name="priority" eval="18"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]/group[1]/field[@name='analytic_cost_id']" position="after">
+                    <field name="cost_imputed"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#  File: __init__.py
+#  File: __openerp__.py
 #  Module: ons_productivity_base
 #
 #  Created by cyp@open-net.ch
@@ -25,6 +25,44 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+{
+    'name' : 'Open-Net Productivity: breakdown of analytic costs',
+    'version' : '1.0.02',
+    'author' : 'Open Net Sarl',
+    'category' : 'Base',
+    'description' : """
+Open Net Productivity : Bac module
+----------------------------------
 
-import models
-import wizard
+The 'productivity' modules is a complete family of modules offering improvement for OpenERP.
+These modules are maintained by Open Net, Swiss Partner of OpenERP.
+These modules are included in all our hosting solutions.
+
+**Features list :**
+ - Wizard to let you manage the breakdown of analytic costs
+
+**Author :** Open Net Sàrl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
+
+**Contact :** info@open-net.ch
+
+**History :**
+
+V1.0.02: 2015-01-23/Cyp
+    - Wizard to let you manage the breakdown of analytic costs
+    """,
+    'website': 'https://www.open-net.ch',
+    'images' : [],
+    'depends' : ['stock', 'ons_cust_solstis'],
+    'data': [
+        'wizard/impute_cost_view.xml',
+        'views/stock_view.xml',
+    ],
+    'qweb' : [
+    ],
+    'demo': [
+    ],
+    'test': [
+    ],
+    'installable': True,
+    'auto_install': False,
+}
