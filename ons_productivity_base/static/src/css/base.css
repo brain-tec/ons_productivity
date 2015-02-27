@@ -1,3 +1,9 @@
+/* Width of Odoo's main form */
 .openerp .oe_form_sheet_width {
   max-width: 98%;
+}
+
+/* Width of Odoo's popup forms */
+.modal-lg {
+  width: 1200px;
 }
