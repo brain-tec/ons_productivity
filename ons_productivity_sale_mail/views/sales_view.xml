@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: views/sales_view.xml
+  Module: ons_productivity_sale_mail
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2015-TODAY Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <!-- 
+            More for the sales
+        -->
+        <record model="ir.ui.view" id="onsp_products_search">
+            <field name="name">Open-Net productivity: products search</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_search_form_view"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="seller_ids"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="onsp_sales_form">
+            <field name="name">Open-Net productivity: sales view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <button name="action_quotation_send" states="draft" position="attributes">
+                    <attribute name="states"/>
+                    <attribute name="attrs">{'invisible':['|',('ons_validation_flag','!=',True),('state','not in',['draft','sent','progress','manual'])]}</attribute>
+                </button>
+                <button name="action_quotation_send" states="sent,progress,manual" position="replace"/>
+                <xpath expr="//page[@string='Other Information']" position="inside">
+                    <group string="Validation">
+                        <group>
+                            <field name="ons_validation_flag" groups="ons_productivity_sale_mail.sale_validators"/>
+                            <field name="ons_validation_by" readonly="1"/>
+                            <field name="ons_validation_date" readonly="1"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

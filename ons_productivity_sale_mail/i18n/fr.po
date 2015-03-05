@@ -1,0 +1,35 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: openobject-addons\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-01-27 21:15+0000\n"
+"PO-Revision-Date: 2015-01-27 21:15+0000\n"
+"Last-Translator: cyp@open-net.ch\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: ons_productivity_sale_mail
+#: field:sale.order,ons_validation_flag:0
+msgid "Validated"
+msgstr "Validé"
+
+#. module: ons_productivity_sale_mail
+#: field:sale.order,ons_validation_by:0
+msgid "By"
+msgstr "Par"
+
+#. module: ons_productivity_sale_mail
+#: field:sale.order,ons_validation_date:0
+msgid "Date"
+msgstr "Date"
+
+#. module: ons_productivity_sale_mail
+#: model:res.groups,name:ons_productivity_sale_mail.sale_validators
+msgid "Sales validators"
+msgstr "Validation des ventes"
+
+#. module: ons_productivity_sale_mail
+#: view:sale.order:0
+msgid "Validation"
+msgstr "Validation"
