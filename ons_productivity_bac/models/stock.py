@@ -46,3 +46,15 @@ class stock_picking(osv.osv):
         default.update({'cost_imputed':False})
 
         return super(stock_picking, self).copy(cr, uid, id, default, context=context)
+
+class stock_move(osv.osv):
+    _inherit = 'stock.move'
+    
+    _columns = {
+        'ons_pu': fields.float('Unit Price', digits=(16, int(config['price_accuracy']))),
+    }
+    
+    defaults = {
+        'ons_pu': lambda *a: 0.0,
+    }
+
