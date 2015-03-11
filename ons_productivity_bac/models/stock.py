@@ -27,6 +27,7 @@
 ##############################################################################
 
 from openerp.osv import osv, fields
+import openerp.addons.decimal_precision as dp
 
 class stock_picking(osv.osv):
     _inherit = "stock.picking"
@@ -51,7 +52,7 @@ class stock_move(osv.osv):
     _inherit = 'stock.move'
     
     _columns = {
-        'ons_pu': fields.float('Unit Price', digits=(16, int(config['price_accuracy']))),
+        'ons_pu': fields.float('Unit Price', digits_compute=dp.get_precision('Account')),
     }
     
     defaults = {
