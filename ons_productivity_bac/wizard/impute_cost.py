@@ -76,10 +76,10 @@ class impute_cost(osv.TransientModel):
                 amount = unit_amount * uom_obj._compute_price(cr, uid,
                         prod.uom_id.id, prod.euro_price, unit)
                 ## Search currency id for euro
-                euro_currency_id = currency_obj.search(cr, uid, [('code', '=', 'EUR')])[0]
+                euro_currency_id = currency_obj.search(cr, uid, [('name', '=', 'EUR')])[0]
                 ##
                 ## Search currency id for euro
-                chf_currency_id = currency_obj.search(cr, uid, [('code', '=', 'CHF')])[0]
+                chf_currency_id = currency_obj.search(cr, uid, [('name', '=', 'CHF')])[0]
                 ##
                 context_date = {
                 'date' : date_currency,
