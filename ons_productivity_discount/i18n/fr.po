@@ -1,0 +1,21 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: openobject-addons\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-03-12 12:41+0000\n"
+"PO-Revision-Date: 2015-03-12 12:41+0000\n"
+"Last-Translator: cyp@open-net.ch\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: ons_productivity_discount
+#: field:sale.order,discount_total:0
+#: field:account.invoice,discount_total:0
+msgid "Total of discounts"
+msgstr "Total des discounts"
+
+#. module: ons_productivity_discount
+#: field:product.template,is_discount:0
+msgid "Is a discount"
+msgstr "Est un discount"
