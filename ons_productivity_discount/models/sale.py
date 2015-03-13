@@ -42,7 +42,7 @@ class sale_order_line(osv.Model):
             context = {}
         for line in self.browse(cr, uid, ids, context=context):
             if line.product_id and line.product_id.is_discount:
-                price = -line.price_unit
+                price = line.price_unit
             else:
                 price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
             taxes = tax_obj.compute_all(cr, uid, line.tax_id, (price * line.product_uom_qty) - line.abs_discount, 1, line.product_id, line.order_id.partner_id)
@@ -79,9 +79,9 @@ class sale_order(osv.Model):
             val = 0.0
             for line in so.order_line:
                 if line.product_id and line.product_id.is_discount:
-                    val += line.price_unit
+                    val += abs(line.price_unit)
                 else:
-                    val +=  line.product_uom_qty * (line.price_unit * ((line.discount or 0.0) / 100.0)) + line.abs_discount
+                    val += line.product_uom_qty * (line.price_unit * ((line.discount or 0.0) / 100.0)) + line.abs_discount
             
             res[so.id] = val
         

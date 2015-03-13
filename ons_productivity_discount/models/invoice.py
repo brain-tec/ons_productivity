@@ -39,7 +39,7 @@ class account_invoice_line(models.Model):
         'product_id', 'invoice_id.partner_id', 'invoice_id.currency_id')
     def _compute_price(self):
         if self.product_id and self.product_id.is_discount:
-            price = -self.price_unit
+            price = self.price_unit
         else:
             price = (self.price_unit * (1 - (self.discount or 0.0) / 100.0))
         taxes = self.invoice_line_tax_id.compute_all((price * self.quantity) - self.abs_discount, 1, product=self.product_id, partner=self.invoice_id.partner_id)
@@ -88,7 +88,7 @@ class account_invoice(models.Model):
 
         for line in self.invoice_line:
             if line.product_id and line.product_id.is_discount:
-                self.discount_total += line.price_unit
+                self.discount_total += abs(line.price_unit)
             else:
                 self.discount_total +=  line.quantity * (line.price_unit * ((line.discount or 0.0) / 100.0)) + line.abs_discount
     
