@@ -42,7 +42,8 @@ class account_invoice_line(models.Model):
             price = self.price_unit
         else:
             price = (self.price_unit * (1 - (self.discount or 0.0) / 100.0))
-        taxes = self.invoice_line_tax_id.compute_all((price * self.quantity) - self.abs_discount, 1, product=self.product_id, partner=self.invoice_id.partner_id)
+            price = ((price * self.quantity) - self.abs_discount) / (self.quantity or 1.0)
+        taxes = self.invoice_line_tax_id.compute_all(price, self.quantity, product=self.product_id, partner=self.invoice_id.partner_id)
         self.price_subtotal = taxes['total']
         if self.invoice_id:
             self.price_subtotal = self.invoice_id.currency_id.round(self.price_subtotal)
@@ -55,8 +56,9 @@ class account_invoice_line(models.Model):
         for l in self._context.get('invoice_line', []):
             if isinstance(l, (list, tuple)) and len(l) >= 3 and l[2]:
                 vals = l[2]
-                price = vals.get('price_unit', 0) * (1 - vals.get('discount', 0) / 100.0)
-                total = total - (price * vals.get('quantity')) - vals.get('abs_discount', 0)
+                price = vals['quantity'] * vals.get('price_unit', 0) * (1 - vals.get('discount', 0) / 100.0)
+                price = (price - vals.get('abs_discount', 0)) / (vals['quantity'] or 1.0)
+                total = total - (price * vals.get('quantity'))
                 taxes = vals.get('invoice_line_tax_id')
                 if taxes and len(taxes[0]) >= 3 and taxes[0][2]:
                     taxes = self.env['account.tax'].browse(taxes[0][2])
@@ -124,8 +126,8 @@ class account_invoice_tax(models.Model):
         company_currency = invoice.company_id.currency_id
         for line in invoice.invoice_line:
             taxes = line.invoice_line_tax_id.compute_all(
-                (line.quantity * (line.price_unit * (1 - (line.discount or 0.0) / 100.0))) - line.abs_discount,
-                1, line.product_id, invoice.partner_id)['taxes']
+                ((line.quantity * (line.price_unit * (1 - (line.discount or 0.0) / 100.0))) - line.abs_discount) / (line.quantity or 1.0),
+                line.quantity, line.product_id, invoice.partner_id)['taxes']
             for tax in taxes:
                 val = {
                     'invoice_id': invoice.id,
