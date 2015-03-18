@@ -93,6 +93,15 @@ class account_invoice(models.Model):
                 self.discount_total += abs(line.price_unit)
             else:
                 self.discount_total +=  line.quantity * (line.price_unit * ((line.discount or 0.0) / 100.0)) + line.abs_discount
+
+    @api.one
+    @api.depends('invoice_line.quantity', 'invoice_line.price_unit')
+    def _compute_ht_total(self):
+        self.ht_total = 0.0
+
+        for line in self.invoice_line:
+            if not line.product_id or not line.product_id.is_discount:
+                self.ht_total +=  line.quantity * line.price_unit
     
     @api.one
     @api.depends('invoice_line.price_subtotal', 'tax_line.amount')
@@ -105,6 +114,8 @@ class account_invoice(models.Model):
 
     discount_total = fields.Float(string='Total of discounts', digits=dp.get_precision('Account'),
         compute='_compute_discount_total', store=True)
+    ht_total = fields.Float(string='Total of HT amounts', digits=dp.get_precision('Account'),
+        compute='_compute_ht_total', store=True)
 
     amount_untaxed = fields.Float(string='Subtotal', digits=dp.get_precision('Account'),
         store=True, readonly=True, compute='_compute_amount', track_visibility='always')

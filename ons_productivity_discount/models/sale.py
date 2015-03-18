@@ -87,6 +87,21 @@ class sale_order(osv.Model):
             res[so.id] = val
         
         return res
+
+    def _compute_ht_total(self, cr, uid, ids, field_name, arg, context=None):
+        cur_obj = self.pool.get('res.currency')
+        res = {}
+        if context is None:
+            context = {}
+        for so in self.browse(cr, uid, ids, context=context):
+            val = 0.0
+            for line in so.order_line:
+                if not line.product_id or not line.product_id.is_discount:
+                    val += line.product_uom_qty * line.price_unit
+            
+            res[so.id] = val
+        
+        return res
     
     def _amount_line_tax(self, cr, uid, line, context=None):
         val = 0.0
@@ -126,6 +141,7 @@ class sale_order(osv.Model):
 
     _columns = {
         'discount_total': fields.function(_compute_discount_total, string='Total of discounts', digits_compute= dp.get_precision('Account')),
+        'ht_total': fields.function(_compute_ht_total, string='Total of HT amounts', digits_compute= dp.get_precision('Account')),
         'amount_untaxed': fields.function(_amount_all_wrapper, digits_compute=dp.get_precision('Account'), string='Untaxed Amount',
             store={
                 'sale.order': (lambda self, cr, uid, ids, c={}: ids, ['order_line'], 10),

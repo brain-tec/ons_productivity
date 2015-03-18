@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: sale and invoice discount management',
-    'version' : '1.0.0',
+    'version' : '1.0.02',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -49,6 +49,9 @@ These modules are included in all our hosting solutions.
 
 V1.0.0: 2015-03-10/Cyp
     - Fixed discount in sales and invoices
+
+V1.0.02: 2015-03-18/Cyp
+    - Total of HT amounts, without any taxes, without any discount
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
