@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_sale_asset_mgr","onsp_sale_asset_mgr","model_sale_asset","base.group_sale_salesman",1,1,1,1
+"access_sale_asset_usr","onsp_sale_asset_usr","model_sale_asset","account.group_account_user",1,1,0,0

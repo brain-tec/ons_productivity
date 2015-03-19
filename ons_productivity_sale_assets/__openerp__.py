@@ -54,6 +54,7 @@ V1.0.0: 2015-03-18/Cyp
     'images' : [],
     'depends' : ['sale'],
     'data': [
+        'data/ir.model.access.csv',
         'wizards/sale_line_make_asset.xml',
         'views/asset_view.xml',
     ],
