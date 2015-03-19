@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: wizards/sale_line_make_asset.xml
+  Module: ons_productivity_sale_assets
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2015 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_sale_line_make_asset">
+            <field name="name">Open-Net productivity: create asset from a sale order line</field>
+            <field name="model">sale.asset.create_wizard</field>
+            <field name="arch" type="xml">
+                <form string="Create an asset" version="7.0">
+                    <group>
+                        <group>
+                            <field name="serial"/>
+                        </group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                        </group>
+                    </group>
+                    <separator string="Description" colspan="4"/>
+                    <field name="name" nolabel="1"/>
+                    <footer>
+                        <button string="Create the asset" name="action_create_asset" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_sale_line_make_asset">
+            <field name="name">Sale asset creation</field>
+            <field name="res_model">sale.asset.create_wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_sale_line_make_asset"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>

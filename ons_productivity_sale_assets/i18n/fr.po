@@ -1,0 +1,142 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: openobject-addons\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-03-12 12:41+0000\n"
+"PO-Revision-Date: 2015-03-12 12:41+0000\n"
+"Last-Translator: cyp@open-net.ch\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: ons_productivity_sale_assets
+#: field:sale.asset,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: ons_productivity_sale_assets
+#: field:sale.asset,partner_id:0
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: ons_productivity_sale_assets
+#: field:sale.asset,sale_line_id:0
+msgid "Sale line"
+msgstr "Ligne de vente"
+
+#. module: ons_productivity_sale_assets
+#: field:sale.asset,sale_id:0
+msgid "Sale"
+msgstr "Vente"
+
+#. module: ons_productivity_sale_assets
+#: field:sale.asset,serial:0
+#: field:sale.asset.create_wizard,serial:0
+msgid "Serial Nb"
+msgstr "No de série"
+
+#. module: ons_productivity_sale_assets
+#: field:sale.asset,date_start:0
+#: field:sale.asset.create_wizard,date_start:0
+msgid "Date start"
+msgstr "Date début"
+
+#. module: ons_productivity_sale_assets
+#: field:sale.asset,date_end:0
+#: field:sale.asset.create_wizard,date_end:0
+msgid "Date end"
+msgstr "Date de fin"
+
+#. module: ons_productivity_sale_assets
+#: field:sale.asset,active:0
+#: view:sale.asset:0
+msgid "Active"
+msgstr "Actif"
+
+#. module: ons_productivity_sale_assets
+#: view:sale.asset:0
+msgid "Unactive"
+msgstr "Inactif"
+
+#. module: ons_productivity_sale_assets
+#: view:sale.asset:0
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: ons_productivity_sale_assets
+#: view:sale.asset:0
+msgid "Sale"
+msgstr "Vente"
+
+#. module: ons_productivity_sale_assets
+#: view:sale.asset:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: ons_productivity_sale_assets
+#: view:sale.asset:0
+msgid "Start date"
+msgstr "Date de début"
+
+#. module: ons_productivity_sale_assets
+#: view:sale.asset:0
+msgid "End date"
+msgstr "Date de fin"
+
+#. module: ons_productivity_sale_assets
+#: model:ir.actions.act_window,name:ons_productivity_sale_assets.onsp_sale_asset_action
+#: model:ir.ui.menu,name:ons_productivity_sale_assets.onsp_sale_asset_menu
+msgid "Sale assets"
+msgstr "Actifs de vente"
+
+#. module: ons_productivity_sale_assets
+#: field:res.partner,sale_asset_count:0
+msgid "# of Sales Asset"
+msgstr "Nb d'actifs de vente"
+
+#. module: ons_productivity_sale_assets
+#: field:product.product,sale_asset_count:0
+msgid "# of Sales Asset"
+msgstr "Nb d'actifs de vente"
+
+#. module: ons_productivity_sale_assets
+#: view:sale.order:0
+msgid "Products"
+msgstr "Produits"
+
+#. module: ons_productivity_sale_assets
+#: view:sale.order:0
+msgid "Assets"
+msgstr "Actifs"
+
+#. module: ons_productivity_sale_assets
+#: view:sale.order.line:0
+msgid "Create an asset"
+msgstr "Créé un actif"
+
+#. module: ons_productivity_sale_assets
+#: view:product.product:0
+#: view:res.partner:0
+msgid "Sale assets"
+msgstr "Actifs"
+
+#. module: ons_productivity_sale_assets
+#: model:ir.actions.act_window,name:ons_productivity_sale_assets.action_sale_line_make_asset
+#: view:sale.asset.create_wizard:0
+msgid "Sale asset creation"
+msgstr "Création d'un actif de vente"
+
+#. module: ons_productivity_sale_assets
+#: view:sale.asset.create_wizard:0
+msgid "Create the asset"
+msgstr "Créer l'actif"
+
+#. module: ons_productivity_sale_assets
+#: view:sale.asset.create_wizard:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: ons_productivity_sale_assets
+#: view:sale.asset.create_wizard:ons_productivity_sale_assets.view_sale_line_make_asset
+msgid "Create an asset"
+msgstr "Créer un actif"

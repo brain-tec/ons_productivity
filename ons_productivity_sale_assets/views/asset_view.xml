@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: views/sale_view.xml
+  Module: ons_productivity_sale_assets
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2015-TODAY Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <!-- 
+            More for the sale's form 
+        -->
+        <record model="ir.ui.view" id="onsp_view_sale_order_form">
+            <field name="name">Open-Net productivity: sale order form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]" position="before">
+                    <div class="oe_right oe_button_box" style="width: 300px;" name="buttons">
+                        <button 
+                            class="oe_inline oe_stat_button" 
+                            string="Products" 
+                            name="action_view_stockable_products" 
+                            type="object"
+                            icon="fa-list"/>
+                        <button 
+                            class="oe_inline oe_stat_button" 
+                            string="Assets" 
+                            name="action_view_related_assets" 
+                            type="object"
+                            icon="fa-strikethrough"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- 
+            More for the sale line's form 
+        -->
+        <record model="ir.ui.view" id="onsp_view_sale_line_form">
+            <field name="name">Open-Net productivity: sale line form</field>
+            <field name="model">sale.order.line</field>
+            <field name="inherit_id" ref="sale.view_order_line_form2"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                    <button 
+                        string="Create an asset" 
+                        name="%(ons_productivity_sale_assets.action_sale_line_make_asset)d" 
+                        type="action"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- 
+            More for the product's form 
+        -->
+        <record model="ir.ui.view" id="onsp_view_product_form">
+            <field name="name">Open-Net productivity: product form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <div name="buttons" position="inside">
+                    <button 
+                        class="oe_inline oe_stat_button" 
+                        name="action_view_related_assets" 
+                        type="object"
+                        icon="fa-strikethrough"
+                        attrs="{'invisible': [('type', '!=', 'product')]}">
+                        <field string="Sale assets" name="sale_asset_count" widget="statinfo"/>
+                    </button>
+                </div>
+            </field>
+        </record>
+
+        <!-- 
+            More for the partner's form 
+        -->
+        <record model="ir.ui.view" id="onsp_view_partner_form">
+            <field name="name">Open-Net productivity: partner form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <div name="buttons" position="inside">
+                    <button 
+                        class="oe_inline oe_stat_button" 
+                        name="action_view_related_assets" 
+                        type="object"
+                        icon="fa-strikethrough">
+                        <field string="Sale assets" name="sale_asset_count" widget="statinfo"/>
+                    </button>
+                </div>
+            </field>
+        </record>
+
+        <!-- 
+            Sale assets 
+        -->
+        <record model="ir.ui.view" id="onsp_sale_asset_list">
+            <field name="name">Open-Net productivity: sale asset list</field>
+            <field name="model">sale.asset</field>
+            <field name="arch" type="xml">
+                <tree version="7.0" create="false">
+                    <field name="partner_id" invisible="0"/>
+                    <field name="sale_id" invisible="0"/>
+                    <field name="product_id" invisible="0"/>
+                    <field name="serial"/>
+                    <field name="name"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="onsp_sale_asset_form">
+            <field name="name">Open-Net productivity: sale asset form</field>
+            <field name="model">sale.asset</field>
+            <field name="arch" type="xml">
+                <form version="7.0">
+                    <sheet>
+<!--
+                        <div class="oe_right oe_button_box" style="width: 300px;" name="buttons">
+                            <button 
+                                class="oe_inline oe_stat_button" 
+                                name="action_view_related_sales" 
+                                type="object"
+                                icon="fa-strikethrough">
+                                <field string="Sales" name="sale_order_count" widget="statinfo"/>
+                            </button>
+                        </div>
+-->
+                        <field name="partner_id" nolabel="1" readonly="1"/>
+                        <div class="oe_left" name="options" groups="base.group_user">
+                            <div>
+                                <field name="active"/>
+                                <label for="active"/>
+                            </div>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="sale_id" readonly="1"/>
+                                <field name="sale_line_id" readonly="1"/>
+                                <field name="product_id" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="serial"/>
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+                            </group>
+                        </group>                    
+                        <separator string="Information" colspan="4"/>
+                        <field name="name" nolabel="1"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="onsp_sale_asset_filter">
+            <field name="name">Open-Net productivity: sale asset filter</field>
+            <field name="model">sale.asset</field>
+            <field name="arch" type="xml">
+                <search string="Sale assets">
+                    <filter string="Active" name="active" domain="[('active', '=',True)]"/>
+                    <filter string="Unactive" domain="[('active', '=',False)]"/>
+                    <separator/>
+                    <field name="partner_id"/>
+                    <field name="sale_id"/>
+                    <field name="product_id"/>
+                    <field name="serial"/>
+                    <field name="name"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Partner" context="{'group_by': 'partner_id'}" invisible="context.get('ons_no_partner_grp', False)"/>
+                        <filter string="Sale" context="{'group_by': 'sale_id'}" invisible="context.get('ons_no_sale_grp', False)"/>
+                        <filter string="Product" context="{'group_by': 'product_id'}" invisible="context.get('ons_no_product_grp', False)"/>
+                        <filter string="Start date" context="{'group_by': 'date_start'}"/>
+                        <filter string="End date" context="{'group_by': 'date_end'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="onsp_sale_asset_action">
+            <field name="name">Sale assets</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.asset</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="onsp_sale_asset_filter"/>
+            <field name="view_id" ref="onsp_sale_asset_list"/>
+        </record>
+        
+        <menuitem 
+            id="onsp_sale_asset_menu"
+            action="onsp_sale_asset_action" 
+            parent="base.menu_sales"
+            sequence="10"/>
+
+    </data>
+</openerp>
