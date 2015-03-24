@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: views/view_mrp.xml
+  Module: ons_productivity_mrp
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2015-TODAY Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <!-- 
+            More for the customer's invoice 
+        -->
+        <record model="ir.ui.view" id="onsp_mrp_bom_wkcp_form">
+            <field name="name">Open-Net productivity: BoM workcenter's parameters</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+             <notebook position="inside">
+                 <page string="Coefficients for the work centers" position="inside">
+                     <field name="workcenter_param_ids" create="false">
+                         <tree string=" "  editable="top">
+                             <field name="coeff"/>
+                             <field name="name" readonly="True"/>
+                         </tree>
+                         <form string="Work center coefficient">
+                             <group>
+                                 <field name="bom_id" readonly="True"/>
+                                 <field name="name" readonly="True"/>
+                             </group>
+                             <group>
+                                 <field name="routing_id" readonly="True"/>
+                                 <field name="coeff"/>
+                             </group>
+                         </form>
+                    </field>
+                </page>
+            </notebook>
+            </field>
+        </record>
+
+    </data>
+</openerp>
