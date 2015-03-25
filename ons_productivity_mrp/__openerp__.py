@@ -52,7 +52,7 @@ V1.0.0: 2015-03-24/Cyp
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
-    'depends' : ['mrp'],
+    'depends' : ['mrp','product_extended'],
     'data': [
         'views/view_mrp.xml',
     ],
