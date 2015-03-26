@@ -60,7 +60,7 @@ class mrp_bom(models.Model):
         do_it = 'routing_id' in vals
         new_id = super(mrp_bom, self).create(cr, uid, vals, context=context)
         if new_id and do_it:
-            self.synch(cr, uid, [new_id], context=context)
+            self.synch_workcenter_params(cr, uid, [new_id], context=context)
         
         return new_id
 
