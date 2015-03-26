@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: MRP',
-    'version' : '1.0.0',
+    'version' : '1.0.02',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -49,11 +49,16 @@ These modules are included in all our hosting solutions.
 
 V1.0.0: 2015-03-24/Cyp
     - Scratch writing
+
+V1.0.02: 2015-03-25/Cyp
+    - Implemented: inclusion in BoM's price computation
+    - Added the access rights
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
     'depends' : ['mrp','product_extended'],
     'data': [
+        'data/ir.model.access.csv',
         'views/view_mrp.xml',
     ],
     'qweb' : [
