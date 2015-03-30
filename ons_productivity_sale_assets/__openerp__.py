@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: sale assets',
-    'version' : '1.0.0',
+    'version' : '1.0.02',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -49,6 +49,11 @@ These modules are included in all our hosting solutions.
 
 V1.0.0: 2015-03-18/Cyp
     - Customers' equipment renewals management
+
+V1.0.02: 2015-03-30/Cyp
+    - Cron to search for assets that need to be checked
+    - The corresponding assets list
+    - wizard to create a new sale quotation from an asset
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
@@ -56,6 +61,7 @@ V1.0.0: 2015-03-18/Cyp
     'data': [
         'data/ir.model.access.csv',
         'wizards/sale_line_make_asset.xml',
+        'wizards/asset_make_quotation_view.xml',
         'views/asset_view.xml',
     ],
     'qweb' : [

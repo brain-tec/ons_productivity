@@ -124,18 +124,13 @@
             <field name="model">sale.asset</field>
             <field name="arch" type="xml">
                 <form version="7.0">
+                    <header>
+                        <button 
+                            string="Create a quotation" 
+                            name="%(ons_productivity_sale_assets.action_sale_asset_make_quotation)d" 
+                            type="action"/>
+                    </header>
                     <sheet>
-<!--
-                        <div class="oe_right oe_button_box" style="width: 300px;" name="buttons">
-                            <button 
-                                class="oe_inline oe_stat_button" 
-                                name="action_view_related_sales" 
-                                type="object"
-                                icon="fa-strikethrough">
-                                <field string="Sales" name="sale_order_count" widget="statinfo"/>
-                            </button>
-                        </div>
--->
                         <field name="partner_id" nolabel="1" readonly="1"/>
                         <div class="oe_left" name="options" groups="base.group_user">
                             <div>
@@ -146,7 +141,7 @@
                         <group>
                             <group>
                                 <field name="sale_id" readonly="1"/>
-                                <field name="sale_line_id" readonly="1"/>
+                                <field name="name" readonly="1"/>
                                 <field name="product_id" readonly="1"/>
                             </group>
                             <group>
@@ -154,9 +149,18 @@
                                 <field name="date_start"/>
                                 <field name="date_end"/>
                             </group>
-                        </group>                    
-                        <separator string="Information" colspan="4"/>
-                        <field name="name" nolabel="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Information">
+                                <field name="note" nolabel="1"/>
+                            </page>
+                            <page string="Quotations">
+                                <field name="quotation_ids" nolabel="1"/>
+                            </page>
+                            <page string="Sales">
+                                <field name="sale_ids" nolabel="1"/>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
@@ -175,6 +179,7 @@
                     <field name="product_id"/>
                     <field name="serial"/>
                     <field name="name"/>
+                    <field name="note"/>
                     <group expand="1" string="Group By">
                         <filter string="Partner" context="{'group_by': 'partner_id'}" invisible="context.get('ons_no_partner_grp', False)"/>
                         <filter string="Sale" context="{'group_by': 'sale_id'}" invisible="context.get('ons_no_sale_grp', False)"/>
@@ -194,6 +199,7 @@
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="onsp_sale_asset_filter"/>
             <field name="view_id" ref="onsp_sale_asset_list"/>
+                <field name="domain">[]</field>
         </record>
         
         <menuitem 
@@ -201,6 +207,23 @@
             action="onsp_sale_asset_action" 
             parent="base.menu_sales"
             sequence="10"/>
+
+            <record model="ir.actions.act_window" id="onsp_sale_asset_2handle_action">
+                <field name="name">To handle</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">sale.asset</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+                <field name="search_view_id" ref="onsp_sale_asset_filter"/>
+                <field name="view_id" ref="onsp_sale_asset_list"/>
+                <field name="domain">[('to_handle','=',True)]</field>
+            </record>
+            
+            <menuitem 
+                id="onsp_sale_asset_2handle_menu"
+                action="onsp_sale_asset_2handle_action" 
+                parent="ons_productivity_sale_assets.onsp_sale_asset_menu"
+                sequence="10"/>
 
     </data>
 </openerp>

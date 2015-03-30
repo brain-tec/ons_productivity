@@ -35,16 +35,21 @@ class sale_asset_create_wizard(osv.osv_memory):
     _description = 'Create an asset from a sale order line'
 
     _columns = {
-        'name': fields.text('Information', required=True),
+        'name': fields.many2one('sale.order.line', 'Sale line', required=True),
+        'note': fields.text('Information', required=True),
         'serial': fields.char('Serial Nb', size=64),
         'date_start': fields.date('Date start'),
         'date_end': fields.date('Date end'),
+    }
+    
+    _defaults = {
+        'name': lambda s, c, u, ctx: ctx.get('active_id', False),
     }
 
     def action_create_asset(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
-        data = self.read(cr, uid, ids, ['serial','date_start','date_end', 'name'], context=context)[0]
+        data = self.read(cr, uid, ids, ['serial','date_start','date_end', 'note'], context=context)[0]
         if data.get('id', False):
             del data['id']
         
@@ -54,7 +59,7 @@ class sale_asset_create_wizard(osv.osv_memory):
         data.update({
             'product_id': sol.product_id and sol.product_id.id or False,
             'sale_id': sol.order_id and sol.order_id.id or False,
-            'sale_line_id': sol.id,
+            'name': sol.id,
             'partner_id': sol.order_id and sol.order_id.partner_id and sol.order_id.partner_id.id or False,
         })
         assets_obj = self.pool.get('sale.asset')

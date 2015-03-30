@@ -29,6 +29,11 @@
 from openerp.osv import osv, fields
 import openerp.addons.decimal_precision as dp
 from lxml import etree
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+import time
+from email.Utils import make_msgid
+from openerp.addons.base.ir import ir_mail_server
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -40,21 +45,26 @@ class sale_asset(osv.Model):
     # ---------- Fields management
 
     _columns = {
-        'name': fields.text('Information', required=True),
+        'name': fields.many2one('sale.order.line', 'Sale line', ondelete='restrict'),
+        'note': fields.text('Information', required=True),
         'product_id': fields.many2one('product.product', 'Product', domain=[('sale_ok', '=', True)], ondelete='restrict'),
         'partner_id': fields.many2one('res.partner', 'Partner', ondelete='restrict'),
-        'sale_line_id': fields.many2one('sale.order.line', 'Sale line', ondelete='restrict'),
         'sale_id': fields.many2one('sale.order', 'Sale', ondelete='restrict'),
         'serial': fields.char('Serial Nb', size=64),
         'date_start': fields.date('Date start'),
         'date_end': fields.date('Date end'),
         'active': fields.boolean('Active'),
+        'to_handle': fields.boolean('To handle'),
+        'quotation_ids': fields.one2many('sale.order', 'sale_asset_id', 'Quotations', domain=[('state','in',['draft','sent'])]),
+        'sale_ids': fields.one2many('sale.order', 'sale_asset_id', 'Sales', domain=[('state','not in',['draft','sent','cancel'])]),
     }
     
     _defaults = {
         'active': lambda *a: True,
+        'to_handle': lambda *a: False,
     }
 
+    # ---------- Interface management
     
     def action_view_related_assets(self, cr, uid, ids, action_domain, action_context, context=None):
         act_obj = self.pool.get('ir.actions.act_window')
@@ -74,6 +84,10 @@ class sale_asset(osv.Model):
         if context is None:
             context = {}
 
+        # Depending on the source of the list, some fields may be hidden
+        #   For example the assets from a sale order point of view are 
+        #       filtered with it => no need to display it in the list
+        #
         if view_type == 'tree':
             doc = etree.XML(res['arch'])
             if context.get('ons_no_sale_grp', False):
@@ -92,8 +106,27 @@ class sale_asset(osv.Model):
         
         return res
 
+    # ---------- Scheduler management
+    
+    def cron_search_next_assets(self, cr, uid, nb_days=7, mail_to=False, context={}):
+        next_stop = (datetime.now() + relativedelta(days=nb_days)).strftime('%Y-%m-%d')
+        filter = [
+            ('date_end', '!=', False),
+            ('date_end', '<=', next_stop),
+        ]
+        asset_ids = self.search(cr, uid, filter, context=context)
+        if asset_ids:
+            self.write(cr, uid, asset_ids, {'to_handle':True}, context=context)
+        
+        return len(asset_ids) > 0
+
+
 class sale_order(osv.Model):
     _inherit = 'sale.order'
+    
+    _columns = {
+        'sale_asset_id': fields.many2one('sale.asset', 'Asset'),
+    }
     
     def action_view_stockable_products(self, cr, uid, ids, context=None):
         sol_obj = self.pool.get("sale.order.line")
@@ -116,7 +149,20 @@ class sale_order(osv.Model):
         action_context = {'ons_no_sale_grp':'1'}
 
         return self.pool.get('sale.asset').action_view_related_assets(cr, uid, [], action_domain, action_context, context=context)
-
+    
+    def copy(self, cr, uid, id, default=None, context=None, asset_id=False):
+        default = {} if default is None else default.copy()
+        asset = self.pool.get('sale.asset').browse(cr, uid, asset_id, context=context) if asset_id else False
+        if asset and asset.name:
+            default['order_line'] = [(6, 0, [])]
+            default['sale_asset_id'] = asset_id
+        new_so_id = super(sale_order, self).copy(cr, uid, id, default=default, context=context)
+        if not new_so_id:
+            return new_so_id
+        if asset and asset.name:
+            new_sol_id = self.pool.get('sale.order.line').copy(cr, uid, asset.name.id, default={'order_id':new_so_id}, context=context)
+        
+        return new_so_id
 
 class res_partner(osv.Model):
     _inherit = 'res.partner'

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  File: wizards/sale_line_make_asset.xml
+  File: wizards/asset_make_quotation_view.xml
   Module: ons_productivity_sale_assets
 
   Created by cyp@open-net.ch
@@ -10,25 +10,19 @@
 <openerp>
     <data>
 
-        <record model="ir.ui.view" id="view_sale_line_make_asset">
+        <record model="ir.ui.view" id="view_sale_asset_make_quotation">
             <field name="name">Open-Net productivity: create asset from a sale order line</field>
-            <field name="model">sale.asset.create_wizard</field>
+            <field name="model">sale.asset.quotation_wizard</field>
             <field name="arch" type="xml">
-                <form string="Create an asset" version="7.0">
+                <form string="Create a quotation" version="7.0">
                     <field name="name" readonly="1"/>
                     <group>
                         <group>
-                            <field name="serial"/>
-                        </group>
-                        <group>
-                            <field name="date_start"/>
                             <field name="date_end"/>
                         </group>
                     </group>
-                    <label for="note"/>
-                    <field name="note"/>
                     <footer>
-                        <button string="Create the asset" name="action_create_asset" type="object" class="oe_highlight"/>
+                        <button string="Create a quotation" name="action_create_quotation" type="object" class="oe_highlight"/>
                         or
                         <button string="Cancel" class="oe_link" special="cancel"/>
                     </footer>
@@ -36,12 +30,12 @@
             </field>
         </record>
 
-        <record model="ir.actions.act_window" id="action_sale_line_make_asset">
-            <field name="name">Sale asset creation</field>
-            <field name="res_model">sale.asset.create_wizard</field>
+        <record model="ir.actions.act_window" id="action_sale_asset_make_quotation">
+            <field name="name">Create a quotation</field>
+            <field name="res_model">sale.asset.quotation_wizard</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="view_sale_line_make_asset"/>
+            <field name="view_id" ref="view_sale_asset_make_quotation"/>
             <field name="target">new</field>
         </record>
 

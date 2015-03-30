@@ -27,3 +27,4 @@
 ##############################################################################
 
 import sale_line_make_asset
+import asset_make_quotation

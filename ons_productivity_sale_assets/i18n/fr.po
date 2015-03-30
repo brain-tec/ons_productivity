@@ -20,7 +20,7 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: ons_productivity_sale_assets
-#: field:sale.asset,sale_line_id:0
+#: field:sale.asset,name:0
 msgid "Sale line"
 msgstr "Ligne de vente"
 
@@ -46,6 +46,23 @@ msgstr "Date début"
 #: field:sale.asset.create_wizard,date_end:0
 msgid "Date end"
 msgstr "Date de fin"
+
+#. module: ons_productivity_sale_assets
+#: field:sale.asset,to_handle:0
+msgid "To handle"
+msgstr "A traiter"
+
+#. module: ons_productivity_sale_assets
+#: field:sale.asset,quotation_ids:0
+#: view:sale.asset:0
+msgid "Quotations"
+msgstr "Devis"
+
+#. module: ons_productivity_sale_assets
+#: field:sale.asset,sale_ids:0
+#: view:sale.asset:0
+msgid "Sales"
+msgstr "Ventes"
 
 #. module: ons_productivity_sale_assets
 #: field:sale.asset,active:0
@@ -90,6 +107,12 @@ msgid "Sale assets"
 msgstr "Actifs de vente"
 
 #. module: ons_productivity_sale_assets
+#: model:ir.actions.act_window,name:ons_productivity_sale_assets.onsp_sale_asset_2handle_action
+#: model:ir.ui.menu,name:ons_productivity_sale_assets.onsp_sale_asset_2handle_menu
+msgid "To handle"
+msgstr "A traiter"
+
+#. module: ons_productivity_sale_assets
 #: field:res.partner,sale_asset_count:0
 msgid "# of Sales Asset"
 msgstr "Nb d'actifs de vente"
@@ -98,6 +121,11 @@ msgstr "Nb d'actifs de vente"
 #: field:product.product,sale_asset_count:0
 msgid "# of Sales Asset"
 msgstr "Nb d'actifs de vente"
+
+#. module: ons_productivity_sale_assets
+#: field:sale.order,sale_asset_id:0
+msgid "Asset"
+msgstr "Actif"
 
 #. module: ons_productivity_sale_assets
 #: view:sale.order:0
@@ -140,3 +168,17 @@ msgstr "Annuler"
 #: view:sale.asset.create_wizard:ons_productivity_sale_assets.view_sale_line_make_asset
 msgid "Create an asset"
 msgstr "Créer un actif"
+
+#. module: ons_productivity_sale_assets
+#: code:addons/ons_productivity_sale_assets/wizards/asset_make_quotation.py:59
+#, python-format
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+
+#. module: ons_productivity_sale_assets
+#: model:ir.actions.act_window,name:ons_productivity_sale_assets.action_sale_asset_make_quotation
+#: view:sale.asset.quotation_wizard:0
+#: view:sale.order.line:0
+msgid "Create a quotation"
+msgstr "Création d'un devis"
