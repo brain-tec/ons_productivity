@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: MRP',
-    'version' : '1.0.02',
+    'version' : '1.0.03',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -53,6 +53,9 @@ V1.0.0: 2015-03-24/Cyp
 V1.0.02: 2015-03-25/Cyp
     - Implemented: inclusion in BoM's price computation
     - Added the access rights
+
+V1.0.03: 2015-03-30/Cyp
+    - Change: the coefficients are now managed by operation, instead of by work center
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],

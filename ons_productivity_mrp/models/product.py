@@ -57,15 +57,14 @@ class product_template(models.Model):
 
         if bom.routing_id:
             for wline in bom.routing_id.workcenter_lines:
-                wc = wline.workcenter_id
                 coeff = 1.0
-                if wc:
-                    for wkc_param in bom.workcenter_param_ids:
-                        if not wkc_param.name:
-                            continue
-                        if wkc_param.name.id == wc.id:
-                            coeff = wkc_param.coeff
-                            break
+                for wkc_param in bom.workcenter_param_ids:
+                    if not wkc_param.name:
+                        continue
+                    if wkc_param.name.id == wline.id:
+                        coeff = wkc_param.coeff
+                        break
+                wc = wline.workcenter_id
                 cycle = wline.cycle_nbr
                 hour = (wc.time_start + wc.time_stop + cycle * wc.time_cycle) *  (wc.time_efficiency or 1.0)
                 price += (wc.costs_cycle * cycle + wc.costs_hour * hour) * coeff

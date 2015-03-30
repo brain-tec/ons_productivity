@@ -10,32 +10,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. module: ons_productivity_mrp
-#: field:mrp.bom.workcenter_param,name:0
-msgid "Workcenter"
+#: field:mrp.bom.wkc_op_param,name:0
+msgid "Operation"
+msgstr "Opération"
+
+#. module: ons_productivity_mrp
+#: field:mrp.bom.wkc_op_param,workcenter_id:0
+msgid "Work center"
 msgstr "Poste de charge"
 
 #. module: ons_productivity_mrp
-#: field:mrp.bom.workcenter_param,routing_id:0
+#: field:mrp.bom.wkc_op_param,routing_id:0
 msgid "Routing"
 msgstr "Gamme"
 
 #. module: ons_productivity_mrp
-#: field:mrp.bom.workcenter_param,bom_id:0
+#: field:mrp.bom.wkc_op_param,bom_id:0
 msgid "BoM"
 msgstr "Nomenclature"
 
 #. module: ons_productivity_mrp
-#: field:mrp.bom.workcenter_param,coeff:0
+#: field:mrp.bom.wkc_op_param,coeff:0
 msgid "Coefficient"
 msgstr "Coefficient"
 
 #. module: ons_productivity_mrp
-#: field:mrp.bom,workcenter_param_ids:0
-msgid "Workcenter parameters"
-msgstr "Paramètres des postes de charge"
-
+#: field:mrp.bom,wkc_op_param_ids:0
+msgid "Operation parameters"
+msgstr "Paramètres des opérations"
 
 #. module: ons_productivity_mrp
 #: view:mrp.bom:0
-msgid "Coefficients for the work centers"
-msgstr "Coefficients des postes de charge"
+msgid "Coefficients for the operations"
+msgstr "Coefficients pour les opérations"

@@ -20,16 +20,19 @@
             <field name="priority" eval="17"/>
             <field name="arch" type="xml">
              <notebook position="inside">
-                 <page string="Coefficients for the work centers" position="inside">
-                     <field name="workcenter_param_ids" create="false">
+                 <page string="Coefficients for the operations" position="inside">
+                     <field name="wkc_op_param_ids" create="false">
                          <tree string=" "  editable="top">
+                             <field name="sequence"/>
                              <field name="coeff"/>
                              <field name="name" readonly="True"/>
+                             <field name="workcenter_id" readonly="True"/>
                          </tree>
-                         <form string="Work center coefficient">
+                         <form string="Coefficients for the operations">
                              <group>
                                  <field name="bom_id" readonly="True"/>
                                  <field name="name" readonly="True"/>
+                                 <field name="workcenter_id" readonly="True"/>
                              </group>
                              <group>
                                  <field name="routing_id" readonly="True"/>
