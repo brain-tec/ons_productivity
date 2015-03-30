@@ -58,7 +58,7 @@ class product_template(models.Model):
         if bom.routing_id:
             for wline in bom.routing_id.workcenter_lines:
                 coeff = 1.0
-                for wkc_param in bom.workcenter_param_ids:
+                for wkc_param in bom.wkc_op_param_ids:
                     if not wkc_param.name:
                         continue
                     if wkc_param.name.id == wline.id:
