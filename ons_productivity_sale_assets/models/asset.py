@@ -109,9 +109,12 @@ class sale_asset(osv.Model):
     # ---------- Scheduler management
     
     def cron_search_next_assets(self, cr, uid, nb_days=7, mail_to=False, context={}):
+        today = datetime.now().strftime('%Y-%m-%d')
         next_stop = (datetime.now() + relativedelta(days=nb_days)).strftime('%Y-%m-%d')
         filter = [
+            ('to_handle', '=', False),
             ('date_end', '!=', False),
+            ('date_end', '>=', today),
             ('date_end', '<=', next_stop),
         ]
         asset_ids = self.search(cr, uid, filter, context=context)
