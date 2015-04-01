@@ -27,26 +27,38 @@
 ##############################################################################
 
 from openerp.osv import fields, osv
+from openerp import api
 from openerp.tools.translate import _
 import time
 
 class sale_order(osv.Model):
     _inherit = 'sale.order'
+
+    # ---------- Fields management
     
     _columns = {
+        'ons_validation_hidden_flag': fields.boolean('Validated'),
         'ons_validation_flag': fields.boolean('Validated'),
         'ons_validation_by': fields.many2one('res.users', 'By'),
         'ons_validation_date': fields.date('Date'),
     }
     
+    # ---------- Instances management
+    
     def create(self, cr, uid, vals, context=None):
-        if vals.get('ons_validation_flag', False):
-            vals.update({'ons_validation_by': uid, 'ons_validation_date': time.strftime('%Y-%m-%d')})
+        if vals.get('ons_validation_hidden_flag', False):
+            vals.update({'ons_validation_flag': True, 'ons_validation_by': uid, 'ons_validation_date': time.strftime('%Y-%m-%d')})
         
         return super(sale_order, self).create(cr, uid, vals, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
-        if vals.get('ons_validation_flag', False):
-            vals.update({'ons_validation_by': uid, 'ons_validation_date': time.strftime('%Y-%m-%d')})
+        if vals.get('ons_validation_hidden_flag', False):
+            vals.update({'ons_validation_flag': True, 'ons_validation_by': uid, 'ons_validation_date': time.strftime('%Y-%m-%d')})
         
         return super(sale_order, self).write(cr, uid, ids, vals, context=context)
+
+    # ---------- Interface management
+    
+    @api.multi
+    def on_change_validation_flag(self, ons_validation_flag=False):
+        return { 'value': {'ons_validation_hidden_flag': ons_validation_flag} }

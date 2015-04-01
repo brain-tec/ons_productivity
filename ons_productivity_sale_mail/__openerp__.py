@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: sale & mail tools',
-    'version' : '1.0.03',
+    'version' : '1.0.04',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -49,10 +49,10 @@ These modules are included in all our hosting solutions.
 
 V1.0.02: 2015-03-05/Cyp
     - A sale order can only be sent by mail once it has been validated by a member of a dedicated group
-**History :**
 
-V1.0.03: 2015-03-16/Cyp
+V1.0.04: 2015-04-01/Cyp
     - The checkbox that controls the validation becomes readonly once it's checked.
+      Trick: using a hidden flag to store the value as a readonly-field is not stored
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],

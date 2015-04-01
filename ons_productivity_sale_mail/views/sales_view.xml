@@ -39,7 +39,8 @@
                 <xpath expr="//page[@string='Other Information']" position="inside">
                     <group string="Validation">
                         <group>
-                            <field name="ons_validation_flag" groups="ons_productivity_sale_mail.sale_validators" attrs="{'readonly':[('ons_validation_flag','=',True)]}"/>
+                            <field name="ons_validation_hidden_flag" groups="ons_productivity_sale_mail.sale_validators" invisible="1"/>
+                            <field name="ons_validation_flag" groups="ons_productivity_sale_mail.sale_validators" attrs="{'readonly':[('ons_validation_flag','=',True)]}" on_change="on_change_validation_flag(ons_validation_flag)"/>
                             <field name="ons_validation_by" readonly="1"/>
                             <field name="ons_validation_date" readonly="1"/>
                         </group>
