@@ -51,7 +51,7 @@ V1.0.0: 2015-03-10/Cyp
     - Fixed discount in sales and invoices
 
 V1.0.02: 2015-03-18/Cyp
-    - Total of HT amounts, without any taxes, without any discount
+    - Total of HT amounts, without any taxes, without any discount, in the sale orders as well as in the invoices
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
