@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: sale assets',
-    'version' : '1.0.02',
+    'version' : '1.0.03',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -54,6 +54,9 @@ V1.0.02: 2015-03-30/Cyp
     - Cron to search for assets that need to be checked
     - The corresponding assets list
     - wizard to create a new sale quotation from an asset
+
+V1.0.03: 2015-04-08/Cyp
+    - New button: "Show the asset" in the sale order line form, in which the "Create an asset" is hidden whenever one active already exists
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],

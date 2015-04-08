@@ -167,6 +167,33 @@ class sale_order(osv.Model):
         
         return new_so_id
 
+
+class sale_order_line(osv.Model):
+    _inherit = 'sale.order.line'
+    
+    # ---------- Fields management
+
+    def _detect_assets(self, cr, uid, ids, field_name, arg, context=None):
+        res = dict(map(lambda x: (x,0), ids))
+        assets_obj = self.pool.get('sale.asset')
+        for sol_id in ids:
+            res[sol_id] = assets_obj.search(cr, uid, [('name', '=', sol_id),('active', '=', True)], context=context)
+        
+        return res
+    
+    _columns = {
+        'has_an_asset': fields.function(_detect_assets, type='boolean', string='Has an asset?'),
+    }
+
+    # ---------- Interface management
+    
+    def action_view_related_assets(self, cr, uid, ids, context=None):
+        action_domain = "[('name','in',[" + ','.join(map(str, ids)) + "])]"
+        action_context = {} # {'ons_no_sale_grp':'1'}
+
+        return self.pool.get('sale.asset').action_view_related_assets(cr, uid, [], action_domain, action_context, context=context)
+
+
 class res_partner(osv.Model):
     _inherit = 'res.partner'
     

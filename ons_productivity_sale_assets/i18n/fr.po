@@ -143,6 +143,11 @@ msgid "Create an asset"
 msgstr "Créé un actif"
 
 #. module: ons_productivity_sale_assets
+#: view:sale.order.line:0
+msgid "Show the asset"
+msgstr "Voir l'actif"
+
+#. module: ons_productivity_sale_assets
 #: view:product.product:0
 #: view:res.partner:0
 msgid "Sale assets"

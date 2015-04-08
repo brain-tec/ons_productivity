@@ -48,10 +48,19 @@
             <field name="priority" eval="17"/>
             <field name="arch" type="xml">
                 <field name="state" position="before">
-                    <button 
-                        string="Create an asset" 
-                        name="%(ons_productivity_sale_assets.action_sale_line_make_asset)d" 
-                        type="action"/>
+                    <field name="has_an_asset" invisible="1"/>
+                    <span attrs="{'invisible':[('has_an_asset','=',True)]}">
+                        <button 
+                            string="Create an asset" 
+                            name="%(ons_productivity_sale_assets.action_sale_line_make_asset)d" 
+                            type="action"/>
+                    </span>
+                    <span attrs="{'invisible':[('has_an_asset','!=',True)]}">
+                        <button 
+                            string="Show the asset" 
+                            name="action_view_related_assets" 
+                            type="object"/>
+                    </span>
                 </field>
             </field>
         </record>
