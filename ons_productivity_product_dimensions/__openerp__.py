@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: product dimensions',
-    'version' : '1.0.05',
+    'version' : '1.0.06',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """

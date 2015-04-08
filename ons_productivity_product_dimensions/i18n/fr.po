@@ -10,36 +10,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. module: ons_productivity_product_dimensions
-#: field:product_template,ons_width:0
+#: field:product.template,ons_width:0
 msgid "Width"
 msgstr "Largeur"
 
 #. module: ons_productivity_product_dimensions
-#: field:product_template,ons_height:0
+#: field:product.template,ons_height:0
 msgid "Height"
 msgstr "Hauteur"
 
 #. module: ons_productivity_product_dimensions
-#: field:product_template,ons_depth:0
+#: field:product.template,ons_depth:0
 msgid "Depth"
 msgstr "Profondeur"
 
 #. module: ons_productivity_product_dimensions
-#: view:product_template:0
+#: view:product.template:0
 msgid "Units"
 msgstr "Unités"
 
 #. module: ons_productivity_product_dimensions
-#: field:product_template,ons_dim_units_id:0
+#: field:product.template,ons_dim_units_id:0
 msgid "Dimensions units"
 msgstr "Unités des dimensions"
 
 #. module: ons_productivity_product_dimensions
-#: help:product_template,ons_dim_units_id:0
+#: help:product.template,ons_dim_units_id:0
 msgid "Units used to compute the volume"
 msgstr "Unités utilisée pour calculer le volume"
 
 #. module: ons_productivity_product_dimensions
-#: field:product_uom,used_to_comp_vol:0
+#: field:product.uom,used_to_comp_vol:0
 msgid "Used to compute a product's volume"
 msgstr "Utilisée pour calculer le volume d'un produit"
