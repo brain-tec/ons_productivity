@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: product dimensions',
-    'version' : '1.0.06',
+    'version' : '1.0.07',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -47,7 +47,7 @@ These modules are included in all our hosting solutions.
 
 **History :**
 
-V1.0.05: 2015-04-08/Cyp
+V1.0.07: 2015-04-08/Cyp
     - Scratch writing, inspired by the work of "Ingenieria ADHOC"
     """,
     'website': 'https://www.open-net.ch',

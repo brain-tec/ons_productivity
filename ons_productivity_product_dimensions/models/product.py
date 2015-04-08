@@ -46,7 +46,7 @@ class product_template(osv.Model):
         'ons_height': fields.float('Height'),
         'ons_depth': fields.float('Depth'),
         'ons_dim_units_id': fields.many2one('product.uom', 'Dimensions units',
-                                           domain="[('category_id.name', '=', 'Length / Distance')]",
+                                           domain="[('used_to_comp_vol', '=', True)]",
                                            help='Units used to compute the volume'),
     }
 
