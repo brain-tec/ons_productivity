@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: views/view_product.xml
+  Module: ons_productivity_product_dimensions
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2015-TODAY Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <!-- 
+            More for the product
+        -->
+        <record model="ir.ui.view" id="onsp_prod_tmpl_comp_volume">
+            <field name="name">Open-Net productivity: product template volume computing</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <group name="inventory" position="inside">
+                    <group name="dimensions" string="Dimensions">
+                        <field name="ons_dim_units_id" string="Units" on_change="on_change_dimension(ons_width, ons_height, ons_depth, ons_dim_units_id)"/>
+                        <field name="ons_width" on_change="on_change_dimension(ons_width, ons_height, ons_depth, ons_dim_units_id)"/>
+                        <field name="ons_height" on_change="on_change_dimension(ons_width, ons_height, ons_depth, ons_dim_units_id)"/>
+                        <field name="ons_depth" on_change="on_change_dimension(ons_width, ons_height, ons_depth, ons_dim_units_id)"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="onsp_product_uom_form">
+            <field name="name">Open-Net productivity: product UoM form</field>
+            <field name="model">product.uom</field>
+            <field name="inherit_id" ref="product.product_uom_form_view"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <field name="active" position="after">
+                    <field name="used_to_comp_vol"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
