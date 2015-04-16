@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: views/view_product.xml
+  Module: ons_productivity_product_ean
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2015-TODAY Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <!-- 
+            More for the product
+        -->
+        <record model="ir.ui.view" id="onsp_prod_tmpl_ean_search">
+            <field name="name">Open-Net productivity: product template EAN search</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <field name="name" position="attributes">
+                    <attribute name="filter_domain">['|', '|', ('default_code','ilike',self),('name','ilike',self), ('ean13','ilike',self)]</attribute>
+                </field>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="onsp_product_ean_search">
+            <field name="name">Open-Net productivity: product EAN search</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_search_form_view"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <field name="name" position="attributes">
+                    <attribute name="filter_domain">['|', '|', ('default_code','ilike',self),('name','ilike',self), ('ean13','ilike',self)]</attribute>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
