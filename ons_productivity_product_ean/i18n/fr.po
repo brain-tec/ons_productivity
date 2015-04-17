@@ -19,3 +19,24 @@ msgstr "Code barre EAN"
 msgid "EAN Barcode"
 msgstr "Code barre EAN"
 
+#. module: ons_productivity_product_ean
+#: field:product.packaging,ean13:0
+msgid "EAN Barcode"
+msgstr "Code barre EAN"
+
+#. module: ons_productivity_product_ean
+#: constraint:product.product:0
+msgid ""
+"You provided an invalid \"EAN Barcode\" reference. You may use the "
+"\"Internal Reference\" field instead."
+msgstr ""
+"Vous avez indiqué un code barre EAN erroné. Vous pouvez utiliser le champ "
+"\"Référence interne\" à la place."
+
+#. module: ons_productivity_product_ean
+#: constraint:product.product:0
+msgid ""
+"You provided an invalid \"EAN Barcode\" reference."
+msgstr ""
+"Vous avez indiqué un code barre EAN erroné."
+

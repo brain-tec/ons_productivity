@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: product EAN barcodes',
-    'version' : '1.0.0',
+    'version' : '1.0.03',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -49,7 +49,7 @@ These modules are included in all our hosting solutions.
 
 **History :**
 
-V1.0.0: 2015-04-16/Cyp
+V1.0.03: 2015-04-17/Cyp
     - Scratch writing, inspired by the "product_gtn" module (by ChriCar Beteiligungs- und Beratungs- GmbH)
     """,
     'website': 'https://www.open-net.ch',

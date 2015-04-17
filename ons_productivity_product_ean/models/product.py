@@ -103,10 +103,30 @@ class product_product(osv.Model):
     # ---------- Constraints management
 
     def _check_ean_key(self, cr, uid, ids, context=None):
-        for product in self.read(cr, uid, ids, ['ean13'], context=context):
-            if not check_ean(product['ean13']):
+        for row in self.read(cr, uid, ids, ['ean13'], context=context):
+            if not check_ean(row['ean13']):
                 return False
         return True
 
     _constraints = [(_check_ean_key, 'You provided an invalid "EAN Barcode" reference. You may use the "Internal Reference" field instead.', ['ean13'])]
+
+
+class product_packaging(osv.Model):
+    _inherit = 'product.packaging'
+
+    # ---------- Fields management
+    
+    _columns = {
+        'ean13': fields.char('EAN Barcode', size=14, help="International Article Number used for product identification."),
+    }
+
+    # ---------- Constraints management
+
+    def _check_ean_key(self, cr, uid, ids, context=None):
+        for row in self.read(cr, uid, ids, ['ean13'], context=context):
+            if not check_ean(row['ean13']):
+                return False
+        return True
+
+    _constraints = [(_check_ean_key, 'You provided an invalid "EAN Barcode" reference.', ['ean13'])]
 
