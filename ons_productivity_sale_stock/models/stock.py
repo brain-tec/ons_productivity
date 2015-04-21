@@ -32,14 +32,14 @@ class stock_move(osv.osv):
     _inherit = 'stock.move'
 
     _columns = {
+        'sale_line_id': fields.many2one('sale.order.line', 'Sale Order Line', ondelete='set null', select=True, readonly=True),
         'sequence': fields.integer('Sequence'),
     }
 
     _defaults = {
+        'sale_line_id': lambda *a:False,
         'sequence': lambda *a: 10,
     }
-    
-    _order = 'picking_id, sequence'
 
     def create(self, cr, uid, vals, context={}):
         return super(stock_move, self).create(cr, uid, vals, context=context)
@@ -50,6 +50,9 @@ class procurement_order(osv.osv):
     def _run_move_create(self, cr, uid, procurement, context=None):
         vals = super(procurement_order, self)._run_move_create(cr, uid, procurement, context=context)
         if procurement and procurement.sale_line_id:
-            vals['sequence'] = procurement.sale_line_id.sequence
+            vals.update({
+                'sale_line_id': procurement.sale_line_id.id,
+                'sequence': procurement.sale_line_id.sequence,
+            })
         
         return vals
