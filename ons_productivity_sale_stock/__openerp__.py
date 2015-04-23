@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: sale stock',
-    'version' : '1.0.02',
+    'version' : '1.0.03',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
