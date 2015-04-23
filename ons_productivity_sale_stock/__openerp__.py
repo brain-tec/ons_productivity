@@ -49,6 +49,9 @@ These modules are included in all our hosting solutions.
 
 V1.0.0: 2015-03-18/Cyp
     - Scratch writing
+
+V1.0.03: 2015-04-23/Cyp
+    - Changing the stock moves' order to: pick + sequence + id
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],

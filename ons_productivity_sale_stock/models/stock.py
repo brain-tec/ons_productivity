@@ -40,6 +40,8 @@ class stock_move(osv.osv):
         'sale_line_id': lambda *a:False,
         'sequence': lambda *a: 10,
     }
+    
+    _order = 'picking_id, sequence, id'
 
     def create(self, cr, uid, vals, context={}):
         return super(stock_move, self).create(cr, uid, vals, context=context)
