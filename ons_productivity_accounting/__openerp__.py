@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: accounting',
-    'version' : '1.4.02',
+    'version' : '1.4.03',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -50,9 +50,12 @@ These modules are included in all our hosting solutions.
 V1.0: 2013-05-07/Cyp
     - Delete an cancelled invoice
 
-V1.4.0: 2014-01-17/Cyp
+V1.4.02: 2014-01-17/Cyp
     - Migration to V8: keeping the confirmed invoices tool
     - The "Reconcile" button is always visible in the bank statement's form 
+
+V1.4.03: 2015-04-30/Cyp
+    - Removed a wrong reference to a custom module
 """,
     'website': 'http://www.open-net.ch',
     'images' : [],

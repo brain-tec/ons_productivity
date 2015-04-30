@@ -10,8 +10,8 @@
 <openerp>
     <data>
 
-        <record model="ir.ui.view" id="onsp_solstis_account_account_form">
-            <field name="name">Open Net for Solstis: account bank statement form</field>
+        <record model="ir.ui.view" id="onsp_bank_statement_form">
+            <field name="name">Open Net productivity: account bank statement form</field>
             <field name="model">account.bank.statement</field>
             <field name="inherit_id" ref="account.view_bank_statement_form"/>
             <field name="priority" eval="17"/>
