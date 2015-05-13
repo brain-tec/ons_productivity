@@ -34,6 +34,7 @@ from dateutil.relativedelta import relativedelta
 import time
 from email.Utils import make_msgid
 from openerp.addons.base.ir import ir_mail_server
+import simplejson
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -90,18 +91,34 @@ class sale_asset(osv.Model):
         #
         if view_type == 'tree':
             doc = etree.XML(res['arch'])
+
             if context.get('ons_no_sale_grp', False):
                 for node in doc.xpath("//field[@name='sale_id']"):
                     node.set('invisible', '1')
-                    node.set('modifiers', node.get('modifiers').replace('false', 'true'))
+                    d = simplejson.loads(node.get('modifiers'))
+                    for k,v in d.items():
+                        if not v:
+                            d[k] = True
+                    node.set('modifiers', simplejson.dumps(d))
+
             if context.get('ons_no_partner_grp', False):
                 for node in doc.xpath("//field[@name='partner_id']"):
                     node.set('invisible', '1')
-                    node.set('modifiers', node.get('modifiers').replace('false', 'true'))
+                    d = simplejson.loads(node.get('modifiers'))
+                    for k,v in d.items():
+                        if not v:
+                            d[k] = True
+                    node.set('modifiers', simplejson.dumps(d))
+
             if context.get('ons_no_product_grp', False):
                 for node in doc.xpath("//field[@name='product_id']"):
                     node.set('invisible', '1')
-                    node.set('modifiers', node.get('modifiers').replace('false', 'true'))
+                    d = simplejson.loads(node.get('modifiers'))
+                    for k,v in d.items():
+                        if not v:
+                            d[k] = True
+                    node.set('modifiers', simplejson.dumps(d))
+
             res['arch'] = etree.tostring(doc)
         
         return res
@@ -131,13 +148,13 @@ class sale_order(osv.Model):
         'sale_asset_id': fields.many2one('sale.asset', 'Asset'),
     }
     
-    def action_view_stockable_products(self, cr, uid, ids, context=None):
+    def action_view_products(self, cr, uid, ids, context=None):
         sol_obj = self.pool.get("sale.order.line")
         act_obj = self.pool.get('ir.actions.act_window')
         mod_obj = self.pool.get('ir.model.data')
         sol_ids = []
         for so in self.browse(cr, uid, ids, context=context):
-            sol_ids += [sol.id for sol in so.order_line if sol.product_id and sol.product_id.type == 'product']
+            sol_ids += [sol.id for sol in so.order_line if sol.product_id]
         if not sol_ids:
             sol_ids = [-1]
 

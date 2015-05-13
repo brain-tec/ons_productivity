@@ -24,7 +24,7 @@
                         <button 
                             class="oe_inline oe_stat_button" 
                             string="Products" 
-                            name="action_view_stockable_products" 
+                            name="action_view_products" 
                             type="object"
                             icon="fa-list"/>
                         <button 

@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: sale assets',
-    'version' : '1.0.03',
+    'version' : '1.0.04',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -57,6 +57,9 @@ V1.0.02: 2015-03-30/Cyp
 
 V1.0.03: 2015-04-08/Cyp
     - New button: "Show the asset" in the sale order line form, in which the "Create an asset" is hidden whenever one active already exists
+
+V1.0.04: 2015-05-13/Cyp
+    - Assets may be created with any sort of products, not only the stockables.
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
