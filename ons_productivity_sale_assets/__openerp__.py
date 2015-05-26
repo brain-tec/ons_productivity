@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: sale assets',
     'version' : '1.0.04',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : sale assets module

@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: breakdown of analytic costs',
     'version' : '1.0.02',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : Bac module

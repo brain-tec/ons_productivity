@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: accounting',
     'version' : '1.4.03',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : Accounting module

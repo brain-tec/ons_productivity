@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: product dimensions',
     'version' : '1.0.07',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : Product's dimensions module

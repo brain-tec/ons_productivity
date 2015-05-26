@@ -31,7 +31,7 @@
     'version': '0.0.01',
     'category': 'Open-Net Tools',
     'description': """In e-mail messages, remove the line that invite customer to create an account in the portal""",
-    'author': 'sge@open-net.ch',
+    'author': 'Open Net Sàrl',
     'website': 'http://www.open-net.ch',
     'depends': ['portal'],
     'init_xml': [],

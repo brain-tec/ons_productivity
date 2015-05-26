@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: sale & mail tools',
     'version' : '1.0.04',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : Sale and Mails Tools module

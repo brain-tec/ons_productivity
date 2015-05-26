@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: sale and invoice discount management',
     'version' : '1.0.02',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : Discount module

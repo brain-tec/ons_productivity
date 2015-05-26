@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: invoice',
     'version' : '1.0.07',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net S\rl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : Invoice

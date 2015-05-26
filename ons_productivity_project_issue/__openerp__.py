@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: Project Issue',
     'version' : '0.0.03',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Issue Management',
     'description' : """
 Open Net Productivity : Project Issue

@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: invoice hack',
     'version' : '1.0.0',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : Invoice

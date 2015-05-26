@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: MRP',
     'version' : '1.0.03',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : MRP module

@@ -28,7 +28,7 @@
 {
     'name' : 'Email CC',
     'version' : '1.0.0',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Social Networking',
     'description' : """
 Email templating add-ons: adds a CC field

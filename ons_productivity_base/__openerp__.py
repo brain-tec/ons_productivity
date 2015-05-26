@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: base',
     'version' : '1.0.3',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : Base module

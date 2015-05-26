@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: product EAN barcodes',
     'version' : '1.0.03',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : Product's EAN Barcodes module

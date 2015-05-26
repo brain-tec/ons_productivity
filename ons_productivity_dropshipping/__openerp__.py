@@ -28,7 +28,7 @@
 {
     'name' : 'Open Net Productivity : Drop shipping',
     'version' : '0.0.1',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : Drop shipping
