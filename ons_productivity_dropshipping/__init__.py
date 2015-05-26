@@ -5,10 +5,10 @@
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2014 Open-Net Ltd. All rights reserved.
+#  Copyright (c) 2014 Open Net Sàrl. All rights reserved.
 ##############################################################################
 #
-# Copyright (c) 2004-2008 Open Net Ltd. (http://open-net.ch) All Rights Reserved.
+# Copyright (c) 2004-2008 Open Net Sàrl. (http://open-net.ch) All Rights Reserved.
 #
 # $Id$
 #

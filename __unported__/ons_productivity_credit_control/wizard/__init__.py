@@ -3,7 +3,7 @@
 #  File: wizard/__init__.py
 #  Module: ons_cust_seematter
 #
-#  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+#  Copyright (c) 2013 Open Net Sàrl. All rights reserved.
 ##############################################################################
 #
 #    Author: Nicolas Bessi, Guewen Baconnier

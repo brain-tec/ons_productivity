@@ -5,7 +5,7 @@
 #
 #  Created by sge@open-net.ch
 #
-#  Copyright (c) 2015 Open-Net Ltd. All rights reserved.
+#  Copyright (c) 2015 Open Net Sàrl. All rights reserved.
 ##############################################################################
 #    
 #    OpenERP, Open Source Management Solution

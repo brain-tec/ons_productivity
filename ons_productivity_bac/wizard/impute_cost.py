@@ -3,7 +3,7 @@
 #  File: wizard/__init__.py
 #  Module: ons_productivity_bac
 #
-#  Copyright (c) 2015-TODAY Open-Net Ltd. <http://www.open-net.ch>
+#  Copyright (c) 2015-TODAY Open Net Sàrl. <http://www.open-net.ch>
 ##############################################################################
 #
 #    Author Joel Grand-Guillaume. Copyright Camptocamp SA

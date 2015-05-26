@@ -3,7 +3,7 @@
 #  File: wizard/credit_control_marker.py
 #  Module: ons_productivity_credit_control
 #
-#  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+#  Copyright (c) 2013 Open Net Sàrl. All rights reserved.
 ##############################################################################
 #
 #    Author: Nicolas Bessi, Guewen Baconnier

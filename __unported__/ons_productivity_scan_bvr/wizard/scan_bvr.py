@@ -6,7 +6,7 @@
 #  Created by cyp@open-net.ch
 #  Original code by CampToCamp SA 2008
 #
-#  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+#  Copyright (c) 2013 Open Net Sàrl. All rights reserved.
 ##############################################################################
 #
 # WARNING: This program as such is intended to be used by professional

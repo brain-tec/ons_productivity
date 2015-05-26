@@ -5,7 +5,7 @@
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+#  Copyright (c) 2013 Open Net Sàrl. All rights reserved.
 ##############################################################################
 #
 #    OpenERP, Open Source Business Applications
