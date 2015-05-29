@@ -39,10 +39,12 @@ class mail_compose_message(osv.TransientModel):
     
     _columns = {
         'partner_cc_ids': fields.many2many('res.partner', 'mail_compose_message_res_partner_cc_rel', 'wizard_id', 'partner_cc_id', 'CC'),
+        'partner_cci_ids': fields.many2many('res.partner', 'mail_compose_message_res_partner_cci_rel', 'wizard_id', 'partner_cci_id', 'CCi'),
     }
 
     _defaults = {
          'partner_cc_ids': lambda *a: [],
+         'partner_cci_ids': lambda *a: [],
     }
     
     # ---------- Content management
@@ -82,15 +84,25 @@ class mail_compose_message(osv.TransientModel):
         """
         values = super(mail_compose_message, self).get_mail_values(cr, uid, wizard, res_ids, context=context)
 
-        if wizard and wizard.partner_cc_ids:
-            cc_ids = [(6,0,[partner.id for partner in wizard.partner_cc_ids])]
-            cc_lst = [formataddr((partner.name, partner.email)) for partner in wizard.partner_cc_ids]
-            cc_value = ','.join(cc_lst)
-            for res_id in res_ids:
-                values[res_id].update({
-                    'partner_cc_ids': cc_ids,
-                    'email_cc': cc_value,
-                })
+        if wizard:
+            if wizard.partner_cc_ids:
+                cc_ids = [(6,0,[partner.id for partner in wizard.partner_cc_ids])]
+                cc_lst = [formataddr((partner.name, partner.email)) for partner in wizard.partner_cc_ids]
+                cc_value = ','.join(cc_lst)
+                for res_id in res_ids:
+                    values[res_id].update({
+                        'partner_cc_ids': cc_ids,
+                        'email_cc': cc_value,
+                    })
+            if wizard.partner_cci_ids:
+                cci_ids = [(6,0,[partner.id for partner in wizard.partner_cc_ids])]
+                cci_lst = [formataddr((partner.name, partner.email)) for partner in wizard.partner_cci_ids]
+                cci_value = ','.join(cci_lst)
+                for res_id in res_ids:
+                    values[res_id].update({
+                        'partner_cci_ids': cci_ids,
+                        'email_cci': cci_value,
+                    })
 
         return values
 

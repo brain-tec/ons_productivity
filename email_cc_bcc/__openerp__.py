@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Email CC',
-    'version' : '1.0.0',
+    'version' : '1.0.02',
     'author' : 'Open Net Sàrl',
     'category' : 'Social Networking',
     'description' : """
@@ -37,6 +37,7 @@ Email templating add-ons: adds a CC field
 
 **Features list :**
  - Adds a CC field to email templates
+ - Adds a CCi field to email templates
 
 **Author :** Open Net Sàrl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
 
@@ -46,6 +47,9 @@ Email templating add-ons: adds a CC field
 
 V1.0.0: 2015-04-01/Cyp
     - Scratch writing
+
+V1.0.02: 2015-05-29/Cyp
+    - Adding the CCi field
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],

@@ -39,4 +39,6 @@ class mail_message(osv.Model):
     _columns = {
         'partner_cc_ids': fields.many2many('res.partner', 'mail_notification_cc', 'message_id', 'partner_id', 'CC', 
                 help='Partners that have a notification pushing this message in their mailboxes'),
+        'partner_cci_ids': fields.many2many('res.partner', 'mail_notification_cci', 'message_id', 'partner_id', 'CCi', 
+                help='Partners that have a notification pushing this message in their mailboxes'),
     }
