@@ -19,8 +19,6 @@
                 <field name="notify" position="before">
                     <field name="partner_cc_ids" widget="many2many_tags_email" placeholder="Add CC contacts to notify..."
                             context="{'force_email':True, 'show_email':True}"/>
-                    <field name="partner_cci_ids" widget="many2many_tags_email" placeholder="Add CCi contacts to notify..."
-                            context="{'force_email':True, 'show_email':True}"/>
                 </field>
             </field>
         </record>

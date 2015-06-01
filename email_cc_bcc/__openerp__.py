@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Email CC',
-    'version' : '1.0.02',
+    'version' : '1.0.03',
     'author' : 'Open Net Sàrl',
     'category' : 'Social Networking',
     'description' : """
@@ -50,6 +50,9 @@ V1.0.0: 2015-04-01/Cyp
 
 V1.0.02: 2015-05-29/Cyp
     - Adding the CCi field
+
+V1.0.03: 2015-05-29/Cyp
+    - Removing the CCi field
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],

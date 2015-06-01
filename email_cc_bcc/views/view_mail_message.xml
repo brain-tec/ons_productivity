@@ -18,7 +18,6 @@
             <field name="arch" type="xml">
                 <field name="partner_ids" position="after">
                     <field name="partner_cc_ids" widget="many2many_tags"/>
-                    <field name="partner_cci_ids" widget="many2many_tags"/>
                 </field>
             </field>
         </record>
