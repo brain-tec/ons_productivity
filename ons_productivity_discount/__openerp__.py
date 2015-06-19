@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: sale and invoice discount management',
-    'version' : '1.0.02',
+    'version' : '1.0.03',
     'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
@@ -52,6 +52,9 @@ V1.0.0: 2015-03-10/Cyp
 
 V1.0.02: 2015-03-18/Cyp
     - Total of HT amounts, without any taxes, without any discount, in the sale orders as well as in the invoices
+
+V1.0.023 2015-06-19/Cyp
+    - An invoice line's product, when a discount-type, may have a quantity different from 1
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],

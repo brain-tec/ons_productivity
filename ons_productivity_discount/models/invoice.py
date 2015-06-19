@@ -90,7 +90,7 @@ class account_invoice(models.Model):
 
         for line in self.invoice_line:
             if line.product_id and line.product_id.is_discount:
-                self.discount_total += abs(line.price_unit)
+                self.discount_total += abs(line.quantity * line.price_unit)
             else:
                 self.discount_total +=  line.quantity * (line.price_unit * ((line.discount or 0.0) / 100.0)) + line.abs_discount
 
