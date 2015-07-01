@@ -49,4 +49,19 @@ class project_issue(osv.osv):
 
         return issue_ids
 
-project_issue()
+    # ---------- Fields management
+
+    def _comp_short_name(self, cr, uid, ids, field_name, arg, context=None):
+        res = dict(map(lambda x: (x,''), ids))
+        for issue in self.browse(cr, uid, ids, context=context):
+            short_name = issue.name
+            prefix = "[%s] " % issue.id
+            if short_name.startswith(prefix):
+                short_name = short_name[len(prefix):]
+            res[issue.id] = short_name
+        
+        return res
+    
+    _columns = {
+        'short_name': fields.function(_comp_short_name, type='char', string='Short name'),
+    }

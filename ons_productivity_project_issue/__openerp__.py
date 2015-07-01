@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: Project Issue',
-    'version' : '0.0.03',
+    'version' : '0.0.04',
     'author' : 'Open Net Sàrl',
     'category' : 'Issue Management',
     'description' : """
@@ -40,6 +40,7 @@ These modules are included in all our hosting solutions.
 
 **Features list :**
     - When create a new issu, add its ID on its name
+    - new field for issues: short_name: the name without the [id]
 
 **Author :** Open Net Sàrl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
 
@@ -49,6 +50,9 @@ These modules are included in all our hosting solutions.
 
 V0.3: 2014-10-14/Sge
     - Add the feature #1
+
+V0.4: 2014-10-14/Cyp
+    - Add the feature #2
 
 """,
     'website': 'http://www.open-net.ch',
