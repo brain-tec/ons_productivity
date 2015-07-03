@@ -5,7 +5,7 @@
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2015-TODAY Open Net Sàrl. <http://www.open-net.ch>
+#  Copyright (c) 2015-TODAY Open Net Ltd. <http://www.open-net.ch>
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -48,8 +48,15 @@ class sale_asset_create_wizard(osv.osv_memory):
             context = {}
         data = self.browse(cr, uid, ids[0], context=context)
         
-        new_so_id = self.pool.get('sale.order').copy(cr, uid, data.name.sale_id.id, asset_id=context.get('active_id', False), context=context)
-        if not new_so_id:
+        so_obj = self.pool.get('sale.order')
+        
+        so_id = so_obj.search(cr, uid, [('partner_id','=',data.name.sale_id.partner_id.id),('state','=','draft')], context=context, limit=1)
+        if so_id:
+            so_id = so_id[0]
+            sol_id = self.pool.get('sale.order.line').copy(cr, uid, data.name.name.id, default={'order_id':so_id}, context=context)
+        else:
+            so_id = so_obj.copy(cr, uid, data.name.sale_id.id, asset_id=context.get('active_id', False), context=context)
+        if not so_id:
             return {}
         
         data.name.write({'to_handle':False})
@@ -60,7 +67,7 @@ class sale_asset_create_wizard(osv.osv_memory):
             'type': 'ir.actions.act_window',
             'name': _('Sales Order'),
             'res_model': 'sale.order',
-            'res_id': new_so_id,
+            'res_id': so_id,
             'view_type': 'form',
             'view_mode': 'form',
             'view_id': view_id,

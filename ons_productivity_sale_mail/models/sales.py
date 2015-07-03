@@ -57,6 +57,18 @@ class sale_order(osv.Model):
         
         return super(sale_order, self).write(cr, uid, ids, vals, context=context)
 
+    def copy(self, cr, uid, id, default=None, context=None):
+        default = {} if default is None else default.copy()
+        default.update({
+            'ons_validation_hidden_flag': False,
+            'ons_validation_flag': False,
+            'ons_validation_by': None,
+            'ons_validation_date': None,
+        })
+        new_so_id = super(sale_order, self).copy(cr, uid, id, default=default, context=context)
+        
+        return new_so_id
+
     # ---------- Interface management
     
     @api.multi

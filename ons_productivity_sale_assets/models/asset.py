@@ -5,7 +5,7 @@
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2015-TODAY Open Net Sàrl. <http://www.open-net.ch>
+#  Copyright (c) 2015-TODAY Open Net Ltd. <http://www.open-net.ch>
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -200,6 +200,8 @@ class sale_order_line(osv.Model):
     
     _columns = {
         'has_an_asset': fields.function(_detect_assets, type='boolean', string='Has an asset?'),
+        'product_type': fields.related('product_id', 'product_tmpl_id', 'type', relation='product.product', type='selection', 
+                selection=[('product', 'Stockable Product'), ('consu', 'Consumable'), ('service', 'Service')], string='Product type'),
     }
 
     # ---------- Interface management

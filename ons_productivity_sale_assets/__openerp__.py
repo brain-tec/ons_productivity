@@ -5,7 +5,7 @@
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2015-TODAY Open Net Sàrl. <http://www.open-net.ch>
+#  Copyright (c) 2015-TODAY Open Net Ltd. <http://www.open-net.ch>
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: sale assets',
-    'version' : '1.0.04',
+    'version' : '1.0.05',
     'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
@@ -60,10 +60,14 @@ V1.0.03: 2015-04-08/Cyp
 
 V1.0.04: 2015-05-13/Cyp
     - Assets may be created with any sort of products, not only the stockables.
+
+V1.0.05: 2015-07-03/Cyp
+    - Assets may be created with products and consomables, not with services
+    - When an asset creates a sale, it first checks if there's a draft sale before creating a new one
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
-    'depends' : ['sale'],
+    'depends' : ['sale','stock'],
     'data': [
         'data/ir.model.access.csv',
         'wizards/sale_line_make_asset.xml',

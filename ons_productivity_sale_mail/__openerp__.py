@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: sale & mail tools',
-    'version' : '1.0.04',
+    'version' : '1.0.05',
     'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
@@ -53,6 +53,9 @@ V1.0.02: 2015-03-05/Cyp
 V1.0.04: 2015-04-01/Cyp
     - The checkbox that controls the validation becomes readonly once it's checked.
       Trick: using a hidden flag to store the value as a readonly-field is not stored
+
+V1.0.05: 2015-07-03/Cyp
+    - During duplication, all the sale's values that concern the validation are resetted
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],

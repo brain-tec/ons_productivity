@@ -5,7 +5,7 @@
 
   Created by cyp@open-net.ch
 
-  Copyright (c) 2015-TODAY Open Net Sàrl. All rights reserved.
+  Copyright (c) 2015-TODAY Open Net Ltd. All rights reserved.
 -->
 <openerp>
     <data>
@@ -49,10 +49,12 @@
             <field name="arch" type="xml">
                 <field name="state" position="before">
                     <field name="has_an_asset" invisible="1"/>
+                    <field name="product_type" invisible="1"/>
                     <span attrs="{'invisible':[('has_an_asset','=',True)]}">
                         <button 
                             string="Create an asset" 
                             name="%(ons_productivity_sale_assets.action_sale_line_make_asset)d" 
+                            attrs="{'invisible': [('product_type', '=', 'service')]}"
                             type="action"/>
                     </span>
                     <span attrs="{'invisible':[('has_an_asset','!=',True)]}">
@@ -80,7 +82,7 @@
                         name="action_view_related_assets" 
                         type="object"
                         icon="fa-strikethrough"
-                        attrs="{'invisible': [('type', '!=', 'product')]}">
+                        attrs="{'invisible': [('type', '=', 'service')]}">
                         <field string="Sale assets" name="sale_asset_count" widget="statinfo"/>
                     </button>
                 </div>
