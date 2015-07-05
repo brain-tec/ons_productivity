@@ -55,7 +55,7 @@ class sale_asset_create_wizard(osv.osv_memory):
             so_id = so_id[0]
             sol_id = self.pool.get('sale.order.line').copy(cr, uid, data.name.name.id, default={'order_id':so_id}, context=context)
         else:
-            so_id = so_obj.copy(cr, uid, data.name.sale_id.id, context.get('active_id', False), context=context)
+            so_id = so_obj.copy(cr, uid, data.name.sale_id.id, default={'asset_id':context.get('active_id', False)), context=context)
         if not so_id:
             return {}
         
