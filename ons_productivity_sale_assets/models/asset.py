@@ -234,7 +234,7 @@ class sale_order_line(osv.Model):
         res = dict(map(lambda x: (x,False), ids))
         for sol in self.browse(cr, uid, ids, context=context):
             if sol.org_asset_id:
-                res[sol_id] = True
+                res[sol.id] = True
 
 #         assets_obj = self.pool.get('sale.asset')
 #         for sol_id in ids:
