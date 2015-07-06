@@ -56,13 +56,11 @@ class sale_asset_create_wizard(osv.osv_memory):
             defaults = {
                 'order_id':so_id,
                 'product_uom_qty': 1,
-                'product_uos_qty': 1
+                'product_uos_qty': 1,
+                'org_asset_id': data.name.id,
             }
-            sol = self.pool.get('sale.order.line').browse(cr, uid, sol_id, context=context)
-            if sol.product_id:
-                product = self.pool.get('product.product').browse(cr, uid, sol.product_id, context=context)
-                if product:
-                    defaults['product_uos_qty'] = product.uos_coeff
+            if data.name.product_id:
+                defaults['product_uos_qty'] = data.name.product_id.uos_coeff
 
             sol_id = self.pool.get('sale.order.line').copy(cr, uid, data.name.name.id, default=defaults, context=context)
         else:
