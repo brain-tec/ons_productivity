@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: sale assets',
-    'version' : '1.0.05',
+    'version' : '1.0.06',
     'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
@@ -64,6 +64,10 @@ V1.0.04: 2015-05-13/Cyp
 V1.0.05: 2015-07-03/Cyp
     - Assets may be created with products and consomables, not with services
     - When an asset creates a sale, it first checks if there's a draft sale before creating a new one
+
+V1.0.06: 2015-07-06/Cyp
+    - More than one asset for each sale line
+    - Sale form displays the number of products valid for assets and the number of assets
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],

@@ -26,13 +26,17 @@
                             string="Products" 
                             name="action_view_products" 
                             type="object"
-                            icon="fa-list"/>
+                            icon="fa-list">
+                            <field string="Sale assets" name="sale_product_count" widget="statinfo"/>
+                        </button>
                         <button 
                             class="oe_inline oe_stat_button" 
                             string="Assets" 
                             name="action_view_related_assets" 
                             type="object"
-                            icon="fa-strikethrough"/>
+                            icon="fa-strikethrough">
+                            <field string="Sale assets" name="sale_asset_count" widget="statinfo"/>
+                        </button>
                     </div>
                 </xpath>
             </field>
@@ -50,13 +54,11 @@
                 <field name="state" position="before">
                     <field name="has_an_asset" invisible="1"/>
                     <field name="product_type" invisible="1"/>
-                    <span attrs="{'invisible':[('has_an_asset','=',True)]}">
-                        <button 
-                            string="Create an asset" 
-                            name="%(ons_productivity_sale_assets.action_sale_line_make_asset)d" 
-                            attrs="{'invisible': [('product_type', '=', 'service')]}"
-                            type="action"/>
-                    </span>
+                    <button 
+                        string="Create an asset" 
+                        name="%(ons_productivity_sale_assets.action_sale_line_make_asset)d" 
+                        attrs="{'invisible': [('product_type', '=', 'service')]}"
+                        type="action"/>
                     <span attrs="{'invisible':[('has_an_asset','!=',True)]}">
                         <button 
                             string="Show the asset" 

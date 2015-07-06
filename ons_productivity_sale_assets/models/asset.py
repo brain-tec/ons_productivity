@@ -144,10 +144,46 @@ class sale_asset(osv.Model):
 class sale_order(osv.Model):
     _inherit = 'sale.order'
     
+    # ---------- Fields management
+
+    def _comp_asset_count(self, cr, uid, ids, field_name, arg, context=None):
+        res = dict(map(lambda x: (x,0), ids))
+        assets_obj = self.pool.get('sale.asset')
+
+        result = {}
+        for id in ids:
+            result.setdefault(id, 0)
+
+        for so in self.browse(cr, uid, ids, context=context):
+            search = assets_obj.search(cr, uid, 
+                            [('name', 'in', [sol.id for sol in so.order_line if sol.product_id]),('active', '=', True)], 
+                            context=context)
+            result[so.id] = len(search)
+
+        return result
+
+    def _comp_product_count(self, cr, uid, ids, field_name, arg, context=None):
+        res = dict(map(lambda x: (x,0), ids))
+        assets_obj = self.pool.get('sale.asset')
+
+        result = {}
+        for id in ids:
+            result.setdefault(id, 0)
+
+        for so in self.browse(cr, uid, ids, context=context):
+            count = len([sol.id for sol in so.order_line if sol.product_id and sol.product_id.type != 'service'])
+            result[so.id] = count
+
+        return result
+    
     _columns = {
         'sale_asset_id': fields.many2one('sale.asset', 'Asset'),
+        'sale_asset_count': fields.function(_comp_asset_count, string='# of Sales Asset', type='integer'),
+        'sale_product_count': fields.function(_comp_product_count, string='# of Sales Products', type='integer'),
     }
     
+    # ---------- Interface management
+
     def action_view_products(self, cr, uid, ids, context=None):
         sol_obj = self.pool.get("sale.order.line")
         act_obj = self.pool.get('ir.actions.act_window')
@@ -170,6 +206,8 @@ class sale_order(osv.Model):
 
         return self.pool.get('sale.asset').action_view_related_assets(cr, uid, [], action_domain, action_context, context=context)
     
+    # ---------- Instances management
+
     def copy(self, cr, uid, id, default=None, context=None, asset_id=False):
         default = {} if default is None else default.copy()
         asset = self.pool.get('sale.asset').browse(cr, uid, asset_id, context=context) if asset_id else False
@@ -218,7 +256,7 @@ class res_partner(osv.Model):
     
     # ---------- Fields management
     
-    def _sale_asset_count(self, cr, uid, ids, field_name, arg, context=None):
+    def _comp_sale_asset_count(self, cr, uid, ids, field_name, arg, context=None):
         res = dict(map(lambda x: (x,0), ids))
         assets_obj = self.pool.get('sale.asset')
 
@@ -233,8 +271,10 @@ class res_partner(osv.Model):
         return res
 
     _columns = {
-        'sale_asset_count': fields.function(_sale_asset_count, string='# of Sales Asset', type='integer'),
+        'sale_asset_count': fields.function(_comp_sale_asset_count, string='# of Sales Asset', type='integer'),
     }
+    
+    # ---------- Interface management
     
     def action_view_related_assets(self, cr, uid, ids, context=None):
         action_domain = "[('partner_id','in',[" + ','.join(map(str, ids)) + "])]"
@@ -248,7 +288,7 @@ class product_product(osv.Model):
     
     # ---------- Fields management
     
-    def _sale_asset_count(self, cr, uid, ids, field_name, arg, context=None):
+    def _comp_sale_asset_count(self, cr, uid, ids, field_name, arg, context=None):
         res = dict(map(lambda x: (x,0), ids))
         assets_obj = self.pool.get('sale.asset')
 
@@ -263,8 +303,10 @@ class product_product(osv.Model):
         return res
 
     _columns = {
-        'sale_asset_count': fields.function(_sale_asset_count, string='# of Sales Asset', type='integer'),
+        'sale_asset_count': fields.function(_comp_sale_asset_count, string='# of Sales Asset', type='integer'),
     }
+    
+    # ---------- Interface management
     
     def action_view_related_assets(self, cr, uid, ids, context=None):
         action_domain = "[('product_id','in',[" + ','.join(map(str, ids)) + "])]"

@@ -128,6 +128,16 @@ msgid "Asset"
 msgstr "Actif"
 
 #. module: ons_productivity_sale_assets
+#: field:sale.order,sale_asset_count:0
+msgid "# of Sales Asset"
+msgstr "Nb d'actifs de vente"
+
+#. module: ons_productivity_sale_assets
+#: field:sale.order,sale_product_count:0
+msgid "# of Sales Products"
+msgstr "Nb de produits"
+
+#. module: ons_productivity_sale_assets
 #: view:sale.order:0
 msgid "Products"
 msgstr "Produits"
@@ -148,9 +158,10 @@ msgid "Show the asset"
 msgstr "Voir l'actif"
 
 #. module: ons_productivity_sale_assets
+#: view:sale.order:0
 #: view:product.product:0
 #: view:res.partner:0
-msgid "Sale assets"
+msgid "Assets"
 msgstr "Actifs"
 
 #. module: ons_productivity_sale_assets
