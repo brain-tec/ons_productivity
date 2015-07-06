@@ -23,19 +23,17 @@
                     <div class="oe_right oe_button_box" style="width: 300px;" name="buttons">
                         <button 
                             class="oe_inline oe_stat_button" 
-                            string="Products" 
                             name="action_view_products" 
                             type="object"
                             icon="fa-list">
-                            <field string="Sale assets" name="sale_product_count" widget="statinfo"/>
+                            <field string="Products" name="sale_product_count" widget="statinfo"/>
                         </button>
                         <button 
                             class="oe_inline oe_stat_button" 
-                            string="Assets" 
                             name="action_view_related_assets" 
                             type="object"
                             icon="fa-strikethrough">
-                            <field string="Sale assets" name="sale_asset_count" widget="statinfo"/>
+                            <field string="Assets" name="sale_asset_count" widget="statinfo"/>
                         </button>
                     </div>
                 </xpath>
@@ -85,7 +83,7 @@
                         type="object"
                         icon="fa-strikethrough"
                         attrs="{'invisible': [('type', '=', 'service')]}">
-                        <field string="Sale assets" name="sale_asset_count" widget="statinfo"/>
+                        <field string="Assets" name="sale_asset_count" widget="statinfo"/>
                     </button>
                 </div>
             </field>
@@ -106,7 +104,7 @@
                         name="action_view_related_assets" 
                         type="object"
                         icon="fa-strikethrough">
-                        <field string="Sale assets" name="sale_asset_count" widget="statinfo"/>
+                        <field string="Assets" name="sale_asset_count" widget="statinfo"/>
                     </button>
                 </div>
             </field>
