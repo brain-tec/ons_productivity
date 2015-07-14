@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+  File: views/hr_view.xml
+  Module: ons_cust_solstis
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2015-TODAY Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+    
+        <record model="ir.ui.view" id="onsp_solstis_hr_analytic_timesheet_list">
+            <field name="name">Open Net for Solstis: timesheet activities list</field>
+            <field name="model">hr.analytic.timesheet</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <field name="user_id" position="before">
+                    <field name="employee_id" on_change="onchange_employee_id(employee_id)"/>
+                </field>
+            </field>
+        </record>
+    
+        <record model="ir.ui.view" id="onsp_solstis_hr_analytic_timesheet_form">
+            <field name="name">Open Net for Solstis: timesheet activities form</field>
+            <field name="model">hr.analytic.timesheet</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_form"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <field name="user_id" position="before">
+                    <field name="employee_id" on_change="onchange_employee_id(employee_id)"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="hr_timesheet.act_hr_timesheet_line_evry1_all_form" model="ir.actions.act_window">
+            <field name="name">Timesheet Activities</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.analytic.timesheet</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="search_view_id" ref="hr_timesheet.hr_timesheet_line_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to record activities.
+              </p><p>
+                You can register and track your workings hours by project every
+                day. Every time spent on a project will become a cost in the
+                analytic accounting/contract and can be re-invoiced to
+                customers if required.
+              </p>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="onsp_solstis_hr_analytic_timesheet_filter">
+            <field name="name">Open Net for Solstis: timesheet activities filter</field>
+            <field name="model">hr.analytic.timesheet</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_search"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <field name="user_id" position="before">
+                    <field name="employee_id"/>
+                </field>
+                <filter string="Users" position="before">
+                    <filter string="Employee" icon="terp-personal" domain="[]" context="{'group_by':'employee_id'}"/>
+                </filter>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+
