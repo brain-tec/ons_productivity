@@ -26,7 +26,7 @@
 #
 ##############################################################################
 {
-    'name' : 'Open-Net Productivity: invoice',
+    'name' : 'Open-Net Productivity: hr timesheet',
     'version' : '1.0.02',
     'author' : 'Open Net Ltd',
     'category' : 'Human Resources',
