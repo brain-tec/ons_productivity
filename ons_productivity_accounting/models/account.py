@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 #
-#  File: models/__init__.py
+#  File: accounts.py
 #  Module: ons_productivity_accounting
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2013-TODAY Open Net Sàrl. All rights reserved.
+#  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -26,5 +26,22 @@
 #
 ##############################################################################
 
-import invoices
-import account
+from openerp.osv import osv
+
+import logging
+_logger = logging.getLogger(__name__)
+
+class account_account(osv.osv):
+    _inherit = 'account.account'
+
+    def search(self, cr, uid, args, offset=0, limit=None, order=None, context=None, count=False):
+        if context is None:
+            context = {}
+        
+        if context.get('ons_filter_inactive_parents', False):
+            cr.execute("select id from account_account where active is false")
+            args += [('parent_id','in', [x[0] for x in cr.fetchall()])]
+
+        result = super(account_account, self).search(cr, uid, args, offset, limit, order, context=context, count=count)
+
+        return result

@@ -27,36 +27,9 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: accounting',
-    'version' : '1.4.03',
+    'version' : '1.5.03',
     'author' : 'Open Net Sàrl',
     'category' : 'Base',
-    'description' : """
-Open Net Productivity : Accounting module
------------------------------------------
-
-The 'productivity' modules is a complete family of modules offering improvement for OpenERP.
-These modules are maintained by Open Net, Swiss Partner of OpenERP.
-These modules are included in all our hosting solutions.
-
-**Features list :**
-    - Allow to delete an canceled invoice, even if has been confirmed before
-    - The "Reconcile" button is always visible in the bank statement's form
-
-**Author :** Open Net Sàrl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
-
-**Contact :** info@open-net.ch
-
-**History :**
-V1.0: 2013-05-07/Cyp
-    - Delete an cancelled invoice
-
-V1.4.02: 2014-01-17/Cyp
-    - Migration to V8: keeping the confirmed invoices tool
-    - The "Reconcile" button is always visible in the bank statement's form 
-
-V1.4.03: 2015-04-30/Cyp
-    - Removed a wrong reference to a custom module
-""",
     'website': 'http://www.open-net.ch',
     'images' : [],
     'depends' : ['account'],
