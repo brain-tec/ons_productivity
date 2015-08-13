@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: sale assets',
-    'version' : '1.0.06',
+    'version' : '1.1',
     'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
