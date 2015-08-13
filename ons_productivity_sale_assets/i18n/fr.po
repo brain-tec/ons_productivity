@@ -89,6 +89,11 @@ msgid "Active"
 msgstr "Actif"
 
 #. module: ons_productivity_sale_assets
+#: field:sale.asset,product_info:0
+msgid "Product infos"
+msgstr "Infos produit"
+
+#. module: ons_productivity_sale_assets
 #: view:sale.asset:0
 msgid "Unactive"
 msgstr "Inactif"

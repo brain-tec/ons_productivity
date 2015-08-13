@@ -122,7 +122,7 @@
                     <field name="sale_id" invisible="0"/>
                     <field name="product_id" invisible="0"/>
                     <field name="serial"/>
-                    <field name="name"/>
+                    <field name="product_info"/>
                     <field name="date_start"/>
                     <field name="date_end"/>
                     <field name="active"/>
@@ -154,6 +154,7 @@
                                 <field name="sale_id" readonly="1"/>
                                 <field name="name" readonly="1"/>
                                 <field name="product_id" readonly="1"/>
+                                <field name="product_info"/>
                             </group>
                             <group>
                                 <field name="serial"/>
@@ -185,10 +186,11 @@
                     <filter string="Active" name="active" domain="[('active', '=',True)]"/>
                     <filter string="Unactive" domain="[('active', '=',False)]"/>
                     <separator/>
-                    <field name="partner_id"/>
-                    <field name="sale_id"/>
+                    <field name="product_info"/>
                     <field name="product_id"/>
                     <field name="serial"/>
+                    <field name="partner_id"/>
+                    <field name="sale_id"/>
                     <field name="name"/>
                     <field name="note"/>
                     <group expand="1" string="Group By">

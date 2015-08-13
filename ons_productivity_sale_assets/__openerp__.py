@@ -68,6 +68,9 @@ V1.0.05: 2015-07-03/Cyp
 V1.0.06: 2015-07-06/Cyp
     - More than one asset for each sale line
     - Sale form displays the number of products valid for assets and the number of assets
+
+V1.1: 2015-08-13/Cyp
+    - Product info: free line on the asset => in list & search as well
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],

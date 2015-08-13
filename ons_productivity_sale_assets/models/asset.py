@@ -60,6 +60,7 @@ class sale_asset(osv.Model):
         'gen_quot_ids': fields.related('gen_qtl_ids', 'order_id', relation='sale.order', type='one2many', string='Quotations'),
         'gen_sol_ids': fields.one2many('sale.order.line', 'org_asset_id', string='Generated lines', domain=[('order_id.state','not in',['draft','sent','cancel'])]),
         'gen_sale_ids': fields.related('gen_sol_ids', 'order_id', relation='sale.order', type='one2many', string='Sales'),
+        'product_info': fields.char('Product infos', size=200),
     }
     
     _defaults = {
