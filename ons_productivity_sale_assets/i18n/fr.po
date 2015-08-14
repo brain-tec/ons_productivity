@@ -90,6 +90,7 @@ msgstr "Actif"
 
 #. module: ons_productivity_sale_assets
 #: field:sale.asset,product_info:0
+#: field:sale.asset.create_wizard,product_info:0
 msgid "Product infos"
 msgstr "Infos produit"
 

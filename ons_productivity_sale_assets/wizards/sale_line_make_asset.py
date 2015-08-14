@@ -36,6 +36,7 @@ class sale_asset_create_wizard(osv.osv_memory):
 
     _columns = {
         'name': fields.many2one('sale.order.line', 'Sale line', required=True),
+        'product_info': fields.char('Product infos', size=200),
         'note': fields.text('Information', required=True),
         'serial': fields.char('Serial Nb', size=64),
         'date_start': fields.date('Date start'),
