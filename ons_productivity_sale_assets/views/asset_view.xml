@@ -55,7 +55,6 @@
                     <button 
                         string="Create an asset" 
                         name="%(ons_productivity_sale_assets.action_sale_line_make_asset)d" 
-                        attrs="{'invisible': [('product_type', '=', 'service')]}"
                         type="action"/>
                     <span attrs="{'invisible':[('has_an_asset','!=',True)]}">
                         <button 
@@ -81,8 +80,7 @@
                         class="oe_inline oe_stat_button" 
                         name="action_view_related_assets" 
                         type="object"
-                        icon="fa-strikethrough"
-                        attrs="{'invisible': [('type', '=', 'service')]}">
+                        icon="fa-strikethrough">
                         <field string="Assets" name="sale_asset_count" widget="statinfo"/>
                     </button>
                 </div>

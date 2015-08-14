@@ -174,7 +174,7 @@ class sale_order(osv.Model):
             result.setdefault(id, 0)
 
         for so in self.browse(cr, uid, ids, context=context):
-            count = len([sol.id for sol in so.order_line if sol.product_id and sol.product_id.type != 'service'])
+            count = len([sol.id for sol in so.order_line if sol.product_id])
             result[so.id] = count
 
         return result
