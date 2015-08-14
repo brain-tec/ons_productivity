@@ -50,7 +50,7 @@ class sale_asset_create_wizard(osv.osv_memory):
     def action_create_asset(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
-        data = self.read(cr, uid, ids, ['serial','date_start','date_end', 'note'], context=context)[0]
+        data = self.read(cr, uid, ids, ['serial','date_start','date_end', 'note', 'product_info'], context=context)[0]
         if data.get('id', False):
             del data['id']
         

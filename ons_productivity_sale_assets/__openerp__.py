@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: sale assets',
-    'version' : '1.1',
+    'version' : '1.1.02',
     'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
@@ -71,6 +71,9 @@ V1.0.06: 2015-07-06/Cyp
 
 V1.1: 2015-08-13/Cyp
     - Product info: free line on the asset => in list & search as well
+
+V1.1.02: 2015-08-14/Cyp
+    - Product info can be edited at creation, within the corr. wizard
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
