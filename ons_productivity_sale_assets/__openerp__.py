@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: sale assets',
-    'version' : '1.1.03',
+    'version' : '1.2',
     'author' : 'Open Net Sàrl',
     'category' : 'Base',
     'description' : """
@@ -77,6 +77,9 @@ V1.1.02: 2015-08-14/Cyp
 
 V1.1.03: 2015-08-14/Cyp
     - Assets may also be created from a service
+
+V1.2: 2015-09-09/Cyp
+    - Assets may also created independantely
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],

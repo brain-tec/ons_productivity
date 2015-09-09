@@ -15,7 +15,7 @@
             <field name="model">sale.asset.create_wizard</field>
             <field name="arch" type="xml">
                 <form string="Create an asset" version="7.0">
-                    <field name="name" readonly="1"/>
+                    <field name="name"/>
                     <group>
                         <group>
                             <field name="serial"/>
@@ -38,13 +38,19 @@
         </record>
 
         <record model="ir.actions.act_window" id="action_sale_line_make_asset">
-            <field name="name">Sale asset creation</field>
+            <field name="name">New sale asset</field>
             <field name="res_model">sale.asset.create_wizard</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="view_sale_line_make_asset"/>
             <field name="target">new</field>
         </record>
+            
+        <menuitem 
+            id="menu_sale_line_make_asset"
+            action="action_sale_line_make_asset" 
+            parent="ons_productivity_sale_assets.onsp_sale_asset_menu"
+            sequence="20"/>
 
     </data>
 </openerp>

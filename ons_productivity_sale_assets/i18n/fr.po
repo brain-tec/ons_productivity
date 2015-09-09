@@ -211,6 +211,7 @@ msgstr "Annuler"
 
 #. module: ons_productivity_sale_assets
 #: view:sale.asset.create_wizard:ons_productivity_sale_assets.view_sale_line_make_asset
+#: model:ir.actions.act_window,name:ons_productivity_sale_assets.action_sale_asset_make_quotation
 msgid "Create an asset"
 msgstr "Créer un actif"
 
@@ -220,10 +221,14 @@ msgstr "Créer un actif"
 msgid "Sales Order"
 msgstr "Bon de commande"
 
-
 #. module: ons_productivity_sale_assets
-#: model:ir.actions.act_window,name:ons_productivity_sale_assets.action_sale_asset_make_quotation
 #: view:sale.asset.quotation_wizard:0
 #: view:sale.order.line:0
 msgid "Create a quotation"
 msgstr "Création d'un devis"
+
+#. module: ons_productivity_sale_assets
+#: model:ir.actions.act_window,name:ons_productivity_sale_assets.action_sale_line_make_asset
+#: model:ir.ui.menu,name:ons_productivity_sale_assets.menu_sale_line_make_asset
+msgid "New sale asset"
+msgstr "Nouvel actif"
