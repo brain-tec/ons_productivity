@@ -5,7 +5,7 @@
 #
 #  Created by sge@open-net.ch
 #
-#  Copyright (c) 2015 Open-Net Sàrl All rights reserved.
+#  Copyright (c) 2015 Open-Net Sarl All rights reserved.
 ##############################################################################
 #    
 #    OpenERP, Open Source Management Solution
@@ -31,7 +31,7 @@
     'version': '0.0.01',
     'category': 'Open-Net Tools',
     'description': """In e-mail messages, remove the line that invite customer to create an account in the portal""",
-    'author': 'Open Net Sàrl',
+    'author': 'Open Net Sarl',
     'website': 'http://www.open-net.ch',
     'depends': ['portal'],
     'init_xml': [],

@@ -5,7 +5,7 @@
 #
 #  Created by sge@open-net.ch
 #
-#  Copyright (c) 2014 Open Net Sàrl. All rights reserved.
+#  Copyright (c) 2014 Open Net Sarl. All rights reserved.
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: Project Issue',
     'version' : '0.0.04',
-    'author' : 'Open Net Sàrl',
+    'author' : 'Open Net Sarl',
     'category' : 'Issue Management',
     'description' : """
 Open Net Productivity : Project Issue
@@ -42,7 +42,7 @@ These modules are included in all our hosting solutions.
     - When create a new issu, add its ID on its name
     - new field for issues: short_name: the name without the [id]
 
-**Author :** Open Net Sàrl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
+**Author :** Open Net Sarl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
 
 **Contact :** info@open-net.ch
 

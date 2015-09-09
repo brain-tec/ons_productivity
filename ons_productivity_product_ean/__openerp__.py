@@ -5,7 +5,7 @@
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2015-TODAY Open Net Sàrl. <http://www.open-net.ch>
+#  Copyright (c) 2015-TODAY Open Net Sarl. <http://www.open-net.ch>
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: product EAN barcodes',
     'version' : '1.0.03',
-    'author' : 'Open Net Sàrl',
+    'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : Product's EAN Barcodes module
@@ -43,7 +43,7 @@ These modules are included in all our hosting solutions.
    Note that if 13 digits (checksum included) are given, a first test is used with EAN13, than if it fails GLN is used
  - EAN code may be used to search products, too
 
-**Author :** Open Net Sàrl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
+**Author :** Open Net Sarl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
 
 **Contact :** info@open-net.ch
 

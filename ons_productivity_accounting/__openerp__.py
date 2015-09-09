@@ -5,7 +5,7 @@
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2013 Open Net Sàrl. All rights reserved.
+#  Copyright (c) 2013 Open Net Sarl. All rights reserved.
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: accounting',
     'version' : '1.5.03',
-    'author' : 'Open Net Sàrl',
+    'author' : 'Open Net Sarl',
     'category' : 'Base',
     'website': 'http://www.open-net.ch',
     'images' : [],

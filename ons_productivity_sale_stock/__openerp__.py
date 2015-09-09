@@ -5,7 +5,7 @@
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2015-TODAY Open Net Sàrl. <http://www.open-net.ch>
+#  Copyright (c) 2015-TODAY Open Net Sarl. <http://www.open-net.ch>
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: sale stock',
     'version' : '1.0.03',
-    'author' : 'Open Net Sàrl',
+    'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : sale stock module
@@ -41,7 +41,7 @@ These modules are included in all our hosting solutions.
 **Features list :**
  - Lets you manage the order of the stock moves with a sequence, inherited from the sale order line
 
-**Author :** Open Net Sàrl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
+**Author :** Open Net Sarl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
 
 **Contact :** info@open-net.ch
 

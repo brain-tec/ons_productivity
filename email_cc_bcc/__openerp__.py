@@ -5,7 +5,7 @@
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2015-TODAY Open Net Sàrl. <http://www.open-net.ch>
+#  Copyright (c) 2015-TODAY Open Net Sarl. <http://www.open-net.ch>
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -28,7 +28,7 @@
 {
     'name' : 'Email CC',
     'version' : '1.0.03',
-    'author' : 'Open Net Sàrl',
+    'author' : 'Open Net Sarl',
     'category' : 'Social Networking',
     'description' : """
 Email templating add-ons: adds a CC field
@@ -39,7 +39,7 @@ Email templating add-ons: adds a CC field
  - Adds a CC field to email templates
  - Adds a CCi field to email templates
 
-**Author :** Open Net Sàrl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
+**Author :** Open Net Sarl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
 
 **Contact :** info@open-net.ch
 

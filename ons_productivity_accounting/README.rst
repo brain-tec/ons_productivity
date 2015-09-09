@@ -14,7 +14,7 @@ These modules are included in all our hosting solutions.
     * "Inconsistencies" entry menu under "Accounts" => search active accounts with inactive parent
 
 **Author :** 
-    * Open Net Sàrl
+    * Open Net Sarl
     * Address: Industrie 59 / CH-1030 Bussigny
     * Website: http://www.open-net.ch
     * Contact: info@open-net.ch

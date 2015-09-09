@@ -5,7 +5,7 @@
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2015-TODAY Open Net Sàrl <http://www.open-net.ch>
+#  Copyright (c) 2015-TODAY Open Net Sarl <http://www.open-net.ch>
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: hr timesheet',
     'version' : '1.0.02',
-    'author' : 'Open Net Ltd',
+    'author' : 'Open Net Sarl',
     'category' : 'Human Resources',
     'description' : """
 Open Net Productivity : HR Timesheets module
@@ -41,7 +41,7 @@ These modules are included in all our hosting solutions.
 **Features list :**
  - Lets you use the employee (many linked to a same user) to manage the work time on an employee basis (instead of  the user)
 
-**Author :** Open Net Sàrl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
+**Author :** Open Net Sarl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
 
 **Contact :** info@open-net.ch
 

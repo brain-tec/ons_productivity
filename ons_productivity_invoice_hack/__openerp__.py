@@ -5,7 +5,7 @@
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2015-TODAY Open Net Sàrl <http://www.open-net.ch>
+#  Copyright (c) 2015-TODAY Open Net Sarl <http://www.open-net.ch>
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -28,7 +28,7 @@
 {
     'name' : 'Open-Net Productivity: invoice hack',
     'version' : '1.0.0',
-    'author' : 'Open Net Sàrl',
+    'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : Invoice
@@ -42,7 +42,7 @@ These modules are included in all our hosting solutions.
 **Features list :**
  - Lets you use "ons_productivity_invoice" while keeping the default Invoice Print button instead of the customized version.
 
-**Author :** Open Net Sàrl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
+**Author :** Open Net Sarl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
 
 **Contact :** info@open-net.ch
 

@@ -5,7 +5,7 @@
 #
 #  Created by sge@open-net.ch
 #
-#  Copyright (c) 2014-TODAY Open Net Sàrl. <http://www.open-net.ch>
+#  Copyright (c) 2014-TODAY Open Net Sarl. <http://www.open-net.ch>
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -28,7 +28,7 @@
 {
     'name' : 'Open Net Productivity : Drop shipping',
     'version' : '0.0.1',
-    'author' : 'Open Net Sàrl',
+    'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
 Open Net Productivity : Drop shipping
@@ -43,7 +43,7 @@ These modules are included in all our hosting solutions
     - Add 'Destination' field to Purchase Order.
     - Add two methods in Purchase Order needed for field 'Destination'.
 
-**Author :** Open Net Sàrl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
+**Author :** Open Net Sarl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
 
 **Contact :** info@open-net.ch
 
