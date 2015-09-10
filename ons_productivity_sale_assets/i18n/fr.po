@@ -36,6 +36,20 @@ msgstr "Lignes générées"
 
 #. module: ons_productivity_sale_assets
 #: field:sale.asset,serial:0
+#: field:sale.asset.create_wizard,product_id:0
+#: view:sale.asset.create_wizard:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: ons_productivity_sale_assets
+#: field:sale.asset,serial:0
+#: field:sale.asset.create_wizard,sale_line_id:0
+#: view:sale.asset.create_wizard:0
+msgid "Sale line"
+msgstr "Ligne de vente"
+
+#. module: ons_productivity_sale_assets
+#: field:sale.asset,serial:0
 #: field:sale.asset.create_wizard,serial:0
 msgid "Serial Nb"
 msgstr "No de série"

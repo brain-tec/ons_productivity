@@ -33,9 +33,11 @@ import openerp.addons.decimal_precision as dp
 class sale_asset_create_wizard(osv.osv_memory):
     _name = 'sale.asset.create_wizard'
     _description = 'Create an asset from a sale order line'
+    _rec_name = 'product_id'
 
     _columns = {
-        'name': fields.many2one('sale.order.line', 'Sale line', required=True),
+        'product_id': fields.many2one('product.product', 'Product'),
+        'sale_line_id': fields.many2one('sale.order.line', 'Sale line'),
         'product_info': fields.char('Product infos', size=200),
         'note': fields.text('Information', required=True),
         'serial': fields.char('Serial Nb', size=64),
@@ -43,25 +45,43 @@ class sale_asset_create_wizard(osv.osv_memory):
         'date_end': fields.date('Date end'),
     }
     
+    def _get_default_product(self, cr, uid, context={}):
+        sale_line_id = (context or {}).get('active_id', False)
+        if not sale_line_id:
+            return False
+        
+        sale_line = self.pool.get('sale.order.line').browse(cr, uid, sale_line_id, context=context)
+        return sale_line and sale_line.product_id and sale_line.product_id.id or False
+    
     _defaults = {
-        'name': lambda s, c, u, ctx: ctx.get('active_id', False),
+        'sale_line_id': lambda s, c, u, ctx: ctx.get('active_id', False),
+        'product_id': _get_default_product,
     }
 
     def action_create_asset(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
-        data = self.read(cr, uid, ids, ['serial','date_start','date_end', 'note', 'product_info'], context=context)[0]
+        data = self.read(cr, uid, ids, ['serial','date_start','date_end', 'note', 'product_id', 'product_info'], context=context)[0]
         if data.get('id', False):
             del data['id']
         
-        sol = self.pool.get('sale.order.line').browse(cr, uid, context.get('active_id', False), context=context)
-        if not sol:
+        sol = False
+        if context.get('active_id', False):
+            sol = self.pool.get('sale.order.line').browse(cr, uid, context.get('active_id', False), context=context)
+            if not sol:
+                return {}
+        product_id = (sol and sol.product_id and sol.product_id.id) or False
+        if data.get('product_id', False):
+            product_id = data['product_id'][0]
+        if not product_id:
             return {}
+        if not isinstance(product_id, (int, long)):
+            product_id = product_id.id
         data.update({
-            'product_id': sol.product_id and sol.product_id.id or False,
-            'sale_id': sol.order_id and sol.order_id.id or False,
-            'name': sol.id,
-            'partner_id': sol.order_id and sol.order_id.partner_id and sol.order_id.partner_id.id or False,
+            'product_id': product_id,
+            'sale_id': sol and sol.order_id and sol.order_id.id or False,
+            'sale_line_id': sol and sol.id or False,
+            'partner_id': sol and sol.order_id and sol.order_id.partner_id and sol.order_id.partner_id.id or False,
         })
         assets_obj = self.pool.get('sale.asset')
         assets_obj.create(cr, uid, data, context=context)

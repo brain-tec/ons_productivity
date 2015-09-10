@@ -42,13 +42,14 @@ _logger = logging.getLogger(__name__)
 class sale_asset(osv.Model):
     _name = 'sale.asset'
     _description = 'Sale asset'
+    _rec_name = 'product_id'
     
     # ---------- Fields management
 
     _columns = {
-        'name': fields.many2one('sale.order.line', 'Sale line', ondelete='restrict'),
         'note': fields.text('Information', required=True),
-        'product_id': fields.many2one('product.product', 'Product', domain=[('sale_ok', '=', True)], ondelete='restrict'),
+        'sale_line_id': fields.many2one('sale.order.line', 'Sale line', ondelete='restrict'),
+        'product_id': fields.many2one('product.product', 'Product', required=True, domain=[('sale_ok', '=', True)], ondelete='restrict'),
         'partner_id': fields.many2one('res.partner', 'Partner', ondelete='restrict'),
         'sale_id': fields.many2one('sale.order', 'Sale', ondelete='restrict'),
         'serial': fields.char('Serial Nb', size=64),
@@ -61,6 +62,7 @@ class sale_asset(osv.Model):
         'gen_sol_ids': fields.one2many('sale.order.line', 'org_asset_id', string='Generated lines', domain=[('order_id.state','not in',['draft','sent','cancel'])]),
         'gen_sale_ids': fields.related('gen_sol_ids', 'order_id', relation='sale.order', type='one2many', string='Sales'),
         'product_info': fields.char('Product infos', size=200),
+        'name': fields.integer('name'),
     }
     
     _defaults = {

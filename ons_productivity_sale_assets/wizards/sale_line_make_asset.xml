@@ -15,7 +15,8 @@
             <field name="model">sale.asset.create_wizard</field>
             <field name="arch" type="xml">
                 <form string="Create an asset" version="7.0">
-                    <field name="name"/>
+                    <field name="sale_line_id" readonly="1" placeholder="Sale line"/>
+                    <field name="product_id" placeholder="Product" attrs="{'readonly':[('sale_line_id','!=',False)]}" required="1"/>
                     <group>
                         <group>
                             <field name="serial"/>
