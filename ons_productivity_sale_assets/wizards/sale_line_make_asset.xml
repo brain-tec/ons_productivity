@@ -16,7 +16,18 @@
             <field name="arch" type="xml">
                 <form string="Create an asset" version="7.0">
                     <field name="sale_line_id" readonly="1" placeholder="Sale line"/>
-                    <field name="product_id" placeholder="Product" attrs="{'readonly':[('sale_line_id','!=',False)]}" required="1"/>
+                    <group>
+                        <field 
+                            name="partner_id" 
+                            placeholder="Customer" 
+                            attrs="{'readonly':[('sale_line_id','!=',False)]}" 
+                            domain="[('customer','=',True)]"/>
+                        <field 
+                            name="product_id" 
+                            placeholder="Product" 
+                            attrs="{'readonly':[('sale_line_id','!=',False)]}" 
+                            required="1"/>
+                    </group>
                     <group>
                         <group>
                             <field name="serial"/>
@@ -30,9 +41,16 @@
                     <label for="note"/>
                     <field name="note"/>
                     <footer>
-                        <button string="Create the asset" name="action_create_asset" type="object" class="oe_highlight"/>
+                        <button 
+                            string="Create the asset" 
+                            name="action_create_asset" 
+                            type="object" 
+                            class="oe_highlight"/>
                         or
-                        <button string="Cancel" class="oe_link" special="cancel"/>
+                        <button 
+                            string="Cancel" 
+                            class="oe_link" 
+                            special="cancel"/>
                     </footer>
                 </form>
             </field>

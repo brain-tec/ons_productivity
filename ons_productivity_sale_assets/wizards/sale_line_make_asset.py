@@ -26,7 +26,7 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, osv
+from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 import openerp.addons.decimal_precision as dp
 
@@ -39,6 +39,7 @@ class sale_asset_create_wizard(osv.osv_memory):
         'product_id': fields.many2one('product.product', 'Product'),
         'sale_line_id': fields.many2one('sale.order.line', 'Sale line'),
         'product_info': fields.char('Product infos', size=200),
+        'partner_id': fields.many2one('res.partner', 'Customer'),
         'note': fields.text('Information', required=True),
         'serial': fields.char('Serial Nb', size=64),
         'date_start': fields.date('Date start'),
@@ -53,15 +54,24 @@ class sale_asset_create_wizard(osv.osv_memory):
         sale_line = self.pool.get('sale.order.line').browse(cr, uid, sale_line_id, context=context)
         return sale_line and sale_line.product_id and sale_line.product_id.id or False
     
+    def _get_default_partner(self, cr, uid, context={}):
+        sale_line_id = (context or {}).get('active_id', False)
+        if not sale_line_id:
+            return False
+        
+        sale_line = self.pool.get('sale.order.line').browse(cr, uid, sale_line_id, context=context)
+        return sale_line and sale_line.order_id and sale_line.order_id.partner_id and sale_line.order_id.partner_id.id or False
+    
     _defaults = {
         'sale_line_id': lambda s, c, u, ctx: ctx.get('active_id', False),
         'product_id': _get_default_product,
+        'partner_id': _get_default_partner,
     }
 
     def action_create_asset(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
-        data = self.read(cr, uid, ids, ['serial','date_start','date_end', 'note', 'product_id', 'product_info'], context=context)[0]
+        data = self.read(cr, uid, ids, ['serial','date_start','date_end', 'note', 'partner_id', 'product_id', 'product_info'], context=context)[0]
         if data.get('id', False):
             del data['id']
         
@@ -81,8 +91,10 @@ class sale_asset_create_wizard(osv.osv_memory):
             'product_id': product_id,
             'sale_id': sol and sol.order_id and sol.order_id.id or False,
             'sale_line_id': sol and sol.id or False,
-            'partner_id': sol and sol.order_id and sol.order_id.partner_id and sol.order_id.partner_id.id or False,
         })
+        if isinstance(data['partner_id'], tuple):
+            data['partner_id'] = data['partner_id'][0]
+            
         assets_obj = self.pool.get('sale.asset')
         assets_obj.create(cr, uid, data, context=context)
         assets_ids = assets_obj.search(cr, uid, [('sale_id','=',data['sale_id'])], context=context)

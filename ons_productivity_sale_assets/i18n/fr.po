@@ -42,6 +42,12 @@ msgid "Product"
 msgstr "Produit"
 
 #. module: ons_productivity_sale_assets
+#: field:sale.asset.create_wizard,partner_id:0
+#: view:sale.asset.create_wizard:0
+msgid "Customer"
+msgstr "Client"
+
+#. module: ons_productivity_sale_assets
 #: field:sale.asset,serial:0
 #: field:sale.asset.create_wizard,sale_line_id:0
 #: view:sale.asset.create_wizard:0
