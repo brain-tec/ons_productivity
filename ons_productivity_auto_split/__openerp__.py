@@ -43,6 +43,7 @@ These modules are included in all our hosting solutions.
 
 **Features list :**
  - V1 lets you automatically split stock moves into smaller pieces, depending on the first packing defined in the product's form
+   Note that the moves that are in draft state, done or cancelled are ignored.
 
 **Author :** Open Net Sarl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
 

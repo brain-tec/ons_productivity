@@ -40,6 +40,7 @@ class StockPicking(models.Model):
         cr, uid, context = self.env.args
         StockMove = self.pool.get('stock.move')
         for pick in self:
+            handled = False
             for move in pick.move_lines:
                 if move.state in ('draft', 'done', 'cancel'):
                     continue
@@ -47,7 +48,7 @@ class StockPicking(models.Model):
                     (move.product_id.packaging_ids and move.product_id.packaging_ids[0]) or \
                     False
                 if not pack:
-                    _logger.info("No defined packaging for '%'" % move.product_id.name)
+                    _logger.info("No defined packaging for '%s'" % move.product_id.name)
                     continue
 
                 new_qty = pack.qty
@@ -55,5 +56,8 @@ class StockPicking(models.Model):
                     if move.product_uom_qty <= new_qty:
                         break
                     StockMove.split(cr, uid, move, new_qty, context=context)
+                    handled = True
+            if handled:
+                pick.action_assign()
 
         return True
