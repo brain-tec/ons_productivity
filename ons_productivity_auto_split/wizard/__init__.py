@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#  File: models/__init__.py
+#  File: wizard/__init__.py
 #  Module: ons_productivity_auto_split
 #
 #  Created by cyp@open-net.ch
@@ -26,4 +26,4 @@
 #
 ##############################################################################
 
-import stock
+import stock_transfer_details

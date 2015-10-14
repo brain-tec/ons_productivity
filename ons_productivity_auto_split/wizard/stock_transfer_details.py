@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#  File: __init__.py
+#  File: wizard/stock_transfer_details.py
 #  Module: ons_productivity_auto_split
 #
 #  Created by cyp@open-net.ch
@@ -9,7 +9,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-TODAY OpenERP S.A. <http://www.openerp.com>
+#    Copyright (C) 2004-TODAY OpenERP S.A. <http://www.odoo.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -26,4 +26,22 @@
 #
 ##############################################################################
 
-import wizard
+from openerp import models, api
+
+
+class stock_transfer_details_items(models.TransientModel):
+    _inherit = 'stock.transfer_details_items'
+
+    @api.multi
+    def split_quantities(self):
+        for det in self:
+            qty = (det.product_id.packaging_ids and det.product_id.packaging_ids[0].qty) or 0
+            if not qty:
+                qty = 1
+            while(det.quantity > qty):
+                det.quantity = (det.quantity-qty)
+                new_id = det.copy(context=self.env.context)
+                new_id.quantity = qty
+                new_id.packop_id = False
+        if self and self[0]:
+            return self[0].transfer_id.wizard_view()

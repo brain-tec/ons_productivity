@@ -29,7 +29,7 @@
 
 {
     'name' : 'Open-Net Productivity: automatic splitting of stock moves',
-    'version' : '8.0.1',
+    'version' : '8.0.2',
     'author' : 'Open Net Sarl',
     'summary': 'Automatic splitting of stock moves',
     'category' : 'Warehouse Management',
@@ -42,8 +42,8 @@ These modules are maintained by Open Net, Swiss Partner of OpenERP.
 These modules are included in all our hosting solutions.
 
 **Features list :**
- - V1 lets you automatically split stock moves into smaller pieces, depending on the first packing defined in the product's form
-   Note that the moves that are in draft state, done or cancelled are ignored.
+ - This module lets you automatically split stock moves into smaller pieces, depending on the first packing defined in the product's form
+   This is done in the Transfer wizard
 
 **Author :** Open Net Sarl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
 
@@ -60,7 +60,6 @@ V8.0.1: 2015-10-14/Cyp
         'stock'
     ],
     'data': [
-        'views/stock_view.xml',
     ],
     'qweb' : [
     ],
