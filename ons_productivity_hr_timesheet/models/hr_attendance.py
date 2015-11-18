@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 #
-#  File: models/__init__.py
+#  File: models/hr_attendance.py
 #  Module: ons_productivity_hr_timesheet
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2015-TODAY Open Net Sàrl. <http://www.open-net.ch>
+#  Copyright (c) 2015 Open-Net Ltd. All rights reserved.
 ##############################################################################
-#
+#    
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -22,9 +22,20 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
 #
 ##############################################################################
 
-from . import hr_timesheet
-from . import hr_attendance
+
+from openerp import models, fields
+
+
+class HrActionReason(models.Model):
+    _inherit = 'hr.action.reason'
+
+    # ---------- Fields management
+    
+    action_type = fields.Selection([
+        ('sign_in', 'Sign in'), 
+        ('sign_out', 'Sign out'), 
+        ('action', 'Action')], string='Action Type')

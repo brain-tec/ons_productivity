@@ -13,3 +13,8 @@ msgstr ""
 #: field:account.analytic.line,employee_id:0
 msgid "Employee"
 msgstr "Employé"
+
+#. module: ons_productivity_hr_timesheet
+#: field:hr.action.reason,action_type:0
+msgid "Action"
+msgstr "Action"

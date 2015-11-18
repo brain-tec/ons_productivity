@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: hr timesheet',
-    'version' : '1.0.02',
+    'version' : '1.2',
     'author' : 'Open Net Sarl',
     'category' : 'Human Resources',
     'description' : """
@@ -50,10 +50,17 @@ These modules are included in all our hosting solutions.
 V1.0.02: 2015-07-14/Cyp
     - Employee in the timesheet lines
 
+V1.2: 2015-11-18/Cyp
+    - New type of 'Action reason' for attendance: 'action'
+
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
-    'depends' : ['hr_timesheet','hr_timesheet_sheet'],
+    'depends' : [
+        'hr_attendance',
+        'hr_timesheet',
+        'hr_timesheet_sheet'
+    ],
     'data': [
         'views/view_hr_timesheet.xml',
     ],
