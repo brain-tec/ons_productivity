@@ -26,4 +26,6 @@
 #
 ##############################################################################
 
-import asset
+from . import asset
+from . import product
+from . import sale

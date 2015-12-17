@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   File: views/product_view.xml
-  Module: ons_productivity_discount
+  Module: ons_productivity_sale_assets
 
   Created by cyp@open-net.ch
 
@@ -14,15 +14,15 @@
             More for the product template's form 
         -->
         <record model="ir.ui.view" id="onsp_view_prd_tmpl_form">
-            <field name="name">Open-Net productivity: product template form</field>
+            <field name="name">Open-Net productivity assets: product template form</field>
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_form_view"/>
             <field name="priority" eval="17"/>
             <field name="arch" type="xml">
                 <div name="options" position="inside">
                     <div>
-                        <field name="is_discount"/>
-                        <label for="is_discount"/>
+                        <field name="generate_asset"/>
+                        <label for="generate_asset"/>
                     </div>
                 </div>
             </field>

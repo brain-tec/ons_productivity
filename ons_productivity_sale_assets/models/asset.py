@@ -39,7 +39,7 @@ import simplejson
 import logging
 _logger = logging.getLogger(__name__)
 
-class sale_asset(osv.Model):
+class SaleAsset(osv.Model):
     _name = 'sale.asset'
     _description = 'Sale asset'
     _rec_name = 'product_id'
@@ -86,7 +86,7 @@ class sale_asset(osv.Model):
         return result
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
-        res = super(sale_asset,self).fields_view_get(cr, uid, view_id, view_type, context, toolbar=toolbar, submenu=submenu)
+        res = super(SaleAsset,self).fields_view_get(cr, uid, view_id, view_type, context, toolbar=toolbar, submenu=submenu)
         if context is None:
             context = {}
 
@@ -146,7 +146,7 @@ class sale_asset(osv.Model):
         return len(asset_ids) > 0
 
 
-class sale_order(osv.Model):
+class SaleOrder(osv.Model):
     _inherit = 'sale.order'
     
     # ---------- Fields management
@@ -219,7 +219,7 @@ class sale_order(osv.Model):
         if asset and asset.name:
             default['order_line'] = [(6, 0, [])]
             default['sale_asset_id'] = asset_id
-        new_so_id = super(sale_order, self).copy(cr, uid, id, default=default, context=context)
+        new_so_id = super(SaleOrder, self).copy(cr, uid, id, default=default, context=context)
         if not new_so_id:
             return new_so_id
         if asset and asset.name:
@@ -228,7 +228,7 @@ class sale_order(osv.Model):
         return new_so_id
 
 
-class sale_order_line(osv.Model):
+class SaleOrderLine(osv.Model):
     _inherit = 'sale.order.line'
     
     # ---------- Fields management
@@ -261,7 +261,7 @@ class sale_order_line(osv.Model):
         return self.pool.get('sale.asset').action_view_related_assets(cr, uid, [], action_domain, action_context, context=context)
 
 
-class res_partner(osv.Model):
+class ResPartner(osv.Model):
     _inherit = 'res.partner'
     
     # ---------- Fields management
@@ -293,7 +293,7 @@ class res_partner(osv.Model):
         return self.pool.get('sale.asset').action_view_related_assets(cr, uid, [], action_domain, action_context, context=context)
 
 
-class product_product(osv.Model):
+class ProductProduct(osv.Model):
     _inherit = 'product.product'
     
     # ---------- Fields management

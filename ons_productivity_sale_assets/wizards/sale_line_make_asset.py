@@ -91,6 +91,7 @@ class sale_asset_create_wizard(osv.osv_memory):
             'product_id': product_id,
             'sale_id': sol and sol.order_id and sol.order_id.id or False,
             'sale_line_id': sol and sol.id or False,
+            'name': sol and sol.id or False,
         })
         if isinstance(data['partner_id'], tuple):
             data['partner_id'] = data['partner_id'][0]

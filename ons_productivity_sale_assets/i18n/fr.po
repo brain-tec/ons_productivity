@@ -252,3 +252,8 @@ msgstr "Création d'un devis"
 #: model:ir.ui.menu,name:ons_productivity_sale_assets.menu_sale_line_make_asset
 msgid "New sale asset"
 msgstr "Nouvel actif"
+
+#. module: ons_productivity_sale_assets
+#: field:product.template,generate_asset:0
+msgid "Generate assets"
+msgstr "Génère des actifs de vente"

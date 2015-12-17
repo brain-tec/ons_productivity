@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 #  File: models/product.py
-#  Module: ons_productivity_discount
+#  Module: ons_productivity_sale_assets
 #
 #  Created by cyp@open-net.ch
 #
@@ -26,15 +26,9 @@
 #
 ##############################################################################
 
-from openerp.osv import osv, fields
+from openerp import models, fields
 
-class product_template(osv.osv):
+class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    _columns = {
-        'is_discount': fields.boolean('Is a discount'),
-    }
-
-    _defaults = {
-        'is_discount': lambda *a: False,
-    }
+    generate_asset = fields.Boolean(string='Generate assets', default=False)

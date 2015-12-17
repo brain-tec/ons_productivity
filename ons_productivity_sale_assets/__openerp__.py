@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: sale assets',
-    'version' : '1.3',
+    'version' : '1.4',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -86,15 +86,22 @@ V1.2.02: 2015-09-10/Cyp
 
 V1.3: 2015-09-16/Cyp
     - When creating an independant asset, a customer may be chosen as well
+
+V1.4: 2015-12-17/Cyp
+    - Automatic assets, based on a specific checkbox
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
-    'depends' : ['sale','stock'],
+    'depends' : [
+        'sale',
+        'stock'
+    ],
     'data': [
         'data/ir.model.access.csv',
         'wizards/sale_line_make_asset.xml',
         'wizards/asset_make_quotation_view.xml',
         'views/asset_view.xml',
+        'views/product_view.xml'
     ],
     'qweb' : [
     ],

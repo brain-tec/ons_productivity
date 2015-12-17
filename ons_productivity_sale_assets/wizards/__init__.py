@@ -26,5 +26,5 @@
 #
 ##############################################################################
 
-import sale_line_make_asset
-import asset_make_quotation
+from . import sale_line_make_asset
+from . import asset_make_quotation
