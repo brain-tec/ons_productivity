@@ -27,7 +27,7 @@
 ##############################################################################
 {
     'name' : 'Open-Net Productivity: sale assets',
-    'version' : '1.4',
+    'version' : '1.5',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
@@ -89,6 +89,11 @@ V1.3: 2015-09-16/Cyp
 
 V1.4: 2015-12-17/Cyp
     - Automatic assets, based on a specific checkbox
+
+V1.5: 2015-12-17/Cyp
+    - Automatic assets:
+        - start date = date of sale + 7 days
+        - end date = start date + nb of warranty months
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],

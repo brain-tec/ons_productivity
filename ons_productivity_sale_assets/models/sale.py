@@ -27,6 +27,8 @@
 ##############################################################################
 
 from openerp import models, fields
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 import time
 
 class SaleOrder(models.Model):
@@ -43,10 +45,14 @@ class SaleOrder(models.Model):
                     if not line.product_id.generate_asset:
                         continue
                     
+                    date_ref = datetime.now()
+                    date_start = date_ref + relativedelta(days=7)
+                    date_end = date_start + relativedelta(months=int(line.product_id.warranty))
                     values = {
-                        'date_start': time.strftime('%Y-%m-%d'),
+                        'date_start': date_start.strftime('%Y-%m-%d'),
+                        'date_end': date_end.strftime('%Y-%m-%d'),
                         'note': line.product_id.description_sale or line.product_id.name, 
-                        'partner_id': so.partner_id.id, 
+                            'partner_id': so.partner_id.id, 
                         'product_id': line.product_id.id, 
                         'product_info': line.product_id.name,
                         'sale_id': so.id,
