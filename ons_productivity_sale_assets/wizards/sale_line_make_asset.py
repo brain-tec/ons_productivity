@@ -87,21 +87,22 @@ class sale_asset_create_wizard(osv.osv_memory):
             return {}
         if not isinstance(product_id, (int, long)):
             product_id = product_id.id
-        data.update({
-            'product_id': product_id,
-            'sale_id': sol and sol.order_id and sol.order_id.id or False,
-            'sale_line_id': sol and sol.id or False,
-            'name': sol and sol.id or False,
-        })
+        data.update({'product_id': product_id})
         if isinstance(data['partner_id'], tuple):
             data['partner_id'] = data['partner_id'][0]
+        if sol and sol.order_id:
+            data['sale_id'] = sol.order_id.id
+        if sol:
+            data['sale_line_id'] = sol.id
+            data['name'] = sol.id
             
+        action_context = {'ons_no_sale_grp':'1'}
+        action_domain = False
         assets_obj = self.pool.get('sale.asset')
         assets_obj.create(cr, uid, data, context=context)
-        assets_ids = assets_obj.search(cr, uid, [('sale_id','=',data['sale_id'])], context=context)
-
-        action_domain = "[('id','in',[" + ','.join(map(str, assets_ids)) + "])]"
-        action_context = {'ons_no_sale_grp':'1'}
+        if data.get('sale_id', False):
+            assets_ids = assets_obj.search(cr, uid, [('sale_id','=',data['sale_id'])], context=context)
+            action_domain = "[('id','in',[" + ','.join(map(str, assets_ids)) + "])]"
         
         ret = assets_obj.action_view_related_assets(cr, uid, [], action_domain, action_context, context=context)
         return ret
