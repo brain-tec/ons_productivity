@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: views/report_financial.xml
+  Module: ons_productivity_accounting
+
+  Created by dco@open-net.ch
+
+  Copyright (c) 2013-TODAY Open Net Sàrl. All rights reserved.
+-->
+<openerp>
+    <data>
+        <template id="report_financial" inherit_id="account.report_financial">
+            <xpath expr="//h2" position="before">
+                <t t-if="data.get('form').get('account_report_id')[0] == 1">
+                    <t t-set="income" t-value="0"/>
+                </t>
+            </xpath>
+            <xpath expr="//div[@class='page']" position="inside">
+                <strong>Bénéfice (perte) à reporter</strong> : <t t-esc="formatLang(income, currency_obj=res_company.currency_id)"/>
+            </xpath>
+        </template>
+        <template id="report_financial_horizontal" inherit_id="account_financial_report_horizontal.report_financial">
+            <xpath expr="//div[@class='row']/div/table/thead" position="after">
+                <t t-set="income" t-value="get_lines_function(data)[0].get('balance')"/>
+            </xpath>
+        </template>
+        
+    </data>
+</openerp>
