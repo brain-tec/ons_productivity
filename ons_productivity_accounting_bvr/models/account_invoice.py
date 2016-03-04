@@ -27,17 +27,40 @@
 ##############################################################################
 
 from openerp import models, api
+import logging
+
+_logger = logging.getLogger(__name__)
+
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
-    @api.onchange('partner_id', 'company_id')
-    def onchange_partner_id_set_bank(self):
-        super(AccountInvoice, self).onchange_partner_id_set_bank()
-        if self.type not in ('in_invoice', 'in_refund'):
+    @api.multi
+    def onchange_partner_id(self, invoice_type, partner_id, date_invoice=False,
+                            payment_term=False, partner_bank_id=False,
+                            company_id=False):
+        res = super(AccountInvoice, self).onchange_partner_id(
+            invoice_type, partner_id, date_invoice,
+            payment_term, partner_bank_id, company_id
+        )
+        _logger.info("ON CHANGE %s" % res)
+        if invoice_type not in ('in_invoice', 'in_refund'):
             user = self.env.user
             bank_ids = user.company_id.partner_id.bank_ids
             for bank in bank_ids:
-                if bank.type == 'bvr':
-                    self.partner_bank_id = bank
+                if bank.state == 'bvr':
+                    _logger.info(bank.state)
+                    res.get('value')['partner_bank_id'] = bank.id
                     break
+        return res
+
+    @api.model
+    def create(self, vals):
+        if vals.get('type') == 'out_invoice':
+            user = self.env.user
+            bank_ids = user.company_id.partner_id.bank_ids
+            for bank in bank_ids:
+                if bank.state == 'bvr':
+                    vals['partner_bank_id'] = bank.id
+        return super(AccountInvoice, self).create(vals)
+
