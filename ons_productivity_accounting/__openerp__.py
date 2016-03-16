@@ -35,7 +35,7 @@
     'depends' : ['account', 'account_financial_report_horizontal'],
     'data': [
         'views/view_account.xml',
-        'views/report_financial.xml'
+        # 'views/report_financial.xml'
     ],
     'js': [
     ],
