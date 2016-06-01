@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="ons_crm_lead_form">
+        <field name="name">ONS Crm Lead Form View</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
+        <field name="priority" eval="20"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <field name="city" position="before">
+                <field name="zip_id"
+                            options="{'create_name_field': 'city', 'no_open': True, 'no_create': True}"
+                            placeholder="City completion"
+                            class="oe_edit_only" />
+            </field>
+        </field>
+    </record>
+</odoo>
