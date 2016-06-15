@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: wizard/wiz_gen_stats_view.xml
+  Module: ons_productivity_budget
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013 Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+			<!-- 
+                Wizard to Generate the statistics: Form
+            -->
+			<record model="ir.ui.view" id="on_wiz_gen_stats_form">
+				<field name="name">on.wiz.gen.stats.form</field>
+				<field name="model">ons.wiz_gen_stats</field>
+				<field name="type">form</field>
+				<field name="arch" type="xml">
+                    <form string="Generate the statistics">
+    					<field name="name" colspan="2" readonly="1"/>
+                        <newline/>
+    					<field name="date_from" colspan="2"/>
+    					<field name="date_to" colspan="2"/>
+                        <separator string="" colspan="4" />
+        				<group col="4" colspan="4">
+        					<button special="cancel" string="Cancel" icon="gtk-cancel"/>
+        					<button name="do_generate" string="Generate the statistics" type="object" icon="gtk-ok"/>
+        				</group>
+                    </form>
+				</field>
+			</record>
+
+			<!-- 
+                Wizard to Generate the statistics: access it
+            -->
+            <record model="ir.actions.act_window" id="on_wiz_gen_stats_action">
+                <field name="name">Generate the statistics</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">ons.wiz_gen_stats</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="on_wiz_gen_stats_form"/>
+                <field name="target">new</field>
+            </record>
+
+    </data>
+</openerp>
