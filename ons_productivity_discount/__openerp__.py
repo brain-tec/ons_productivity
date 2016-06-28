@@ -70,6 +70,6 @@ V1.0.023 2015-06-19/Cyp
     ],
     'test': [
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }
