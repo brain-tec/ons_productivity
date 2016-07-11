@@ -65,6 +65,9 @@
                     <field name="is_active"/>
                     <field name="cancellation_deadline"/>
                 </xpath>
+                <xpath expr="//field[@name='recurring_invoice_line_ids']/tree//field[@name='name']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
                 <xpath expr="//field[@name='recurring_invoice_line_ids']/tree//field[@name='product_id']" position="before">
                     <field name="sequence" widget='handle'/>
                 </xpath>

@@ -36,7 +36,10 @@ class SaleOrderLine(models.Model):
         vals = super(SaleOrderLine, self)._prepare_order_line_procurement(cr, uid, ids, group_id=group_id, context=context)
         line = self.browse(cr, uid, ids, context=context)
         if line.requested_date:
-            date_planned = datetime.strptime(line.requested_date + ' 00:00:00', DEFAULT_SERVER_DATETIME_FORMAT) - timedelta(days=line.order_id.company_id.security_lead)
+            days = line.order_id.company_id.security_lead
+            if line.product_id.seller_ids and line.product_id.seller_ids[0].delay:
+                days += line.product_id.seller_ids[0].delay
+            date_planned = datetime.strptime(line.requested_date + ' 00:00:00', DEFAULT_SERVER_DATETIME_FORMAT) - timedelta(days=days)
             vals.update({
                 'date_planned': date_planned.strftime(DEFAULT_SERVER_DATETIME_FORMAT),
             })

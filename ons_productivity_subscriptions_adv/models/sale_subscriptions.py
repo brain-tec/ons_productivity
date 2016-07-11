@@ -317,7 +317,27 @@ class SaleSubscription(osv.osv):
             fiscal_position = fpos_obj.browse(cr, uid, fiscal_position_id, context=context)
         lang_dict = self.get_lang_dict(cr, uid, context=context)
         date_format = lang_dict['date_format']
+
+        s_current_date = fields.date.context_today(self, cr, uid)
+
         for line in contract.recurring_invoice_line_ids:
+            if (line.recurring_rule_type or '') != 'none':
+                if not line.recurring_next_date or not line.is_active:
+                    continue
+                line_date = datetime.strptime(line.recurring_next_date, '%Y-%m-%d') - \
+                    relativedelta(days=(line.cancellation_deadline))
+                s_line_date = line_date.strftime('%Y-%m-%d')
+                if s_current_date < s_line_date:
+                    continue
+            else:
+                if not line.is_active:
+                    continue
+                if line.recurring_next_date:
+                    line_date = datetime.strptime(line.recurring_next_date, '%Y-%m-%d')
+                    s_line_date = line_date.strftime('%Y-%m-%d')
+                    if s_current_date != s_line_date:
+                        continue
+
             values = self._prepare_invoice_line(cr, uid, line, fiscal_position, context=context)
 
             txt = line.name or ''
@@ -365,7 +385,7 @@ class SaleSubscription(osv.osv):
 
     def _prepare_invoice(self, cr, uid, contract, context={}):
         values = self._prepare_invoice_data(cr, uid, contract, context=context)
-        values['invoice_line_ids'] = self._prepare_invoice_lines(cr, uid, contract, values['fiscal_position_id'], context=context)
+        values['invoice_line_ids'] = self._prepare_invoice_lines(cr, uid, contract, values.get('fiscal_position_id', False), context=context)
         return values
 
     def _prepare_sale_data(self, cr, uid, contract, context=None):
@@ -380,11 +400,6 @@ class SaleSubscription(osv.osv):
         fpos_id = fpos_obj.get_fiscal_position(cr, uid, partner.id, context=context)
 
         partner_payment_term = partner.property_payment_term_id and partner.property_payment_term_id.id or False
-
-        next_date = datetime.strptime(contract.recurring_next_date, "%Y-%m-%d")
-        periods = {'daily': 'days', 'weekly': 'weeks', 'monthly': 'months', 'yearly': 'years'}
-        saling_period = relativedelta(**{periods[contract.recurring_rule_type]: contract.recurring_interval})
-        new_date = next_date + saling_period
 
         currency_id = False
         if contract.pricelist_id:
@@ -402,10 +417,16 @@ class SaleSubscription(osv.osv):
             'fiscal_position_id': fpos_id,
             'payment_term_id': partner_payment_term,
             'company_id': contract.company_id.id or False,
-            'note': _("This sale covers the following period: %s - %s") % (next_date.date(), new_date.date()),
             'subscription_id': contract.id,
             'project_id': contract.analytic_account_id.id,
         }
+        if contract.recurring_next_date:
+            next_date = datetime.strptime(contract.recurring_next_date, "%Y-%m-%d")
+            periods = {'daily': 'days', 'weekly': 'weeks', 'monthly': 'months', 'yearly': 'years'}
+            saling_period = relativedelta(**{periods[contract.recurring_rule_type]: contract.recurring_interval})
+            new_date = next_date + saling_period
+            sale['note'] = _("This sale covers the following period: %s - %s") % (next_date.date(), new_date.date())
+
         return sale
 
     def _prepare_sale_line(self, cr, uid, contract, line, fiscal_position, context=None):
@@ -461,7 +482,27 @@ class SaleSubscription(osv.osv):
         fiscal_position = None
         if fiscal_position_id:
             fiscal_position = fpos_obj.browse(cr, uid, fiscal_position_id, context=context)
+
+        s_current_date = fields.date.context_today(self, cr, uid)
+
         for line in contract.recurring_invoice_line_ids:
+            if (line.recurring_rule_type or '') != 'none':
+                if not line.recurring_next_date or not line.is_active:
+                    continue
+                line_date = datetime.strptime(line.recurring_next_date, '%Y-%m-%d') - \
+                    relativedelta(days=(line.cancellation_deadline))
+                s_line_date = line_date.strftime('%Y-%m-%d')
+                if s_current_date < s_line_date:
+                    continue
+            else:
+                if not line.is_active:
+                    continue
+                if line.recurring_next_date:
+                    line_date = datetime.strptime(line.recurring_next_date, '%Y-%m-%d')
+                    s_line_date = line_date.strftime('%Y-%m-%d')
+                    if s_current_date != s_line_date:
+                        continue
+
             values = self._prepare_sale_line(cr, uid, contract, line, fiscal_position, context=context)
             sale_lines.append((0, 0, values))
 
@@ -469,7 +510,7 @@ class SaleSubscription(osv.osv):
 
     def _prepare_sale(self, cr, uid, contract, context={}):
         sale = self._prepare_sale_data(cr, uid, contract)
-        sale['sale_line_ids'] = self._prepare_sale_lines(cr, uid, contract, sale['fiscal_position_id'], context=context)
+        sale['sale_line_ids'] = self._prepare_sale_lines(cr, uid, contract, sale.get('fiscal_position_id', False), context=context)
         return sale
 
     def setup_sale_filter(self, cr, uid, contract, filter, context={}):
@@ -489,7 +530,8 @@ class SaleSubscription(osv.osv):
             contracts = ids
         else:
             domain = [
-                ('recurring_invoice_line_ids.recurring_next_date', '<=', current_date.strftime('%Y-%m-%d')),
+                '|',
+                ('recurring_invoice_line_ids.recurring_next_date', '<=', s_current_dat),
                 ('recurring_invoice_line_ids.is_active', '=', True),
                 ('recurring_invoice_line_ids.is_billable', '=', True),
                 ('state', 'in', ['open', 'pending']),
@@ -512,20 +554,6 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                 'force_company': company_id
             })
             for contract in self.browse(cr, uid, ids, context=ctx):
-                # Find the longuest delay before the next action date
-                delay = 0
-                for line in contract.recurring_invoice_line_ids:
-                    if not line.is_active or \
-                            not line.recurring_rule_type or \
-                            line.recurring_rule_type == 'none':
-                        continue
-
-                    if line.cancellation_deadline > delay:
-                        delay = line.cancellation_deadline
-                min_date = datetime.strptime(contract.recurring_next_date, '%Y-%m-%d') - relativedelta(days=(delay))
-                s_min_date = min_date.strftime('%Y-%m-%d')
-                if s_current_date < s_min_date:
-                    continue
 
                 try:
                     # Prepare the invoice. Its lines list will be empty if there's nothing yet to invoice
@@ -566,20 +594,10 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                         for val_item in sale_lines:
                             val = val_item[2]
                             subscr_line = self.pool.get('sale.subscription.line').browse(cr, uid, val['subscr_line_id'], context=context)
-                            # For non-recurring items: don't add a sale order line if the item is already in the sale
-                            if not subscr_line.recurring_rule_type or subscr_line.recurring_rule_type == 'none':
-                                for sol in sale.order_line:
-                                    if not sol.product_id:
-                                        continue
-                                    if sol.product_id.id == val['product_id']:
-                                        val = False
-                                        break
-                            if not val:
-                                continue
-
                             val['order_id'] = sale_id
                             sale_line_id = self.pool('sale.order.line').create(cr, salesman, val, context=context)
                             self.pool('sale.order.line')._compute_tax_id(cr, uid, [sale_line_id], context=context)
+                            subscr_line.write({'recurring_next_date': s_current_date, 'is_active': False})
 
                         invoice_ids.append(sale_id)
 
@@ -591,7 +609,7 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                                 continue
                             next_date = datetime.strptime(line.recurring_next_date, '%Y-%m-%d')
                             cancel_date = next_date - relativedelta(days=(line.cancellation_deadline or 0))
-                            if (cancel_date.strftime('%y-%m-%d') > current_date.strftime('%y-%m-%d')):
+                            if cancel_date.strftime('%Y-%m-%d') > s_current_date:
                                 continue
 
                             # Compute the recurring next date
@@ -632,19 +650,9 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                         for val_item in  invoice_lines:
                             val = val_item[2]
                             subscr_line = self.pool.get('sale.subscription.line').browse(cr, uid, val['subscr_line_id'], context=context)
-                            # For non-recurring items: don't add an invoice line if the item is already in the invoice
-                            if not subscr_line.recurring_rule_type or subscr_line.recurring_rule_type == 'none':
-                                for invl in invoice.invoice_line_ids:
-                                    if not invl.product_id:
-                                        continue
-                                    if invl.product_id.id == val['product_id']:
-                                        val = False
-                                        break
-                            if not val:
-                                continue
-
                             val['invoice_id'] = invoice_id
                             self.pool('account.invoice.line').create(cr, salesman, val, context=context)
+                            subscr_line.write({'recurring_next_date': s_current_date, 'is_active': False})
                         self.pool['account.invoice'].compute_taxes(cr, salesman, invoice_id, context=context)
 
                         invoice_ids.append(invoice_id)
@@ -657,7 +665,7 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                                 continue
                             next_date = datetime.strptime(line.recurring_next_date, '%Y-%m-%d')
                             cancel_date = next_date - relativedelta(days=(line.cancellation_deadline or 0))
-                            if (cancel_date.strftime('%y-%m-%d') > current_date.strftime('%y-%m-%d')):
+                            if cancel_date.strftime('%Y-%m-%d') > s_current_date:
                                 continue
 
                             # Compute the recurring next date

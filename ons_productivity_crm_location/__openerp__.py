@@ -5,7 +5,7 @@
 {
     'name': 'Open-Net Productivity: crm base location',
     'category': 'Open-Net customizations',
-    'author': "Open-Net Sàrl",
+    'author': "Open Net Sarl",
     'depends': [
         'crm',
         'base_location'
