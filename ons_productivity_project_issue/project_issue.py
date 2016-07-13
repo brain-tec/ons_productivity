@@ -26,27 +26,28 @@
 #
 ##############################################################################
 
-from openerp import fields, model
-from openerp.tools.translate import _
+from openerp import fields, models, api
 
-class project_issue(model.Models):
+
+class project_issue(models.Model):
     _inherit = 'project.issue'
-    
+
+    @api.model
     def create(self, vals):
         """
         Overload the original create methode to 
         add the ID of issue on its name
         """
-        issue_ids = super(project_issue, self).create(
+        issues = super(project_issue, self).create(
            vals)
 
-        for issue in self.browse(issue_ids):
+        for issue in issues:
             prefix = "[%s] " % issue.id
             if not prefix in issue.name:
                 new_name = prefix + issue.name
-                self.write(issue.id, {'name': new_name})
+                issue.write({'name': new_name})
 
-        return issue_ids
+        return issues
 
     @api.multi
     def _comp_short_name(self):

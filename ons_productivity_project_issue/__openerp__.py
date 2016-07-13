@@ -59,6 +59,7 @@ V0.4: 2014-10-14/Cyp
     'images' : [],
     'depends' : ['project_issue'],
     'data': [
+        'project_issue_view.xml'
     ],
     'js': [
     ],
