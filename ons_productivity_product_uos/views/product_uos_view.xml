@@ -8,7 +8,8 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <field name="price_subtotal" position="after">
-                <field name="product_uos_qty"/>
+                <field name="product_uos" invisible="1"/>
+                <field name="product_uos_qty" attrs="{'invisible': [('product_uos', '=', False)]}"/>
             </field>
         </field>
     </record>

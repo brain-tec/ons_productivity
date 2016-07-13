@@ -16,7 +16,8 @@ class SaleOrderLine(models.Model):
 
     @api.one
     def _compute_uos(self):
-        self.product_uos_qty = self.product_uom_qty / self.product_id.uos_coeff
+        if self.product_id.uos_coeff != 0:
+            self.product_uos_qty = self.product_uom_qty / self.product_id.uos_coeff
 
     @api.onchange('product_uos_qty')
     def onchange_product_uos_qty(self):
