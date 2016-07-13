@@ -26,42 +26,35 @@
 #
 ##############################################################################
 
-from openerp.osv import fields,osv
+from openerp import fields, model
 from openerp.tools.translate import _
 
-class project_issue(osv.osv):
+class project_issue(model.Models):
     _inherit = 'project.issue'
     
-    def create(self, cr, uid, vals, context=None):
+    def create(self, vals):
         """
         Overload the original create methode to 
         add the ID of issue on its name
         """
         issue_ids = super(project_issue, self).create(
-            cr, uid, vals, context=context)
+           vals)
 
-        for issue in self.browse(cr, uid, issue_ids):
+        for issue in self.browse(issue_ids):
             prefix = "[%s] " % issue.id
             if not prefix in issue.name:
                 new_name = prefix + issue.name
-                self.write(cr, uid, issue.id,
-                           {'name': new_name})
+                self.write(issue.id, {'name': new_name})
 
         return issue_ids
 
-    # ---------- Fields management
-
-    def _comp_short_name(self, cr, uid, ids, field_name, arg, context=None):
-        res = dict(map(lambda x: (x,''), ids))
-        for issue in self.browse(cr, uid, ids, context=context):
+    @api.multi
+    def _comp_short_name(self):
+        for issue in self:
             short_name = issue.name
             prefix = "[%s] " % issue.id
             if short_name.startswith(prefix):
                 short_name = short_name[len(prefix):]
-            res[issue.id] = short_name
-        
-        return res
+            self.short_name = short_name
     
-    _columns = {
-        'short_name': fields.function(_comp_short_name, type='char', string='Short name'),
-    }
+    short_name = fields.Char(compute=_comp_short_name, string='Short name')
