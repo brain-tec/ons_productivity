@@ -48,6 +48,6 @@ V 1.0   2013-06-14/Cyp
 	],
     'demo_xml': [],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 #  File: __openerp__.py
-#  Module: ons_productivity_auto_split
+#  Module: ons_productivity_sale_mail
 #
 #  Created by cyp@open-net.ch
 #
@@ -25,25 +25,21 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-
 {
-    'name' : 'Open-Net Productivity: automatic splitting of stock moves',
-    'version' : '8.0.2',
+    'name' : 'Open-Net Productivity: sale & mail tools',
+    'version' : '1.0.05',
     'author' : 'Open Net Sarl',
-    'summary': 'Automatic splitting of stock moves',
-    'category' : 'Warehouse Management',
+    'category' : 'Base',
     'description' : """
-Open Net Productivity : Auto Split module
------------------------------------------
+Open Net Productivity : Sale and Mails Tools module
+---------------------------------------------------
 
 The 'productivity' modules is a complete family of modules offering improvement for OpenERP.
 These modules are maintained by Open Net, Swiss Partner of OpenERP.
 These modules are included in all our hosting solutions.
 
 **Features list :**
- - This module lets you automatically split stock moves into smaller pieces, depending on the first packing defined in the product's form
-   This is done in the Transfer wizard
+ - A sale order can only be sent by mail once it has been validated by a member of a dedicated group
 
 **Author :** Open Net Sarl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
 
@@ -51,15 +47,22 @@ These modules are included in all our hosting solutions.
 
 **History :**
 
-V8.0.1: 2015-10-14/Cyp
-    - Automatic stock moves splitting
+V1.0.02: 2015-03-05/Cyp
+    - A sale order can only be sent by mail once it has been validated by a member of a dedicated group
+
+V1.0.04: 2015-04-01/Cyp
+    - The checkbox that controls the validation becomes readonly once it's checked.
+      Trick: using a hidden flag to store the value as a readonly-field is not stored
+
+V1.0.05: 2015-07-03/Cyp
+    - During duplication, all the sale's values that concern the validation are resetted
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
-    'depends' : [
-        'stock'
-    ],
+    'depends' : ['sale'],
     'data': [
+        'data/sales_security.xml',
+        'views/sales_view.xml',
     ],
     'qweb' : [
     ],
@@ -67,6 +70,6 @@ V8.0.1: 2015-10-14/Cyp
     ],
     'test': [
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 #
 #  File: __openerp__.py
-#  Module: ons_productivity_hr_timesheet
+#  Module: ons_productivity_auto_split
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2015-TODAY Open Net Sarl <http://www.open-net.ch>
+#  Copyright (c) 2015-TODAY Open Net Sarl. <http://www.open-net.ch>
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -25,21 +25,25 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
+
 {
-    'name' : 'Open-Net Productivity: hr timesheet',
-    'version' : '1.2',
+    'name' : 'Open-Net Productivity: automatic splitting of stock moves',
+    'version' : '8.0.2',
     'author' : 'Open Net Sarl',
-    'category' : 'Human Resources',
+    'summary': 'Automatic splitting of stock moves',
+    'category' : 'Warehouse Management',
     'description' : """
-Open Net Productivity : HR Timesheets module
---------------------------------------------
+Open Net Productivity : Auto Split module
+-----------------------------------------
 
 The 'productivity' modules is a complete family of modules offering improvement for OpenERP.
 These modules are maintained by Open Net, Swiss Partner of OpenERP.
 These modules are included in all our hosting solutions.
 
 **Features list :**
- - Lets you use the employee (many linked to a same user) to manage the work time on an employee basis (instead of  the user)
+ - This module lets you automatically split stock moves into smaller pieces, depending on the first packing defined in the product's form
+   This is done in the Transfer wizard
 
 **Author :** Open Net Sarl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
 
@@ -47,22 +51,15 @@ These modules are included in all our hosting solutions.
 
 **History :**
 
-V1.0.02: 2015-07-14/Cyp
-    - Employee in the timesheet lines
-
-V1.2: 2015-11-18/Cyp
-    - New type of 'Action reason' for attendance: 'action'
-
+V8.0.1: 2015-10-14/Cyp
+    - Automatic stock moves splitting
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
     'depends' : [
-        'hr_attendance',
-        'hr_timesheet',
-        'hr_timesheet_sheet'
+        'stock'
     ],
     'data': [
-        'views/view_hr_timesheet.xml',
     ],
     'qweb' : [
     ],
@@ -70,6 +67,6 @@ V1.2: 2015-11-18/Cyp
     ],
     'test': [
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }

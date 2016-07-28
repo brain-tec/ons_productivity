@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 #  File: __openerp__.py
-#  Module: ons_productivity_invoice_hack
+#  Module: ons_productivity_hr_timesheet
 #
 #  Created by cyp@open-net.ch
 #
@@ -26,21 +26,20 @@
 #
 ##############################################################################
 {
-    'name' : 'Open-Net Productivity: invoice hack',
-    'version' : '1.0.0',
+    'name' : 'Open-Net Productivity: hr timesheet',
+    'version' : '1.2',
     'author' : 'Open Net Sarl',
-    'category' : 'Base',
+    'category' : 'Human Resources',
     'description' : """
-Open Net Productivity : Invoice
- module
-----------------------------------------
+Open Net Productivity : HR Timesheets module
+--------------------------------------------
 
 The 'productivity' modules is a complete family of modules offering improvement for OpenERP.
 These modules are maintained by Open Net, Swiss Partner of OpenERP.
 These modules are included in all our hosting solutions.
 
 **Features list :**
- - Lets you use "ons_productivity_invoice" while keeping the default Invoice Print button instead of the customized version.
+ - Lets you use the employee (many linked to a same user) to manage the work time on an employee basis (instead of  the user)
 
 **Author :** Open Net Sarl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
 
@@ -48,19 +47,29 @@ These modules are included in all our hosting solutions.
 
 **History :**
 
-V1.0.0: 2015-03-17/Cyp
-    - Invoices Print button: returns to its default function
+V1.0.02: 2015-07-14/Cyp
+    - Employee in the timesheet lines
+
+V1.2: 2015-11-18/Cyp
+    - New type of 'Action reason' for attendance: 'action'
+
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
-    'depends' : ['ons_productivity_invoice'],
-    'data': [],
+    'depends' : [
+        'hr_attendance',
+        'hr_timesheet',
+        'hr_timesheet_sheet'
+    ],
+    'data': [
+        'views/view_hr_timesheet.xml',
+    ],
     'qweb' : [
     ],
     'demo': [
     ],
     'test': [
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }

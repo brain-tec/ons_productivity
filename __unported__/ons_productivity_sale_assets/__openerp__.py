@@ -114,6 +114,6 @@ V1.5: 2015-12-17/Cyp
     ],
     'test': [
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }

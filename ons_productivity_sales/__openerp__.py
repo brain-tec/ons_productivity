@@ -31,7 +31,7 @@
     'author' : 'Open Net Sarl',
     'category' : 'Open-Net customizations',
     'description' : """
-Customizations for Scientia, by Open Net
+Open Net Productivity : Sales
 ----------------------------------------
 
 **Features list :**
@@ -45,10 +45,7 @@ Customizations for Scientia, by Open Net
     'website': 'https://www.open-net.ch',
     'images' : [],
     'depends' : [
-        'product',
-        'stock',
-        'sale_stock',
-        'inter_company_rules'
+        'sale'
     ],
     'data': [
     ],

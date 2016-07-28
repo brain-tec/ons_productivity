@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 #
 #  File: __openerp__.py
-#  Module: ons_productivity_sale_mail
+#  Module: ons_productivity_invoice_hack
 #
 #  Created by cyp@open-net.ch
 #
-#  Copyright (c) 2015-TODAY Open Net Sarl. <http://www.open-net.ch>
+#  Copyright (c) 2015-TODAY Open Net Sarl <http://www.open-net.ch>
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -26,20 +26,21 @@
 #
 ##############################################################################
 {
-    'name' : 'Open-Net Productivity: sale & mail tools',
-    'version' : '1.0.05',
+    'name' : 'Open-Net Productivity: invoice hack',
+    'version' : '1.0.0',
     'author' : 'Open Net Sarl',
     'category' : 'Base',
     'description' : """
-Open Net Productivity : Sale and Mails Tools module
----------------------------------------------------
+Open Net Productivity : Invoice
+ module
+----------------------------------------
 
 The 'productivity' modules is a complete family of modules offering improvement for OpenERP.
 These modules are maintained by Open Net, Swiss Partner of OpenERP.
 These modules are included in all our hosting solutions.
 
 **Features list :**
- - A sale order can only be sent by mail once it has been validated by a member of a dedicated group
+ - Lets you use "ons_productivity_invoice" while keeping the default Invoice Print button instead of the customized version.
 
 **Author :** Open Net Sarl   Industrie 59  1030 Bussigny  Suisse  http://www.open-net.ch
 
@@ -47,29 +48,19 @@ These modules are included in all our hosting solutions.
 
 **History :**
 
-V1.0.02: 2015-03-05/Cyp
-    - A sale order can only be sent by mail once it has been validated by a member of a dedicated group
-
-V1.0.04: 2015-04-01/Cyp
-    - The checkbox that controls the validation becomes readonly once it's checked.
-      Trick: using a hidden flag to store the value as a readonly-field is not stored
-
-V1.0.05: 2015-07-03/Cyp
-    - During duplication, all the sale's values that concern the validation are resetted
+V1.0.0: 2015-03-17/Cyp
+    - Invoices Print button: returns to its default function
     """,
     'website': 'https://www.open-net.ch',
     'images' : [],
-    'depends' : ['sale'],
-    'data': [
-        'data/sales_security.xml',
-        'views/sales_view.xml',
-    ],
+    'depends' : ['ons_productivity_invoice'],
+    'data': [],
     'qweb' : [
     ],
     'demo': [
     ],
     'test': [
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }
