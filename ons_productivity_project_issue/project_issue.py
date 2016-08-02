@@ -59,3 +59,4 @@ class project_issue(models.Model):
             self.short_name = short_name
     
     short_name = fields.Char(compute=_comp_short_name, string='Short name')
+    ons_progress = fields.Float(string="Progress (%)", related="task_id.progress")

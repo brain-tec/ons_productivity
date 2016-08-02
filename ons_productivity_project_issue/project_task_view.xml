@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="ons_prod_project_task_form_view">
+        <field name="name">ONS Productivity Project Issue : Project Task Form View</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="priority" eval="20"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='description_page']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="description_page" string="Description">
+                    <field name="description" type="html"/>
+                    <div class="oe_clear"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

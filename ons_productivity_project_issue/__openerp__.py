@@ -57,9 +57,13 @@ V0.4: 2014-10-14/Cyp
 """,
     'website': 'http://www.open-net.ch',
     'images' : [],
-    'depends' : ['project_issue'],
+    'depends' : [
+        'project_issue',
+        'project_issue_sheet'
+    ],
     'data': [
-        'project_issue_view.xml'
+        'project_issue_view.xml',
+        'project_task_view.xml'
     ],
     'js': [
     ],
