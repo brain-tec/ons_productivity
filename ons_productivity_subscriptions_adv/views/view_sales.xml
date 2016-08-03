@@ -13,7 +13,7 @@
         <record model="ir.ui.view" id="onsp_view_sale_order_subscription_form">
             <field name="name">Open Net productivity for the subscriptions: sale form</field>
             <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale_contract.sale_order_view_form_subscription"/>
+            <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="priority" eval="30"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='subscription_id']" position="attributes">
@@ -23,7 +23,7 @@
                 <xpath expr="//notebook/page[1]" position="attributes">
                     <attribute name="attrs">{'invisible':[('state','not in',['sale','done'])]}</attribute>
                 </xpath>
-                <xpath expr="//notebook/page[1]" position="after">
+                <xpath expr="//page/field[@name='order_line']/.." position="after">
                     <page string="Quotation Lines" attrs="{'invisible':[('state','in',['sale','done'])]}">
                         <field name="quot_lines" mode="tree,kanban" attrs="{'readonly': [('state', 'in', ('done','cancel'))]}">
                             <form string="Quotation Lines">
