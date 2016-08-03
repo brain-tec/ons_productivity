@@ -97,7 +97,7 @@ class SaleSubscription(osv.osv):
         for account in self.browse(cr, uid, ids, context=context):
             result[account.id] = sum(line.price_subtotal
                                      for line in account.recurring_invoice_line_ids
-                                     if line.recurring_rule_type and line.recurring_rule_type != 'none')
+                                     if line.recurring_rule_type and line.recurring_rule_type != 'none' and line.is_active)
         return result
 
     _columns = {
