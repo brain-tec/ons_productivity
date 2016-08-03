@@ -62,8 +62,9 @@ V0.4: 2014-10-14/Cyp
         'project_issue_sheet'
     ],
     'data': [
-        'project_issue_view.xml',
-        'project_task_view.xml'
+        'views/project_issue_view.xml',
+        'views/project_task_view.xml',
+        'views/project_project_view.xml'
     ],
     'js': [
     ],
