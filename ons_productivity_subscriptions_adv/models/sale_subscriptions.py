@@ -597,7 +597,9 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                             val['order_id'] = sale_id
                             sale_line_id = self.pool('sale.order.line').create(cr, salesman, val, context=context)
                             self.pool('sale.order.line')._compute_tax_id(cr, uid, [sale_line_id], context=context)
-                            subscr_line.write({'recurring_next_date': s_current_date, 'is_active': False})
+                            subscr_line.write({'recurring_next_date': s_current_date})
+                            if subscr_line.recurring_rule_type == 'none':
+                                subscr_line.write({'is_active': False})
 
                         invoice_ids.append(sale_id)
 
@@ -652,7 +654,9 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                             subscr_line = self.pool.get('sale.subscription.line').browse(cr, uid, val['subscr_line_id'], context=context)
                             val['invoice_id'] = invoice_id
                             self.pool('account.invoice.line').create(cr, salesman, val, context=context)
-                            subscr_line.write({'recurring_next_date': s_current_date, 'is_active': False})
+                            subscr_line.write({'recurring_next_date': s_current_date})
+                            if subscr_line.recurring_rule_type == 'none':
+                                subscr_line.write({'is_active': False})
                         self.pool['account.invoice'].compute_taxes(cr, salesman, invoice_id, context=context)
 
                         invoice_ids.append(invoice_id)
