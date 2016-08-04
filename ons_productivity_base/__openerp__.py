@@ -22,7 +22,8 @@
         'hr',
     ],
     'data': [
-        'views/view_res_users.xml'
+        'views/view_res_users.xml',
+        'views/onsp_base.xml'
     ],
     'installable': True,
     'auto_install': False,
