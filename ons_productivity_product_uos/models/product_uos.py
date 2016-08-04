@@ -34,6 +34,6 @@ class SaleOrderLine(models.Model):
             _logger.info("ON CHANGE PRODUCT")
 
     product_uos_qty = fields.Float(string='Quantity', digits=dp.get_precision('Product Unit of Measure'),
-                                    compute='_compute_uos', inverse='_set_uos', readonly=False)
+                                    compute='_compute_uos', inverse='_set_uos', readonly=False, default=1)
     product_uos = fields.Many2one('product.uom', string='Unit of Measure', required=False,
                                   related='product_id.uos_id', readonly=False)
