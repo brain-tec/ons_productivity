@@ -37,7 +37,6 @@ class account_journal(models.Model):
         self.env.cr.execute(query, (self.id, last_month, today))
         bank_stmt = self.env.cr.dictfetchall()
         for stmt in bank_stmt:
-            _logger.info(stmt)
             data.append({'x': stmt.get('date'), 'y':stmt.get('balance_end'), 'name': stmt.get('date')})
         return [{'values': data, 'area': True}]
 
@@ -69,7 +68,7 @@ class account_journal(models.Model):
         for i in range(0,6):
             if i == 0:
                 query += "("+select_sql_clause+" and date_due < '"+start_date.strftime(DF)+"')"
-            elif i == 6:
+            elif i == 5:
                 query += " UNION ALL ("+select_sql_clause+" and date_due >= '"+start_date.strftime(DF)+"')"
             else:
                 next_date = start_date + timedelta(days=7)
@@ -78,8 +77,9 @@ class account_journal(models.Model):
 
         self.env.cr.execute(query, {'journal_id':self.id})
         query_results = self.env.cr.dictfetchall()
+        _logger.info(query)
         for index in range(0, len(query_results)):
             if query_results[index].get('aggr_date') != None:
                 data[index]['value'] = query_results[index].get('total')
-
+        # _logger.info(data)
         return [{'values': data}]
