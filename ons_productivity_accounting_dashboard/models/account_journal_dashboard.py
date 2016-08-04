@@ -77,9 +77,7 @@ class account_journal(models.Model):
 
         self.env.cr.execute(query, {'journal_id':self.id})
         query_results = self.env.cr.dictfetchall()
-        _logger.info(query)
         for index in range(0, len(query_results)):
             if query_results[index].get('aggr_date') != None:
                 data[index]['value'] = query_results[index].get('total')
-        # _logger.info(data)
         return [{'values': data}]
