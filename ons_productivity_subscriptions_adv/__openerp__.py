@@ -25,6 +25,7 @@
         'ons_productivity_sol_req'
     ],
     'data': [
+        'views/onsp_base.xml',
         'views/onsp_subscriptions_adv.xml',
         'views/view_sale_subscription.xml',
         'views/view_sales.xml',
