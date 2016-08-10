@@ -39,7 +39,7 @@ class SaleOrder(models.Model):
     @api.multi
     def action_confirm(self):
         #Check if the current user is the teamleader of the sale
-        if (self.team_id.user_id.id != self.env.uid):
+        if (self.team_id and self.team_id.user_id.id != self.env.uid):
             msg = _("You are not allowed to confirm a sale\nContact the team leader : ")+self.team_id.user_id.name
             _logger.info(msg)
             raise Warning(msg)
