@@ -24,14 +24,20 @@ class SaleSubscription(osv.osv):
 
     # ---------- Fields management
 
-    def _get_recurring_line_min_date(self, cr, uid, ids, fieldnames, args, context=None):
+    def _comp_next_date(self, cr, uid, ids, fieldnames, args, context=None):
         result = dict.fromkeys(ids, False)
+
+        current_date = datetime.now()
+        s_current_date = current_date.strftime('%Y-%m-%d')
+
         for contract in self.browse(cr, uid, ids, context=context):
             min_date = False
             for line in contract.recurring_invoice_line_ids:
                 if not line.is_active or \
                     not line.is_billable or \
-                    not line.recurring_next_date:
+                    not line.recurring_rule_type or \
+                    line.recurring_rule_type == 'none':
+
                     continue
 
                 next = datetime.strptime(line.recurring_next_date, '%Y-%m-%d')
@@ -49,10 +55,10 @@ class SaleSubscription(osv.osv):
 
         return result
 
-    def _get_ids_recurring_lines(self, cr, uid, ids, context=None):
+    def _get_active_lines(self, cr, uid, ids, context=None):
         result = []
         for line in self.pool.get('sale.subscription.line').browse(cr, uid, ids, context=context):
-            if line.recurring_next_date:
+            if line.is_active:
                 result.append(line.analytic_account_id.id)
         return result
 
@@ -73,7 +79,7 @@ class SaleSubscription(osv.osv):
     def _get_non_recurring_line_ids(self, cr, uid, ids, context=None):
         result = []
         for line in self.pool.get('sale.subscription.line').browse(cr, uid, ids, context=context):
-            if not line.recurring_rule_type or line.recurring_rule_type == 'none':
+            if line.is_active and (not line.recurring_rule_type or line.recurring_rule_type == 'none'):
                 result.append(line.analytic_account_id.id)
         return result
 
@@ -82,13 +88,13 @@ class SaleSubscription(osv.osv):
         for account in self.browse(cr, uid, ids, context=context):
             result[account.id] = sum(line.price_subtotal
                                      for line in account.recurring_invoice_line_ids
-                                     if not line.recurring_rule_type or line.recurring_rule_type == 'none')
+                                     if line.is_active and (not line.recurring_rule_type or line.recurring_rule_type == 'none'))
         return result
 
     def _get_recurring_line_ids(self, cr, uid, ids, context=None):
         result = []
         for line in self.pool.get('sale.subscription.line').browse(cr, uid, ids, context=context):
-            if line.recurring_rule_type and line.recurring_rule_type != 'none':
+            if line.is_active and line.recurring_rule_type and line.recurring_rule_type != 'none':
                 result.append(line.analytic_account_id.id)
         return result
 
@@ -97,7 +103,7 @@ class SaleSubscription(osv.osv):
         for account in self.browse(cr, uid, ids, context=context):
             result[account.id] = sum(line.price_subtotal
                                      for line in account.recurring_invoice_line_ids
-                                     if line.recurring_rule_type and line.recurring_rule_type != 'none' and line.is_active)
+                                     if line.is_active and line.recurring_rule_type and line.recurring_rule_type != 'none' and line.is_active)
         return result
 
     _columns = {
@@ -113,11 +119,11 @@ class SaleSubscription(osv.osv):
         ),
         'recurring_interval': fields.integer('Repeat Every', help="Repeat every (Days/Week/Month/Year)", readonly=True),
         'recurring_next_date': fields.function(
-            _get_recurring_line_min_date,
+            _comp_next_date,
             string='Date of Next Invoice',
             type='date',
             store={
-                'sale.subscription.line': (_get_ids_recurring_lines, ['recurring_next_date','cancellation_deadline'], 5)
+                'sale.subscription.line': (_get_active_lines, ['recurring_next_date','cancellation_deadline', 'is_active'], 5)
             }
         ),
         'recurring_generates': fields.selection([
@@ -144,8 +150,8 @@ class SaleSubscription(osv.osv):
             store={
                'account.analytic.account': (lambda s, cr, uid, ids, c={}: ids, ['recurring_invoice_line_ids'], 5),
                'sale.subscription.line': (_get_non_recurring_line_ids,
-                                          ['product_id', 'quantity', 'actual_quantity', 'sold_quantity',
-                                           'uom_id', 'price_unit', 'discount', 'price_subtotal'],
+                                          ['product_id', 'quantity', 'actual_quantity', 'sold_quantity', 'uom_id',
+                                           'price_unit', 'discount', 'price_subtotal', 'is_active'],
                                           5),
             },
             track_visibility='onchange'),
@@ -157,7 +163,7 @@ class SaleSubscription(osv.osv):
                 'account.analytic.account': (lambda s, cr, uid, ids, c={}: ids, ['recurring_invoice_line_ids'], 5),
                 'sale.subscription.line': (_get_recurring_line_ids,
                                            ['product_id', 'quantity', 'actual_quantity', 'sold_quantity', 'uom_id',
-                                            'price_unit', 'discount', 'price_subtotal'],
+                                            'price_unit', 'discount', 'price_subtotal', 'is_active'],
                                            5),
         }, track_visibility='onchange'),
     }
@@ -531,7 +537,7 @@ class SaleSubscription(osv.osv):
         else:
             domain = [
                 '|',
-                ('recurring_invoice_line_ids.recurring_next_date', '<=', s_current_dat),
+                ('recurring_invoice_line_ids.recurring_next_date', '<=', s_current_date),
                 ('recurring_invoice_line_ids.is_active', '=', True),
                 ('recurring_invoice_line_ids.is_billable', '=', True),
                 ('state', 'in', ['open', 'pending']),
