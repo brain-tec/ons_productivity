@@ -1,15 +1,15 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
-Open Net Productivity : Accounting dashboard improvements module
-================================================================
+Open Net Productivity : Accounting BVR improvements module
+==========================================================
 
 The 'productivity' modules is a complete family of modules offering improvement for OpenERP.
 These modules are maintained by Open Net, Swiss Partner of OpenERP.
 These modules are included in all our hosting solutions.
 
 **Features list :**
-    * Improve graph datas on accouting dashboard
+    * Choose BVR account as partner_bank_id on an invoice.
 
 **Author :** 
     * Open Net Sarl
