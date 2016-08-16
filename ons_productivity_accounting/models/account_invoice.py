@@ -11,6 +11,6 @@ class account_invoice(models.Model):
     def unlink(self):
         for inv in self:
             if inv.state in ('draft', 'cancel'):
-                self.write({'internal_number': False})
+                self.write({'move_name': False})
     
         return super(account_invoice, self).unlink()
