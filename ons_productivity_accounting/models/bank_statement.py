@@ -10,7 +10,7 @@ class bank_statement(models.Model):
     payment_order_lines = fields.Many2many('account.payment.line', string="Payment lines")
 
     @api.one
-    @api.depends('line_ids', 'balance_start', 'line_ids.amount', 'balance_end_real')
+    @api.depends('line_ids', 'payment_order_lines','balance_start', 'line_ids.amount', 'balance_end_real')
     def _end_balance(self):
         super(bank_statement, self)._end_balance()
         total_payment_lines = sum([line.amount_currency for line in self.payment_order_lines])
