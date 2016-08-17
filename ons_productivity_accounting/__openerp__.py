@@ -11,8 +11,10 @@
     'images' : [],
     'depends' : [
         'account',
+        'account_banking_pain_base'
     ],
     'data': [
+        'views/bank_statement_view.xml'
     ],
     'js': [
     ],

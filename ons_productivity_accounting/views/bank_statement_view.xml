@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="ons_prod_bank_statement_form_view">
+        <field name="name">ONS Productivity accounting : Bank statement Form View</field>
+        <field name="model">account.bank.statement</field>
+        <field name="inherit_id" ref="account.view_bank_statement_form"/>
+        <field name="priority" eval="20"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <field name="line_ids" position="after">
+                <field name="payment_order_lines"/>
+            </field>
+        </field>
+    </record>
+</odoo>
