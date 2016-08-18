@@ -3,9 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name' : 'Open Net productivity: subscriptions advanced',
+    'name' : 'Open Net productivity: Subscriptions advanced',
     'version' : '1.0.0.0',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Extra Tools',
     'website': 'https://www.open-net.ch',
     'depends' : [

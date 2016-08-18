@@ -2,7 +2,7 @@
 # © 2016 Open Net Sarl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
-    'name' : 'Open-Net Productivity: sales',
+    'name' : 'Open-Net Productivity: Sales',
     'version' : '1.0.0.0',
     'author' : 'Open Net Sàrl',
     'category' : 'Sales',

@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Open Net Productivity: crm base location',
+    'name': 'Open Net Productivity: CRM Base Location',
     'category': 'Sales',
     'author': "Open Net Sàrl",
     'depends': [

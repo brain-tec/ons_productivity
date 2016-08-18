@@ -3,9 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name' : 'Open-Net Productivity: product dimensions',
-    'version' : '1.0.07',
-    'author' : 'Open Net Sarl',
+    'name' : 'Open-Net Productivity: Product Dimensions',
+    'version' : '1.0.0.0',
+    'author' : 'Open Net Sàrl',
     'category' : 'Sales',
     'website': 'https://www.open-net.ch',
     'images' : [],

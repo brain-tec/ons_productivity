@@ -3,9 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name' : 'Open Net productivity: requested date for S.O.L.',
+    'name' : 'Open Net productivity: Requested date for S.O.L.',
     'version' : '1.0.0.0',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Sales',
     'website': 'https://www.open-net.ch',
     'depends' : [
