@@ -6,7 +6,7 @@
     'name' : 'Open Net Productivity: Accounting Dashboard',
     'version' : '1.0.0.0',
     'author' : 'Open Net Sàrl',
-    'category' : 'Open Net Productivity',
+    'category' : 'Accounting',
     'website': 'http://www.open-net.ch',
     'images' : [],
     'depends' : [

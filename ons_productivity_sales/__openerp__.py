@@ -5,7 +5,7 @@
     'name' : 'Open-Net Productivity: sales',
     'version' : '1.0.0.0',
     'author' : 'Open Net Sàrl',
-    'category' : 'Open Net Productivity',
+    'category' : 'Sales',
     'website': 'https://www.open-net.ch',
     'images' : [],
     'depends' : [

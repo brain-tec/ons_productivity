@@ -4,7 +4,7 @@
 
 {
     'name': 'Open Net Productivity: Report',
-    'category': 'Open Net Productivity',
+    'category': 'Base',
     'author': "Open Net Sàrl",
     'depends': [
         'report',

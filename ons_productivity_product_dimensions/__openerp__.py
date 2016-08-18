@@ -6,7 +6,7 @@
     'name' : 'Open-Net Productivity: product dimensions',
     'version' : '1.0.07',
     'author' : 'Open Net Sarl',
-    'category' : 'Open Net Productivity',
+    'category' : 'Sales',
     'website': 'https://www.open-net.ch',
     'images' : [],
     'depends' : ['product'],

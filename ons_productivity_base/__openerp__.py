@@ -6,7 +6,7 @@
     'name' : 'Open Net Productivity: base',
     'version' : '1.0.0.0',
     'author' : 'Open Net Sàrl',
-    'category' : 'Open Net Productivity',
+    'category' : 'Extra Tools',
     'website': 'http://www.open-net.ch',
     'depends' : [
         'hr',

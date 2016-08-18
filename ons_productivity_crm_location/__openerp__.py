@@ -4,7 +4,7 @@
 
 {
     'name': 'Open Net Productivity: crm base location',
-    'category': 'Open Net Productivity',
+    'category': 'Sales',
     'author': "Open Net Sàrl",
     'depends': [
         'crm',

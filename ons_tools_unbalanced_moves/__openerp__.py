@@ -6,7 +6,7 @@
     'name' : 'Open Net tools: helps closing POS session',
     'version' : '1.0.0.0',
     'author' : 'Open Net Sarl',
-    'category' : 'Open Net Productivity',
+    'category' : 'Extra Tools',
     'website': 'https://www.open-net.ch',
     'images' : [],
     'depends' : [

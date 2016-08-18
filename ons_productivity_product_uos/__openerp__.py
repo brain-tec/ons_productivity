@@ -4,7 +4,7 @@
 
 {
     'name': 'Open Net Productivity: product UOS',
-    'category': 'Open Net Productivity',
+    'category': 'Sales',
     'author': "Open Net Sàrl",
     'depends': [
         'product_uos',

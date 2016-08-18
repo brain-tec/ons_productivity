@@ -6,7 +6,7 @@
     'name' : 'Open Net productivity: requested date for S.O.L.',
     'version' : '1.0.0.0',
     'author' : 'Open Net Sarl',
-    'category' : 'Open Net Productivity',
+    'category' : 'Sales',
     'website': 'https://www.open-net.ch',
     'depends' : [
         'sale',

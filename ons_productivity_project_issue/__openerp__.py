@@ -6,7 +6,7 @@
     'name' : 'Open Net Productivity: Project Issue',
     'version' : '1.0.0.0',
     'author' : 'Open Net Sàrl',
-    'category' : 'Open Net Productivity',
+    'category' : 'Project',
     'website': 'http://www.open-net.ch',
     'images' : [],
     'depends' : [

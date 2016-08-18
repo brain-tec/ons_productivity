@@ -6,7 +6,7 @@
     'name' : 'Open Net Productivity: Accounting BVR',
     'version' : '1.0.0.0',
     'author' : 'Open Net Sàrl',
-    'category' : 'Open Net Productivity',
+    'category' : 'Accounting',
     'website': 'https://www.open-net.ch',
     'images' : [],
     'depends' : [
