@@ -28,13 +28,13 @@
                 <thead>
                   <tr class="active">
                     <th>Tasks</th>
-                    <th>Progress</th>
+                    <th>Progress (%)</th>
                   </tr>
                 </thead>
                 <t t-foreach="tasks" t-as="task">
                     <tr>
                        <td><span t-field="task.name"/></td>
-                       <td><span t-field="task.progress"/></td>
+                       <td><span t-field="task.progress"/>/100</td>
                     </tr>
                 </t>
             </table>
