@@ -4,4 +4,3 @@
 
 import project_issue
 import project_project
-# import project_settings
