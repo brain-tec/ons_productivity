@@ -1,22 +1,12 @@
- # -*- coding: utf-8 -*-
-#
-#  File: __openerp__.py
-#  Module: ons_productivity_subscriptions_adv
-#
-#  Created by cyp@open-net.ch
-#
-#  Copyright (c) 2016-TODAY Open-Net Ltd. <http://www.open-net.ch>
-##############################################################################
-#
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# © 2016 Open Net Sarl
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 {
-    'name' : 'Open-Net productivity: subscriptions advanced',
-    'version' : '1.3',
+    'name' : 'Open Net productivity: subscriptions advanced',
+    'version' : '1.0.0.0',
     'author' : 'Open Net Sarl',
-    'category' : 'Sale',
-    'summary': 'Complementary functions for the subscriptions management',
+    'category' : 'Open Net Productivity',
     'website': 'https://www.open-net.ch',
     'depends' : [
         'sale',

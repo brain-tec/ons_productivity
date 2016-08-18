@@ -4,7 +4,7 @@
 
 {
     'name' : 'Open Net Productivity: Project Issue',
-    'version' : '0.0.04',
+    'version' : '1.0.0.0',
     'author' : 'Open Net Sàrl',
     'category' : 'Open Net Productivity',
     'website': 'http://www.open-net.ch',

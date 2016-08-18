@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# © 2016 Coninckx David (Open Net Sarl)
+# © 2016 Open Net Sarl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name' : 'Open-Net Productivity: Accounting Dashboard',
+    'name' : 'Open Net Productivity: Accounting Dashboard',
     'version' : '1.0.0.0',
-    'author' : 'Open Net Sarl',
-    'category' : 'Accounting',
+    'author' : 'Open Net Sàrl',
+    'category' : 'Open Net Productivity',
     'website': 'http://www.open-net.ch',
     'images' : [],
     'depends' : [

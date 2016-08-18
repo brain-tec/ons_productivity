@@ -1,7 +1,7 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
-Open Net Productivity : Project Issue
+Open Net Productivity : Report
 ================================================================
 
 The 'productivity' modules is a complete family of modules offering improvement for OpenERP.
@@ -9,10 +9,8 @@ These modules are maintained by Open Net, Swiss Partner of OpenERP.
 These modules are included in all our hosting solutions.
 
 **Features list :**
-    * Add an unique ID to issue's name
-    * Add stages on project
-    * Add progress of the task into issue
-    * Add task progress for portal user
+    * Reduce font size on reports
+    * Fix header overlapping issue
 
 **Author :** 
     * Open Net Sàrl

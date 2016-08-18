@@ -10,6 +10,7 @@ These modules are included in all our hosting solutions.
 
 **Features list :**
     * Allows you to remove invoice with internal number
+    * Allows you to add payment lines to bank statements
 
 **Author :** 
     * Open Net Sarl

@@ -3,8 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name' : 'Open-Net Productivity: product dimensions',
-    'version' : '1.0.07',
+    'name' : 'Open-Net Productivity: product EAN barcodes',
+    'version' : '1.0.0.0',
     'author' : 'Open Net Sarl',
     'category' : 'Open Net Productivity',
     'website': 'https://www.open-net.ch',
