@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="ons_cust_website_portal_account" inherit_id="website_portal.account">
+        <xpath expr="//div[@id='o_my_sidebar']" position="replace">
+            <div id="o_my_sidebar">
+                <div class="o_my_details"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[@class='col-md-8 o_my_documents']" position="replace">
+            <div class="col-md-12 o_my_documents">
+                <div class="oe_structure"/>
+            </div>
+        </xpath>
+    </template>
+    <template id="website_portal_sale.account" inherit_id='website_portal.account'>
+        <xpath expr="//div[contains(@class,'o_my_documents')]" position="inside">
+            <t t-call="ons_productivity_project_issue.website_portal_project_task"/>
+            <t t-call="website_portal_sale.invoices"/>
+        </xpath>
+    </template>
+    <template id="website_portal_project_task">
+        <h3 class="page-header">Your tasks</h3>
+        <t t-if="not tasks">
+            <p>There are currently no tasks for your account.</p>
+        </t>
+        <t t-if="tasks">
+            <table class="table table-hover o_my_status_table">
+                <thead>
+                  <tr class="active">
+                    <th>Tasks</th>
+                    <th>Progress</th>
+                  </tr>
+                </thead>
+                <t t-foreach="tasks" t-as="task">
+                    <tr>
+                       <td><span t-field="task.name"/></td>
+                       <td><span t-field="task.progress"/></td>
+                    </tr>
+                </t>
+            </table>
+        </t>
+    </template>
+</odoo>

@@ -1,30 +1,7 @@
 # -*- coding: utf-8 -*-
-#
-#  File: __openerp__.py
-#  Module: ons_productivity_project_issue
-#
-#  Created by sge@open-net.ch
-#
-#  Copyright (c) 2014 Open Net Sarl. All rights reserved.
-##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2016 Coninckx David (Open Net Sarl)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 {
     'name' : 'Open-Net Productivity: Project Issue',
     'version' : '0.0.04',
@@ -58,13 +35,15 @@ V0.4: 2014-10-14/Cyp
     'website': 'http://www.open-net.ch',
     'images' : [],
     'depends' : [
-        'project_issue',
-        'project_issue_sheet'
+        'project_issue_sheet',
+        'website_project_issue',
+        'website_portal_sale',
     ],
     'data': [
         'views/project_issue_view.xml',
         'views/project_task_view.xml',
-        'views/project_project_view.xml'
+        'views/project_project_view.xml',
+        'views/website_account_view.xml'
     ],
     'js': [
     ],
