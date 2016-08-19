@@ -15,4 +15,4 @@ class bank_statement(models.Model):
         super(bank_statement, self)._end_balance()
         total_payment_lines = sum([line.amount_currency for line in self.payment_order_lines])
         self.balance_end = self.balance_end - total_payment_lines
-        self.difference = self.balance_end_real - self.balance_ends
+        self.difference = self.balance_end_real - self.balance_end
