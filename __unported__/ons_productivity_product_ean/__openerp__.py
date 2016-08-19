@@ -3,16 +3,16 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name' : 'Open Net tools: helps closing POS session',
+    'name' : 'Open-Net Productivity: product EAN barcodes',
     'version' : '1.0.0.0',
     'author' : 'Open Net Sarl',
-    'category' : 'Extra Tools',
+    'category' : 'Open Net Productivity',
     'website': 'https://www.open-net.ch',
     'images' : [],
-    'depends' : [
-        'account'
+    'depends' : ['product'],
+    'data': [
+        'views/view_product.xml',
     ],
-    'data': [],
     'qweb' : [
     ],
     'demo': [

@@ -3,14 +3,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Open-Net Productivity: product UOS',
-    'summary': 'Improved UOS on product',
-    'category': 'Base',
+    'name': 'Open Net Productivity: Product UOS',
+    'category': 'Sales',
     'author': "Open Net Sàrl",
     'depends': [
         'product_uos',
     ],
-    'version': '9.0.1.0.0',
+    'version': '1.0.0.0',
     'auto_install': False,
     'website': 'http://open-net.ch',
     'license': 'AGPL-3',

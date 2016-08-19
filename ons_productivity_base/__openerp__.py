@@ -1,22 +1,12 @@
 # -*- coding: utf-8 -*-
-#
-#  File: __openerp__.py
-#  Module: ons_productivity_base
-#
-#  Created by cyp@open-net.ch
-#
-#  Copyright (c) 2015-TODAY Open-Net Ltd. All rights reserved.
-##############################################################################
-#
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-#
-##############################################################################
+# © 2016 Open Net Sarl
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 {
-    'name' : 'Open-Net Productivity: base',
-    'version' : '1.0',
-    'author' : 'Open Net Sarl',
-    'category' : 'Base',
-    'summary': 'Complementary functions for Odoo V9',
+    'name' : 'Open Net Productivity: Base',
+    'version' : '1.0.0.0',
+    'author' : 'Open Net Sàrl',
+    'category' : 'Extra Tools',
     'website': 'http://www.open-net.ch',
     'depends' : [
         'hr',

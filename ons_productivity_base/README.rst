@@ -10,20 +10,14 @@ These modules are included in all our hosting solutions.
 
 **Features list :**
     * User simplified view from the HR menu
+    * Extend form view and popup to full screen width
+    * Allows you to search product by seller
 
 **Author :** 
     * Open Net Sarl
     * Address: Industrie 59 / CH-1030 Bussigny
     * Website: http://www.open-net.ch
     * Contact: info@open-net.ch
-
-
-Known issues / Roadmap
-======================
-
-V1.0: 2015-11-16/Cyp
-    * User simplified view from the HR menu
-
 
 Contributors
 ------------

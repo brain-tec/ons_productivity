@@ -3,16 +3,16 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name' : 'Open Net tools: helps closing POS session',
+    'name' : 'Open Net Productivity : Drop shipping',
     'version' : '1.0.0.0',
-    'author' : 'Open Net Sarl',
-    'category' : 'Extra Tools',
+    'author' : 'Open Net Sàrl',
+    'category' : 'Open Net Productivity',
     'website': 'https://www.open-net.ch',
     'images' : [],
-    'depends' : [
-        'account'
+    'depends' : ['stock_dropshipping'],
+    'data': [
+        'views/purchases_view.xml',
     ],
-    'data': [],
     'qweb' : [
     ],
     'demo': [
@@ -22,3 +22,4 @@
     'installable': True,
     'auto_install': False,
 }
+

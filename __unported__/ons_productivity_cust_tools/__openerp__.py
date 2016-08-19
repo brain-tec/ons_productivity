@@ -3,21 +3,18 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name' : 'Open Net tools: helps closing POS session',
+    'name' : 'Open Net productivity: customer-related tools',
     'version' : '1.0.0.0',
-    'author' : 'Open Net Sarl',
-    'category' : 'Extra Tools',
+    'author' : 'Open Net Sàrl',
+    'category' : 'Open Net Productivity',
     'website': 'https://www.open-net.ch',
-    'images' : [],
     'depends' : [
-        'account'
+        'stock',
+        'sale',
+        'sale_stock',
     ],
-    'data': [],
-    'qweb' : [
-    ],
-    'demo': [
-    ],
-    'test': [
+    'data': [
+        'views/view_stock.xml'
     ],
     'installable': True,
     'auto_install': False,
