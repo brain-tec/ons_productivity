@@ -62,3 +62,26 @@ class ProductTemplate(models.Model):
             'context': {'default_product_template':self.id},
         }
 
+    @api.onchange('attribute_id')
+    def change_attribute(self):
+        if not self.env.context.get('ons_add_values', False):
+            return {}
+
+        line = self.env['product.attribute.line'].search(['product_tmpl_id','=',self.env.context.get('active_id', False), ('attribute_id','=',self.attribute_id)])
+        if line:
+            self.value_ids = line.value_ids
+
+
+class ProductAttributeLine(models.Model):
+    _inherit = 'product.attribute.line'
+
+    @api.onchange('attribute_id')
+    def change_attribute(self):
+        if not self.env.context.get('ons_add_values', False) or not self.attribute_id:
+            return {}
+
+        values = self.env['product.attribute.value'].search([('attribute_id','=',self.attribute_id.id)])
+        if values:
+            self.value_ids = [v.id for v in values]
+
+
