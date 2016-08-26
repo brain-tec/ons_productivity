@@ -27,9 +27,9 @@
             <table class="table table-hover o_my_status_table">
                 <thead>
                   <tr class="active">
-                    <th>Tasks</th>
+                    <th>Description</th>
                     <th>Date</th>
-                    <th>Progress (%)</th>
+                    <th style="width:200px">Progress (%)</th>
                   </tr>
                 </thead>
                 <t t-foreach="tasks" t-as="task">
@@ -51,15 +51,32 @@
             <td class="cell_overflow">
                 <t t-esc="invoice.number"/>
             </td>
+
         </xpath>
-        <xpath expr="//td[5]" position="replace">
-            <td></td>
+        <xpath expr="//thead/tr" position="inside">
+            <th>Total</th>
+        </xpath>
+        <xpath expr="//td[last()]" position="after">
+            <td><span t-field="invoice.amount_total"/></td>
+        </xpath>
+        <xpath expr="//th[5]" position="replace"/>
+        <xpath expr="//td[5]" position="replace"/>
+        <xpath expr="//td[@colspan='5']" position="attributes">
+            <attribute name="colspan">6</attribute>
         </xpath>
     </template>
     <template id="website_payment_method" inherit_id="website_payment.pay_meth_link">
         <xpath expr="//a" position="replace"/>
     </template>
     <template id="website_portal_issues" inherit_id="website_project_issue.portal_project_issue">
+        <xpath expr="//th[3]" position="replace"/>
+        <xpath expr="//td[3]" position="replace"/>
+        <xpath expr="//th[2]" position="attributes">
+            <attribute name="style">width:600px</attribute>
+        </xpath>
+        <xpath expr="//th[3]" position="attributes">
+            <attribute name="style">width:80px</attribute>
+        </xpath>
         <xpath expr="//thead/tr" position="inside">
             <th>Email</th>
         </xpath>
@@ -68,6 +85,9 @@
         </xpath>
         <xpath expr="//td[last()]" position="after">
             <td><span t-field="issue.email_from"/></td>
+        </xpath>
+        <xpath expr="//td[@colspan='4']" position="attributes">
+            <attribute name="colspan">5</attribute>
         </xpath>
         <xpath expr="//td" position="after">
             <td><span t-field="issue.create_date" t-field-options='{"format": "dd.MM.yy"}'/></td>
