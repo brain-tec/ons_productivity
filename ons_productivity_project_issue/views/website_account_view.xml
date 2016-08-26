@@ -9,12 +9,12 @@
         <xpath expr="//div[@class='col-md-8 o_my_documents']" position="replace">
             <div class="col-md-12 o_my_documents">
                 <div class="oe_structure"/>
+                <t t-call="ons_productivity_project_issue.website_portal_project_task"/>
             </div>
         </xpath>
     </template>
     <template id="website_portal_sale.account" inherit_id='website_portal.account'>
-        <xpath expr="//div[contains(@class,'o_my_documents')]" position="inside">
-            <t t-call="ons_productivity_project_issue.website_portal_project_task"/>
+        <xpath expr="//div[contains(@class,'o_my_documents')]/*[last()]" position="after">
             <t t-call="website_portal_sale.invoices"/>
         </xpath>
     </template>
@@ -28,16 +28,56 @@
                 <thead>
                   <tr class="active">
                     <th>Tasks</th>
+                    <th>Date</th>
                     <th>Progress (%)</th>
                   </tr>
                 </thead>
                 <t t-foreach="tasks" t-as="task">
                     <tr>
                        <td><span t-field="task.name"/></td>
-                       <td><span t-field="task.progress"/>/100</td>
+                       <td><span t-field="task.create_date" t-field-options='{"format": "dd.MM.yy"}'/></td>
+                       <td>
+                        <div t-attf-class="progress-bar progress-bar-success" role="progressbar" t-attf-style="width: #{task.progress}%;">
+                            <t t-esc="task.progress"/>%%
+                        </div>
+                       </td>
                     </tr>
                 </t>
             </table>
         </t>
     </template>
+    <template id="website_portal_invoice" inherit_id="website_portal_sale.invoices">
+        <xpath expr="//td" position="replace">
+            <td class="cell_overflow">
+                <t t-esc="invoice.number"/>
+            </td>
+        </xpath>
+        <xpath expr="//td[5]" position="replace">
+            <td></td>
+        </xpath>
+    </template>
+    <template id="website_payment_method" inherit_id="website_payment.pay_meth_link">
+        <xpath expr="//a" position="replace"/>
+    </template>
+    <template id="website_portal_issues" inherit_id="website_project_issue.portal_project_issue">
+        <xpath expr="//thead/tr" position="inside">
+            <th>Email</th>
+        </xpath>
+        <xpath expr="//thead/tr/th" position="after">
+            <th>Date</th>
+        </xpath>
+        <xpath expr="//td[last()]" position="after">
+            <td><span t-field="issue.email_from"/></td>
+        </xpath>
+        <xpath expr="//td" position="after">
+            <td><span t-field="issue.create_date" t-field-options='{"format": "dd.MM.yy"}'/></td>
+        </xpath>
+    </template>
+<!--     <template id="message_thread" inherit_id="website_mail.message_thread">
+        <xpath expr="//img" position="replace">
+                <img class="img pull-left img-circle" t-attf-src="/web/image/res.partner/#{user_id.partner_id.id}/image_small/50x50" style="width: 50px; margin-right: 10px;"/>
+            </t>
+        </xpath>
+    </template> -->
+        
 </odoo>
