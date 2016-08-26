@@ -346,6 +346,27 @@ class SaleSubscription(osv.osv):
 
             values = self._prepare_invoice_line(cr, uid, line, fiscal_position, context=context)
 
+            # Overwrite sale_contract_asset's default asset handling:
+            #   the info is now computed from the line's recurrence
+            #   it defaults from the product if empty
+            month = 0
+            asset_cat = False
+            if line.recurring_rule_type in ('dayly','weekly')
+                month = 1
+            elif line.recurring_rule_type == 'monthly':
+                month = line.recurring_interval
+            elif line.recurring_rule_type == 'yearly':
+                month = line.recurring_interval * 12
+            if month:
+                asset_cat = self.env['account.asset.category'].search([('active','=',True),('method_number','=',month)])
+                if asset_cat:
+                    asset_cat = asset_cat[0].id
+                else:
+                    asset_cat = False
+            values['asset_category_id'] = asset_cat
+            if not asset_cat and line.product_id.product_tmpl_id.deferred_revenue_category_id:
+                line.product_id.product_tmpl_id.deferred_revenue_category_id.id or False
+
             txt = line.name or ''
             if line.recurring_next_date and (line.recurring_rule_type or '') != 'none':
                 if not context:
