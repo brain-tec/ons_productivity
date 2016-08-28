@@ -354,13 +354,13 @@ class SaleSubscription(osv.osv):
             month = 0
             asset_cat = False
             if line.recurring_rule_type in ('dayly','weekly'):
-                month = 1
+                month = 0   # i.e. not actually supported
             elif line.recurring_rule_type == 'monthly':
                 month = line.recurring_interval
             elif line.recurring_rule_type == 'yearly':
-                month = line.recurring_interval * 12
+                month = 12
             if month:
-                asset_cat = self.env['account.asset.category'].search([('active','=',True),('method_number','=',month)])
+                asset_cat = self.env['account.asset.category'].search([('type','=','sale'),('active','=',True),('method_number','=',month)])
                 if asset_cat:
                     asset_cat = asset_cat[0].id
                 else:
