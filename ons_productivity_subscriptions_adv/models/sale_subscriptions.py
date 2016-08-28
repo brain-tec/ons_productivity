@@ -353,7 +353,7 @@ class SaleSubscription(osv.osv):
             #   it defaults from the product if empty
             month = 0
             asset_cat = False
-            if line.recurring_rule_type in ('dayly','weekly')
+            if line.recurring_rule_type in ('dayly','weekly'):
                 month = 1
             elif line.recurring_rule_type == 'monthly':
                 month = line.recurring_interval
@@ -365,9 +365,9 @@ class SaleSubscription(osv.osv):
                     asset_cat = asset_cat[0].id
                 else:
                     asset_cat = False
-            values['asset_category_id'] = asset_cat
             if not asset_cat and line.product_id.product_tmpl_id.deferred_revenue_category_id:
-                line.product_id.product_tmpl_id.deferred_revenue_category_id.id or False
+                asset_cat = line.product_id.product_tmpl_id.deferred_revenue_category_id.id or False
+            values['asset_category_id'] = asset_cat
 
             txt = line.name or ''
             if line.recurring_next_date and (line.recurring_rule_type or '') != 'none':

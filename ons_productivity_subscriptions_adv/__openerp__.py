@@ -22,6 +22,7 @@
         'views/view_sale_subscription.xml',
         'views/view_sales.xml',
         'views/view_products.xml',
+        'wizards/sale_make_invoice_advance.xml'
     ],
     'installable': True,
     'auto_install': False,
