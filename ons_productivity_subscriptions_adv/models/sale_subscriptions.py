@@ -42,11 +42,12 @@ class SaleSubscription(osv.osv):
 
                     continue
 
-                next = datetime.strptime(line.recurring_next_date, '%Y-%m-%d')
-                if context.get('force_date', False):
-                    before = next
-                else:
-                    before = (next - relativedelta(days=(line.cancellation_deadline or 0))).strftime('%Y-%m-%d')
+                before = line.recurring_next_date
+#                 next = datetime.strptime(line.recurring_next_date, '%Y-%m-%d')
+#                 if context.get('force_date', False):
+#                     before = next
+#                 else:
+#                     before = (next - relativedelta(days=(line.cancellation_deadline or 0))).strftime('%Y-%m-%d')
                 if not min_date:
                     min_date = before
                     continue
