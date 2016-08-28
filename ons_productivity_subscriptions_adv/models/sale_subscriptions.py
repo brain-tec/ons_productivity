@@ -366,7 +366,12 @@ class SaleSubscription(osv.osv):
                 else:
                     asset_cat = False
             if not asset_cat and line.product_id.product_tmpl_id.deferred_revenue_category_id:
-                asset_cat = line.product_id.product_tmpl_id.deferred_revenue_category_id.id or False
+                asset_cat = line.product_id.product_tmpl_id.deferred_revenue_category_id
+                if asset_cat:
+                    if asset_cat.account_asset_id:
+                        values['account_id'] = asset_cat.account_asset_id.id
+                    asset_cat = asset_cat.id
+
             values['asset_category_id'] = asset_cat
 
             txt = line.name or ''

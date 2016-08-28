@@ -134,6 +134,8 @@ class SaleOrderLine(models.Model):
                 asset_cat = self.product_id.product_tmpl_id.deferred_revenue_category_id
 
         values['asset_category_id'] = asset_cat and asset_cat.id or False
+        if asset_cat and asset_cat.account_asset_id:
+            values['account_id'] = asset_cat.account_asset_id.id
         invoice_line_vals.update(values)
 
         return invoice_line_vals
