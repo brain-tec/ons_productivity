@@ -9,6 +9,8 @@
 ##############################################################################
 
 from openerp import api, fields, models
+from datetime import datetime
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT as DF
 
 
 class SaleOrder(models.Model):
@@ -80,6 +82,15 @@ class SaleOrder(models.Model):
 
         return res
 
+    # ---------- Utils
+
+    @api.multi
+    def _prepare_invoice(self):
+        values = super(SaleOrder, self)._prepare_invoice()
+        values['date_invoice'] = datetime.now().strftime(DF)
+
+        return values
+
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -89,3 +100,46 @@ class SaleOrderLine(models.Model):
     subscription_id = fields.Many2one('sale.subscription', 'Subscription')
     subscr_line_id = fields.Many2one('sale.subscription.line', 'Subscription line')
 
+    # ---------- Utils
+
+    @api.multi
+    def _prepare_invoice_line(self, qty):
+        invoice_line_vals = super(SaleOrderLine, self)._prepare_invoice_line(qty)
+        if not invoice_line_vals:
+            return invoice_line_vals
+
+        values = {
+            'subscription_id': self.subscription_id.id or False,
+            'subscr_line_id': self.subscr_line_id.id or False,
+            'asset_mrr': 0,
+            'asset_start_date': False,
+            'asset_end_date': False
+        }
+
+        # Overwrite sale_contract_asset's default asset handling:
+        #   the info is now computed from the line's recurrence
+        #   it defaults from the product if empty
+        asset_cat = False
+        if self.subscr_line_id:
+            month = 0
+            if self.subscr_line_id.recurring_rule_type in ('dayly','weekly'):
+                month = 1
+            elif self.subscr_line_id.recurring_rule_type == 'monthly':
+                month = self.subscr_line_id.recurring_interval
+            elif self.subscr_line_id.recurring_rule_type == 'yearly':
+                month = self.subscr_line_id.recurring_interval * 12
+            if month:
+                asset_cat = self.env['account.asset.category'].search([('active','=',True),('method_number','=',month)])
+            if not asset_cat and self.product_id.product_tmpl_id.deferred_revenue_category_id:
+                asset_cat = self.product_id.product_tmpl_id.deferred_revenue_category_id
+
+        values['asset_category_id'] = asset_cat and asset_cat.id or False
+        invoice_line_vals.update(values)
+
+        return invoice_line_vals
+
+    @api.multi
+    def invoice_line_create(self, invoice_id, qty):
+        super(SaleOrderLine, self).invoice_line_create(invoice_id, qty)
+#         for line in self.env['account.invoice'].browse(invoice_id).invoice_line_ids:
+#             line._get_asset_date()
