@@ -29,7 +29,7 @@
                   <tr class="active">
                     <th>Description</th>
                     <th>Date</th>
-                    <th style="width:200px">Progress (%)</th>
+                    <th style="width:200px" class="text-left">Progress (%)</th>
                   </tr>
                 </thead>
                 <t t-foreach="tasks" t-as="task">
