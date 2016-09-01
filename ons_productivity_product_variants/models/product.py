@@ -84,4 +84,6 @@ class ProductAttributeLine(models.Model):
         if values:
             self.value_ids = [v.id for v in values]
 
-
+class ProductAttributeValue(models.Model):
+    _inherit = 'product.attribute.value'
+    _order = 'attribute_id'
