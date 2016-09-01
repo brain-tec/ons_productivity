@@ -10,7 +10,6 @@ These modules are included in all our hosting solutions.
 
 **Features list :**
     * Variants creation uses a wizard, instead of the default automatic creation
-    * Variants order by attribute_ID
 
 **Author :** 
     * Open Net Sarl
