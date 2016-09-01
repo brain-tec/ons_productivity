@@ -18,8 +18,11 @@ class project_task(osv.osv):
             for line in task.timesheet_ids:
                 if line.ons_to_invoice:
                     effective_hours += line.unit_amount
-            progress = (effective_hours/task.planned_hours)*100
-            _logger.info(progress)
+            if task.planned_hours:
+                progress = (effective_hours/task.planned_hours)*100
+            else:
+                progress = 0.0
+
             res[task.id] = {
                 'effective_hours': effective_hours,
                 'remaining_hours': task.planned_hours - effective_hours,
