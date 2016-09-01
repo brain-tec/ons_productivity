@@ -8,4 +8,3 @@
 #  Copyright (c) 2016-TODAY Open Net Sàrl. <http://www.open-net.ch>
 
 from . import models
-from . import wizards
