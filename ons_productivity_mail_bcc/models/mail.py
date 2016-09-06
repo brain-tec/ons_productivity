@@ -25,6 +25,29 @@ class mail_compose_message(models.TransientModel):
 
     ons_bcc = fields.Char(string="Bcc")
 
+    @api.model
+    def generate_email_for_composer(self, template_id, res_ids, fields=None):
+        fields =  ['subject', 'body_html', 'email_from', 'email_to', 'partner_to', 'email_cc', 'ons_bcc', 'reply_to', 'attachment_ids', 'mail_server_id']
+        res = super(mail_compose_message, self).generate_email_for_composer(template_id, res_ids, fields)
+        return res
+
+    # @api.model
+    # def get_record_data(self, values):
+    #     res = super(mail_compose_message, self).get_record_data(values)
+    #     if values.get('template_id'):
+    #         template = self.env['mail.template'].browse(values.get('template_id'))
+    #         res['ons_bcc'] = template.ons_bcc
+    #         _logger.info(template.ons_bcc)
+        
+    #     return res
+
+    # @api.multi
+    # def onchange_template_id(self, template_id, composition_mode, model, res_id):
+       
+    #     res = super(mail_compose_message, self).onchange_template_id(template_id, composition_mode, model, res_id)
+    #     return res
+
+
     @api.multi
     def get_mail_values(self, res_ids):
         res = super(mail_compose_message, self).get_mail_values(res_ids)
