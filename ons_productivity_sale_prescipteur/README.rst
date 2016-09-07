@@ -1,15 +1,16 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
-Open Net Productivity : Sales
-==============================
+Open Net Productivity : Sale prescripteur
+================================================================
 
 The 'productivity' modules is a complete family of modules offering improvement for OpenERP.
 These modules are maintained by Open Net, Swiss Partner of OpenERP.
 These modules are included in all our hosting solutions.
 
 **Features list :**
-    * Allow sales confirmation for teamleader of the sale only
+    * Add a "Prescripteur" to a partner
+    * Allow you to filter by "Prescripteur" into sale report
 
 **Author :** 
     * Open Net Sàrl

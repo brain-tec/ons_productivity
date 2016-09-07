@@ -41,11 +41,12 @@ class SaleSubscription(osv.osv):
 
                     continue
 
-                next = datetime.strptime(line.recurring_next_date, '%Y-%m-%d')
-                if context.get('force_date', False):
-                    before = next
-                else:
-                    before = (next - relativedelta(days=(line.cancellation_deadline or 0))).strftime('%Y-%m-%d')
+                before = line.recurring_next_date
+#                 next = datetime.strptime(line.recurring_next_date, '%Y-%m-%d')
+#                 if context.get('force_date', False):
+#                     before = next
+#                 else:
+#                     before = (next - relativedelta(days=(line.cancellation_deadline or 0))).strftime('%Y-%m-%d')
                 if not min_date:
                     min_date = before
                     continue
@@ -353,19 +354,24 @@ class SaleSubscription(osv.osv):
             month = 0
             asset_cat = False
             if line.recurring_rule_type in ('dayly','weekly'):
-                month = 1
+                month = 0   # i.e. not actually supported
             elif line.recurring_rule_type == 'monthly':
                 month = line.recurring_interval
             elif line.recurring_rule_type == 'yearly':
-                month = line.recurring_interval * 12
+                month = 12
             if month:
-                asset_cat = self.env['account.asset.category'].search([('active','=',True),('method_number','=',month)])
+                asset_cat = self.env['account.asset.category'].search([('type','=','sale'),('active','=',True),('method_number','=',month)])
                 if asset_cat:
                     asset_cat = asset_cat[0].id
                 else:
                     asset_cat = False
             if not asset_cat and line.product_id.product_tmpl_id.deferred_revenue_category_id:
-                asset_cat = line.product_id.product_tmpl_id.deferred_revenue_category_id.id or False
+                asset_cat = line.product_id.product_tmpl_id.deferred_revenue_category_id
+                if asset_cat:
+                    if asset_cat.account_asset_id:
+                        values['account_id'] = asset_cat.account_asset_id.id
+                    asset_cat = asset_cat.id
+
             values['asset_category_id'] = asset_cat
 
             txt = line.name or ''

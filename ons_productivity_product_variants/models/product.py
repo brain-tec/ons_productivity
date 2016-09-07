@@ -83,5 +83,3 @@ class ProductAttributeLine(models.Model):
         values = self.env['product.attribute.value'].search([('attribute_id','=',self.attribute_id.id)])
         if values:
             self.value_ids = [v.id for v in values]
-
-

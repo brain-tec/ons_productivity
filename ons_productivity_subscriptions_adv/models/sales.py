@@ -123,17 +123,19 @@ class SaleOrderLine(models.Model):
         if self.subscr_line_id:
             month = 0
             if self.subscr_line_id.recurring_rule_type in ('dayly','weekly'):
-                month = 1
+                month = 0   # i.e. not actually supported
             elif self.subscr_line_id.recurring_rule_type == 'monthly':
                 month = self.subscr_line_id.recurring_interval
             elif self.subscr_line_id.recurring_rule_type == 'yearly':
-                month = self.subscr_line_id.recurring_interval * 12
+                month = 12
             if month:
-                asset_cat = self.env['account.asset.category'].search([('active','=',True),('method_number','=',month)])
+                asset_cat = self.env['account.asset.category'].search([('type','=','sale'),('active','=',True),('method_number','=',month)])
             if not asset_cat and self.product_id.product_tmpl_id.deferred_revenue_category_id:
                 asset_cat = self.product_id.product_tmpl_id.deferred_revenue_category_id
 
-        values['asset_category_id'] = asset_cat.id or False
+        values['asset_category_id'] = asset_cat and asset_cat.id or False
+        if asset_cat and asset_cat.account_asset_id:
+            values['account_id'] = asset_cat.account_asset_id.id
         invoice_line_vals.update(values)
 
         return invoice_line_vals

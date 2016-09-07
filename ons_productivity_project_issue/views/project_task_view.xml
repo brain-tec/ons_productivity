@@ -16,4 +16,17 @@
             </xpath>
         </field>
     </record>
+    <record model="ir.ui.view" id="ons_prod_project_task_timesheet_form_view">
+        <field name="name">ONS Productivity Project Issue : Project Task TimeSheet Form View</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project_timesheet.view_task_form2_inherited"/>
+        <field name="priority" eval="20"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <field name="unit_amount" position="before">
+                <field name="ons_to_invoice"/>
+            </field>
+        </field>
+    </record>
+        
 </odoo>

@@ -13,6 +13,7 @@ These modules are included in all our hosting solutions.
     * Add stages on project
     * Add progress of the task into issue
     * Add task progress for portal user
+    * Add "Invoiceable" checkbox on task's analytic line
 
 **Author :** 
     * Open Net Sàrl
