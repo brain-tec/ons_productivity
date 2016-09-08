@@ -35,7 +35,6 @@ class SaleSubscription(osv.osv):
             for line in contract.recurring_invoice_line_ids:
                 if not line.is_active or \
                     not line.is_billable or \
-                    not line.recurring_rule_type or \
                     line.recurring_rule_type == 'none' or \
                     not line.recurring_rule_type or \
                     not line.recurring_next_date:
