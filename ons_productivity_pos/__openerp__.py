@@ -21,7 +21,6 @@
     'depends' : [
         'sale',
         'point_of_sale',
-        'pos_cache',
     ],
     'data': [
         'views/templates.xml',
