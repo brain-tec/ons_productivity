@@ -25,6 +25,7 @@
         <field name="arch" type="xml">
             <field name="unit_amount" position="before">
                 <field name="ons_to_invoice"/>
+                <field name="tag_ids" widget="many2many_tags"/>
             </field>
         </field>
     </record>
