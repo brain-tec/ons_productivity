@@ -1,7 +1,7 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
-Open Net Productivity : Accounting
+Open Net Productivity : Payment
 ================================================================
 
 The 'productivity' modules is a complete family of modules offering improvement for OpenERP.
@@ -9,7 +9,6 @@ These modules are maintained by Open Net, Swiss Partner of OpenERP.
 These modules are included in all our hosting solutions.
 
 **Features list :**
-    * Allows you to remove invoice with internal number
     * Allows you to add payment lines to bank statements
 
 **Author :** 
