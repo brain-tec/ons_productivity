@@ -6,6 +6,7 @@ from babel.dates import format_datetime, format_date
 from openerp import fields, models, api, _
 from datetime import datetime, timedelta
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT as DF
+from openerp.tools.misc import formatLang
 import logging
 #Get the logger
 _logger = logging.getLogger(__name__)
@@ -13,6 +14,22 @@ _logger = logging.getLogger(__name__)
 
 class account_journal(models.Model):
     _inherit = 'account.journal'
+
+
+    @api.multi
+    def get_journal_dashboard_datas(self):
+        res = super(account_journal, self).get_journal_dashboard_datas()
+        account_ids = tuple(filter(None, [self.default_debit_account_id.id, self.default_credit_account_id.id]))
+        if account_ids:
+            account_sum = 0
+            amount_field = 'balance' if not self.currency_id else 'amount_currency'
+            query = """SELECT sum(%s) FROM account_move_line WHERE account_id in %%s AND date <= '%s';""" % (amount_field, fields.Date.to_string(datetime.today()))
+            self.env.cr.execute(query, (account_ids,))
+            query_results = self.env.cr.dictfetchall()
+            if query_results and query_results[0].get('sum') != None:
+                account_sum = query_results[0].get('sum')
+            res['account_balance'] = formatLang(self.env, account_sum, currency_obj=self.currency_id or self.company_id.currency_id)
+        return res
 
     @api.multi
     def get_line_graph_datas(self):
