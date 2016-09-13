@@ -10,4 +10,4 @@ _logger = logging.getLogger(__name__)
 class res_partner(models.Model):
     _inherit = 'res.partner'
 
-    ons_prescripteur = fields.Many2one('res.partner', string="Presripteur")
+    ons_prescripteur = fields.Many2one('res.partner', string="Prescripteur")
