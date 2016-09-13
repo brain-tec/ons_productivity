@@ -13,3 +13,8 @@ class payment_order(models.Model):
         if bank_lines:
             res['date'] = bank_lines[0].date
         return res
+
+class payment_order_line(models.Model):
+    _inherit = 'account.payment.line'
+
+    bank_statement_id = fields.Many2one('account.bank.statement', string="Bank statement")
