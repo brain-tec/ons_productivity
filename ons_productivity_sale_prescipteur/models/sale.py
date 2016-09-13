@@ -7,7 +7,7 @@ from openerp import fields, models, api
 class sale_order(models.Model):
     _inherit = "sale.order"
 
-    ons_prescripteur = fields.Many2one('res.partner', string="Presripteur")
+    ons_prescripteur = fields.Many2one('res.partner', string="Prescripteur")
 
     @api.multi
     @api.onchange('partner_id')
