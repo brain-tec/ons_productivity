@@ -7,9 +7,9 @@
         <field name="priority" eval="20"/>
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <field name="line_ids" position="after">
+            <field name="line_ids" position="after" >
                 <separator string="Payment Lines"/>
-                <field name="payment_order_lines" widget='many2many' domain="[('bank_statement_id', '=', False),('state', '=', 'uploaded')]"/>
+                <field name="payment_order_lines" attrs="{'readonly':[('state','=','confirm')]}" widget='many2many' domain="[('bank_statement_id', '=', False),('state', '=', 'uploaded')]"/>
             </field>
         </field>
     </record>
