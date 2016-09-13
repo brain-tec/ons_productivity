@@ -10,7 +10,8 @@
     'website': 'http://www.open-net.ch',
     'images' : [],
     'depends' : [
-        'account_banking_pain_base'
+        'account_banking_pain_base',
+        'account_payment_order',
     ],
     'data': [
         'views/bank_statement_view.xml'
