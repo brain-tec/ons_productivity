@@ -82,3 +82,8 @@ msgstr "There are currently no tasks for your account."
 msgid "Your tasks"
 msgstr "Vos travaux"
 
+#. module: ons_productivity_project_issue
+#: model:ir.model.fields,field_description:ons_productivity_project_issue.field_account_analytic_line_ons_to_invoice
+msgid "Invoiceable"
+msgstr "Facturable"
+
