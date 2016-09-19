@@ -412,7 +412,7 @@ class SaleSubscription(osv.osv):
 
         values.update({
             'subscription_id': contract.id,
-            'date_invoice': contract.date_start,
+            'date_invoice': datetime.now().strftime('%Y-%m-%d'),
         })
 
         return values
@@ -447,7 +447,7 @@ class SaleSubscription(osv.osv):
             'origin': contract.display_name,
             'partner_id': partner.id,
             'currency_id': currency_id,
-            'date_order': contract.date_start,
+            'date_order': datetime.now().strftime('%Y-%m-%d'),
             'fiscal_position_id': fpos_id,
             'payment_term_id': partner_payment_term,
             'company_id': contract.company_id.id or False,

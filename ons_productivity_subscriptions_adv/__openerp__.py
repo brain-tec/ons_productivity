@@ -4,7 +4,7 @@
 
 {
     'name' : 'Open Net productivity: Subscriptions advanced',
-    'version' : '1.0.0.0',
+    'version' : '1.3.0.0',
     'author' : 'Open Net Sàrl',
     'category' : 'Extra Tools',
     'website': 'https://www.open-net.ch',

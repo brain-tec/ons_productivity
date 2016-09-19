@@ -30,11 +30,14 @@ V1.1: 2016-05-20/Cyp
 V1.2: 2016-06-03/Cyp
     * Sale subscription lines now include the requested date, a few labels are shorter
 
+V1.3: 2016-09-19/Cyp
+    * Sale subscription uses the current date for new sale/invoice
 
 Contributors
 ------------
 
 * Yvon-Philippe Crittin <cyp@open-net.ch>
+* David Coninckx <dco@open-net.ch>
 
 Maintainer
 ----------
