@@ -10,6 +10,7 @@ These modules are included in all our hosting solutions.
 
 **Features list :**
     * Allows you to remove invoice with internal number
+    * Allows you to validate multiple supplier invoices with the same ref.
 
 **Author :** 
     * Open Net Sarl
@@ -21,11 +22,18 @@ These modules are included in all our hosting solutions.
 Known issues / Roadmap
 ======================
 
+* Version 1.0/dco
+    * Allows you to remove invoice with internal number
+
+* Version 2.0/cyp
+    * Allows you to validate multiple supplier invoices with the same ref.
+
 
 Contributors
 ------------
 
 * David Coninckx <dco@open-net.ch>
+* Crittin Y-Ph <cyp@open.net.ch>
 
 Maintainer
 ----------
