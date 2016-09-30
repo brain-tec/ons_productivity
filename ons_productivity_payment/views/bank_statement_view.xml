@@ -7,6 +7,9 @@
         <field name="priority" eval="20"/>
         <field name="type">form</field>
         <field name="arch" type="xml">
+            <button name="check_confirm_bank" position="attributes">
+                <attribute name="attrs">{'invisible':[('state', '!=', 'open')]}</attribute>
+            </button>
             <field name="line_ids" position="after" >
                 <separator string="Payment Lines"/>
                 <field name="payment_order_lines" attrs="{'readonly':[('state','=','confirm')]}" widget='many2many' domain="[('bank_statement_id', '=', False),('state', '=', 'uploaded')]"/>
