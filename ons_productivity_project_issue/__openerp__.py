@@ -18,7 +18,8 @@
         'views/project_issue_view.xml',
         'views/project_task_view.xml',
         'views/project_project_view.xml',
-        'views/website_account_view.xml'
+        'views/website_account_view.xml',
+        'report/project_task_report.xml'
     ],
     'js': [
     ],
