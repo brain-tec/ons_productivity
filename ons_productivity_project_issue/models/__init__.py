@@ -6,3 +6,4 @@ import project_issue
 import project_project
 import project_task
 import analytic_line
+import sale
