@@ -13,13 +13,22 @@
             <t t-call="report.external_layout">
             <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />
             <div class="page">
+                <div class="row">
+                    <div class="col-xs-5 col-xs-offset-7">
+                        <p t-field="doc.partner_id"/>
+                        <p>
+                            <span t-field="doc.project_id"/> / <span t-field="doc.name"/>
+                        </p>
+                    </div>
+                </div>
+                <h3 style="font-weight:bold;text-decoration:underline">Résumé de vos prestations au <span t-esc="datetime.datetime.today().strftime('%d/%m/%Y')"/></h3>
                 <table class="table table-condensed">
                     <thead>
                         <tr>
                             <th>Date</th>
                             <th>Utilisateur</th>
                             <th>Description</th>
-                            <th>Facturé ?</th>
+                            <th>Facturé</th>
                             <th>Catégories</th>
                             <th>Durée</th>
                         </tr>
