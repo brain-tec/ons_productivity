@@ -14,10 +14,8 @@ import httplib2, StringIO
 from openerp.exceptions import AccessError, ValidationError, except_orm
 from openerp import api, fields, models, _
 
-from openerp import tools
-
 import logging
-_logger = logging.Logger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 # ---- This let's you change SUDs' user agent name
@@ -213,42 +211,32 @@ class ExternalServer(models.Model):
         return False
 
     @api.multi
-    def update_external_product(self, oe_prod_id, ext_prod_id, attribute_set='Default'):
+    def update_external_product(self, product, ext_prod_id, attribute_set='Default'):
         self.ensure_one()
 
         ext_srv_res = {
             'msg': [],
             'status': False,
         }
-        if not oe_prod_id or not ext_prod_id: 
-            msg = _("External product sync says: missing product ID")
+        if not product or not ext_prod_id:
+            msg = _("External product sync says: missing product")
             ext_srv_res['msg'] += [msg]
             _logger.info(msg)
 
             return ext_srv_res
 
-        Product = self.env['product.product']
-        if not self:
-            msg = _("External product sync says: no server given")
-            ext_srv_res['msg'] += [msg]
-            _logger.info(msg)
-
-            return ext_srv_res
-        
         prod_fields = [x.field_id.name for x in self.field_mapping_ids]
         if not prod_fields:
-            msg = _("External product sync says: Nothing to sync for product with ID=%s") % str(oe_prod_id)
+            msg = _("External product sync says: Nothing to sync for product %s") % str(product.display_name)
             ext_srv_res['msg'] += [msg]
             _logger.info(msg)
 
             return ext_srv_res
 
-        product = Prodoct.read(self.env.cr, self.env.uid, oe_prod_id, prod_fields, context=self.env.context)
-        
         # Now, we need a connection
         conn, session = self.connect()
         if not session:
-            msg = _("External product sync says: Can't connect to the server with the ID %s") % str(self.id)
+            msg = _("External product sync says: Can't connect to the server %s") % str(self.name)
             ext_srv_res['msg'] += [msg]
             _logger.info(msg)
 
@@ -277,7 +265,7 @@ class ExternalServer(models.Model):
                 a_vals['opts'] = o_vals
             attrs[str(item['code'])] = a_vals
 
-        msg = _("External product sync says: starting to sync the product with ID=%s") % str(oe_prod_id)
+        msg = _("External product sync says: starting to sync the product %s") % str(product.display_name)
         ext_srv_res['msg'] += [msg]
         _logger.info(msg)
 
@@ -296,9 +284,12 @@ class ExternalServer(models.Model):
                 continue
             
             # ... and its real value (in case of a many2one field)
-            attr_val = product.get(map_line.field_id.name)
-            if isinstance(attr_val,tuple):
-                attr_val = attr_val[0]
+            try:
+                attr_val = getattr(product, map_line.field_id.name)
+            except:
+                continue
+            if hasattr(attr_val,'id'):
+                attr_val = attr_val.id
             if not attr_val:
                 attr_val = '' # Else we'll find the word 'False' as a result...
 
