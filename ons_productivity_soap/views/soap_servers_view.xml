@@ -147,16 +147,19 @@
                     <notebook>
                         <page string="Connection">
                             <group>
-                                <group>
+                                <group string="URLs">
                                     <field name="location"/>
                                     <field name="wsdl_suffix"/>
                                     <field name="admin_panel" widget="url"/>
-                                    <field name="timeout"/>
                                 </group>
-                                <group>
+                                <group string="Identification">
                                     <field name="apiusername"/>
                                     <field name="apipass" password="True"/>
+                                </group>
+                                <group string="Technical">
+                                    <field name="timeout"/>
                                     <field name="use_alt_transport"/>
+                                    <field name="simulation"/>
                                 </group>
                             </group>
                         </page>

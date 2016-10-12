@@ -68,7 +68,9 @@ class ExternalServerBase(models.Model):
     timeout = fields.Integer(string='Time-out', default=3600)
     admin_panel = fields.Char(stirng='Administration panel')
     use_alt_transport = fields.Boolean(string='Use alternate transport', default=False)
-    
+    simulation = fields.Boolean(string='Simulation', default=False,
+        help='Permet de ne faire aucune mise modification sur le serveur distant')
+
     _sql_constraints = [
         ('name_uniq', 'unique (name)', 'Referential names must be unique !')
     ]
