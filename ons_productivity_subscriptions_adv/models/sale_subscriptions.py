@@ -347,6 +347,8 @@ class SaleSubscription(osv.osv):
                         continue
 
             values = self._prepare_invoice_line(cr, uid, line, fiscal_position, context=context)
+            if line.use_new_so_inv:
+                values['use_new_so_inv'] = True
 
             # Overwrite sale_contract_asset's default asset handling:
             #   the info is now computed from the line's recurrence
@@ -360,7 +362,7 @@ class SaleSubscription(osv.osv):
             elif line.recurring_rule_type == 'yearly':
                 month = 12
             if month:
-                asset_cat = self.env['account.asset.category'].search([('type','=','sale'),('active','=',True),('method_number','=',month)])
+                asset_cat = self.pool.get('account.asset.category').search(cr, uid, [('type','=','sale'),('active','=',True),('method_number','=',month)], context=context)
                 if asset_cat:
                     asset_cat = asset_cat[0].id
                 else:
@@ -482,6 +484,8 @@ class SaleSubscription(osv.osv):
         }
         if line.requested_date:
             values['requested_date'] = line.requested_date
+        if line.use_new_so_inv:
+            values['use_new_so_inv'] = True
 
         txt = line.name or ''
         if line.recurring_next_date and (line.recurring_rule_type or '') != 'none':
@@ -620,10 +624,18 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                                 ], context=context)
                             
                             lst = self.pool('sale.order').search(cr, uid, domain, context=context)
+
+                        # A contract line may request a new sale
+                        for line in sale_lines:
+                            if line[2].get('use_new_so_inv'):
+                                lst = False
+                                del line[2]['use_new_so_inv']
+
                         if lst:
                             sale_id = lst[0]
                         else:
                             sale_id = self.pool('sale.order').create(cr, salesman, sale_values, context=context)
+
                         sale = self.pool('sale.order').browse(cr, uid, sale_id, context=context)
                         for val_item in sale_lines:
                             val = val_item[2]
@@ -677,10 +689,18 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                                 ('state', '=', 'draft')
                             ], context=context)
                         lst = self.pool('account.invoice').search(cr, uid, domain, context=context)
+
+                        # A contract line may request a new sale
+                        for line in invoice_lines:
+                            if line[2].get('use_new_so_inv'):
+                                lst = False
+                                del line[2]['use_new_so_inv']
+
                         if lst:
                             invoice_id = lst[0]
                         else:
                             invoice_id = self.pool('account.invoice').create(cr, salesman, invoice_values, context=context)
+
                         invoice = self.pool('account.invoice').browse(cr, uid,  invoice_id, context=context)
                         for val_item in  invoice_lines:
                             val = val_item[2]
@@ -756,7 +776,8 @@ class SaleSubscriptionLine(osv.osv):
         'is_billable': fields.boolean(string='Billable'),
         'sequence': fields.integer(string='Sequence'),
         'cancellation_deadline': fields.integer(string='Days before'),
-        'requested_date': fields.date(string='Requested Date')
+        'requested_date': fields.date(string='Requested Date'),
+        'use_new_so_inv': fields.boolean(string='New sale/invoice')
     }
     _defaults = {
         'recurring_rule_type': lambda *a: 'none',
@@ -764,7 +785,8 @@ class SaleSubscriptionLine(osv.osv):
         'is_active': lambda *a: True,
         'is_billable': lambda *a: True,
         'sequence': lambda *a: 1,
-        'cancellation_deadline': lambda *a: 0
+        'cancellation_deadline': lambda *a: 0,
+        'use_new_so_inv': lambda *a: False
     }
 
     # ---------- Utils

@@ -100,6 +100,11 @@ msgid "Active"
 msgstr "Actif"
 
 #. module: ons_productivity_subscriptions_adv
+#: model:ir.model.fields,field_description:ons_productivity_subscriptions_adv.field_sale_subscription_line_use_new_so_inv
+msgid "New sale/invoice"
+msgstr "Nouvelle vente/facture"
+
+#. module: ons_productivity_subscriptions_adv
 #: model:ir.model.fields,field_description:ons_productivity_subscriptions_adv.field_sale_subscription_line_is_billable
 msgid "Billable"
 msgstr "Facturable"
