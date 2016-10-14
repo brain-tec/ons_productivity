@@ -14,7 +14,7 @@ These modules are included in all our hosting solutions.
     * A Point of Sale has now a default partner that can be used automatically        
 
 **Author :** 
-    * Open Net Sarl
+    * Open Net Sàrl
     * Address: Industrie 59 / CH-1030 Bussigny
     * Website: http://www.open-net.ch
     * Contact: info@open-net.ch
@@ -36,7 +36,7 @@ Maintainer
 ----------
 
 .. image:: http://open-net.ch/logo.png
-   :alt: Open Net Sarl
+   :alt: Open Net Sàrl
    :target: http://open-net.ch
 
-This module is maintained by Open Net Sarl.
+This module is maintained by Open Net Sàrl.

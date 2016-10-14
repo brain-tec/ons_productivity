@@ -14,7 +14,7 @@
 {
     'name' : 'Open-Net productivity: Point of Sale',
     'version' : '1.0',
-    'author' : 'Open Net Sarl',
+    'author' : 'Open Net Sàrl',
     'category' : 'Point of Sale',
     'summary': 'Complementary functions for the Points of Sale',
     'website': 'https://www.open-net.ch',

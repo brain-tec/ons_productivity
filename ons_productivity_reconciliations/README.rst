@@ -31,7 +31,7 @@ Maintainer
 ----------
 
 .. image:: http://open-net.ch/logo.png
-   :alt: Open Net Sarl
+   :alt: Open Net Sàrl
    :target: http://open-net.ch
 
 This module is maintained by Open Net Sàrl.
