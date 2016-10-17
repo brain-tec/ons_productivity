@@ -1,24 +1,40 @@
+.o_kanban_view .oe_kanban_color_0 {
+	background-color: white;
+	color: #5a5a5a;
+}
+.o_kanban_view .oe_kanban_color_1 {
+	background-color: #424242;
+	color: #5a5a5a;
+}
+.o_kanban_view .oe_kanban_color_2 {
+	background-color: #7a3737;
+	color: #5a5a5a;
+}
 .o_kanban_view .oe_kanban_color_3 {
-	background-color: yellow;
+	background-color: #756832;
 	color: #5a5a5a;
 }
 .o_kanban_view .oe_kanban_color_4 {
-	background-color: red;
+	background-color: #5d6937;
 	color: white;
 }
 .o_kanban_view .oe_kanban_color_5 {
-	background-color: blue;
+	background-color: #1a7759;
 	color: white;
 }
 .o_kanban_view .oe_kanban_color_6 {
-	background-color: green;
+	background-color: #1a5d83;
 	color: white;
 }
 .o_kanban_view .oe_kanban_color_7 {
-	background-color: pink;
+	background-color: #3b3e75;
 	color: #5a5a5a;
 }
 .o_kanban_view .oe_kanban_color_8 {
-	background-color: blueviolet;
+	background-color: #4c3668;
+	color: white;
+}
+.o_kanban_view .oe_kanban_color_9 {
+	background-color: #6d2c70;
 	color: white;
 }
