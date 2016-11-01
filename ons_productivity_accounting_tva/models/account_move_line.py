@@ -18,7 +18,10 @@ class AccountMoveLine(models.Model):
     @api.model
     def get_tags_from_tax(self):
         for line in self.search([]):
-                if line.tax_line_id:
+            if line.tax_line_id:
+                move = line.move_id
+                lock_date = max(move.company_id.period_lock_date, move.company_id.fiscalyear_lock_date)
+                if move.date > lock_date:
                     line.ons_taxes_tags = line.tax_line_id.tag_ids.ids
 
 class AccountMove(models.Model):
