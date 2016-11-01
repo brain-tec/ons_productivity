@@ -48,7 +48,7 @@ class AccountInvoice(models.Model):
             user = self.env.user
             bank_ids = user.company_id.partner_id.bank_ids
             for bank in bank_ids:
-                if bank.state == 'bvr':
+                if bank.acc_type == 'postal':
                     _logger.info(bank.state)
                     res.get('value')['partner_bank_id'] = bank.id
                     break
@@ -60,7 +60,7 @@ class AccountInvoice(models.Model):
             user = self.env.user
             bank_ids = user.company_id.partner_id.bank_ids
             for bank in bank_ids:
-                if bank.state == 'bvr':
+                if bank.acc_type == 'postal':
                     vals['partner_bank_id'] = bank.id
         return super(AccountInvoice, self).create(vals)
 

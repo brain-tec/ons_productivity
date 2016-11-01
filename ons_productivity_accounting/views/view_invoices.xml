@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: views/view_invoices.xml
+  Module: ons_productivity_accounting
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2016-TODAY Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="onsp_view_suppl_invoice_form">
+            <field name="name">Open Net productivity acocuntinf: suplpier invoice form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <field name="company_currency_id" position="after">
+                    <field name="authorize_same_ref"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

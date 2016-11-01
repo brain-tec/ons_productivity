@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<!--
+  File: views/soap_servers_view.xml
+  Module: ons_productivity_soap
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2013-TODAY Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+	<data>
+
+    	<!-- 
+            SOAP connector log entries
+        -->
+
+        <!-- Search -->
+		<record model="ir.ui.view" id="onsp_soap_srv_extern_logs_search">
+			<field name="name">Open-Net - SOAP connector: external servers search</field>
+			<field name="model">ons.soap.external.server.log_entry</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Log entries search">
+                    <group>
+    					<field name="name"/>
+    					<field name="log"/>
+                    </group>
+				</search>
+			</field>
+		</record>
+
+        <!-- Tree -->
+        <record model="ir.ui.view" id="onsp_soap_srv_extern_logs_list">
+            <field name="name">Open-Net - SOAP connector: external servers log entries list</field>
+            <field name="model">ons.soap.external.server.log_entry</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Logs">
+                    <field name="name"/>
+                    <field name="doing"/>
+                    <field name="last_update"/>
+                    <field name="log_line"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form -->
+        <record model="ir.ui.view" id="onsp_soap_srv_extern_logs_form">
+            <field name="name">Open-Net - SOAP connector: external servers log entries form</field>
+            <field name="model">ons.soap.external.server.log_entry</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Logs">
+                    <group colspan="4" col="6">
+                        <field name="name"/>
+                        <field name="doing"/>
+                        <field name="last_update"/>
+                    </group>
+                    <separator string="Message" colspan="4"/>
+                    <field name="log" colspan="4" nolabel="1"/>
+                </form>
+            </field>
+        </record>
+
+ 		<record model="ir.actions.act_window" id="onsp_soap_srv_extern_srv2logs">
+            <field name="name">External server log entries</field>
+            <field name="res_model">ons.soap.external.server.log_entry</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="onsp_soap_srv_extern_logs_list"/>
+			<field name="search_view_id" ref="onsp_soap_srv_extern_logs_search"/>
+        </record>
+
+ 		<record model="ir.actions.act_window" id="onsp_soap_srv_extern_srv2dailylogs">
+            <field name="name">External server log daily entries</field>
+            <field name="res_model">ons.soap.external.server.log_entry</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="onsp_soap_srv_extern_logs_list"/>
+			<field name="search_view_id" ref="onsp_soap_srv_extern_logs_search"/>
+            <field name="domain">[('external_server_id','=',active_id),('name','like','Synch: '+time.strftime('%Y-%m-%d'))]"</field>
+        </record>
+
+    	<!--
+            SOAP connector definitions
+        -->
+
+        <!-- Search -->
+		<record model="ir.ui.view" id="onsp_soap_srv_extern_srvs_search">
+			<field name="name">Open-Net - SOAP connector: external servers search</field>
+			<field name="model">ons.soap.external.server</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="External servers search">
+                    <group>
+    					<field name="name"/>
+                    </group>
+				</search>
+			</field>
+		</record>
+
+        <!-- Tree -->
+        <record model="ir.ui.view" id="onsp_soap_srv_extern_srvs_list">
+            <field name="name">Open-Net - SOAP connector: external servers list</field>
+            <field name="model">ons.soap.external.server</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="External servers">
+                    <field name="name"/>
+                    <field name="location"/>
+                    <field name="apiusername"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form -->
+        <record model="ir.ui.view" id="onsp_soap_srv_extern_srvs_view">
+            <field name="name">Open-Net - SOAP connector: external servers view</field>
+            <field name="model">ons.soap.external.server</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="External server">
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_test_connection"
+                            type="object"
+                            string="Test connection"
+                            icon="fa-arrows-v"
+                        />
+                        <button
+                            name="%(onsp_soap_srv_extern_srv2logs)d"
+                            type="action"
+                            string="Log entries"
+                            icon="fa-list-alt"
+                        />
+                        <button
+                            name="%(onsp_soap_srv_extern_srv2dailylogs)d"
+                            type="action"
+                            string="Log du jour"
+                            icon="fa-list-alt"
+                        />
+                    </div>
+                    <div class="oe_title">
+                        <label class="oe_edit_only" for="name" string="Server Name"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <notebook>
+                        <page string="Connection">
+                            <group>
+                                <group string="URLs">
+                                    <field name="location"/>
+                                    <field name="wsdl_suffix"/>
+                                    <field name="admin_panel" widget="url"/>
+                                </group>
+                                <group string="Identification">
+                                    <field name="apiusername"/>
+                                    <field name="apipass" password="True"/>
+                                </group>
+                                <group string="Technical">
+                                    <field name="timeout"/>
+                                    <field name="use_alt_transport"/>
+                                    <field name="simulation"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Fields mapping">
+                            <field name="field_mapping_ids" nolabel="1" colspan="4" mode="tree">
+                                <tree string=" " editable="bottom">
+                                    <field name="external_server_id" invisible="1"/>
+                                    <field name="name"/>
+                                    <field name="field_id"/>
+                                </tree>
+                            </field>
+                        </page>
+<!--
+                        <page string="Logs">
+                            <field name="logs_ids" nolabel="1" colspan="4" mode="tree"/>
+                        </page>
+-->
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <!-- Access to the list -->
+		<record model="ir.actions.act_window" id="onsp_soap_srv_extern_srvs_action">
+			<field name="name">External servers list</field>
+			<field name="res_model">ons.soap.external.server</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="onsp_soap_srv_extern_srvs_list"/>
+			<field name="search_view_id" ref="onsp_soap_srv_extern_srvs_search"/>
+		</record>
+
+        <act_window domain="[('external_server_id','=',active_id)]"
+            id="act_onsp_soap_srv_extern_srv2stdlogs" name="Log entries"
+            res_model="ons.soap.external.server.log_entry"
+            src_model="ons.soap.external.server"
+            />
+
+        <act_window domain="[('external_server_id','=',active_id),('name','like','Synch: '+time.strftime('%Y-%m-%d'))]"
+            id="act_onsp_soap_srv_extern_srv2todaylogs" name="Log du jour"
+            res_model="ons.soap.external.server.log_entry"
+            src_model="ons.soap.external.server"
+            />
+
+		<menuitem
+            id="onsp_soap_srv_root_menu"
+            name="External Servers"
+            icon="terp-sale"
+			web_icon="ons_productivity_soap,static/description/icon.png"
+        />
+
+    		<menuitem
+    			name="External Servers"
+    			id="onsp_soap_srv_extern_srvs_menu"
+    			action="onsp_soap_srv_extern_srvs_action"
+                parent="onsp_soap_srv_root_menu"
+    			sequence="1"/>
+
+	</data>
+</openerp>

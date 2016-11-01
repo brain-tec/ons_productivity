@@ -1,20 +1,18 @@
 # French translation for ons_productivity_accounting
-# Copyright (c) 2015-TODAY Open Net Ltd
 #
+
 msgid ""
 msgstr ""
-"Project-Id-Version: ons_productivity_accounting\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-07-20 15:40+0000\n"
-"PO-Revision-Date: 2015-05-20 15:40+0000\n"
-"Last-Translator: cyp <cyp@open-net.ch>\n"
-"Language-Team: French <fr@li.org>\n"
+"Project-Id-Version: openobject-addons\n"
+"POT-Creation-Date: 2016-09-20 12:47+0000\n"
+"PO-Revision-Date: 2016-09-20 12:47+0000\n"
+"Last-Translator: <cyp@open-net.ch>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. module: ons_productivity_accounting
-#: model:ir.actions.act_window,name:ons_productivity_accounting.onsp_action_inconsistent_accounts_form
-#: model:ir.ui.menu,name:ons_productivity_accounting.onsp_menu_action_inconsistent_accounts
-msgid "Inconsistencies"
-msgstr "Inconsistences"
+#: model:ir.model.fields,field_description:ons_productivity_accounting.field_account_invoice_authorize_same_ref
+msgid "Authorize same ref"
+msgstr "Autoriser réf. à double"
+
