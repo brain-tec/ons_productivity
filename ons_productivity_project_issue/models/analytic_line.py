@@ -9,5 +9,6 @@ _logger = logging.getLogger(__name__)
 
 class account_analytic_line(models.Model):
     _inherit = 'account.analytic.line'
+    _order = 'tag_ids ASC, date ASC'
 
     ons_to_invoice = fields.Boolean(string="Invoiceable", default=True)

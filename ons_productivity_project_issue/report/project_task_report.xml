@@ -34,7 +34,8 @@
                         </tr>
                    </thead>
                    <tbody>
-                        <t t-foreach="doc.timesheet_ids.sorted(key=lambda l: l.tag_ids)" t-as="l">
+<!--                         <t t-set="sorted_timesheet_ids" t-value="sorted(doc.timesheet_ids, key=lambda line: line.tag_ids)"/> -->
+                        <t t-foreach="doc.timesheet_ids.sorted(key=lambda line: line.tag_ids.ids)" t-as="l">
                             <tr>
                                 <td>
                                    <span t-field="l.date"/>
