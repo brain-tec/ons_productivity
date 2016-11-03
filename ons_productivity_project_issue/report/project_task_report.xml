@@ -57,12 +57,24 @@
                                     <span t-esc="', '.join(map(lambda x: (x.name), l.tag_ids))"/>
                                 </td>
                                 <td class="text-right">
-                                    <span t-field="l.unit_amount"/>
+                                    <t t-esc="'%02d:%02d' % (int(l.unit_amount), (l.unit_amount-int(l.unit_amount))*60)"/>
                                 </td>
                             </tr>
                         </t>
                     </tbody>
                 </table>
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-7">
+                        <strong>
+                            Heures passés : <br/>
+                            Heures restantes :
+                        </strong>
+                    </div>
+                    <div class="col-xs-2 text-right">
+                        <span t-esc="'%02d:%02d' % (int(doc.effective_hours), (doc.effective_hours-int(doc.effective_hours))*60)"/><br/>
+                        <span t-esc="'%02d:%02d' % (int(doc.remaining_hours), (doc.remaining_hours-int(doc.remaining_hours))*60)"/>
+                    </div>
+                </div>
             </div>
             </t>
         </template>
