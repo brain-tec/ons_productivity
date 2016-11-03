@@ -73,8 +73,8 @@
                         </strong>
                     </div>
                     <div class="col-xs-2 text-right">
-                        <span t-esc="'%02d:%02d' % (int(doc.effective_hours), (doc.effective_hours-int(doc.effective_hours))*60)"/><br/>
-                        <span t-esc="'%02d:%02d' % (int(doc.remaining_hours), (doc.remaining_hours-int(doc.remaining_hours))*60)"/>
+                        <span t-esc="'%02d:%02d' % (int(doc.effective_hours), abs((doc.effective_hours-int(doc.effective_hours)))*60)"/><br/>
+                        <span t-esc="'%02d:%02d' % (int(doc.remaining_hours), abs((doc.remaining_hours-int(doc.remaining_hours)))*60)"/>
                     </div>
                 </div>
             </div>
