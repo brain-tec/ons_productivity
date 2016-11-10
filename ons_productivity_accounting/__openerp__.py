@@ -10,7 +10,7 @@
 
 {
     'name' : 'Open Net Productivity: Accounting',
-    'version' : '2.0',
+    'version' : '2.1',
     'author' : 'Open Net Sàrl',
     'category' : 'Accounting',
     'website': 'http://www.open-net.ch',
