@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id= "menu_merge_partner"
+        parent= "base.menu_sale_config"
+        sequence= "1"
+        name= "Merge partner"
+        groups= "base.group_sale_manager,base.group_sale_salesman,account.group_account_manager,account.group_account_user"
+        action="crm.action_partner_deduplicate"/>
+</odoo>

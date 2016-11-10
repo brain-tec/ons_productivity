@@ -15,6 +15,7 @@
     'license': 'AGPL-3',
     'images': [],
     'data': [
+        'views/crm_view.xml'
     ],
     'installable': True
 }
