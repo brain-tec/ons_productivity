@@ -14,4 +14,37 @@
             </xpath>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="ons_prod_project_project_kanban_view">
+        <field name="name">ONS Productivity Project Issue: Project Kanban View</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_kanban"/>
+        <field name="priority" eval="20"/>
+        <field name="type">kanban</field>
+        <field name="arch" type="xml">
+            <field name="doc_count" position="after">
+                <field name="partner_id"/>
+            </field>
+            <xpath expr="//div[@class='o_primary']" position="inside">
+                <span><t t-esc="record.partner_id.value"/></span>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="ons_prod_project_task_kanban_view">
+        <field name="name">ONS Productivity Project Issue: Project Task Kanban View</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_kanban"/>
+        <field name="priority" eval="20"/>
+        <field name="type">kanban</field>
+        <field name="arch" type="xml">
+            <field name="legend_done" position="after">
+                <field name="partner_id"/>
+            </field>
+            <xpath expr="//div[@class='oe_kanban_content']/div[2]" position="after">
+                <div>
+                    <field name="partner_id"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
 </odoo>
