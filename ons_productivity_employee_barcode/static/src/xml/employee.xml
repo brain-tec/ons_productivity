@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-name="ons_productivity_employee_barcode.EmployeeWidget">
+        <li style="border-left:1px solid white">
+            <a class="employee_barcode"><t t-esc="widget.current_employee"/></a>
+        </li>
+        <li style="border-right:1px solid white">
+            <a class="employee_barcode_exit" href="/employee_barcode_logout"><i class="fa fa-times" aria-hidden="true"></i></a>
+        </li>
+    </t>
+</templates>

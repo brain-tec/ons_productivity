@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="ons_res_users_form_view">
+        <field name="name">ONS Res Users Form View</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="priority" eval="20"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='preferences']" position="before">
+                <group>
+                    <group>
+                        <field name="ons_needs_barcode"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
