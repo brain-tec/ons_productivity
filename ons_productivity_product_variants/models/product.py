@@ -44,6 +44,10 @@ class ProductTemplate(models.Model):
 
         return super(ProductTemplate, new_env).write(vals)
 
+    @api.multi
+    def unlink(self):
+        return super(ProductTemplate, self).unlink()
+
     # ---------- Interface management
 
     @api.multi
@@ -70,6 +74,16 @@ class ProductTemplate(models.Model):
         line = self.env['product.attribute.line'].search(['product_tmpl_id','=',self.env.context.get('active_id', False), ('attribute_id','=',self.attribute_id)])
         if line:
             self.value_ids = line.value_ids
+
+
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+
+   # ---------- Instances management
+
+    @api.multi
+    def unlink(self):
+        return super(ProductProduct, self).unlink()
 
 
 class ProductAttributeLine(models.Model):

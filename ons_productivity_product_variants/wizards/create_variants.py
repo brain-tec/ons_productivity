@@ -95,7 +95,7 @@ class CreateProductVariants(models.TransientModel):
         for wiz in self:
             values = wiz.prepare_values()
             self.check_unicity(values)
+            product = Product.with_context(tracking_disable=True).create(values)
             self.update_product_template()
-            product = Product.create(values)
 
         return {}
