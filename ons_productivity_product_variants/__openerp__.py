@@ -4,12 +4,12 @@
 
 {
     'name' : 'Open-Net Productivity: Product Variants',
-    'version' : '1.0.0.0',
+    'version' : '1.0.01',
     'author' : 'Open Net Sàrl',
     'category' : 'Sales',
     'website': 'https://www.open-net.ch',
     'images' : [],
-    'depends' : ['product'],
+    'depends' : ['product','stock_account'],
     'data': [
         'views/view_product.xml',
         'wizards/wiz_create_variants.xml'
