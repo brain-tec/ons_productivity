@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="ons_prod_hr_employee_form_view">
+        <field name="name">ONS Productivity Impôt à la source : HR Employee Form View</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="priority" eval="20"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[3]/group" position="inside">
+                <group string="Payroll">
+                    <field name="impot_source_rate"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
