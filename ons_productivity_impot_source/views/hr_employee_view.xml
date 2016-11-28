@@ -10,6 +10,8 @@
             <xpath expr="//notebook/page[3]/group" position="inside">
                 <group string="Payroll">
                     <field name="impot_source_rate"/>
+                    <field name="one_revenue" attrs="{'invisible':[('marital', '!=', 'married')]}"/>
+                    <field name="impot_ecclesiastique"/>
                 </group>
             </xpath>
         </field>

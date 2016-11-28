@@ -14,30 +14,54 @@ class HrEmployee(models.Model):
     _inherit = 'hr.employee'
 
     impot_source_rate = fields.Float(compute='_get_impot_source_rate', string="Taux d'impôt à la source")
+    impot_ecclesiastique = fields.Boolean(string="Avec l'impôt ecclésiastique ?")
+    one_revenue = fields.Boolean(string="Un seul revenu ?")
 
     @api.multi
     def _get_impot_source_rate(self):
         for employee in self:
             source_rate_employee = []
             tarif_group = []
-            if employee.marital == 'single':
-                tarif_group.append('A')
-            # elif: employee.marital == 'married':
-            #     tarif_group.append('')
             nb_child = employee.children + employee.children_student
-            source_rates = employee.read_file(employee.address_home_id.state_id.code.lower(), employee.contract_id.wage, nb_child, tarif_group)
-            # for source_rate in source_rates:
-            #     if source_rate.get('taxed_revenue_from') <= employee.contract_id.wage and source_rate.get('taxed_revenue_to') > employee.contract_id.wage:
-            #         source_rate_employee.append(source_rates)
-            _logger.info(source_rates)
-            _logger.info(employee.address_home_id.state_id.code)
-            _logger.info(employee.contract_id.wage)
-            _logger.info(employee.gender)
-            _logger.info(employee.children)
-            _logger.info(employee.children_student)
+            if employee.marital == 'single':
+                if nb_child > 0:
+                    tarif_group.append('H')
+                else:
+                    tarif_group.append('A')
+            elif employee.marital == 'married':
+                if employee.one_revenue:
+                    tarif_group.append('B')
+                else:
+                    tarif_group.append('C')
+            
+            canton = False
+            if employee.address_home_id.country_id.code == 'CH':
+                if employee.address_home_id.state_id:
+                    canton = employee.address_home_id.state_id.code.lower()
+            else:
+                if employee.address_id.state_id:
+                    canton = employee.address_id.state_id.code.lower()
+                    if employee.address_home_id.country_id.code == 'DE':
+                        if employee.marital == 'single':
+                            tarif_group.append('L')
+                            tarif_group.remove('A')
+            _logger.info(tarif_group)
+            if canton:
+                source_rates = employee.read_file(
+                    canton,
+                    employee.contract_id.wage,
+                    nb_child, tarif_group,
+                    employee.impot_ecclesiastique
+                )
+                # for source_rate in source_rates:
+                #     if source_rate.get('taxed_revenue_from') <= employee.contract_id.wage and source_rate.get('taxed_revenue_to') > employee.contract_id.wage:
+                #         source_rate_employee.append(source_rates)
+                _logger.info(source_rates)
+                if source_rates:
+                    employee.impot_source_rate = source_rates[0].get('percent_tax')
 
     @api.model
-    def read_file(self, canton, wage, nb_child, tarif_group):
+    def read_file(self, canton, wage, nb_child, tarif_group, eccles):
         directory_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
         f = open('%s/tar16%s.txt' % (directory_path, canton), 'r')
         lines = f.read().splitlines()
@@ -91,6 +115,6 @@ class HrEmployee(models.Model):
             for group in tarif_group:
                 if group not in code:
                     is_in_group = False
-            if taxed_revenue_from <= wage and taxed_revenue_to > wage and nb_child == number_child and is_in_group:
+            if taxed_revenue_from <= wage and taxed_revenue_to > wage and nb_child == number_child and is_in_group and ecclesiastique == eccles:
                 parsed_lines.append(line_parsed)
         return parsed_lines
