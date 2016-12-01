@@ -14,6 +14,7 @@
     ],
     'data': [
         'views/hr_employee_view.xml',
+        'data/hr_payslip_rule.xml',
     ],
     'js': [
     ],

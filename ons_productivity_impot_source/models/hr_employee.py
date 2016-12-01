@@ -63,6 +63,7 @@ class HrEmployee(models.Model):
     @api.model
     def read_file(self, canton, wage, nb_child, tarif_group, eccles):
         directory_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+        if not os.path.isfile('%s/tar16%s.txt' % (directory_path, canton)): return []
         f = open('%s/tar16%s.txt' % (directory_path, canton), 'r')
         lines = f.read().splitlines()
         parsed_lines = []
@@ -80,9 +81,9 @@ class HrEmployee(models.Model):
             group = ''
             number_child = 0
             initial_validity_date = datetime.strptime(line[16:24], '%Y%m%d').date()
-            taxed_revenue_from = int(line[24:31])
+            taxed_revenue_from = int(line[24:31]) + int(line[31:33])/100.0
             echellon = int(line[33:40])
-            taxed_revenue_to = (taxed_revenue_from - 1) + int(line[33:40])
+            taxed_revenue_to = (taxed_revenue_from) + int(line[33:40])
             amount_tax = int(line[45:54])
             percent_tax = int(line[55:57]) + int(line[57:59])/100.0
             for letter in code:
@@ -115,6 +116,7 @@ class HrEmployee(models.Model):
             for group in tarif_group:
                 if group not in code:
                     is_in_group = False
+            # _logger.info("%s - %s" % (taxed_revenue_from, taxed_revenue_to))
             if taxed_revenue_from <= wage and taxed_revenue_to > wage and nb_child == number_child and is_in_group and ecclesiastique == eccles:
                 parsed_lines.append(line_parsed)
         return parsed_lines
