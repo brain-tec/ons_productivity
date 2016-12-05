@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="ons_prod_sale_adv_payment_form_view">
+        <field name="name">ONS Productivity Sale Advance Payment Form View</field>
+        <field name="model">sale.advance.payment.inv</field>
+        <field name="inherit_id" ref="sale.view_sale_advance_payment_inv"/>
+        <field name="priority" eval="20"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <field name="grouped"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
