@@ -32,7 +32,7 @@ odoo.define('ons_productivity_employee_barcode.EmployeeWidget',function (require
                 }
             });
             var keys = [];
-            var time_between_input = 55;
+            var time_between_input = 500;
             var last_timestamp = 0;
             var self = this;
             
