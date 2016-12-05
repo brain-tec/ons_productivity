@@ -12,6 +12,10 @@ from openerp import api, fields, models
 from datetime import datetime
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT as DF
 
+#Import logger
+import logging
+#Get the logger
+_logger = logging.getLogger(__name__)
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
@@ -90,6 +94,14 @@ class SaleOrder(models.Model):
         values['date_invoice'] = datetime.now().strftime(DF)
 
         return values
+
+    @api.multi
+    def write(self, values):
+        _logger.info(values)
+        if values.get('quot_lines'):
+            del values['order_line']
+        res = super(SaleOrder, self).write(values)
+        return res
 
 
 class SaleOrderLine(models.Model):
