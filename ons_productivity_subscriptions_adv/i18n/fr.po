@@ -119,13 +119,13 @@ msgstr "Séquence"
 #: model:ir.model.fields,field_description:ons_productivity_subscriptions_adv.field_account_invoice_subscription_id
 #: model:ir.model.fields,field_description:ons_productivity_subscriptions_adv.field_account_invoice_line_subscription_id
 msgid "Subscription"
-msgstr "Abonnement"
+msgstr "Contrat"
 
 #. module: ons_productivity_subscriptions_adv
 #: model:ir.model.fields,field_description:ons_productivity_subscriptions_adv.field_sale_order_line_subscription_id
 #: model:ir.model.fields,field_description:ons_productivity_subscriptions_adv.field_account_invoice_line_subscription_id
 msgid "Subscription line"
-msgstr "Ligne d'abonnement"
+msgstr "Positions du contrat"
 
 #. module: ons_productivity_subscriptions_adv
 #: model:ir.model.fields,field_description:ons_productivity_subscriptions_adv.field_quote_order_sale_lines
@@ -145,7 +145,7 @@ msgstr "Lignes de devis"
 #. module: ons_productivity_subscriptions_adv
 #: model:ir.ui.view,arch_db:ons_productivity_subscriptions_adv.onsp_view_sale_order_subscription_form
 msgid "Subscription lines"
-msgstr "Lignes d'abonnement"
+msgstr "Positions du contrat"
 
 #. module: ons_productivity_subscriptions_adv
 #: model:ir.model.fields,field_description:ons_productivity_subscriptions_adv.field_sale_order_quote_amount_untaxed

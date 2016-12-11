@@ -75,6 +75,11 @@
                 <field name="template_id" position="attributes">
                     <attribute name="on_change">on_change_template(template_id, date_start)</attribute>
                 </field>
+                <field name="template_id" position="after">
+                    <field name="analytic_account_id" readonly="1" required="0" attrs="{'invisible': [('type','=','template')]}"/>
+                    <field name="asset_category_id" context="{'default_type':'sale'}"/>
+                    <field name="tag_ids" widget="many2many_tags" attrs="{'invisible': [('type','!=','template')]}"/>
+                </field>
                 <field name="date_start" position="attributes">
                     <attribute name="attrs">{'invisible':[('type','=','template')]}</attribute>
                 </field>
@@ -102,6 +107,7 @@
                         modifiers="{'readonly': true}"
                     />
                 </field>
+                <page id="settings" position="replace"/>
             </field>
         </record>
 
