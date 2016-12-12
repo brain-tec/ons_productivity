@@ -209,6 +209,7 @@
             name="External Servers"
             icon="terp-sale"
 			web_icon="ons_productivity_soap,static/description/icon.png"
+            groups="ons_productivity_soap.group_ons_soap_server_mgr"
         />
 
     		<menuitem
@@ -216,7 +217,9 @@
     			id="onsp_soap_srv_extern_srvs_menu"
     			action="onsp_soap_srv_extern_srvs_action"
                 parent="onsp_soap_srv_root_menu"
-    			sequence="1"/>
+    			sequence="1"
+                groups="ons_productivity_soap.group_ons_soap_server_mgr"
+            />
 
 	</data>
 </openerp>
