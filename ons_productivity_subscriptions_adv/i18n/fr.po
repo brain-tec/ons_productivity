@@ -224,3 +224,14 @@ msgstr "Qté vendue"
 #: model:ir.model.fields,field_description:ons_productivity_subscriptions_adv.field_sale_subscription_non_recurring_total
 msgid "Non-recurring Price"
 msgstr "Prix non-récurrent"
+
+#. module: ons_productivity_subscriptions_adv
+#: model:ir.model.fields,field_description:ons_productivity_subscriptions_adv.field_sale_subscription_manager_id
+msgid "Person in charge"
+msgstr "Responsable"
+
+#. module: ons_productivity_subscriptions_adv
+#: model:ir.model.fields,field_description:ons_productivity_subscriptions_adv.field_sale_subscription_asset_category_id
+msgid "Deferred Revenue"
+msgstr "Revenu différé"
+

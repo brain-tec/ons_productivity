@@ -168,6 +168,10 @@ class SaleSubscription(osv.osv):
                                             'price_unit', 'discount', 'price_subtotal', 'is_active'],
                                            5),
         }, track_visibility='onchange'),
+        'manager_id': fields.many2one('res.users', 'Person in charge', track_visibility='onchange'),
+        'asset_category_id': fields.many2one('account.asset.category', 'Deferred Revenue',
+                                            help="This asset category will be applied to the lines of the contract's invoices.",
+                                            domain="[('type','=','sale')]")
     }
 
     _defaults = {
@@ -226,6 +230,7 @@ class SaleSubscription(osv.osv):
                 'name': x.name,
                 'sold_quantity': x.quantity,
                 'price_unit': x.price_unit or 0.0,
+                'discount': x.discount or 0.0,
                 'analytic_account_id': x.analytic_account_id and x.analytic_account_id.id or False,
                 'recurring_rule_type': 'none',
                 'recurring_interval': 1,
