@@ -34,7 +34,7 @@ class SaleOrderLine(models.Model):
 
     @api.multi
     @api.onchange('product_id')
-    def product_id_change(self):
+    def onsp_pos_product_id_change(self):
         res = super(SaleOrderLine, self).product_id_change()
         for line in self:
             if not line.product_id:
@@ -46,7 +46,7 @@ class SaleOrderLine(models.Model):
         return res
 
     @api.onchange('product_uom')
-    def product_uom_change(self):
+    def onsp_pos_product_uom_change(self):
         res = super(SaleOrderLine, self).product_uom_change()
         for line in self:
             if not line.product_uom:
