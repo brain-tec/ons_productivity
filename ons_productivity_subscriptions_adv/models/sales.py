@@ -99,7 +99,8 @@ class SaleOrder(models.Model):
     def write(self, values):
         _logger.info(values)
         if values.get('quot_lines'):
-            del values['order_line']
+            if values.get('order_line'):
+                del values['order_line']
         res = super(SaleOrder, self).write(values)
         return res
 
