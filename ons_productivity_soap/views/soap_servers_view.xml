@@ -21,9 +21,10 @@
 			<field name="type">search</field>
 			<field name="arch" type="xml">
 				<search string="Log entries search">
-                    <group>
-    					<field name="name"/>
-    					<field name="log"/>
+					<field name="name"/>
+					<field name="log"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_date" string="Date" context="{'group_by':'create_date'}"/>
                     </group>
 				</search>
 			</field>
@@ -69,16 +70,7 @@
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="onsp_soap_srv_extern_logs_list"/>
 			<field name="search_view_id" ref="onsp_soap_srv_extern_logs_search"/>
-        </record>
-
- 		<record model="ir.actions.act_window" id="onsp_soap_srv_extern_srv2dailylogs">
-            <field name="name">External server log daily entries</field>
-            <field name="res_model">ons.soap.external.server.log_entry</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="onsp_soap_srv_extern_logs_list"/>
-			<field name="search_view_id" ref="onsp_soap_srv_extern_logs_search"/>
-            <field name="domain">[('external_server_id','=',active_id),('name','like','Synch: '+time.strftime('%Y-%m-%d'))]"</field>
+            <field name="context">{'search_default_group_by_date':True}</field>
         </record>
 
     	<!--
@@ -134,9 +126,9 @@
                             icon="fa-list-alt"
                         />
                         <button
-                            name="%(onsp_soap_srv_extern_srv2dailylogs)d"
-                            type="action"
-                            string="Log du jour"
+                            name="action_remove_old_logs"
+                            type="object"
+                            string="Supprimer les vieux logs"
                             icon="fa-list-alt"
                         />
                     </div>

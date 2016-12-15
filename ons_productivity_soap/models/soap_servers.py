@@ -13,6 +13,9 @@ from suds.transport import Transport
 import httplib2, StringIO
 from openerp.exceptions import AccessError, ValidationError, except_orm
 from openerp import api, fields, models, _
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -161,7 +164,16 @@ class ExternalServer(models.Model):
                 raise SOAPInfo("Successfull connection")
         
         return False
-    
+
+    @api.multi
+    def action_remove_old_logs(self):
+        current_date = datetime.now()
+        old_date = (current_date + relativedelta(months=-6)).strftime('%Y-%m-%d')
+        query = "delete from ons_soap_external_server_log_entry where create_date::text < '%s'" % (old_date,)
+        self._cr.execute(query)
+
+        return True
+
     def show_my_logs(self):
         model,res_id = self.env['ir.model.data'].get_object_reference('ons_productivity_soap', 'onsp_soap_srv_extern_srv2logs')
         if not model or not res_id: return False

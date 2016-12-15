@@ -8,6 +8,7 @@
 #  Copyright (c) 2016-TODAY Open Net Sàrl. <http://www.open-net.ch>
 
 from openerp import models, fields, api, _
+from openerp.exceptions import UserError
 
 class CreateProductLine(models.TransientModel):
     _name = 'onsp_wiz.create.product.line'
@@ -46,7 +47,7 @@ class CreateProductVariants(models.TransientModel):
     def prepare_values(self):
         self.ensure_one()
 
-        variant_ids = [l.value_id.id for l in self.line_ids]
+        variant_ids = [l.value_id.id for l in self.line_ids if l.value_id]
         values = {
             'product_tmpl_id': self.product_template.id,
             'attribute_value_ids': [(6, 0, variant_ids)] if variant_ids else []
@@ -56,16 +57,27 @@ class CreateProductVariants(models.TransientModel):
 
     @api.multi
     def check_unicity(self, values):
-#         filter = [('product_tmpl_id','=',values['product_tmpl_id')]
-#         if values['attribute_value_ids']:
-#             lst = []
-#             for l in values['attribute_value_ids'][2]:
-#                 item = ()
-#                 if not lst:
-#                     lst = [(]
-#                 filter.append
+        unique = True
+        query = """select att_id
+from product_attribute_value_product_product_rel r, product_product p
+where r.prod_id=p.id and p.product_tmpl_id=""" + str(values['product_tmpl_id'])
+        self._cr.execute(query)
+        existing_lst= [x[0] for x in self._cr.fetchall()]
+        if values['attribute_value_ids']:
+            new_lst = [x[2][0] for x in values['attribute_value_ids']]
+            for item in existing_lst:
+                if item in new_lst:
+                    new_lst.remove(item)
+            if not new_lst:
+                unique = False
+        else:
+            if self.product_template:
+                for prod in self.product_template.product_variant_ids:
+                    if not prod.attribute_value_ids:
+                        unique = False
+                        break
 
-        return True
+        return unique
 
     @api.multi
     def update_product_template(self):
@@ -94,8 +106,10 @@ class CreateProductVariants(models.TransientModel):
         Product = self.env['product.product']
         for wiz in self:
             values = wiz.prepare_values()
-            self.check_unicity(values)
+            if not self.check_unicity(values):
+                raise UserError("Each variant must be unique")
+
             product = Product.with_context(tracking_disable=True).create(values)
             self.update_product_template()
 
-        return {}
+        return self.product_template.action_create_variants()

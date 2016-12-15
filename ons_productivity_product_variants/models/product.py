@@ -15,12 +15,14 @@ class ProductTemplate(models.Model):
     # ---------- Fields management
 
     force_variants_upt = fields.Boolean('Force variants update')
-    main_vendor = fields.Many2one('res.partner', compute='_compute_main_vendor', string='Vendor')
+    main_vendor = fields.Many2one('res.partner', compute='_compute_suppl_infos', string='Vendor')
+    min_qty = fields.Float(compute='_compute_suppl_infos', string='Min qty')
 
     @api.multi
-    def _compute_main_vendor(self):
+    def _compute_suppl_infos(self):
         for prod in self:
             prod.main_vendor = prod.seller_ids[0].name if prod.seller_ids else False
+            prod.min_qty = prod.seller_ids[0].min_qty if prod.seller_ids else 0
 
     # ---------- Instances management
 

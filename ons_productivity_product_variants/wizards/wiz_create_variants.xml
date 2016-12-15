@@ -16,8 +16,8 @@
             <field name="arch" type="xml">
                 <tree string="Create product variant" editable="top" create="false" delete="false">
                     <field name="product_template" invisible="1"/>
-                    <field name="attribute_id" readonly="1"/>
-                    <field name="value_id" domain="[('attribute_id','=',attribute_id)]"/>
+                    <field name="attribute_id" readonly="1" string=" "/>
+                    <field name="value_id" string=" " domain="[('attribute_id','=',attribute_id)]" widget="selection"/>
                 </tree>
             </field>
         </record>
@@ -29,7 +29,7 @@
                 <form string="Create product variant">
                     <label string="Use this wizard to create variants for" colspan="4"/>
                     <field name="product_template" readonly="1"/>
-                    <span> Then, use the Close button to finish"</span>
+                    <span> Then, use the <b>Close</b> button to finish</span>
                     <group name="main">
                         <group>
                             <field name="currency_id" invisible="1"/>
