@@ -7,4 +7,4 @@
 #
 #  Copyright (c) 2016-TODAY Open-Net Ltd. <http://www.open-net.ch>
 
-from . import sale
+from . import sales
