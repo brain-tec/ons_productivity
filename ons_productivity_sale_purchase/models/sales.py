@@ -16,7 +16,6 @@ class sale_order(models.Model):
     purchase_count = fields.Integer(string='Buy Orders', compute='_detect_purchase_orders')
 
     @api.multi
-    @api.depends('procurement_group_id')
     def _detect_purchase_orders(self):
         for order in self:
             filter = [
