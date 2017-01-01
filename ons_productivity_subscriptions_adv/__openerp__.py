@@ -4,7 +4,7 @@
 
 {
     'name' : 'Open Net productivity: Subscriptions advanced',
-    'version' : '1.3.0.0',
+    'version' : '1.4.0.0',
     'author' : 'Open Net Sàrl',
     'category' : 'Extra Tools',
     'website': 'https://www.open-net.ch',
@@ -14,7 +14,8 @@
         'sale_order_dates',
         'ons_productivity_sol_req',
         'account_asset',
-        'sale_contract_asset'
+        'sale_contract_asset',
+        'sale_layout'
     ],
     'data': [
         'views/onsp_base.xml',

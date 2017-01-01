@@ -33,6 +33,9 @@ V1.2: 2016-06-03/Cyp
 V1.3: 2016-09-19/Cyp
     * Sale subscription uses the current date for new sale/invoice
 
+V1.4: 2017-01-01/Cyp
+    * New dependancy: sale_layout, so that the layout cat's id is displayed in tue quotation lines
+
 Contributors
 ------------
 

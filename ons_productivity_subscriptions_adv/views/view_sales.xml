@@ -33,6 +33,7 @@
                                             context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
                                             attrs="{'readonly': ['|', ('qty_invoiced', '&gt;', 0), ('procurement_ids', '!=', [])]}"
                                            />
+                                        <field name="sale_layout_cat_id"/>
                                         <field name="invoice_status" invisible="1"/>
                                         <field name="qty_to_invoice" invisible="1"/>
                                         <field name="qty_delivered_updateable" invisible="1"/>
@@ -83,6 +84,7 @@
                                     attrs="{'readonly': ['|', ('qty_invoiced', '&gt;', 0), ('procurement_ids', '!=', [])]}"
                                     context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
                                    />
+                                <field name="sale_layout_cat_id"/>
                                 <field name="name"/>
                                 <field name="product_uom_qty"
                                     string="Ordered Qty"
