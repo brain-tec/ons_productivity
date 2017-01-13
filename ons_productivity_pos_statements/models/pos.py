@@ -23,3 +23,9 @@ class PosSession(models.Model):
                 else:
                     statement.balance_start = 0
         return res
+
+    @api.multi
+    def wkf_action_close(self):
+        res = super(PosSession, self).wkf_action_close()
+        move_lines = self.env['account.move.line'].search([('ref', '=', self.name)])
+        move_lines.auto_reconcile_lines()
