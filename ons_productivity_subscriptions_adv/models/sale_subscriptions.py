@@ -425,6 +425,8 @@ class SaleSubscription(osv.osv):
         return values
 
     def _prepare_invoice(self, cr, uid, contract, context={}):
+        if not contract.recurring_next_date:
+            contract.recurring_next_date = datetime.now().strftime('%Y-%m-%d')
         values = self._prepare_invoice_data(cr, uid, contract, context=context)
         values['invoice_line_ids'] = self._prepare_invoice_lines(cr, uid, contract, values.get('fiscal_position_id', False), context=context)
         return values
