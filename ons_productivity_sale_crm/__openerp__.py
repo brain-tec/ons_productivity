@@ -14,6 +14,7 @@
     'website': 'http://www.open-net.ch',
     'images' : [],
     'depends' : [
+        'account',
         'sale',
         'sale_crm',
         'sales_team'
@@ -21,7 +22,9 @@
     'data': [
         'views/view_sale_crm.xml',
         'views/view_users.xml',
-        'views/view_sale_crm_dashboard.xml'
+        'views/view_sale_crm_dashboard.xml',
+        'views/view_sale_team.xml',
+        'views/view_invoice.xml'
     ],
     'qweb': [
         "static/src/xml/onsp_sales_crm_dashboard.xml",

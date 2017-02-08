@@ -9,3 +9,5 @@
 from . import sale_crm
 from . import users
 from . import ir_ui_view
+from . import sale_team
+from . import invoice

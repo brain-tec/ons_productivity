@@ -13,7 +13,10 @@
             <field name="name">Open Net Productivity: Sale CRM Dashboard</field>
             <field name="model">crm.lead</field>
             <field name="arch" type="xml">
-                <onsp_sales_crm_dashboard class="oe_background_grey o_kanban_dashboard o_salesteam_kanban" default_group_by="stage_id" create="0" group_create="0">
+                <onsp_sales_crm_dashboard
+                    class="oe_background_grey o_kanban_dashboard o_salesteam_kanban"
+                    default_group_by="stage_id" group_create="0" folded="false">
+
                     <field name="stage_id" options='{"group_by_tooltip": {"requirements": "Description", "legend_priority": "Use of stars"}}'/>
                     <field name="color"/>
                     <field name="priority"/>
@@ -26,6 +29,7 @@
                     <field name="partner_id"/>
                     <field name="active"/>
                     <field name="company_currency"/>
+
                     <templates>
                         <field name="date_deadline"/>
                         <t t-name="kanban-box">

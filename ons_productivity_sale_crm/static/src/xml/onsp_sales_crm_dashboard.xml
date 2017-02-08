@@ -30,10 +30,10 @@
                                 Next Actions
                             </a>
                         </td>
-                        <td class="o_main" title="Your Pipeline" rowspan="2">
-                            <a href="#" class="o_dashboard_action" name="crm.action_your_pipeline">
+                        <td class="o_main" title="Other Pipelines" rowspan="2">
+                            <a href="#" class="o_dashboard_action" name="ons_productivity_sale_crm.action_open_pipeline_dashboard">
                                 <span class="fa fa-th-large fa-3x"/><br/>
-                                Your Pipeline
+                                Other Pipelines
                             </a>
                         </td>
                     </tr>
@@ -74,7 +74,7 @@
                             This Month
                         </td>
                         <td class="o_secondary" title="Invoiced this month">
-                            <a href="#" class="o_dashboard_action" name="ons_productivity_sale_crm.action_invoiced_monthly">
+                            <a href="#" class="o_dashboard_action" name="ons_productivity_sale_crm.action_dashboard_open_invoices_list" data-extra="month">
                                 <span class="o_highlight">
                                     <t t-esc="widget.render_monetary_field(values['invoiced']['month'], values['currency_id'])"/>
                                 </span><br/>
@@ -82,7 +82,7 @@
                             </a>
                         </td>
                         <td class="o_secondary" title="Invoiced this year">
-                            <a href="#" class="o_dashboard_action" name="ons_productivity_sale_crm.action_invoiced_yearly">
+                            <a href="#" class="o_dashboard_action" name="ons_productivity_sale_crm.action_dashboard_open_invoices_list" data-extra="year">
                                 <span class="o_highlight">
                                     <t t-esc="widget.render_monetary_field(values['invoiced']['year'], values['currency_id'])"/>
                                 </span><br/>
@@ -90,7 +90,7 @@
                             </a>
                         </td>
                         <td class="o_secondary" title="Planned">
-                            <a href="#" class="o_dashboard_action" name="ons_productivity_sale_crm.action_invoices_yearly">
+                            <a href="#" class="o_dashboard_action" name="ons_productivity_sale_crm.action_dashboard_open_invoices_list" data-extra="plan">
                                 <span class="o_highlight">
                                     <t t-esc="widget.render_monetary_field(values['planned']['year'], values['currency_id'])"/>
                                 </span><br/>
@@ -100,7 +100,7 @@
                     </tr>
                     <tr>
                         <td class="o_text">
-                            Objectif pro rata temporis
+                            Pro rata temporis Objectif
                         </td>
                         <td class="o_secondary" title="Planned this month" >
                             <t t-esc="widget.render_monetary_field(values['planned']['month'], values['currency_id'])"/>

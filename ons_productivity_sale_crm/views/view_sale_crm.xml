@@ -31,7 +31,7 @@
 
         <!-- Case Teams Action -->
         <record model="ir.actions.act_window" id="onsp_sale_crm_dashboard_act">
-            <field name="name">Dashboard2</field>
+            <field name="name">Pipeline Dashboard</field>
             <field name="res_model">crm.lead</field>
             <field name="view_type">form</field>
             <field name="view_mode">onsp_sales_crm_dashboard,form</field>
@@ -48,33 +48,112 @@
             </field>
         </record>
 
+        <record model="ir.actions.server" id="action_open_pipeline_dashboard">
+            <field name="name">Pipeline Dashboard</field>
+            <field name="model_id" ref="ons_productivity_sale_crm.model_crm_lead"/>
+            <field name="state">code</field>
+            <field name="code">action = self.action_open_pipeline_dashboard(cr, uid, context=context)</field>
+            <field eval="True" name="condition"/>
+        </record>
+
         <menuitem
             id="ons_productivity_sale_crm.menu_onsp_sales_crm_act"
-            action="onsp_sale_crm_dashboard_act"
+            action="action_open_pipeline_dashboard"
             sequence="2"
-            parent="base.menu_base_partner"
-            name="Dashboard2"/>
+            parent="base.menu_base_partner"/>
 
+        <record model="ir.ui.view" id="crm_case_kanban_view_leads">
+            <field name="name">CRM - Leads Kanban</field>
+            <field name="model">crm.lead</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="stage_id" class="o_kanban_small_column">
+                    <field name="stage_id" options='{"group_by_tooltip": {"requirements": "Description", "legend_priority": "Use of stars"}}'/>
+                    <field name="color"/>
+                    <field name="priority"/>
+                    <field name="planned_revenue"/>
+                    <field name="user_email"/>
+                    <field name="user_id"/>
+                    <field name="partner_address_email"/>
+                    <field name="message_needaction_counter"/>
+                    <field name="tag_ids"/>
+                    <field name="partner_id"/>
+                    <field name="active"/>
+                    <field name="company_currency"/>
+                    <templates>
+                        <field name="date_deadline"/>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click">
+                                <div class="o_dropdown_kanban dropdown">
 
-        <record model="ir.actions.act_window" id="ons_productivity_sale_crm.action_invoiced_monthly">
-            <field name="name">My Invoices (this month)</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">account.invoice</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form,calendar,graph</field>
-            <field name="domain">[('type','=', 'out_invoice'), ('state', 'in', ['open', 'paid']),('user_id','=',uid),('date','&gt;=',time.strftime('%Y-%m-01'))]</field>
-            <field name="context">{'type':'out_invoice'}</field>
+                                    <a class="dropdown-toggle btn" data-toggle="dropdown" href="#" >
+                                        <span class="fa fa-bars fa-lg"/>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <t t-if="widget.editable"><li><a type="edit">Edit</a></li></t>
+                                        <t t-if="widget.deletable"><li><a type="delete">Delete</a></li></t>
+                                        <li t-if="! record.active.value"><a name="action_set_active" type="object">Unarchive</a></li>
+                                        <li t-if="record.active.value"><a name="action_set_unactive" type="object">Archive</a></li>
+                                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                                <div class="oe_kanban_content">
+                                    <div>
+                                        <field name="tag_ids"/>
+                                    </div>
+                                    <div>
+                                        <strong><field name="name"/></strong>
+                                    </div>
+                                    <div class="text-muted">
+                                        <t t-if="record.planned_revenue.raw_value"><field name="planned_revenue" widget="monetary" options="{'currency_field': 'company_currency'}"/></t> <span t-if="record.partner_id.value"> - <t t-esc="record.partner_id.value"/></span>
+                                    </div>
+                                    <div class="text-muted">
+                                        <t t-if="record.date_action.raw_value and record.date_action.raw_value lt (new Date())" t-set="red">oe_kanban_text_red</t>
+                                        <span t-attf-class="#{red || ''}">
+                                            <field name="date_action"/>
+                                            <t t-if="record.date_action.raw_value"> : </t>
+                                            <field name="next_activity_id"/>
+                                        </span>
+                                    </div>
+                                    <div class="text-muted text-right" style="font-style:italic;">
+                                        <field name="user_id"/>
+                                    </div>
+                                    <div class="o_kanban_footer">
+                                        <field name="priority" widget="priority" groups="base.group_user"/>
+                                        <t t-if="record.message_needaction_counter.raw_value">
+                                            <span class='oe_kanban_mail_new' title='Unread Messages'><i class='fa fa-comments'/><t t-raw="record.message_needaction_counter.raw_value"/></span>
+                                        </t>
+                                        <img t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)" t-att-title="record.user_id.value" width="24" height="24" class="oe_kanban_avatar pull-right"/>
+                                    </div>
+                                </div>
+                                <div class="oe_clear"></div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
         </record>
 
-        <record model="ir.actions.act_window" id="ons_productivity_sale_crm.action_invoiced_yearly">
-            <field name="name">My Invoices (this year)</field>
+        <record model="ir.actions.act_window" id="crm_lead_action_activities">
+            <field name="name">Team Pipeline</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">account.invoice</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form,calendar,graph</field>
-            <field name="domain">[('type','=', 'out_invoice'), ('state', 'in', ['open', 'paid']),('user_id','=',uid),('date','&gt;=',time.strftime('%Y-01-01'))]</field>
-            <field name="context">{'type':'out_invoice'}</field>
+            <field name="res_model">crm.lead</field>
+            <field name="view_mode">kanban,tree,form,calendar,pivot,graph</field>
+            <field name="search_view_id" ref="crm.view_crm_case_opportunities_filter"/>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'kanban', 'view_id': ref('crm_case_kanban_view_leads')}),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('crm.crm_lead_view_tree_activity')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('crm.crm_case_form_view_oppor')}),
+                          (0, 0, {'view_mode': 'calendar'}), (0, 0, {'view_mode': 'pivot'}), (0, 0, {'view_mode': 'graph'})]"/>
+            <field name="domain">[]</field>
+            <field name="context">{}
+            </field>
+            <field name="help" type="html">
+                <p>
+                   Here is the list of your next activities. Those are linked to your opportunities.
+                   To set a next activity, go on an opportunity and add one. It will then appear in this list.
+                </p>
+            </field>
         </record>
-
 
 </odoo>

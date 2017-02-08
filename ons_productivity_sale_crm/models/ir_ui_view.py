@@ -12,6 +12,7 @@ from openerp import models, fields
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
 
+    "Extends the view type lists"
     type = fields.Selection([
             ('tree','Tree'),
             ('form','Form'),
@@ -21,7 +22,9 @@ class IrUiView(models.Model):
             ('diagram','Diagram'),
             ('gantt', 'Gantt'),
             ('kanban', 'Kanban'),
+            # Added by the official sale_team module
             ('sales_team_dashboard', 'Sales Team Dashboard'),
+            # New
             ('onsp_sales_crm_dashboard', 'Sales CRM Dashboard'),
             ('search','Search'),
             ('qweb', 'QWeb')], string='View Type')

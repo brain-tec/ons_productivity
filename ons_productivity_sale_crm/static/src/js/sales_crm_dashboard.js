@@ -44,7 +44,7 @@ var OnspSalesCrmDashboardView = KanbanView.extend({
             self.$el.css({display:'block'});
             self.$el.attr('class', 'o_cannot_create')
             // ... but the lower kanban part must remain "flex"
-            self.$el.wrapInner( "<div class='o_kanban_view o_kanban_small_column o_kanban_grouped ui-sortable' style='display: flex;'/>" )
+            self.$el.wrapInner( "<div class='o_kanban_view o_kanban_group ui-sortable' style='display: flex;'/>" )
 
             //$(sales_dashboard).prependTo(self.$el);
             self.$el.prepend($(sales_dashboard));
@@ -71,9 +71,15 @@ var OnspSalesCrmDashboardView = KanbanView.extend({
             } else if (action_extra === 'overdue') {
                 additional_context['search_default_overdue'] = 1;
             }
-        } else if (action_name === 'crm.action_your_pipeline') {
+        } else if (action_name === 'ons_productivity_sale_crm.action_open_pipeline_dashboard') {
+            additional_context['ons_search_for_the_team'] = 1;
             if (action_extra === 'overdue') {
+                action_name = 'crm.crm_lead_action_activities';
                 additional_context['search_default_overdue'] = 1;
+            }
+        } else if (action_name === 'ons_productivity_sale_crm.action_dashboard_open_invoices_list') {
+            if (action_extra) {
+                additional_context['invoices_filter'] = action_extra;
             }
         }
 
