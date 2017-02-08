@@ -29,6 +29,8 @@ class CreateProductVariants(models.TransientModel):
     @api.model
     def default_get(self, fields_list):
         res = super(CreateProductVariants, self).default_get(fields_list)
+
+        product_variant = self.env['product.product'].browse(self.env.context.get('default_product_variant', False))
         product_template = self.env['product.template'].browse(self.env.context.get('default_product_template', False))
         if product_template:
             res['product_template'] = product_template.id
@@ -38,7 +40,13 @@ class CreateProductVariants(models.TransientModel):
                     'product_template': product_template.id,
                     'attribute_id': line.attribute_id.id
                 }
+                if product_variant:
+                    for var in product_variant.attribute_value_ids:
+                        if var.attribute_id == line.attribute_id:
+                            vals['value_id'] = var.id
+
                 lst.append((0,0,vals))
+
             res['line_ids'] = lst
 
         return res
@@ -104,6 +112,7 @@ where r.prod_id=p.id and p.product_tmpl_id=""" + str(values['product_tmpl_id'])
     @api.multi
     def action_create_variant(self):
         Product = self.env['product.product']
+        product = False
         for wiz in self:
             values = wiz.prepare_values()
             if not self.check_unicity(values):
@@ -112,4 +121,10 @@ where r.prod_id=p.id and p.product_tmpl_id=""" + str(values['product_tmpl_id'])
             product = Product.with_context(tracking_disable=True).create(values)
             self.update_product_template()
 
-        return self.product_template.action_create_variants()
+        res = self.product_template.action_create_variants()
+        if product:
+            res['context'].update({
+                'default_product_variant': product.id
+            })
+
+        return res
