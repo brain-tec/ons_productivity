@@ -369,7 +369,7 @@ class SaleSubscription(osv.osv):
             if month:
                 asset_cat = self.pool.get('account.asset.category').search(cr, uid, [('type','=','sale'),('active','=',True),('method_number','=',month)], context=context)
                 if asset_cat:
-                    asset_cat = asset_cat[0]
+                    asset_cat = self.pool.get('account.asset.category').browse(cr, uid, asset_cat[0], context=context)
                 else:
                     asset_cat = False
             if not asset_cat and line.product_id.product_tmpl_id.deferred_revenue_category_id:
