@@ -13,7 +13,7 @@
         <!-- 
             More for the products 
         -->
-        <record model="ir.ui.view" id="onsp_products_search">
+<!--         <record model="ir.ui.view" id="onsp_products_search">
             <field name="name">Open-Net productivity: products search</field>
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_search_form_view"/>
@@ -35,7 +35,7 @@
                     <field name="seller_ids" invisible="1"/>
                 </field>
             </field>
-        </record>
+        </record> -->
 
         <record model="ir.ui.view" id="onsp_products_pricelist_list">
             <field name="name">Open-Net productivity: products price_list</field>

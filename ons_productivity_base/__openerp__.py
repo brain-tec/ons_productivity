@@ -14,7 +14,8 @@
     ],
     'data': [
         'views/view_res_users.xml',
-        'views/onsp_base.xml'
+        'views/onsp_base.xml',
+        'views/products_view.xml'
     ],
     'installable': True,
     'auto_install': False,
