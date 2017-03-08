@@ -10,6 +10,7 @@
     'website': 'http://www.open-net.ch',
     'depends' : [
         'hr',
+        'product'
     ],
     'data': [
         'views/view_res_users.xml',
