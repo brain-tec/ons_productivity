@@ -44,9 +44,9 @@
             <field name="priority" eval="17"/>
             <field name="arch" type="xml">
                 <field name="sequence" position="replace"/>
-                <field name="name" position="before">
+                <xpath expr="//tree/field[@name='name']" position="before">
                     <field name="sequence"/>
-                </field>
+                </xpath>
             </field>
         </record>
 
