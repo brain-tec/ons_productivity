@@ -16,6 +16,7 @@ class HrEmployee(models.Model):
     impot_source_rate = fields.Float(compute='_get_impot_source_rate', string="Taux d'impôt à la source")
     impot_ecclesiastique = fields.Boolean(string="Avec l'impôt ecclésiastique ?")
     one_revenue = fields.Boolean(string="Un seul revenu ?")
+    wage_supplement = fields.Float(string="Montant supp. calcul impôt à la source")
 
     @api.multi
     def _get_impot_source_rate(self):
@@ -49,7 +50,7 @@ class HrEmployee(models.Model):
             if canton:
                 source_rates = employee.read_file(
                     canton,
-                    employee.contract_id.wage,
+                    employee.contract_id.wage+employee.wage_supplement,
                     nb_child, tarif_group,
                     employee.impot_ecclesiastique
                 )
@@ -63,8 +64,8 @@ class HrEmployee(models.Model):
     @api.model
     def read_file(self, canton, wage, nb_child, tarif_group, eccles):
         directory_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-        if not os.path.isfile('%s/tar16%s.txt' % (directory_path, canton)): return []
-        f = open('%s/tar16%s.txt' % (directory_path, canton), 'r')
+        if not os.path.isfile('%s/tar17%s.txt' % (directory_path, canton)): return []
+        f = open('%s/tar17%s.txt' % (directory_path, canton), 'r')
         lines = f.read().splitlines()
         parsed_lines = []
         for line in lines:

@@ -12,6 +12,7 @@
                     <field name="impot_source_rate"/>
                     <field name="one_revenue" attrs="{'invisible':[('marital', '!=', 'married')]}"/>
                     <field name="impot_ecclesiastique"/>
+                    <field name="wage_supplement"/>
                 </group>
             </xpath>
         </field>
