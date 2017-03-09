@@ -418,6 +418,7 @@ class SaleSubscription(osv.osv):
         values = super(SaleSubscription, self)._prepare_invoice_data(cr, uid, contract, context=context)
 
         values.update({
+            'comment': '',
             'subscription_id': contract.id,
             'date_invoice': datetime.now().strftime('%Y-%m-%d'),
         })
@@ -586,6 +587,8 @@ class SaleSubscription(osv.osv):
         if not contracts:
             return invoice_ids
 
+        current_user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
+
         query = """SELECT a.company_id, array_agg(sub.id) as ids
 FROM sale_subscription as sub
 JOIN account_analytic_account as a ON
@@ -599,6 +602,10 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                 'force_company': company_id
             })
             for contract in self.browse(cr, uid, ids, context=ctx):
+                lang = current_user.lang
+                if contract.partner_id and contract.partner_id.lang:
+                    lang = contract.partner_id.lang
+                ctx['lang'] = lang
 
                 try:
                     # Prepare the invoice. Its lines list will be empty if there's nothing yet to invoice
@@ -608,7 +615,7 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                         salesman = uid
 
                     if contract.recurring_generates == 'sale':
-                        sale_values = self._prepare_sale(cr, uid, contract, context=context)
+                        sale_values = self._prepare_sale(cr, uid, contract, context=ctx)
                         if not sale_values.get('sale_line_ids', []):
                             # Nothing to sale, skip this one
                             continue
@@ -622,15 +629,15 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                             domain = self.setup_sale_filter(cr, uid, contract, [
                                     ('partner_id', '=', contract.partner_id.id),
                                     ('state', '=', 'sale')
-                                ], context=context)
-                            lst = self.pool('sale.order').search(cr, uid, domain, context=context)
+                                ], context=ctx)
+                            lst = self.pool('sale.order').search(cr, uid, domain, context=ctx)
                         if not lst:
                             domain = self.setup_sale_filter(cr, uid, contract, [
                                     ('partner_id', '=', contract.partner_id.id),
                                     ('state', '=', 'draft')
-                                ], context=context)
+                                ], context=ctx)
                             
-                            lst = self.pool('sale.order').search(cr, uid, domain, context=context)
+                            lst = self.pool('sale.order').search(cr, uid, domain, context=ctx)
 
                         # A contract line may request a new sale
                         for line in sale_lines:
@@ -641,15 +648,15 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                         if lst:
                             sale_id = lst[0]
                         else:
-                            sale_id = self.pool('sale.order').create(cr, salesman, sale_values, context=context)
+                            sale_id = self.pool('sale.order').create(cr, salesman, sale_values, context=ctx)
 
-                        sale = self.pool('sale.order').browse(cr, uid, sale_id, context=context)
+                        sale = self.pool('sale.order').browse(cr, uid, sale_id, context=ctx)
                         for val_item in sale_lines:
                             val = val_item[2]
-                            subscr_line = self.pool.get('sale.subscription.line').browse(cr, uid, val['subscr_line_id'], context=context)
+                            subscr_line = self.pool.get('sale.subscription.line').browse(cr, uid, val['subscr_line_id'], context=ctx)
                             val['order_id'] = sale_id
-                            sale_line_id = self.pool('sale.order.line').create(cr, salesman, val, context=context)
-                            self.pool('sale.order.line')._compute_tax_id(cr, uid, [sale_line_id], context=context)
+                            sale_line_id = self.pool('sale.order.line').create(cr, salesman, val, context=ctx)
+                            self.pool('sale.order.line')._compute_tax_id(cr, uid, [sale_line_id], context=ctx)
                             if subscr_line.recurring_rule_type == 'none':
                                 subscr_line.write({'recurring_next_date': s_current_date, 'is_active': False})
 
@@ -678,11 +685,11 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                                 next_date += relativedelta(years=+interval)
 
                         # Load the line with the salesman's context
-                            self.pool.get('sale.subscription.line').write(cr, salesman, line.id, {'recurring_next_date': next_date.strftime('%Y-%m-%d')}, context=context)
+                            self.pool.get('sale.subscription.line').write(cr, salesman, line.id, {'recurring_next_date': next_date.strftime('%Y-%m-%d')}, context=ctx)
                             if automatic:
                                 cr.commit()
                     else:
-                        invoice_values = self._prepare_invoice(cr, uid, contract, context=context)
+                        invoice_values = self._prepare_invoice(cr, uid, contract, context=ctx)
                         if not invoice_values.get('invoice_line_ids', []):
                             # Nothing to invoice, skip this one
                             continue
@@ -694,8 +701,8 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                                 ('type', '=', 'out_invoice'),
                                 ('partner_id', '=', contract.partner_id.id),
                                 ('state', '=', 'draft')
-                            ], context=context)
-                        lst = self.pool('account.invoice').search(cr, uid, domain, context=context)
+                            ], context=ctx)
+                        lst = self.pool('account.invoice').search(cr, uid, domain, context=ctx)
 
                         # A contract line may request a new sale
                         for line in invoice_lines:
@@ -706,17 +713,17 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                         if lst:
                             invoice_id = lst[0]
                         else:
-                            invoice_id = self.pool('account.invoice').create(cr, salesman, invoice_values, context=context)
+                            invoice_id = self.pool('account.invoice').create(cr, salesman, invoice_values, context=ctx)
 
-                        invoice = self.pool('account.invoice').browse(cr, uid,  invoice_id, context=context)
+                        invoice = self.pool('account.invoice').browse(cr, uid,  invoice_id, context=ctx)
                         for val_item in  invoice_lines:
                             val = val_item[2]
-                            subscr_line = self.pool.get('sale.subscription.line').browse(cr, uid, val['subscr_line_id'], context=context)
+                            subscr_line = self.pool.get('sale.subscription.line').browse(cr, uid, val['subscr_line_id'], context=ctx)
                             val['invoice_id'] = invoice_id
-                            self.pool('account.invoice.line').create(cr, salesman, val, context=context)
+                            self.pool('account.invoice.line').create(cr, salesman, val, context=ctx)
                             if subscr_line.recurring_rule_type == 'none':
                                 subscr_line.write({'recurring_next_date': s_current_date, 'is_active': False})
-                        self.pool['account.invoice'].compute_taxes(cr, salesman, invoice_id, context=context)
+                        self.pool['account.invoice'].compute_taxes(cr, salesman, invoice_id, context=ctx)
 
                         invoice_ids.append(invoice_id)
 
@@ -743,7 +750,7 @@ WHERE sub.id IN %s GROUP BY a.company_id"""
                                 next_date += relativedelta(years=+interval)
 
                         # Load the line with the salesman's context
-                            self.pool.get('sale.subscription.line').write(cr, salesman, line.id, {'recurring_next_date': next_date.strftime('%Y-%m-%d')}, context=context)
+                            self.pool.get('sale.subscription.line').write(cr, salesman, line.id, {'recurring_next_date': next_date.strftime('%Y-%m-%d')}, context=ctx)
                             if automatic:
                                 cr.commit()
                 except Exception:
