@@ -55,7 +55,7 @@ class CrmLead(models.Model):
         # Invoiced this month
         account_invoice_domain = [
             ('state', 'in', ['open', 'paid']),
-            ('date', '>=', date.today().replace(day=1)),
+            ('date_invoice', '>=', date.today().replace(day=1)),
             ('type', 'in', ['out_invoice', 'out_refund'])
         ]
         if uids:
@@ -68,7 +68,7 @@ class CrmLead(models.Model):
         # Invoiced this year
         account_invoice_domain = [
             ('state', 'in', ['open', 'paid']),
-            ('date', '>=', date.today().replace(day=1).replace(month=1)),
+            ('date_invoice', '>=', date.today().replace(day=1).replace(month=1)),
             ('type', 'in', ['out_invoice', 'out_refund'])
         ]
         if uids:
