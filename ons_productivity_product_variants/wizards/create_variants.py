@@ -65,27 +65,20 @@ class CreateProductVariants(models.TransientModel):
 
     @api.multi
     def check_unicity(self, values):
-        unique = True
-        query = """select att_id
-from product_attribute_value_product_product_rel r, product_product p
-where r.prod_id=p.id and p.product_tmpl_id=""" + str(values['product_tmpl_id'])
-        self._cr.execute(query)
-        existing_lst= [x[0] for x in self._cr.fetchall()]
-        if values['attribute_value_ids']:
-            new_lst = [x[2][0] for x in values['attribute_value_ids']]
-            for item in existing_lst:
-                if item in new_lst:
-                    new_lst.remove(item)
-            if not new_lst:
-                unique = False
+        found = False
+        if not values['attribute_value_ids']:
+            for prod in self.product_template.product_variant_ids:
+                if not prod.attribute_value_ids:
+                    found = True
+                    break
         else:
-            if self.product_template:
-                for prod in self.product_template.product_variant_ids:
-                    if not prod.attribute_value_ids:
-                        unique = False
-                        break
+            to_check = set(values['attribute_value_ids'][0][2])
+            for prod in self.product_template.product_variant_ids:
+                if set([x.id for x in prod.attribute_value_ids]) & to_check == to_check:
+                    found = True
+                    break
 
-        return unique
+        return not found
 
     @api.multi
     def update_product_template(self):
