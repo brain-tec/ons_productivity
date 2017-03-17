@@ -23,10 +23,12 @@ class SaleOrder(models.Model):
             for line in order.order_line.filtered(lambda l: not float_is_zero(l.qty_to_invoice, precision_digits=precision)):
                 price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
                 billable += line.qty_to_invoice * price
+                billable += line.price_tax
 
             # Then, deduct what have already invoiced in advance
             for line in order.order_line.filtered(lambda l: l.product_id and l.product_id == down_product_id):
                 billable -= line.qty_to_invoice * line.price_unit
+
 
             if billable < 0.0:
                 billable = 0.0
