@@ -11,6 +11,12 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     amount_billable = fields.Monetary(string='Billable Amount', store=True, readonly=True, compute='_comp_amount_billable')
+    fully_billable = fields.Boolean(string="Is fully billable ?", compute="_is_fully_billable", store=True)
+
+    @api.depends('amount_billable')
+    def _is_fully_billable(self):
+        for order in self:
+            order.fully_billable = (order.amount_billable == order.amount_total)
 
     @api.depends('order_line.qty_to_invoice')
     def _comp_amount_billable(self):
