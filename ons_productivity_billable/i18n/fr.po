@@ -30,3 +30,8 @@ msgstr "Montant facturable"
 msgid "Sale Order"
 msgstr "Commande client"
 
+#. module: ons_productivity_billable
+#: model:ir.model.fields,field_description:ons_productivity_billable.field_sale_order_fully_billable
+msgid "Is fully billable ?"
+msgstr "Entièrement facturable ?"
+
