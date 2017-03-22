@@ -55,7 +55,7 @@
             <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
             <field name="priority" eval="17"/>
             <field name="arch" type="xml">
-                <field name="applied_on" position="replace"/>
+                <field name="applied_on" position="before">
                     <field name="sequence"/>
                 </field>
             </field>
