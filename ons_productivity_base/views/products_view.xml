@@ -49,6 +49,17 @@
                 </xpath>
             </field>
         </record>
-
+        <record model="ir.ui.view" id="onsp_products_pricelist_list_item">
+            <field name="name">Open-Net productivity: products price_list item</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <field name="applied_on" position="replace"/>
+                    <field name="sequence"/>
+                </field>
+            </field>
+        </record>
+    
     </data>
 </openerp>
