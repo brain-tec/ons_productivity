@@ -4,10 +4,11 @@
   Module: ons_productivity_subscriptions_adv
 
   Created by cyp@open-net.ch
+  MIG[10.0] by lfr@open-net.ch (2017)
 
   Copyright (c) 2016-TODAY Open-Net Ltd. All rights reserved.
 -->
-<openerp>
+<odoo>
     <data>
 
         <record model="ir.ui.view" id="onsp_view_sale_subscription_form">
@@ -23,14 +24,14 @@
                         icon="fa-dollar"
                         name="action_subscription_invoice"
                         type="object"
-                        attrs="{'invisible': ['|',('type','=','template'),('invoices_count','=',0)]}">
+                        attrs="{'invisible': ['|',('invoices_count','=',0)]}">
                         <field name="invoices_count" widget="statinfo" string="Invoice(s)"/>
                     </button>
                     <button class="oe_stat_button"
                         icon="fa-dollar"
                         name="action_subscription_sale"
                         type="object"
-                        attrs="{'invisible': ['|',('type','=','template'),('sales_count','=',0)]}">
+                        attrs="{'invisible': ['|',('sales_count','=',0)]}">
                         <field name="sales_count" widget="statinfo" string="Sale(s)"/>
                     </button>
                 </div>
@@ -39,23 +40,20 @@
                         name="action_recurring_invoice"
                         string="Generate an Invoice"
                         type="object"
-                        attrs="{'invisible': ['|','|',('type','!=','contract'),('recurring_generates','=','sale'),('state','!=','open')]}" />
+                        attrs="{'invisible': ['|','|',('recurring_generates','=','sale'),('state','!=','open')]}" />
                     <button
                         name="action_recurring_invoice"
                         string="Generate a Sale"
                         type="object"
-                        attrs="{'invisible': ['|','|',('type','!=','contract'),('recurring_generates','!=','sale'),('state','!=','open')]}" />
+                        attrs="{'invisible': ['|','|',('recurring_generates','!=','sale'),('state','!=','open')]}" />
                 </field>
                 <field name="pricelist_id" position="after">
                     <field name="recurring_generates"/>
                 </field>
-                <label for="recurring_interval" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </label>
-                <xpath expr="//group[@name='main']/group[2]/div" position="attributes">
+                <!-- <xpath expr="//group[@name='main']/group[2]" position="attributes">
                     <attribute name="attrs"/>
                     <attribute name="invisible">1</attribute>
-                </xpath>
+                </xpath> -->
                 <xpath expr="//field[@name='recurring_invoice_line_ids']/tree//field[@name='price_unit']" position="before">
                     <field name="requested_date" invisible="context.get('default_type') == 'template'"/>
                     <field name="recurring_rule_type"/>
@@ -72,19 +70,10 @@
                 <xpath expr="//field[@name='recurring_invoice_line_ids']/tree//field[@name='product_id']" position="before">
                     <field name="sequence" widget='handle'/>
                 </xpath>
-                <field name="template_id" position="attributes">
-                    <attribute name="on_change">on_change_template(template_id, date_start)</attribute>
-                </field>
                 <field name="template_id" position="after">
-                    <field name="analytic_account_id" readonly="1" required="0" attrs="{'invisible': [('type','=','template')]}"/>
+                    <field name="analytic_account_id"/>
                     <field name="asset_category_id" context="{'default_type':'sale'}"/>
-                    <field name="tag_ids" widget="many2many_tags" attrs="{'invisible': [('type','!=','template')]}"/>
-                </field>
-                <field name="date_start" position="attributes">
-                    <attribute name="attrs">{'invisible':[('type','=','template')]}</attribute>
-                </field>
-                <field name="date" position="attributes">
-                    <attribute name="attrs">{'invisible':[('type','=','template')]}</attribute>
+                    <field name="tag_ids" widget="many2many_tags"/>
                 </field>
                 <xpath expr="//field[@name='recurring_invoice_line_ids']/tree//field[@name='sold_quantity']" position="attributes">
                     <attribute name="string">Actual Qty</attribute>
@@ -124,4 +113,4 @@
         </record>
 
     </data>
-</openerp>
+</odoo>

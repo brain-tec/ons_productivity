@@ -14,8 +14,7 @@
         'sale_order_dates',
         'ons_productivity_sol_req',
         'account_asset',
-        'sale_contract_asset',
-        'sale_layout'
+        'sale_contract_asset'
     ],
     'data': [
         'views/onsp_base.xml',

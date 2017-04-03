@@ -7,7 +7,7 @@
 #  Copyright (c) 2016-TODAY Open-Net Ltd. <http://www.open-net.ch>
 
 
-from openerp import api, models
+from odoo import api, models
 
 
 class SaleAdvancePaymentInv(models.TransientModel):
