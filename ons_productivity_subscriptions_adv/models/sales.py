@@ -161,3 +161,7 @@ class SaleOrderLine(models.Model):
     @api.multi
     def invoice_line_create(self, invoice_id, qty):
         super(SaleOrderLine, self).invoice_line_create(invoice_id, qty)
+
+class SaleLayoutCategory(models.Model):
+    _inherit = 'sale.layout_category'
+    # sale_subscription_line_ids = One2many('sale.subscription.line')

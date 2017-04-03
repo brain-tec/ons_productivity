@@ -725,6 +725,10 @@ class SaleSubscriptionLine(models.Model):
         string='New sale/invoice',
         default=lambda *a: False)
 
+    sale_layout_cat_id = fields.Many2one(
+        'sale.layout_category',
+        string='Sale Layout Category')
+
     # ---------- Utils
     @api.multi
     def _compute_tax_id(self):
