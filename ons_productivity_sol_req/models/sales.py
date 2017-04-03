@@ -4,6 +4,7 @@
 #  Module: ons_productivity_sol_req
 #
 #  Created by cyp@open-net.ch
+#  MIG[10.0] by lfr@open-net.ch (2017)
 #
 #  Copyright (c) 2015-TODAY Open-Net Ltd. All rights reserved.
 ##############################################################################
@@ -13,8 +14,8 @@
 ##############################################################################
 
 
-from openerp import models, fields, api
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from odoo import models, fields, api
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import datetime, timedelta
 
 
@@ -32,9 +33,10 @@ class SaleOrderLine(models.Model):
 
     # ---------- Tools
 
-    def _prepare_order_line_procurement(self, cr, uid, ids, group_id=False, context=None):
-        vals = super(SaleOrderLine, self)._prepare_order_line_procurement(cr, uid, ids, group_id=group_id, context=context)
-        line = self.browse(cr, uid, ids, context=context)
+    @api.multi
+    def _prepare_order_line_procurement(self, group_id=False):
+        vals = super(SaleOrderLine, self)._prepare_order_line_procurement(group_id=group_id)
+        line = self.ensure_one()
         if line.requested_date:
             days = line.order_id.company_id.security_lead
             if line.product_id.seller_ids and line.product_id.seller_ids[0].delay:
@@ -68,6 +70,5 @@ class SaleOrder(models.Model):
 
     hide_requested_date = fields.Boolean(compute='_check_requested_dates', 
                                          string='Must hide requested date',
-                                         default=False
-    )
+                                         default=False)
 
