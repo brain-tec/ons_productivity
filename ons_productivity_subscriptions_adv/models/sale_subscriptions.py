@@ -557,12 +557,9 @@ class SaleSubscription(models.Model):
                     if sub.recurring_generates == 'sale':
                         _logger.info("---SALE---")
                         sale_values = sub._prepare_sale()
-                        _logger.info("START")
-                        _logger.info("INFOOO: %s" % sale_values)
                         if not sale_values.get('sale_line_ids', []):
                             # Nothing to sale, skip this one
                             continue
-                        _logger.info("HERE_+1")
                         sale_lines = sale_values['sale_line_ids']
                         sale_values['sale_line_ids'] = []
 
@@ -589,7 +586,7 @@ class SaleSubscription(models.Model):
                                 lst = False
                                 del line[2]['use_new_so_inv']
 
-                        if len(lst) != 0:
+                        if lst:
                             sale_id = lst[0]
                         else:
                             sale_values['user_id'] = salesman
@@ -604,7 +601,6 @@ class SaleSubscription(models.Model):
                             if subscr_line.recurring_rule_type == 'none':
                                 subscr_line.write({'recurring_next_date': current_date, 'is_active': False})
                         sale_line_id.with_context(ctx)._compute_tax_id()
-                        _logger.info("HERE_+2")
                         invoices.append(sale_id)
                     else:
                         _logger.info("---INVOICE---")
@@ -629,7 +625,7 @@ class SaleSubscription(models.Model):
                                 lst = False
                                 del line[2]['use_new_so_inv']
 
-                        if len(lst) != 0:
+                        if lst:
                             invoice_id = lst[0]
                         else:
                             invoice_values['user_id'] = salesman
@@ -668,8 +664,10 @@ class SaleSubscription(models.Model):
                         rule, interval = line.recurring_rule_type, line.recurring_interval
                         new_date = next_date + relativedelta(**{periods[rule]: interval})
                         line.recurring_next_date = new_date
+                    _logger.info(": %s : DONE" % sub.recurring_generates)
                     if automatic:
                         self.env.cr.commit()
+
         except Exception:
             if automatic:
                 self.env.cr.rollback()
