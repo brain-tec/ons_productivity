@@ -470,36 +470,37 @@ class SaleSubscription(models.Model):
 
     @api.multi
     def _prepare_sale_lines(self, fiscal_position_id):
-        sale_lines = []
-        fpos_obj = self.env['account.fiscal.position']
-        fiscal_position = fpos_obj.browse(fiscal_position_id)
-        _logger.info("ENTERED")
-        current_date = datetime.now()
-        s_current_date = current_date.strftime('%Y-%m-%d')
-        for line in self.recurring_invoice_line_ids:
-            if (line.recurring_rule_type or '') != 'none':
-                if not line.recurring_next_date or not line.is_active:
-                    continue
-                _logger.info("E+1")
-                line_date = datetime.strptime(line.recurring_next_date, '%Y-%m-%d') - \
-                    relativedelta(days=(line.cancellation_deadline))
-                s_line_date = line_date.strftime('%Y-%m-%d')
-                if s_current_date < s_line_date:
-                    continue
-                _logger.info("E+1.1")
-            else:
-                if not line.is_active:
-                    continue
-                _logger.info("E+2")
-                if line.recurring_next_date:
-                    line_date = datetime.strptime(line.recurring_next_date, '%Y-%m-%d')
-                    s_line_date = line_date.strftime('%Y-%m-%d')
-                    if s_current_date != s_line_date:
+        for prep in self:
+            sale_lines = []
+            fpos_obj = prep.env['account.fiscal.position']
+            fiscal_position = fpos_obj.browse(fiscal_position_id)
+            _logger.info("ENTERED")
+            current_date = datetime.now()
+            s_current_date = current_date.strftime('%Y-%m-%d')
+            for line in prep.recurring_invoice_line_ids:
+                if (line.recurring_rule_type or '') != 'none':
+                    if not line.recurring_next_date or not line.is_active:
                         continue
-                _logger.info("E+2.2")
+                    _logger.info("E+1")
+                    line_date = datetime.strptime(line.recurring_next_date, '%Y-%m-%d') - \
+                        relativedelta(days=(line.cancellation_deadline))
+                    s_line_date = line_date.strftime('%Y-%m-%d')
+                    if s_current_date < s_line_date:
+                        continue
+                    _logger.info("E+1.1")
+                else:
+                    if not line.is_active:
+                        continue
+                    _logger.info("E+2")
+                    if line.recurring_next_date:
+                        line_date = datetime.strptime(line.recurring_next_date, '%Y-%m-%d')
+                        s_line_date = line_date.strftime('%Y-%m-%d')
+                        if s_current_date != s_line_date:
+                            continue
+                    _logger.info("E+2.2")
 
-            values = self._prepare_sale_line(line, fiscal_position)
-            sale_lines.append((0, 0, values))
+                values = prep._prepare_sale_line(line, fiscal_position)
+                sale_lines.append((0, 0, values))
 
         return sale_lines
 
