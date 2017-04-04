@@ -439,6 +439,7 @@ class SaleSubscription(models.Model):
                 'product_id': line.product_id.id or False,
                 'subscription_id': subs.id,
                 'subscr_line_id': line.id,
+                'layout_category_id': line.sale_layout_cat_id.id or False
             }
             if line.requested_date:
                 values['requested_date'] = line.requested_date
