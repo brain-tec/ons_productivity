@@ -355,10 +355,10 @@ class SaleSubscription(models.Model):
                 values.update({
                     'name': txt,
                     'subscription_id': contract.id,
-                    'subscr_line_id': line.id
+                    'subscr_line_id': line.id,
+                    'layout_category_id': line.sale_layout_cat_id.id or False
                 })
                 invoice_lines.append((0, 0, values))
-            _logger.info("INFO_prep_invoice_lines: %s" % invoice_lines)
         return invoice_lines
 
     @api.multi
