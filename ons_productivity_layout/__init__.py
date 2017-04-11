@@ -1,15 +1,5 @@
-# -*- encoding: utf-8 -*-
-#
-#  File: __init__.py
-#  Module: ons_productivity_subscriptions_adv
-#
-#  Created by cyp@open-net.ch
-#
-#  Copyright (c) 2016-TODAY Open-Net Ltd. All rights reserved.
-##############################################################################
-#
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# © 2017 Open Net Sarl
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from . import models
