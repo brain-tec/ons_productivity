@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="onsp_layout_view_invoice_form">
+            <field name="name">Open Net productivity : invoice form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="priority" eval="30"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_tag_ids']" position="after">
+                    <field name="page_break"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="onsp_layout_view_invoice_supplier_form">
+            <field name="name">Open Net productivity : invoice supplier form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="priority" eval="30"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='uom_id']" position="after">
+                    <field name="page_break"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
