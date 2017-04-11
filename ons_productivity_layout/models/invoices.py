@@ -30,13 +30,15 @@ class AccountInvoice(models.Model):
         res = super(AccountInvoice, self).order_lines_layouted()
 
         new_layout = [[]]
-
         for page in res:
             for category in page:
+                has_page_break = False
                 for line in category['lines']:
                     if line.page_break:
-                        new_layout[-1].append(category)
-                        new_layout.append([])
-                    else:
-                        new_layout[-1].append(category)
+                        has_page_break = True
+                if has_page_break:
+                    new_layout[-1].append(category)
+                    new_layout.append([])
+                else:
+                    new_layout[-1].append(category)
         return new_layout
