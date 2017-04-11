@@ -10,7 +10,6 @@
     'website': 'https://www.open-net.ch',
     'depends' : [
         'sale',
-        'sale_contract',
         'account'
     ],
     'data': [
