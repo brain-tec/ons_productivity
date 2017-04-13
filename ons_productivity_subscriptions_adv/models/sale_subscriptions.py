@@ -62,7 +62,7 @@ class SaleSubscription(models.Model):
             subscr.invoices_count = len(InvoiceSubscription.search([('subscription_id','=',subscr.id)]))
 
     @api.multi
-    @api.depends('line_ids', 'recurring_invoice_line_ids')
+    @api.depends('recurring_invoice_line_ids.price_subtotal')
     def _get_non_recurring_price(self):
         _logger.info("GET: _get_non_recurring_price")
         for account in self:
@@ -71,7 +71,7 @@ class SaleSubscription(models.Model):
                     account.non_recurring_total =+ line.price_subtotal
 
     @api.multi
-    @api.depends('line_ids', 'recurring_invoice_line_ids')
+    @api.depends('recurring_invoice_line_ids.price_subtotal')
     def _get_recurring_price(self):
         _logger.info("GET: _get_recurring_price")
         for account in self:
@@ -119,14 +119,13 @@ class SaleSubscription(models.Model):
 
     non_recurring_total = fields.Float(
         string="Non-recurring Price",
-        store=True,
-        compute=_get_non_recurring_price)
+        store=False,
+        compute='_get_non_recurring_price')
 
     recurring_total = fields.Float(
         string="Recurring Price",
-        type="float",
-        store=True, 
-        compute=_get_recurring_price)
+        store=False,
+        compute='_get_recurring_price')
 
     manager_id = fields.Many2one(
         'res.users', 
@@ -733,3 +732,4 @@ class SaleSubscriptionLine(models.Model):
     @api.multi
     def _compute_tax_id(self):
         return super(SaleSubscriptionLine, self)._compute_tax_id()
+
