@@ -17,5 +17,5 @@
     'data': [
         'views/product_uos_view.xml'
     ],
-    'installable': True
+    'installable': False
 }

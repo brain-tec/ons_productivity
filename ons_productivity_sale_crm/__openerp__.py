@@ -29,6 +29,6 @@
     'qweb': [
         "static/src/xml/onsp_sales_crm_dashboard.xml",
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }

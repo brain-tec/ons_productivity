@@ -18,5 +18,5 @@
         'data/hr_payroll_workflow.xml',
         'views/view_hr_payslip.xml'
     ],
-    'installable': True
+    'installable': False
 }

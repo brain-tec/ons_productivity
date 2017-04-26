@@ -53,7 +53,7 @@ V 2.0: 2016-10-04
     ],
     'test': [
     ],
-    'installable': True,
+    'installable': False,
     'application': True,
     'auto_install': False,
 }

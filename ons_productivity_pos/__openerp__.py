@@ -27,6 +27,6 @@
         'views/view_pos_order_report.xml',
         'views/view_pos.xml'
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }

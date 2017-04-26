@@ -17,6 +17,6 @@
         'views/onsp_base.xml',
         'views/products_view.xml'
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }

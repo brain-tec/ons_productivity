@@ -17,5 +17,5 @@
     'data': [
         'views/view_hr_payslip.xml'
     ],
-    'installable': True
+    'installable': False
 }

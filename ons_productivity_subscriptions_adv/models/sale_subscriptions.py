@@ -417,7 +417,7 @@ class SaleSubscription(models.Model):
                 periods = {'daily': 'days', 'weekly': 'weeks', 'monthly': 'months', 'yearly': 'years'}
                 saling_period = relativedelta(**{periods[contract.recurring_rule_type]: contract.recurring_interval})
                 new_date = next_date + saling_period
-                sale['note'] = _("This sale covers the following period: %s - %s") % (next_date.date(), new_date.date())
+                # sale['note'] = _("This sale covers the following period: %s - %s") % (next_date.date(), new_date.date())
 
         return sale
 
