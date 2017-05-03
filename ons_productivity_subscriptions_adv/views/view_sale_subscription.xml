@@ -109,5 +109,37 @@
             </field>
         </record>
 
+        <!-- sale.subscription.template -->
+        <record id="onsp_view_sale_subscription_template_form" model="ir.ui.view">
+        <field name="name">onsp.sale.subscription.form.view</field>
+        <field name="model">sale.subscription.template</field>
+        <field name="inherit_id" ref="sale_contract.sale_subscription_template_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='main']/group/label[@for='recurring_interval']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[@name='main']/group/div/field[@name='recurring_interval']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[@name='main']/group/div/field[@name='recurring_rule_type']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[@name='main']/group/field[@name='code']" position="after">
+                    <field name="pricelist_id" />
+                    <field name="recurring_generates" />
+                </xpath>
+
+                <!-- subs lines -->
+                <xpath expr="//field[@name='subscription_template_line_ids']/tree/field[@name='uom_id']" position="after">
+                    <field name="sale_layout_cat_id"/>
+                    <field name="recurring_rule_type"/>
+                    <field name="recurring_interval"/>
+                    <field name="use_new_so_inv"/>
+                    <field name="is_billable"/>
+                    <field name="is_active"/>
+                    <field name="cancellation_deadline"/>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>

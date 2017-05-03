@@ -41,6 +41,7 @@ Contributors
 
 * Yvon-Philippe Crittin <cyp@open-net.ch>
 * David Coninckx <dco@open-net.ch>
+* Leonardo Franja <lfr@open-net.ch>
 
 Maintainer
 ----------
