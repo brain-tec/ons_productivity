@@ -324,10 +324,6 @@ class SaleSubscription(models.Model):
                     month = 12
                 if month:
                     asset_cat = self.env['account.asset.category'].search([('type','=','sale'),('active','=',True),('method_number','=',month)])
-                    if asset_cat:
-                        asset_cat = self.env['account.asset.category'].browse(asset_cat[0])
-                    else:
-                        asset_cat = False
                 if not asset_cat and line.product_id.product_tmpl_id.deferred_revenue_category_id:
                     asset_cat = line.product_id.product_tmpl_id.deferred_revenue_category_id
                 if asset_cat:
