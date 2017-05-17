@@ -4,5 +4,8 @@
         <xpath expr="//nav[@id='oe_main_menu_navbar']" position="attributes">
             <attribute name="groups">ons_productivity_dummies.group_dummies</attribute>
         </xpath>
+        <xpath expr="//div[@class='o_sub_menu']" position="attributes">
+            <attribute name="groups">ons_productivity_dummies.group_dummies</attribute>
+        </xpath>
     </template>
 </odoo>
