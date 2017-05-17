@@ -16,7 +16,10 @@
     'website': 'https://www.open-net.ch',
     'images' : [],
     'depends' : [],
-    'data': [],
+    'data': [
+        'views/templates.xml',
+        'security/dummies_security.xml'
+    ],
     'demo': [],
     'qweb': [],
     'installable': True,
