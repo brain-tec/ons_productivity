@@ -9,7 +9,7 @@ These modules are maintained by Open Net, Swiss Partner of OpenERP.
 These modules are included in all our hosting solutions.
 
 **Features list :**
-    * 
+    * Add costum field page_break to create line breaks in the reports 
 
 **Author :** 
     * Open Net Sarl
