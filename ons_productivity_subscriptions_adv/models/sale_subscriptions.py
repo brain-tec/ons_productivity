@@ -251,7 +251,7 @@ class SaleSubscription(models.Model):
     def update_lines_date_start(self, new_date_start):
         SaleSubscriptionLines = self.env['sale.subscription.line']
         for subscription in self:
-            lines = subscription.recurring_invoice_line_ids.search([('recurring_rule_type','!=','none')])
+            lines = [l for l in subscription.recurring_invoice_line_ids if l.recurring_rule_type != 'none']
             if len(lines):
                 lines.write({'recurring_next_date': new_date_start})
 
@@ -735,6 +735,11 @@ class SaleSubscriptionLine(models.Model):
     @api.multi
     def _compute_tax_id(self):
         return super(SaleSubscriptionLine, self)._compute_tax_id()
+
+    @api.multi
+    def write(self, vals):
+        res = super(SaleSubscriptionLine, self).write(vals)
+        return res
 
 class SaleSubscriptionTemplate(models.Model):
     _inherit = "sale.subscription.template"
