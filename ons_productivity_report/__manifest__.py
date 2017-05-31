@@ -17,5 +17,5 @@
     'data': [
         'views/report.xml',
     ],
-    'installable': False
+    'installable': True
 }
