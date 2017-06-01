@@ -13,6 +13,6 @@
     'data': [
         'views/view_sale.xml'
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': False,
 }

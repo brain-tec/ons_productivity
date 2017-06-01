@@ -32,7 +32,7 @@ class SaleOrder(models.Model):
                 billable += line.price_tax
 
             # Then, deduct what have already invoiced in advance
-            for line in order.order_line.filtered(lambda l: l.product_id and l.product_id == down_product_id):
+            for line in order.order_line.filtered(lambda l: l.product_id and l.product_id.id == down_product_id):
                 billable -= line.qty_to_invoice * line.price_unit
 
 

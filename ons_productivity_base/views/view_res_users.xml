@@ -57,20 +57,6 @@
                                     <field string="Allowed Companies" name="company_ids" widget="many2many_tags"/>
                                     <field string="Current Company" name="company_id" context="{'user_preference': 0}"/>
                                 </group>
-                                <group string="Applications">
-<!--
-                                    <field name="sel_groups_9_27_10"/>
-                                    <field name="sel_groups_65_66"/>
-                                    <field name="sel_groups_71_72"/>
-                                    <field name="sel_groups_36_37"/>
-                                    <field name="sel_groups_43_44"/>
-                                    <field name="sel_groups_23_24_25"/>
-                                    <field name="sel_groups_58_59"/>
-                                    <field name="sel_groups_4_68_69"/>
-                                    <field name="sel_groups_63_64"/>
-                                    <field name="sel_groups_1_2_3"/>
--->
-                                </group>
                             </page>
                             <page string="Preferences">
                                 <group>
@@ -129,17 +115,14 @@
             id="ons_menu_action_res_company_form" 
             parent="ons_menu_hr_users_root" 
             sequence="20" 
-            groups="base.group_light_multi_company"/>
+            groups="base.group_multi_company"/>
 
-        <!-- 
-            Move the current "Departements" menu entry further
-        -->
         <menuitem
             action="hr.open_module_tree_department"
             id="hr.menu_hr_department_tree"
             parent="hr.menu_hr_root"
             sequence="15"
-            groups="base.group_hr_user"/>
+            groups="base.group_user"/>
 
     </data>
 </openerp>

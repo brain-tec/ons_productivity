@@ -3,20 +3,27 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name' : 'Open Net Productivity: Base',
+    'name' : 'Open Net Productivity: Accounting Dashboard',
     'version' : '1.0.0.0',
     'author' : 'Open Net Sàrl',
-    'category' : 'Extra Tools',
+    'category' : 'Accounting',
     'website': 'http://www.open-net.ch',
+    'images' : [],
     'depends' : [
-        'hr',
-        'product'
+        'account',
     ],
     'data': [
-        'views/view_res_users.xml',
-        'views/onsp_base.xml',
-        'views/products_view.xml'
     ],
-    'installable': False,
+    'js': [
+    ],
+    'qweb' : [
+    ],
+    'css':[
+    ],
+    'demo': [
+    ],
+    'test': [
+    ],
+    'installable': True,
     'auto_install': False,
 }

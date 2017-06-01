@@ -7,14 +7,11 @@
         <field name="priority" eval="20"/>
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <field name="task_id" position="replace">
-                <field name="task_id" on_change="onchange_task_id(task_id)" context="{'default_project_id':project_id}" domain="[('progress','!=',100),('project_id', '=', project_id)]"/>
+            <field name="task_id" position="attributes">
+                <attribute name="domain">[('progress','!=',100),('project_id', '=', project_id)]</attribute>
             </field>
             <field name="task_id" position="after">
                 <field name="ons_progress" widget="progressbar"/>
-            </field>
-            <field name="progress" position="attributes">
-                <attribute name="invisible">1</attribute>
             </field>
         </field>
     </record>

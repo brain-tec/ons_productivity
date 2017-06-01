@@ -3,28 +3,22 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name' : 'Open Net Productivity: Accounting Deposit',
+    'name' : 'Open-Net Productivity: Kanban',
     'version' : '1.0.0.0',
     'author' : 'Open Net Sàrl',
-    'category' : 'Accounting',
-    'website': 'http://www.open-net.ch',
+    'category' : 'Base',
+    'website': 'https://www.open-net.ch',
     'images' : [],
-    'depends' : [
-        'sale',
-    ],
+    'depends' : ['web'],
     'data': [
-        'views/sale_view.xml'
-    ],
-    'js': [
+        'views/web_kanban_assets_view.xml'
     ],
     'qweb' : [
-    ],
-    'css':[
     ],
     'demo': [
     ],
     'test': [
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': False,
 }

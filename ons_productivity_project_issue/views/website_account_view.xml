@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="ons_cust_website_portal_account" inherit_id="website_portal.account">
+<!--     <template id="ons_cust_website_portal_account" inherit_id="website_portal.account">
         <xpath expr="//div[@id='o_my_sidebar']" position="replace">
             <div id="o_my_sidebar">
                 <div class="o_my_details"/>
@@ -12,12 +12,12 @@
                 <t t-call="ons_productivity_project_issue.website_portal_project_task"/>
             </div>
         </xpath>
-    </template>
-    <template id="website_portal_sale.account" inherit_id='website_portal.account'>
+    </template> -->
+<!--     <template id="website_portal_sale.account" inherit_id='website_portal.account'>
         <xpath expr="//div[contains(@class,'o_my_documents')]/*[last()]" position="after">
             <t t-call="website_portal_sale.invoices"/>
         </xpath>
-    </template>
+    </template> -->
     <template id="website_portal_project_task">
         <h3 class="page-header">Your tasks</h3>
         <t t-if="not tasks">
@@ -46,7 +46,7 @@
             </table>
         </t>
     </template>
-    <template id="website_portal_invoice" inherit_id="website_portal_sale.invoices">
+<!--     <template id="website_portal_invoice" inherit_id="website_portal_sale.invoices">
         <xpath expr="//td" position="replace">
             <td class="cell_overflow">
                 <t t-esc="invoice.number"/>
@@ -64,11 +64,11 @@
         <xpath expr="//td[@colspan='5']" position="attributes">
             <attribute name="colspan">6</attribute>
         </xpath>
-    </template>
+    </template> -->
     <template id="website_payment_method" inherit_id="website_payment.pay_meth_link">
         <xpath expr="//a" position="replace"/>
     </template>
-    <template id="website_portal_issues" inherit_id="website_project_issue.portal_project_issue">
+    <!-- <template id="website_portal_issues" inherit_id="website_project_issue.portal_project_issue">
         <xpath expr="//th[3]" position="replace"/>
         <xpath expr="//td[3]" position="replace"/>
         <xpath expr="//th[2]" position="attributes">
@@ -92,12 +92,13 @@
         <xpath expr="//td" position="after">
             <td><span t-field="issue.create_date" t-field-options='{"format": "dd.MM.yy"}'/></td>
         </xpath>
-    </template>
-<!--     <template id="message_thread" inherit_id="website_mail.message_thread">
+    </template> -->
+    <template id="message_thread" inherit_id="website_mail.message_thread">
         <xpath expr="//img" position="replace">
+            <t>
                 <img class="img pull-left img-circle" t-attf-src="/web/image/res.partner/#{user_id.partner_id.id}/image_small/50x50" style="width: 50px; margin-right: 10px;"/>
             </t>
         </xpath>
-    </template> -->
+    </template>
         
 </odoo>
