@@ -539,8 +539,7 @@ class SaleSubscription(models.Model):
             ('recurring_invoice_line_ids.recurring_next_date', '<=', current_date),
             ('recurring_invoice_line_ids.is_active', '=', True),
             ('recurring_invoice_line_ids.is_billable', '=', True),
-            ('state', 'in', ['open', 'pending']),
-            ('type', '=', 'contract')
+            ('state', 'in', ['open', 'pending'])
         ]
         domain = [('id', 'in', self.ids)] if self.ids else cust_domain
         sub_data = self.search_read(fields=['id', 'company_id'], domain=domain)
