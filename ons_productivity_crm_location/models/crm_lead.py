@@ -12,7 +12,6 @@ class CrmLead(models.Model):
     # ---------- Fields management
     zip_id = fields.Many2one('res.better.zip', 'City/Location')
 
-    @api.one
     @api.onchange('zip_id')
     def onchange_zip_id(self):
         if self.zip_id:
