@@ -17,5 +17,5 @@
     'data': [
         'views/crm_view.xml'
     ],
-    'installable': False
+    'installable': True
 }
