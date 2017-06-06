@@ -6,6 +6,10 @@
 from openerp import api, fields, models, _
 import openerp.addons.decimal_precision as dp
 from openerp.tools import float_is_zero, float_compare
+#Import logger
+import logging
+#Get the logger
+_logger = logging.getLogger(__name__)
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
@@ -23,20 +27,26 @@ class SaleOrder(models.Model):
         precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
         down_product_id = self.env['ir.values'].get_default('sale.config.settings', 'deposit_product_id_setting')
         for order in self:
-            billable = 0.0
+            billed = 0.0
 
-            # Start by cumulating what should be invoiced
-            for line in order.order_line.filtered(lambda l: not float_is_zero(l.qty_to_invoice, precision_digits=precision)):
-                price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
-                billable += line.qty_to_invoice * price
-                billable += line.price_tax
+            for invoice in order.invoice_ids:
+                billed += invoice.amount_total
 
-            # Then, deduct what have already invoiced in advance
-            for line in order.order_line.filtered(lambda l: l.product_id and l.product_id.id == down_product_id):
-                billable -= line.qty_to_invoice * line.price_unit
+            # # Start by cumulating what should be invoiced
+            # for line in order.order_line.filtered(lambda l: not float_is_zero(l.qty_to_invoice, precision_digits=precision)):
+            #     price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
+            #     billable += line.qty_to_invoice * price
+            #     billable += line.price_tax
+            #     _logger.info(line.qty_to_invoice)
+            #     _logger.info(billable)
+
+            # # Then, deduct what have already invoiced in advance
+            # for line in order.order_line.filtered(lambda l: l.product_id and l.product_id.id == down_product_id):
+            #     billable -= line.qty_to_invoice * line.price_unit
 
 
-            if billable < 0.0:
-                billable = 0.0
-
-            order.amount_billable = billable
+            # if billable < 0.0:
+            #     billable = 0.0
+            billable = order.amount_total - billed
+            if billable >= 0:
+                order.amount_billable = billable
