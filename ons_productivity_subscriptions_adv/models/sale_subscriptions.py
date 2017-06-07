@@ -68,7 +68,8 @@ class SaleSubscription(models.Model):
         for account in self:
             for line in account.recurring_invoice_line_ids:
                 if line.is_active and (not line.recurring_rule_type or line.recurring_rule_type == 'none'):
-                    account.non_recurring_total =+ line.price_subtotal
+                    account.non_recurring_total += line.price_subtotal
+
 
     @api.multi
     @api.depends('recurring_invoice_line_ids.price_subtotal')
