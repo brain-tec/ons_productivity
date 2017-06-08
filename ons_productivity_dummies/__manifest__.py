@@ -11,6 +11,7 @@
     'name' : 'Open Net productivity: dummies tools',
     'version' : '1.',
     'summary': 'Open Net productivity: dummies tools',
+    'author':'Open Net Sàrl',
     'sequence': 30,
     'category': 'Tools',
     'website': 'https://www.open-net.ch',
@@ -23,6 +24,5 @@
     'demo': [],
     'qweb': [],
     'installable': True,
-    'application': True,
     'auto_install': False,
 }
