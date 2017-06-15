@@ -124,11 +124,12 @@
                 <xpath expr="//group[@name='main']/group/div/field[@name='recurring_rule_type']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
+<!--
                 <xpath expr="//group[@name='main']/group/field[@name='code']" position="after">
                     <field name="pricelist_id" />
                     <field name="recurring_generates" />
                 </xpath>
-
+-->
                 <!-- subs lines -->
                 <xpath expr="//field[@name='subscription_template_line_ids']/tree/field[@name='uom_id']" position="after">
                     <field name="sale_layout_cat_id"/>

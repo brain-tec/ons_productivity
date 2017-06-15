@@ -163,56 +163,50 @@ class SaleSubscription(models.Model):
 
     @api.onchange('template_id')
     def on_change_template(self):
-        res = super(SaleSubscription, self).on_change_template()
-        for subs in self:
-            if subs.template_id:
-                if not subs.date_start:
-                    subs.date_start = datetime.now()
-
-                ProductProduct = subs.env['product.product']
-                ctx = {}
-                if subs.pricelist_id:
-                    ctx['pricelist'] = subs.pricelist_id
-
+        if self.template_id:
+            # Check if record is a new record or exists in db by checking its _origin
+            # note that this property is not always set, hence the getattr
+            if not getattr(self, '_origin', self.browse()) and not isinstance(self.id, int):
                 invoice_line_ids = []
-                template_line = subs.template_id.subscription_template_line_ids
-                for x in subs.recurring_invoice_line_ids:
-
+                for line in self.template_id.subscription_template_line_ids:
+                    product = line.product_id.with_context(
+                        lang=self.partner_id.lang,
+                        partner=self.partner_id.id,
+                        pricelist=self.pricelist_id.id,
+                        uom=line.uom_id.id
+                    )
+                    name = product.name_get()[0][1]
+                    if product.description_sale:
+                        name += '\n' + product.description_sale
                     line_item = {
-                        'product_id': x.product_id.id,
-                        'uom_id': x.uom_id.id,
-                        'name': x.name,
-                        'sold_quantity': x.quantity,
-                        'price_unit': x.price_unit or 0.0,
-                        'discount': x.discount or 0.0,
-                        'analytic_account_id': x.analytic_account_id and x.analytic_account_id.id or False,
-                        'recurring_rule_type': template_line.recurring_rule_type,
-                        'recurring_interval': template_line.recurring_interval,
+                        'product_id': line.product_id.id,
+                        'actual_quantity': line.quantity,
+                        'uom_id': line.uom_id.id,
+                        'name': line.name,
+                        'sold_quantity': line.quantity,
+                        'price_unit': product.price or 0.0,
+                        'recurring_rule_type': line.recurring_rule_type,
+                        'recurring_interval': line.recurring_interval,
                         'recurring_next_date': None,
-                        'is_active': template_line.is_active,
-                        'is_billable': template_line.is_billable,
-                        'sequence': x.sequence,
-                        'cancellation_deadline': template_line.cancellation_deadline,
-                        'use_new_so_inv': template_line.use_new_so_inv,
-                        'sale_layout_cat_id': template_line.sale_layout_cat_id,
+                        'is_active': line.is_active,
+                        'is_billable': line.is_billable,
+                        'cancellation_deadline': line.cancellation_deadline,
+                        'use_new_so_inv': line.use_new_so_inv,
+                        'sale_layout_cat_id': line.sale_layout_cat_id,
                     }
-
-                    if x.recurring_rule_type and x.recurring_rule_type != 'none':
+                    if line.recurring_rule_type and line.recurring_rule_type != 'none':
                         next_date = datetime.now()
-                        if subs.date_start:
+                        if self.date_start:
                             next_date = datetime.strptime(subs.date_start, '%Y-%m-%d')
                             line_item.update({
-                                'recurring_rule_type': subs.template_id.recurring_rule_type,
-                                'recurring_interval': subs.template_id.recurring_interval,
                                 'recurring_next_date': next_date
                             })
                     invoice_line_ids.append((0, 0, line_item))
-                    subs.recurring_invoice_line_ids = invoice_line_ids
-                    if subs.template_id.pricelist_id:
-                        subs.pricelist_id = subs.template_id.pricelist_id
-                    subs.recurring_generates = subs.template_id.recurring_generates
-                else:
-                    return res
+                self.recurring_invoice_line_ids = invoice_line_ids
+                self.description = self.template_id.description
+            self.recurring_interval = self.template_id.recurring_interval
+            self.recurring_rule_type = self.template_id.recurring_rule_type
+            self.recurring_generates = self.template_id.recurring_generates
 
     # Show the list of corresponding invoices
     @api.multi
@@ -252,9 +246,7 @@ class SaleSubscription(models.Model):
     def update_lines_date_start(self, new_date_start):
         SaleSubscriptionLines = self.env['sale.subscription.line']
         for subscription in self:
-            lines = [l for l in subscription.recurring_invoice_line_ids if l.recurring_rule_type != 'none']
-            if len(lines):
-                lines.write({'recurring_next_date': new_date_start})
+            [l.write({'recurring_next_date': new_date_start}) for l in subscription.recurring_invoice_line_ids if l.recurring_rule_type != 'none']
 
         return True
 
