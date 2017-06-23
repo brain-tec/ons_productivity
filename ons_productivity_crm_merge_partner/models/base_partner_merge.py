@@ -9,7 +9,7 @@ class MergePartnerAutomatic(osv.TransientModel):
     _inherit = 'base.partner.merge.automatic.wizard'
 
     def _merge(self, partner_ids, dst_partner=None):
-        proxy = self.pool.get('res.partner')
+        proxy = self.env['res.partner']
         child_ids = set()
         for partner_id in partner_ids:
             child_ids = child_ids.union(set(proxy.search([('id', 'child_of', [partner_id])])) - set([partner_id]))
