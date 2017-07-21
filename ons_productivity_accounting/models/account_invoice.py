@@ -32,3 +32,15 @@ class AccountInvoice(models.Model):
 
         return True
 
+class AccountInvoiceLine(models.Model):
+    _inherit = 'account.invoice.line'
+
+    @api.multi
+    def _compute_ons_amount_tax(self):
+        for line in self:
+            total_tax_percentage = sum(tax.amount for tax in line.invoice_line_tax_ids)
+            line.ons_amount_tax = line.price_subtotal * (total_tax_percentage/100)
+
+    ons_amount_tax = fields.Float(
+        string="Total tax amount",
+        compute=_compute_ons_amount_tax)
