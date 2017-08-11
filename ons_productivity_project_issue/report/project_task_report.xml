@@ -1,88 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <report 
-            id="project_task"
-            model="project.task"
-            string="Task"
-            report_type="qweb-pdf"
-            name="ons_productivity_project_issue.report_task"
-            file="ons_productivity_project_issue.report_task"
-        />
+        <report file="ons_productivity_project_issue.report_task" id="project_task" model="project.task" name="ons_productivity_project_issue.report_task" report_type="qweb-pdf" string="Carnet de support"/>
         <template id="report_task_document">
             <t t-call="report.external_layout">
-            <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />
-            <div class="page">
-                <div class="row">
-                    <div class="col-xs-5 col-xs-offset-7">
-                        <p t-field="doc.partner_id"/>
-                        <p>
-                            <span t-field="doc.project_id"/> / <span t-field="doc.name"/>
-                        </p>
+                <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})"/>
+                <div class="page">
+                    <div class="row">
+                        <div class="col-xs-5 col-xs-offset-7">
+                            <p t-field="doc.partner_id"/>
+                            <p>
+                                <span t-field="doc.project_id"/>/ 
+                                <span t-field="doc.name"/></p>
+                        </div>
                     </div>
-                </div>
-                <h3 style="font-weight:bold;text-decoration:underline">Résumé de vos prestations au <span t-esc="datetime.datetime.today().strftime('%d/%m/%Y')"/></h3>
-                <table class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Utilisateur</th>
-                            <th>Description</th>
-                            <th>Facturé</th>
-                            <th>Catégories</th>
-                            <th>Durée</th>
-                        </tr>
-                   </thead>
-                   <tbody>
-<!--                         <t t-set="sorted_timesheet_ids" t-value="sorted(doc.timesheet_ids, key=lambda line: line.tag_ids)"/> -->
-
-                        <t t-foreach="doc.timesheet_ids.sorted(key=lambda line: line.tag_ids[0].name if line.tag_ids else '')" t-as="l">
-                            <tr>
-                                <td>
-                                   <span t-field="l.date"/>
-                                </td>
-                                <td>
-                                    <span t-field="l.user_id"/>
-                                </td>
-                                <td>
-                                    <span t-field="l.name"/>
-                                </td>
-                                <td>
-                                    <t t-if="l.ons_to_invoice">
-                                        <span>OUI</span>
-                                    </t>
-                                    <t t-if="not l.ons_to_invoice">
-                                        <span>NON</span>
-                                    </t>
-                                </td>
-                                <td class="text-right">
-                                    <span t-esc="', '.join(map(lambda x: (x.name), l.tag_ids))"/>
-                                </td>
-                                <td class="text-right">
-                                    <t t-esc="'%02d:%02d' % (int(l.unit_amount), (l.unit_amount-int(l.unit_amount))*60)"/>
-                                </td>
-                            </tr>
+                    <t t-set="remarques" t-value="False"/>
+                    <t t-set="free_hours_sum" t-value="0"/>
+                    <t t-as="r" t-foreach="doc.timesheet_ids">
+                        <t t-if="not r.ons_to_invoice">
+                            <t t-set="remarques" t-value="True"/>
+                            <t t-set="free_hours_sum" t-value="free_hours_sum + r.unit_amount"/>
                         </t>
-                    </tbody>
-                </table>
-                <div class="row">
-                    <div class="col-xs-3 col-xs-offset-7">
-                        <strong>
-                            Heures passés : <br/>
-                            Heures restantes :
-                        </strong>
-                    </div>
-                    <div class="col-xs-2 text-right">
-                        <span t-esc="'%02d:%02d' % (int(doc.effective_hours), abs((doc.effective_hours-int(doc.effective_hours)))*60)"/><br/>
-                        <span t-esc="'%02d:%02d' % (int(doc.remaining_hours), abs((doc.remaining_hours-int(doc.remaining_hours)))*60)"/>
+                    </t>
+                    <h3 style="font-weight:bold;text-decoration:underline">Résumé de vos prestations au 
+                        <span t-esc="datetime.datetime.today().strftime('%d/%m/%Y')"/></h3>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Utilisateur</th>
+                                <th>Description</th>
+                                <th t-if="remarques">Remarque</th>
+                                <th>Catégorie</th>
+                                <th>Durée</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--                         <t t-set="sorted_timesheet_ids" t-value="sorted(doc.timesheet_ids, key=lambda line: line.tag_ids)"/>-->
+                            <t t-as="l" t-foreach="doc.timesheet_ids.sorted(key=lambda line: line.date)">
+                                <tr>
+                                    <td>
+                                        <span t-field="l.date"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="l.user_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="l.name"/>
+                                    </td>
+                                    <td t-if="remarques">
+                                        <t t-if="l.ons_to_invoice">
+                                            <span/>
+                                        </t>
+                                        <t t-if="not l.ons_to_invoice">
+                                            <span>Offert</span>
+                                        </t>
+                                    </td>
+                                    <td>
+                                        <span t-esc="', '.join(map(lambda x: (x.name), l.tag_ids))"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-esc="'%02d:%02d' % (int(l.unit_amount), (l.unit_amount-int(l.unit_amount))*60)"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-xs-2 col-xs-offset-9">
+                            <strong>Heures passés: 
+                                <br/>
+                                Heures restantes:
+                                <br/>
+                                <t t-if="remarques">Heures offertes:</t></strong>
+                        </div>
+                        <div class="col-xs-1 text-right">
+                            <strong><span t-esc="'%02d:%02d' % (int(doc.effective_hours), abs((doc.effective_hours-int(doc.effective_hours)))*60)"/><br/>
+                            <span t-esc="'%02d:%02d' % (int(doc.remaining_hours), abs((doc.remaining_hours-int(doc.remaining_hours)))*60)"/><br/>
+                            <t t-if="remarques"><span t-esc="'%02d:%02d' % (int(free_hours_sum), abs((free_hours_sum-int(free_hours_sum)))*60)"/></t></strong>
+                        </div>
                     </div>
                 </div>
-            </div>
             </t>
         </template>
         <template id="report_task">
             <t t-call="report.html_container">
-                <t t-foreach="docs" t-as="doc">
+                <t t-as="doc" t-foreach="docs">
                     <t t-call="ons_productivity_project_issue.report_task_document" t-lang="doc.partner_id.lang"/>
                 </t>
             </t>

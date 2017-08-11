@@ -3,13 +3,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name' : 'Open Net Productivity: Project Issue',
-    'version' : '1.0.0.0',
-    'author' : 'Open Net Sàrl',
-    'category' : 'Project',
+    'name': 'Open Net Productivity: Project Issue',
+    'version': '1.0.0.1',
+    'author': 'Open Net Sàrl',
+    'category': 'Project',
     'website': 'http://www.open-net.ch',
-    'images' : [],
-    'depends' : [
+    'images': [],
+    'depends': [
         'project_issue_sheet',
         'website_project_issue',
         'website_portal_sale',
@@ -23,9 +23,9 @@
     ],
     'js': [
     ],
-    'qweb' : [
+    'qweb': [
     ],
-    'css':[
+    'css': [
     ],
     'demo': [
     ],

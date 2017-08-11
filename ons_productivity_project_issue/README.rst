@@ -14,6 +14,10 @@ These modules are included in all our hosting solutions.
     * Add progress of the task into issue
     * Add task progress for portal user
     * Add "Invoiceable" checkbox on task's analytic line
+    * Add free hours sum if exist
+    * Add order task by date
+    * Add remark column
+
 
 **Author :** 
     * Open Net Sàrl
@@ -30,6 +34,7 @@ Contributors
 ------------
 
 * David Coninckx <dco@open-net.ch>
+* Rémy Zulauff <rzu@open-net.ch>
 
 Maintainer
 ----------
