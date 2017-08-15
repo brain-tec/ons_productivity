@@ -16,9 +16,10 @@
             </xpath>
             <xpath expr="//header//field[@name='stage_id']" position="before">
                 <button
-                        name="%(onsp_action_print_task_report)d"
-                        type="action"
-                    icon="fa-sitemap" class="oe_stat_button"
+                    name="%(onsp_action_print_task_report)d"
+                    type="action"
+                    icon="fa-sitemap"
+                     class="btn-primary"
                     string="Print"
                 />
             </xpath>

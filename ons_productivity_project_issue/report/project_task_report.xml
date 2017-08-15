@@ -8,8 +8,10 @@
                     <t t-if="do_filter">
                         <t t-set="date_from" t-value="doc.filter_date_from"/>
                         <t t-set="date_to" t-value="doc.filter_date_to"/>
+<!--
                         *Date from: <span t-esc="date_from"/><br/>
                         *Date to: <span t-esc="date_to"/><br/>
+-->
                     </t>
                     <t t-if="not do_filter or not date_from">
                         <t t-set="date_from" t-value="'1970-01-01'"/>
@@ -17,10 +19,12 @@
                     <t t-if="not do_filter or not date_to">
                         <t t-set="date_from" t-value="'2999-12-31'"/>
                     </t>
+<!--
                     <div class="row">
                         Date from: <span t-esc="date_from"/><br/>
                         Date to: <span t-esc="date_to"/><br/>
                     </div>
+-->
                     <div class="row">
                         <div class="col-xs-5 col-xs-offset-7">
                             <p t-field="doc.partner_id"/>

@@ -23,7 +23,7 @@
                     </group>
                 </group>
                 <footer>
-                    <button name="action_print_report" string="Print" type="object" class="oe_highlight"/>
+                    <button name="action_print_report" string="Print" type="object"/>
                     <button special="cancel" string="Close"/>
                 </footer>
             </form>

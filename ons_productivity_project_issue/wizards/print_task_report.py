@@ -10,7 +10,7 @@
 from odoo import api, fields, models
 
 
-class WizPrintTaskReport(models.Model):
+class WizPrintTaskReport(models.TransientModel):
     _name = 'onsp.wiz.print_task_report'
     _description = "Open Net Productivity Wizard: print task report"
 
