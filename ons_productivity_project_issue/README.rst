@@ -17,6 +17,7 @@ These modules are included in all our hosting solutions.
     * Add free hours sum if exist
     * Add order task by date
     * Add remark column
+    * Let print a task report delimited by two dates
 
 
 **Author :** 
@@ -35,6 +36,7 @@ Contributors
 
 * David Coninckx <dco@open-net.ch>
 * Rémy Zulauff <rzu@open-net.ch>
+* Cyp <cyp@open-net.ch>
 
 Maintainer
 ----------

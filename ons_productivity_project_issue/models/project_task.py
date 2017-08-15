@@ -10,6 +10,9 @@ _logger = logging.getLogger(__name__)
 class ProjectTask(models.Model):
     _inherit = 'project.task'
 
+    filter_date_from = fields.Date(string='Date from')
+    filter_date_to = fields.Date(string='Date to')
+
     @api.depends('stage_id', 'timesheet_ids.unit_amount', 'planned_hours', 'child_ids.stage_id',
                  'child_ids.planned_hours', 'child_ids.effective_hours', 'child_ids.children_hours', 'child_ids.timesheet_ids.unit_amount')
     def _hours_get(self):

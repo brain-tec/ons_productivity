@@ -4,7 +4,7 @@
 
 {
     'name': 'Open Net Productivity: Project Issue',
-    'version': '1.0.0.1',
+    'version': '1.1.0.1',
     'author': 'Open Net Sàrl',
     'category': 'Project',
     'website': 'http://www.open-net.ch',
@@ -15,6 +15,7 @@
         'website_portal_sale',
     ],
     'data': [
+        'wizards/view_print_task_report.xml',
         'views/project_issue_view.xml',
         'views/project_task_view.xml',
         'views/project_project_view.xml',

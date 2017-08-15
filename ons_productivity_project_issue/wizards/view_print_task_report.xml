@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: wizards/view_print_task_report.xml
+  Module: ons_productivity_project_issue
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2017-TODAY Open Net Sàrl. <http://www.open-net.ch>
+-->
+<odoo>
+
+    <record model="ir.ui.view" id="onsp_wiz_print_task_report">
+        <field name="name">Open Net Productivity Wizard: print task report</field>
+        <field name="model">onsp.wiz.print_task_report</field>
+        <field name="arch" type="xml">
+            <form string="Print a task report">
+                <group name="main">
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <group>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_print_report" string="Print" type="object" class="oe_highlight"/>
+                    <button special="cancel" string="Close"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="onsp_action_print_task_report">
+        <field name="name">Print task report</field>
+        <field name="res_model">onsp.wiz.print_task_report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="onsp_wiz_print_task_report"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
