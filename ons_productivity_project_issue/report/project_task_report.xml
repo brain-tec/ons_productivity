@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
         <template id="report_task_document">
             <t t-call="report.external_layout">
@@ -8,41 +8,36 @@
                     <t t-if="do_filter">
                         <t t-set="date_from" t-value="doc.filter_date_from"/>
                         <t t-set="date_to" t-value="doc.filter_date_to"/>
-<!--
-                        *Date from: <span t-esc="date_from"/><br/>
-                        *Date to: <span t-esc="date_to"/><br/>
--->
                     </t>
-                    <t t-if="not do_filter or not date_from">
-                        <t t-set="date_from" t-value="'1970-01-01'"/>
-                    </t>
+                    <!--<t t-if="not do_filter or not date_from">
+                        <t t-set="date_from" t-value="'2000-12-01'"/>
+                    </t>-->
                     <t t-if="not do_filter or not date_to">
-                        <t t-set="date_from" t-value="'2999-12-31'"/>
+                        <t t-set="date_to" t-value="time.strftime('%Y-%m-%d')"/>
                     </t>
-<!--
-                    <div class="row">
-                        Date from: <span t-esc="date_from"/><br/>
-                        Date to: <span t-esc="date_to"/><br/>
-                    </div>
--->
                     <div class="row">
                         <div class="col-xs-5 col-xs-offset-7">
                             <p t-field="doc.partner_id"/>
-                            <p>
-                                <span t-field="doc.project_id"/>/
-                                <span t-field="doc.name"/></p>
+                            <p><span t-field="doc.project_id"/></p>
+                            <p><span t-field="doc.name"/></p>
                         </div>
                     </div>
                     <t t-set="remarques" t-value="False"/>
                     <t t-set="free_hours_sum" t-value="0"/>
+                    <t t-set="hours_spent" t-value="0"/>
+                    <t t-set="hours_remaining" t-value="0"/>
                     <t t-as="r" t-foreach="doc.timesheet_ids">
-                        <t t-if="not r.ons_to_invoice">
-                            <t t-set="remarques" t-value="True"/>
-                            <t t-set="free_hours_sum" t-value="free_hours_sum + r.unit_amount"/>
+                        <t t-if="r.date &gt;= date_from and r.date &lt;= date_to">
+                            <t t-if="not r.ons_to_invoice">
+                                <t t-set="remarques" t-value="True"/>
+                                <t t-set="free_hours_sum" t-value="free_hours_sum + r.unit_amount"/>
+                            </t>
+                            <t t-set="hours_spent" t-value="hours_spent + r.unit_amount" />
                         </t>
                     </t>
-                    <h3 style="font-weight:bold;text-decoration:underline">Résumé de vos prestations au 
-                        <span t-esc="datetime.datetime.today().strftime('%d/%m/%Y')"/></h3>
+                    <h3 style="font-weight:bold;text-decoration:underline">Résumé de nos prestations
+                        <t t-if="do_filter == 0"> au <span t-esc="datetime.datetime.today().strftime('%d/%m/%Y')"/></t>
+                        <t t-else=""> du <span t-esc="time.strftime('%d/%m/%Y', time.strptime(date_from,'%Y-%m-%d'))" /> au <span t-esc="time.strftime('%d/%m/%Y', time.strptime(date_to,'%Y-%m-%d'))" /></t></h3>
                     <table class="table table-condensed">
                         <thead>
                             <tr>
@@ -57,7 +52,7 @@
                         <tbody>
                             <!--                         <t t-set="sorted_timesheet_ids" t-value="sorted(doc.timesheet_ids, key=lambda line: line.tag_ids)"/>-->
                             <t t-as="l" t-foreach="doc.timesheet_ids.sorted(key=lambda line: line.date)">
-                                <tr>
+                                <tr t-if="l.date &gt;= date_from and l.date &lt;= date_to">
                                     <td>
                                         <span t-field="l.date"/>
                                     </td>
@@ -87,16 +82,14 @@
                     </table>
                     <div class="row">
                         <div class="col-xs-2 col-xs-offset-9">
-                            <strong>Heures passés: 
-                                <br/>
-                                Heures restantes:
-                                <br/>
-                                <t t-if="remarques">Heures offertes:</t></strong>
+                            <strong><p>Heures passés:</p>
+                            <p><t t-if="do_filter == 0">Heures restantes:</t></p>
+                            <p><t t-if="remarques">Heures offertes:</t></p></strong>
                         </div>
                         <div class="col-xs-1 text-right">
-                            <strong><span t-esc="'%02d:%02d' % (int(doc.effective_hours), abs((doc.effective_hours-int(doc.effective_hours)))*60)"/><br/>
-                            <span t-esc="'%02d:%02d' % (int(doc.remaining_hours), abs((doc.remaining_hours-int(doc.remaining_hours)))*60)"/><br/>
-                            <t t-if="remarques"><span t-esc="'%02d:%02d' % (int(free_hours_sum), abs((free_hours_sum-int(free_hours_sum)))*60)"/></t></strong>
+                            <strong><p t-esc="'%02d:%02d' % (int(hours_spent), abs((hours_spent-int(hours_spent)))*60)"></p>
+                            <t t-if="do_filter == 0"><p t-esc="'%02d:%02d' % (int(doc.remaining_hours), abs((doc.remaining_hours-int(doc.remaining_hours)))*60)"></p></t>
+                            <t t-if="remarques"><p t-esc="'%02d:%02d' % (int(free_hours_sum), abs((free_hours_sum-int(free_hours_sum)))*60)"></p></t></strong>
                         </div>
                     </div>
                 </div>
@@ -113,12 +106,12 @@
         <template id="report_task_filtered">
             <t t-call="report.html_container">
                 <t t-as="doc" t-foreach="docs">
-                    <t t-set="do_filter" t-value="0"/>
+                    <t t-set="do_filter" t-value="1"/>
                     <t t-call="ons_productivity_project_issue.report_task_document" t-lang="doc.partner_id.lang"/>
                 </t>
             </t>
         </template>
         <report file="ons_productivity_project_issue.report_task" id="project_task" model="project.task" name="ons_productivity_project_issue.report_task" report_type="qweb-pdf" string="Carnet de support"/>
-        <report file="ons_productivity_project_issue.report_task_filtered" id="project_task_filtered" model="project.task" name="ons_productivity_project_issue.report_task_filtered" report_type="qweb-pdf" string="Carnet de support (filtrage par dates)"/>
+        <report file="ons_productivity_project_issue.report_task_filtered" id="project_task_filtered" model="project.task" name="ons_productivity_project_issue.report_task_filtered" report_type="qweb-pdf" string="Carnet de support (filtrage par dates)" menu="False"/>
     </data>
-</openerp>
+</odoo>

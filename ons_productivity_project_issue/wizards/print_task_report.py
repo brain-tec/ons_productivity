@@ -16,8 +16,8 @@ class WizPrintTaskReport(models.TransientModel):
 
     # ---------- Fields management
 
-    date_from = fields.Date(string='Date from')
-    date_to = fields.Date(string='Date to')
+    date_from = fields.Date(string='Date de début', required=True)
+    date_to = fields.Date(string='Date de fin')
 
     # ---------- Interface management
 

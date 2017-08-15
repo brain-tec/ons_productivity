@@ -23,8 +23,8 @@
                     </group>
                 </group>
                 <footer>
-                    <button name="action_print_report" string="Print" type="object"/>
-                    <button special="cancel" string="Close"/>
+                    <button name="action_print_report" string="Imprimer" type="object"/>
+                    <button special="cancel" string="Fermer"/>
                 </footer>
             </form>
         </field>
