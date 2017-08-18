@@ -78,7 +78,7 @@ class SaleSubscription(models.Model):
         for account in self:
             for line in account.recurring_invoice_line_ids:
                 if line.is_active and line.recurring_rule_type and line.recurring_rule_type != 'none':
-                    account.recurring_total =+ line.price_subtotal
+                    account.recurring_total += line.price_subtotal
 
 
     recurring_rule_type = fields.Selection([
