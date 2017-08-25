@@ -13,13 +13,14 @@ import inspect
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
 
-    impot_source_rate = fields.Float(compute='_get_impot_source_rate', string="Taux d'impôt à la source")
+    # impot_source_rate = fields.Float(compute='_get_impot_source_rate', string="Taux d'impôt à la source")
     impot_ecclesiastique = fields.Boolean(string="Avec l'impôt ecclésiastique ?")
     one_revenue = fields.Boolean(string="Un seul revenu ?")
     wage_supplement = fields.Float(string="Montant supp. calcul impôt à la source")
+    group_tarifaire = fields.Char(string="Group tarifaire")
 
     @api.multi
-    def _get_impot_source_rate(self):
+    def _get_impot_source_rate(self, wage, group_tarifaire):
         for employee in self:
             source_rate_employee = []
             tarif_group = []
@@ -50,8 +51,8 @@ class HrEmployee(models.Model):
             if canton:
                 source_rates = employee.read_file(
                     canton,
-                    employee.contract_id.wage+employee.wage_supplement,
-                    nb_child, tarif_group,
+                    wage,
+                    group_tarifaire,
                     employee.impot_ecclesiastique
                 )
                 # for source_rate in source_rates:
@@ -59,10 +60,13 @@ class HrEmployee(models.Model):
                 #         source_rate_employee.append(source_rates)
                 _logger.info(source_rates)
                 if source_rates:
-                    employee.impot_source_rate = source_rates[0].get('percent_tax')
+                    return source_rates[0].get('percent_tax')
+                else:
+                    return 0
 
     @api.model
-    def read_file(self, canton, wage, nb_child, tarif_group, eccles):
+    def read_file(self, canton, wage, tarif_group, eccles):
+        wage = wage/12
         directory_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
         if not os.path.isfile('%s/tar17%s.txt' % (directory_path, canton)): return []
         f = open('%s/tar17%s.txt' % (directory_path, canton), 'r')
@@ -79,7 +83,7 @@ class HrEmployee(models.Model):
             canton = line[4:6]
             code = line[6:16].strip()
             ecclesiastique = (code.find('Y') != -1)
-            group = ''
+            group = tarif_group
             number_child = 0
             initial_validity_date = datetime.strptime(line[16:24], '%Y%m%d').date()
             taxed_revenue_from = int(line[24:31]) + int(line[31:33])/100.0
@@ -87,14 +91,6 @@ class HrEmployee(models.Model):
             taxed_revenue_to = (taxed_revenue_from) + int(line[33:40])
             amount_tax = int(line[45:54])
             percent_tax = int(line[55:57]) + int(line[57:59])/100.0
-            for letter in code:
-                if letter in ['A', 'B', 'C', 'D', 'E', 'F', 'H', 'L', 'M', 'N', 'O', 'P']:
-                    group = letter
-                    break
-            for number in code:
-                if number in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
-                    number_child = int(number)
-                    break
             is_admin_barem = (code.find('HE') != -1)
             is_employee_barem = (code.find('ME') != -1)
             line_parsed.update({
@@ -103,7 +99,6 @@ class HrEmployee(models.Model):
                 'code': code,
                 'ecclesiastique': ecclesiastique,
                 'group': group,
-                'number_child': number_child,
                 'is_admin_barem': is_admin_barem,
                 'is_employee_barem': is_employee_barem,
                 'initial_validity_date': initial_validity_date,
@@ -113,11 +108,6 @@ class HrEmployee(models.Model):
                 'amount_tax': amount_tax,
                 'percent_tax': percent_tax
             })
-            is_in_group = True
-            for group in tarif_group:
-                if group not in code:
-                    is_in_group = False
-            # _logger.info("%s - %s" % (taxed_revenue_from, taxed_revenue_to))
-            if taxed_revenue_from <= wage and taxed_revenue_to > wage and nb_child == number_child and is_in_group and ecclesiastique == eccles:
+            if taxed_revenue_from <= wage and taxed_revenue_to >= wage and group in code and ecclesiastique == eccles:
                 parsed_lines.append(line_parsed)
         return parsed_lines
