@@ -28,11 +28,14 @@ msgstr "Pays d'origine"
 #: model:ir.model.fields,field_description:ons_productivity_stock.field_product_category_onsp_eccn
 #: model:ir.model.fields,field_description:ons_productivity_stock.field_product_product_onsp_eccn
 #: model:ir.model.fields,field_description:ons_productivity_stock.field_product_template_onsp_eccn
+#: model:ir.model.fields,field_description:ons_productivity_stock.field_stock_move_onsp_cat_eccn
+#: model:ir.model.fields,field_description:ons_productivity_stock.field_stock_move_onsp_prod_eccn
 msgid "ECCN"
 msgstr "ECCN"
 
 #. module: ons_productivity_stock
 #: model:ir.model.fields,field_description:ons_productivity_stock.field_product_category_onsp_hs_code
+#: model:ir.model.fields,field_description:ons_productivity_stock.field_stock_move_onsp_hs_code
 msgid "HS Code"
 msgstr "Nomenclature douanière"
 
@@ -50,4 +53,9 @@ msgstr "Modèle d'article"
 #: model:ir.model.fields,help:ons_productivity_stock.field_product_category_onsp_hs_code
 msgid "Standardized code for international shipping and goods declaration"
 msgstr "Code standardisé pour l'expédition international et la déclaration des marchandises"
+
+#. module: ons_productivity_stock
+#: model:ir.model.fields,field_description:ons_productivity_stock.field_stock_move_currency_id
+msgid "Currency"
+msgstr "Devises"
 

@@ -22,6 +22,10 @@ These modules are included in all our hosting solutions.
 Known issues / Roadmap
 ======================
 
+V1.1: 2017-08-24/cyp
+    - Added fields onsp_hs_code, onsp_prod_eccn, onsp_cat_eccn, price_total and currency_id to stock moves
+    - Added the corresponding Border slip report
+
 V1.0: 2017-08-18/lfr
     - Added fields onsp_hs_code, onsp_eccn and onsp_country_origin to product category model
     - Added fields onsp_eccn and onsp_country_origin to product model
