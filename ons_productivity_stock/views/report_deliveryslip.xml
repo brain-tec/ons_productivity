@@ -75,7 +75,11 @@
                         <tbody>
                             <tr t-foreach="o.move_lines" t-as="move">
                                 <td><span t-field="move.product_id"/></td>
-                                <td><span t-field="move.onsp_hs_code"/></td>
+                                <td>
+                                    <!-- <span t-field="move.onsp_hs_code" t-if="move.onsp_hs_code"/> -->
+                                    <span t-field="move.product_id.categ_id.onsp_hs_code" t-if="move.product_id.categ_id.onsp_hs_code"/>
+                                    <span t-field="move.product_id.hs_code" t-if="move.product_id.hs_code and not move.product_id.categ_id.onsp_hs_code"/>
+                                </td>
                                 <td>
                                     <span t-field="move.onsp_prod_eccn" t-if="move.onsp_prod_eccn"/>
                                     <span t-field="move.onsp_cat_eccn" t-if="move.onsp_cat_eccn and not move.onsp_prod_eccn"/>
