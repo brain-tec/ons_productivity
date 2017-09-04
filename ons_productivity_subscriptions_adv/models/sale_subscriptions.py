@@ -11,8 +11,8 @@
 
 
 from odoo import models, fields, api
-import odoo.tools as tools
 from odoo.tools.translate import _
+from odoo.exceptions import UserError
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
 
@@ -317,8 +317,10 @@ class SaleSubscription(models.Model):
                     month = 12
                 if month:
                     asset_cat = self.env['account.asset.category'].search([('type','=','sale'),('active','=',True),('method_number','=',month)])
-                if not asset_cat and line.product_id.product_tmpl_id.deferred_revenue_category_id:
+                if line.product_id.product_tmpl_id.deferred_revenue_category_id:
                     asset_cat = line.product_id.product_tmpl_id.deferred_revenue_category_id
+                if contract.asset_category_id:
+                    asset_cat = contract.asset_category_id
                 if asset_cat:
                     if asset_cat.account_asset_id:
                         values['account_id'] = asset_cat.account_asset_id.id
