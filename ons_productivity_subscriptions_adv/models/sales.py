@@ -149,8 +149,10 @@ class SaleOrderLine(models.Model):
                     month = 12
                 if month:
                     asset_cat = line.env['account.asset.category'].search([('type','=','sale'),('active','=',True),('method_number','=',month)])
-                if not asset_cat and line.product_id.product_tmpl_id.deferred_revenue_category_id:
+                if line.product_id.product_tmpl_id.deferred_revenue_category_id:
                     asset_cat = line.product_id.product_tmpl_id.deferred_revenue_category_id
+                if line.subscription_id.asset_category_id:
+                    asset_cat = line.subscription_id.asset_category_id
 
             values['asset_category_id'] = asset_cat and asset_cat.id or False
             if asset_cat and asset_cat.account_asset_id:

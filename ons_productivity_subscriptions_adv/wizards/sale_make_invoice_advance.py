@@ -30,19 +30,21 @@ class SaleAdvancePaymentInv(models.TransientModel):
             if so_line.subscr_line_id:
                 month = 0
                 if so_line.subscr_line_id.recurring_rule_type in ('dayly','weekly'):
-                    month = 1
+                    month = 0
                 elif so_line.subscr_line_id.recurring_rule_type == 'monthly':
                     month = so_line.subscr_line_id.recurring_interval
                 elif so_line.subscr_line_id.recurring_rule_type == 'yearly':
                     month = so_line.subscr_line_id.recurring_interval * 12
+
                 if month:
-                    asset_cat = self.env['account.asset.category'].search([('active','=',True),('method_number','=',month)])
-                    if asset_cat:
-                        asset_cat = asset_cat[0].id
-                    else:
-                        asset_cat = False
-                if not asset_cat and line.product_id.product_tmpl_id.deferred_revenue_category_id:
-                    asset_cat = line.product_id.product_tmpl_id.deferred_revenue_category_id.id or False
+                    asset_cat = self.env['account.asset.category'].search(
+                        [('type', '=', 'sale'), ('active', '=', True), ('method_number', '=', month)],
+                        limit=1
+                    )
+                    if so_line.product_id.product_tmpl_id.deferred_revenue_category_id:
+                        asset_cat = so_line.product_id.product_tmpl_id.deferred_revenue_category_id
+                    if so_line.subscr_line_id.analytic_account_id.asset_category_id:
+                        asset_cat = so_line.subscr_line_id.analytic_account_id.asset_category_id
 
             line.asset_category_id = asset_cat
 
