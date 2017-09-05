@@ -78,7 +78,7 @@
                                 </div>
                                 <field name="state" invisible="1"/>
                             </form>
-                            <tree string="Quotation Lines" editable="bottom" decoration-info="invoice_status=='to invoice'">
+                            <tree string="Quotation Lines" decoration-info="invoice_status=='to invoice'">
                                 <field name="sequence" widget="handle"/>
                                 <field name="product_id"
                                     attrs="{'readonly': ['|', ('qty_invoiced', '&gt;', 0), ('procurement_ids', '!=', [])]}"
