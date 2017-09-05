@@ -34,7 +34,7 @@
                                             attrs="{'readonly': ['|', ('qty_invoiced', '&gt;', 0), ('procurement_ids', '!=', [])]}"
                                            />
                                         <field name="layout_category_id" groups="sale.group_sale_layout"/>
-                                        <field name="invoice_status" invisible="1"/>
+                                        <field name="invoice_status"/>
                                         <field name="qty_to_invoice" invisible="1"/>
                                         <field name="qty_delivered_updateable" invisible="1"/>
                                         <field name="procurement_ids" invisible="1"/>
