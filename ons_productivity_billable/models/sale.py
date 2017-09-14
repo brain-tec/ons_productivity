@@ -27,10 +27,10 @@ class SaleOrder(models.Model):
         precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
         down_product_id = self.env['ir.values'].get_default('sale.config.settings', 'deposit_product_id_setting')
         for order in self:
-            billed = 0.0
+            # billed = 0.0
 
-            for invoice in order.invoice_ids:
-                billed += invoice.amount_total
+            # for invoice in order.invoice_ids:
+            #     billed += invoice.amount_total
 
             # # Start by cumulating what should be invoiced
             # for line in order.order_line.filtered(lambda l: not float_is_zero(l.qty_to_invoice, precision_digits=precision)):
@@ -47,6 +47,19 @@ class SaleOrder(models.Model):
 
             # if billable < 0.0:
             #     billable = 0.0
-            billable = order.amount_total - billed
-            if billable >= 0:
-                order.amount_billable = billable
+            # billable = order.amount_total - billed
+            # if billable >= 0:
+            #     order.amount_billable = billable
+
+
+            amount = 0.0
+
+            for line in order.order_line:
+                price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
+                # uses qty_to_invoice as main quantity
+                taxes = line.tax_id.compute_all(price, line.order_id.currency_id, line.qty_to_invoice, product=line.product_id, partner=order.partner_shipping_id)
+                amount += taxes.get('total_included', [])
+
+            billable = amount
+
+            order.amount_billable = billable
