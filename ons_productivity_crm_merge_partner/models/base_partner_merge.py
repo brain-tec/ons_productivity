@@ -12,7 +12,7 @@ class MergePartnerAutomatic(osv.TransientModel):
         proxy = self.env['res.partner']
         child_ids = set()
         for partner_id in partner_ids:
-            child_ids = child_ids.union(set(proxy.search([('id', 'child_of', [partner_id])])) - set([partner_id]))
+            child_ids = child_ids.union(set([x.id for x in proxy.search([('id', 'child_of', [partner_id])])]) - set([partner_id]))
         if set(partner_ids).intersection(child_ids):
             for partner_id in proxy.browse(partner_ids):
                 partner_id.parent_id = False
