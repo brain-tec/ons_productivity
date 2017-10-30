@@ -148,7 +148,10 @@ class SaleOrderLine(models.Model):
                 elif line.subscr_line_id.recurring_rule_type == 'yearly':
                     month = 12
                 if month:
-                    asset_cat = line.env['account.asset.category'].search([('type','=','sale'),('active','=',True),('method_number','=',month)])
+                    asset_cat = line.env['account.asset.category'].search(
+                        [('type','=','sale'),('active','=',True),('method_number','=',month)],
+                        limit=1
+                    )
                 if line.product_id.product_tmpl_id.deferred_revenue_category_id:
                     asset_cat = line.product_id.product_tmpl_id.deferred_revenue_category_id
                 if line.subscription_id.asset_category_id:
