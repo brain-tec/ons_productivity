@@ -1,5 +1,0 @@
-"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"access_budget_position_user","budget.position user","model_onsp_budget_position","base.group_user",1,0,0,0
-"access_budget_position_mgr","budget.position mgr","model_onsp_budget_position","account.group_account_manager",1,1,1,1
-"access_budget_pos_period_user","budget.pos.period user","model_onsp_budget_position_period","base.group_user",1,0,0,0
-"access_budget_pos_period_mgr","budget.pos.period mgr","model_onsp_budget_position_period","account.group_account_manager",1,1,1,1

@@ -1,9 +1,0 @@
-"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"access_ons_stats_mgr","ons_productivity_stats.mgr.ons.stats","model_ons_stats","account.group_account_manager",1,1,1,1
-"access_ons_stats_usr","ons_productivity_stats.usr.ons.stats","model_ons_stats","base.group_user",1,0,0,0
-"access_ons_stats_user_line_mgr","ons_productivity_stats.mgr.ons.stats_user_line","model_ons_stats_user_line","account.group_account_manager",1,1,1,1
-"access_ons_stats_user_line_usr","ons_productivity_stats.usr.ons.stats_user_line","model_ons_stats_user_line","base.group_user",1,0,0,0
-"access_ons_stats_currency_line_mgr","ons_productivity_stats.mgr.ons.stats_currency_line","model_ons_stats_currency_line","account.group_account_manager",1,1,1,1
-"access_ons_stats_currency_line_usr","ons_productivity_stats.usr.ons.stats_currency_line","model_ons_stats_currency_line","base.group_user",1,0,0,0
-"access_ons_stats_stats_curr_line_mgr","ons_productivity_stats.mgr.ons.stats_stats_curr_line","model_ons_stats_stats_curr_line","account.group_account_manager",1,1,1,1
-"access_ons_stats_stats_curr_line_usr","ons_productivity_stats.usr.ons.stats_stats_curr_line","model_ons_stats_stats_curr_line","base.group_user",1,0,0,0

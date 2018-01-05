@@ -1,5 +1,0 @@
-"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"access_ons_soap_server_manager","ons_soap_server_manager","model_ons_soap_external_server","ons_productivity_soap.group_ons_soap_server_mgr",1,1,1,1
-"access_ons_soap_server_user","ons_soap_server_user","model_ons_soap_external_server","ons_productivity_soap.group_ons_soap_server_usr",1,0,0,0
-"access_ons_soap_fld_map_manager","ons_soap_fld_map_manager","model_ons_soap_external_server_field_map_line","ons_productivity_soap.group_ons_soap_server_mgr",1,1,1,1
-"access_ons_soap_fld_map_user","ons_soap_fld_map_user","model_ons_soap_external_server_field_map_line","ons_productivity_soap.group_ons_soap_server_usr",1,0,0,0

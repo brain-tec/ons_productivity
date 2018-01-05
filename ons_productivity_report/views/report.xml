@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <template id="product_report_assets" inherit_id="report.assets_common">
-        <xpath expr="." position='inside'>
-            <link href="/ons_productivity_report/static/src/css/report.css" rel="stylesheet"/>
-        </xpath>
-    </template>
-</odoo>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<templates xml:space="preserve">
-    <t t-extends="account.reconciliation">
-        <t t-jquery="p" t-operation="append">
-            <p class='protip'>Tip : Hit ctrl-space to add all proposed move lines.</p>
-        </t>
-    </t>
-</templates>
