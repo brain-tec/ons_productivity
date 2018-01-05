@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2016 Open Net Sarl
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -10,9 +9,10 @@
     'website': 'https://www.open-net.ch',
     'images' : [],
     'depends' : [
-        'l10n_ch_base_bank'
+        'l10n_ch'
     ],
     'data': [
+        'views/bvr_view.xml'
     ],
     'qweb' : [
     ],

@@ -1,0 +1,10 @@
+/* Width of Odoo's main form */
+.o_form_sheet, .oe_form_sheet {
+  width: 98% !important;
+  max-width: 98% !important;
+}
+
+/* Width of Odoo's popup forms */
+.modal-lg {
+  width: 1200px;
+}

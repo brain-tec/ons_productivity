@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_common" name="l10n_ch_isr_report" inherit_id="l10n_ch.assets_common">
+            <xpath expr="." position="inside">
+            	<link href="/ons_productivity_accounting_bvr/static/src/less/report_isr.less" rel="stylesheet"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>
