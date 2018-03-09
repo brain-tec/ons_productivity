@@ -17,6 +17,7 @@
     'images' : [],
     'depends' : [
         'account',
+        'l10n_ch'
     ],
     'data': [
         'data/country_group_data.xml',
