@@ -19,6 +19,8 @@
         'account',
     ],
     'data': [
+        'data/country_group_data.xml',
+        'data/fiscal_position_data.xml',
         'views/view_invoices.xml',
     ],
     'js': [
