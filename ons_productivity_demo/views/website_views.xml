@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<menuitem id="utm.menu_link_tracker_root" name="Link Tracker" active="false" groups="base.group_no_one"/>
+		<menuitem name="UTMs" id="utm.marketing_utm" parent="website.menu_website_configuration" sequence="99" groups="base.group_no_one"/>
+		<menuitem name="Link Tracker" id="link_tracker.menu_url_shortener_main" parent="website.menu_website_configuration" sequence="98" groups="base.group_no_one"/>
+	</data>
+</odoo>
