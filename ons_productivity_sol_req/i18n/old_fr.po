@@ -1,0 +1,22 @@
+# French translation for ons_productivity_sol_req
+#
+
+msgid ""
+msgstr ""
+"Project-Id-Version: openobject-addons\n"
+"POT-Creation-Date: 2015-11-19 21:08+0000\n"
+"PO-Revision-Date: 2015-11-19 21:08+0000\n"
+"Last-Translator: <cyp@open-net.ch>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: ons_productivity_sol_req
+#: model:ir.model.fields,field_description:ons_productivity_sol_req.field_sale_order_line_requested_date
+msgid "Requested Date"
+msgstr "Date demandée"
+
+#. module: ons_productivity_sol_req
+#: model:ir.model.fields,field_description:ons_productivity_sol_req.field_sale_order_hide_requested_date
+msgid "Must hide requested date"
+msgstr "Doit cacher la date demandée"

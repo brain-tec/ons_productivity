@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: views/view_products.xml
+  Module: ons_productivity_subscriptions_adv
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2016-TODAY Open-Net Ltd. All rights reserved.
+-->
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="onsp_view_prod_tmpl_subscription_form">
+            <field name="name">Open Net productivity: product template subscription form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='group_standard_price']" position="after">
+                    <group name='recurrency'>
+                        <field name="recurring_rule_type"/>
+                        <field name="recurring_interval" attrs="{'invisible':[('recurring_rule_type','=','none')]}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,11 @@
+@charset "UTF-8";
+.oe_subtotal_footer_no_sep {
+  min-width: 108px;
+  margin-top: 2px;
+  padding-top: 0px;
+  font-weight: bold;
+  font-size: 16.9px;
+}
+td.o_td_label > label.oe_subtotal_footer_no_sep {
+  font-size: 16.9px;
+}
