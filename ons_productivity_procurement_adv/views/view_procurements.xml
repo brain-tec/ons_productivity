@@ -1,0 +1,90 @@
+<!--
+  File: views/view_procurements.xml
+  Module: ons_productivity_procurement_adv
+
+  Created by cyp@open-net.ch
+
+  Copyright (c) 2018-TODAY Open-Net Ltd. All rights reserved.
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+
+    <record model="ir.ui.view" id="onsp_view_procurement_rule_list">
+        <field name="name">Open Net Productivity: procurement rules list</field>
+        <field name="model">procurement.rule</field>
+        <field name="inherit_id" ref="stock.view_procurement_rule_tree"/>
+        <field name="priority" eval="17"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="location_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="onsp_action_procurement_rule_list">
+        <field name="name">Procurement Rules</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">procurement.rule</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <menuitem
+            id="onsp_menu_procurement_rule_list"
+            action="onsp_action_procurement_rule_list"
+            parent="stock.menu_warehouse_config"
+    />
+
+    <record model="ir.ui.view" id="onsp_view_procurement_group_list">
+        <field name="name">Open Net Productivity: procurement requisitions list</field>
+        <field name="model">procurement.group</field>
+        <field name="arch" type="xml">
+            <tree string="Procurement Requisitions">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="onsp_action_procurement_group_list">
+        <field name="name">Procurement Requisitions</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">procurement.group</field>
+        <field name="view_mode">tree</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <menuitem
+            id="onsp_menu_procurement_group_list"
+            action="onsp_action_procurement_group_list"
+            parent="stock.menu_warehouse_config"
+    />
+
+    <record model="ir.ui.view" id="onsp_view_procurement_message_list">
+        <field name="name">Open Net Productivity: procurement messages list</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_tree"/>
+        <field name="priority" eval="17"/>
+        <field name="arch" type="xml">
+            <field name="summary" position="after">
+                <field name="note"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="onsp_action_procurement_message_list">
+        <field name="name">Procurement Messages</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_mode">tree</field>
+        <field name="view_type">form</field>
+        <field name="domain">[('res_model_id','=','product.template')]</field>
+    </record>
+
+    <menuitem
+            id="onsp_menu_procurement_message_list"
+            action="onsp_action_procurement_message_list"
+            parent="stock.menu_warehouse_report"
+    />
+
+</odoo>
