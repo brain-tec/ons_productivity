@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name' : 'Open Net Productivity: Bank Statement Import',
+    'name' : 'Open Net Productivity: Import CAMT.054',
     'version' : '1.0',
     'author' : 'Open Net Sàrl',
     'category' : 'Accounting',

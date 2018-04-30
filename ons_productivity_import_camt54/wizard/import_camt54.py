@@ -53,7 +53,7 @@ class AccountBankStatementImport(models.TransientModel):
                 matched_invoice = False
 
                 matched_invoice = self._match_ref(ref, ref_type)
-                name = matched_invoice.number if matched_invoice else ('Ref: '+ ref)
+                name = ref
 
                 transactions.append({
                     'name': name,
@@ -61,7 +61,7 @@ class AccountBankStatementImport(models.TransientModel):
                     'amount': amount,
                     'unique_import_id': '{}-{}'.format(trans_AcctSvcrRef, entry_AcctSvcrRef),
                     'partner_name': partner_name,
-                    'ref': ref,
+                    'ref': ref if not matched_invoice else matched_invoice.number,
                     'account_number':partner_acc_nmb,
                 })
 
