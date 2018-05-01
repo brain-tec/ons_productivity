@@ -31,39 +31,53 @@ class AccountBankStatementImport(models.TransientModel):
     def _parse_file_camt54(self, xml_root):
         namespaces = {k or 'xmlns': v for k, v in xml_root.nsmap.items()}
         statement = []
-        account_number = xml_root[0].xpath('xmlns:Ntfctn/xmlns:Acct/xmlns:Id/xmlns:IBAN/text()', namespaces=namespaces)[0]
+        account_number = xml_root[0].xpath(
+            'xmlns:Ntfctn/xmlns:Acct/xmlns:Id/xmlns:IBAN/text() | xmlns:Ntfctn/xmlns:Acct/xmlns:Id/xmlns:Othr/xmlns:Id/text()', 
+        namespaces=namespaces)[0]
         currency = None
 
         for entry in xml_root[0].findall('xmlns:Ntfctn/xmlns:Ntry', namespaces=namespaces):
-            entry_ref = entry.xpath('xmlns:NtryRef/text()', namespaces=namespaces)[0]
-            entry_date = entry.xpath('xmlns:BookgDt/xmlns:Dt/text()', namespaces=namespaces)[0]
-            entry_AcctSvcrRef = entry.xpath('xmlns:AcctSvcrRef/text()', namespaces=namespaces)[0]
+            entry_ref = entry.xpath('xmlns:NtryRef/text()', namespaces=namespaces)[0] or None
+            entry_date = entry.xpath('xmlns:BookgDt/xmlns:Dt/text() | xmlns:BookgDt/xmlns:DtTm/text()', namespaces=namespaces)[0] or None
+            entry_AcctSvcrRef = entry.xpath('xmlns:AcctSvcrRef/text()', namespaces=namespaces)[0] or None
 
             transactions = []
 
             for transaction in entry.findall('xmlns:NtryDtls/xmlns:TxDtls', namespaces=namespaces):
-                ref = transaction.xpath('xmlns:RmtInf//xmlns:Ref/text()', namespaces=namespaces)[0]
-                ref_type = transaction.xpath('xmlns:RmtInf//xmlns:CdOrPrtry/xmlns:Prtry/text()', namespaces=namespaces)[0]
+                # references
+                ref = transaction.xpath('xmlns:RmtInf//xmlns:Ref/text()', namespaces=namespaces)[0] or None
+                ref_type = transaction.xpath(
+                    'xmlns:RmtInf//xmlns:CdOrPrtry/xmlns:Prtry/text() | xmlns:RmtInf//xmlns:CdOrPrtry/xmlns:Cd/text()', 
+                namespaces=namespaces)[0] or None
+                matched_invoice = False
+                matched_invoice = self._match_ref(ref, ref_type)
+
+                # transaction info
                 amount = transaction.xpath('xmlns:Amt/text()', namespaces=namespaces)[0]
                 # currency = transaction.xpath('xmlns:Amt/@Ccy', namespaces=namespaces)[0]
-                trans_date = transaction.xpath('xmlns:RltdDts/xmlns:AccptncDtTm/text()', namespaces=namespaces)[0].split('T')[0]
+                trans_type = transaction.xpath('xmlns:CdtDbtInd/text()', namespaces=namespaces)[0]
+                trans_date = transaction.xpath('xmlns:RltdDts/xmlns:AccptncDtTm/text() | xmlns:RltdDts/xmlns:IntrBkSttlmDt/text()', namespaces=namespaces)[0] or None
+                if 'T' in trans_date:
+                    trans_date = trans_date.split('T')[0]
                 trans_AcctSvcrRef = transaction.xpath('xmlns:Refs/xmlns:AcctSvcrRef/text()', namespaces=namespaces)[0]
-                partner_name = transaction.xpath('xmlns:RltdPties/xmlns:Dbtr/xmlns:Nm/text()', namespaces=namespaces)[0]
-                partner_acc_nmb = transaction.xpath('xmlns:RltdPties/xmlns:DbtrAcct/xmlns:Id/xmlns:IBAN/text()', namespaces=namespaces)[0] or False
-                matched_invoice = False
 
-                matched_invoice = self._match_ref(ref, ref_type)
-                name = ref
-
-                transactions.append({
-                    'name': name,
-                    'date': trans_date,
-                    'amount': amount,
-                    'unique_import_id': '{}-{}'.format(trans_AcctSvcrRef, entry_AcctSvcrRef),
-                    'partner_name': partner_name,
-                    'ref': ref if not matched_invoice else matched_invoice.number,
-                    'account_number':partner_acc_nmb,
-                })
+                # partner info
+                partner_type = 'Cdtr' if trans_type == 'DBIT' else 'Dbtr'
+                partner_name = transaction.xpath('xmlns:RltdPties/xmlns:%s/xmlns:Nm/text()' % partner_type, namespaces=namespaces)[0] or None
+                partner_acc_nmb = transaction.xpath(
+                    'xmlns:RltdPties/xmlns:%sAcct/xmlns:Id/xmlns:IBAN/text() | xmlns:RltdPties/xmlns:%sAcct/xmlns:Id/xmlns:Othr/xmlns:Id/text()' 
+                % (partner_type, partner_type), namespaces=namespaces)[0]
+                
+                if trans_AcctSvcrRef and (entry_AcctSvcrRef or entry_ref):
+                    transactions.append({
+                        'name': ref,
+                        'date': trans_date,
+                        'amount': -amount if trans_type == 'DBIT' else amount,
+                        'unique_import_id': '{}-{}'.format(trans_AcctSvcrRef, entry_AcctSvcrRef or entry_ref),
+                        'partner_name': partner_name,
+                        'ref': ref if not matched_invoice else matched_invoice.number,
+                        'account_number':partner_acc_nmb,
+                    })
 
             statement.append({
                 'name': entry_ref,
