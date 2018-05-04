@@ -8,8 +8,12 @@ The 'productivity' modules is a complete family of modules offering improvement 
 These modules are maintained by Open Net, Swiss Partner of OpenERP.
 These modules are included in all our hosting solutions.
 
+**Warning :**
+    * This module should only be installed on databases with l10n_ch standard chart of accounts
+
 **Features list :**
-    * Adds some missing accounting data to the base
+    * Addings missing: res.country.group, account.fiscal.position, account.fiscal.position.tax data
+
 
 **Author :** 
     * Open Net Sarl
