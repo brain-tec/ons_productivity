@@ -66,7 +66,7 @@ class AccountBankStatementImport(models.TransientModel):
                 partner_name = transaction.xpath('xmlns:RltdPties/xmlns:%s/xmlns:Nm/text()' % partner_type, namespaces=namespaces)[0] or None
                 partner_acc_nmb = transaction.xpath(
                     'xmlns:RltdPties/xmlns:%sAcct/xmlns:Id/xmlns:IBAN/text() | xmlns:RltdPties/xmlns:%sAcct/xmlns:Id/xmlns:Othr/xmlns:Id/text()' 
-                % (partner_type, partner_type), namespaces=namespaces)[0]
+                % (partner_type, partner_type), namespaces=namespaces) or None
                 
                 if trans_AcctSvcrRef and (entry_AcctSvcrRef or entry_ref):
                     transactions.append({
