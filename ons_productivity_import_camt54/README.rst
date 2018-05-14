@@ -1,7 +1,7 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
-Open Net Productivity : Bank Statement Import
+Open Net Productivity : Import CAMT.054
 ================================================================
 
 The 'productivity' modules is a complete family of modules offering improvement for OpenERP.

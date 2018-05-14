@@ -7,11 +7,11 @@
 
   Copyright (c) 2016-TODAY Open-Net Ltd. All rights reserved.
 -->
-<openerp>
+<odoo>
     <data>
 
         <record model="ir.ui.view" id="onsp_view_suppl_invoice_form">
-            <field name="name">Open Net productivity acocuntinf: suplpier invoice form</field>
+            <field name="name">Open Net productivity acocunting: suplier invoice form</field>
             <field name="model">account.invoice</field>
             <field name="inherit_id" ref="account.invoice_supplier_form"/>
             <field name="priority" eval="17"/>
@@ -23,4 +23,4 @@
         </record>
 
     </data>
-</openerp>
+</odoo>
