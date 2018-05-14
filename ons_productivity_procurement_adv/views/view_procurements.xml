@@ -42,6 +42,7 @@
         <field name="arch" type="xml">
             <tree string="Procurement Requisitions">
                 <field name="name"/>
+                <field name="move_type"/>
             </tree>
         </field>
     </record>
@@ -50,7 +51,7 @@
         <field name="name">Procurement Requisitions</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">procurement.group</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">tree,form</field>
         <field name="view_type">form</field>
     </record>
 
