@@ -3,12 +3,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import io
-import re
 from lxml import etree
 from odoo import models
 
 import logging
 _logger = logging.getLogger(__name__)
+
 
 class AccountBankStatementImport(models.TransientModel):
     _inherit = 'account.bank.statement.import'
@@ -16,7 +16,8 @@ class AccountBankStatementImport(models.TransientModel):
     def _check_camt54(self, data_file):
         try:
             root = etree.parse(io.BytesIO(data_file)).getroot()
-        except:
+        except Exception as e:
+            _logger.error('PARSING ERROR %s' % e)
             return None
         if root.tag.find('camt.054') != -1:
             return root
@@ -32,8 +33,9 @@ class AccountBankStatementImport(models.TransientModel):
         namespaces = {k or 'xmlns': v for k, v in xml_root.nsmap.items()}
         statement = []
         account_number = xml_root[0].xpath(
-            'xmlns:Ntfctn/xmlns:Acct/xmlns:Id/xmlns:IBAN/text() | xmlns:Ntfctn/xmlns:Acct/xmlns:Id/xmlns:Othr/xmlns:Id/text()', 
-        namespaces=namespaces)[0]
+            'xmlns:Ntfctn/xmlns:Acct/xmlns:Id/xmlns:IBAN/text() | xmlns:Ntfctn/xmlns:Acct/xmlns:Id/xmlns:Othr/xmlns:Id/text()',
+            namespaces=namespaces
+        )[0]
         currency = None
 
         for entry in xml_root[0].findall('xmlns:Ntfctn/xmlns:Ntry', namespaces=namespaces):
@@ -47,8 +49,8 @@ class AccountBankStatementImport(models.TransientModel):
                 # references
                 ref = transaction.xpath('xmlns:RmtInf//xmlns:Ref/text()', namespaces=namespaces)[0] or None
                 ref_type = transaction.xpath(
-                    'xmlns:RmtInf//xmlns:CdOrPrtry/xmlns:Prtry/text() | xmlns:RmtInf//xmlns:CdOrPrtry/xmlns:Cd/text()', 
-                namespaces=namespaces)[0] or None
+                    'xmlns:RmtInf//xmlns:CdOrPrtry/xmlns:Prtry/text() | xmlns:RmtInf//xmlns:CdOrPrtry/xmlns:Cd/text()',
+                    namespaces=namespaces)[0] or None
                 matched_invoice = False
                 matched_invoice = self._match_ref(ref, ref_type)
 
@@ -63,9 +65,9 @@ class AccountBankStatementImport(models.TransientModel):
 
                 # partner info
                 partner_type = 'Cdtr' if trans_type == 'DBIT' else 'Dbtr'
-                partner_name = transaction.xpath('xmlns:RltdPties/xmlns:%s/xmlns:Nm/text()' % partner_type, namespaces=namespaces)[0] or None
+                partner_name = transaction.xpath('xmlns:RltdPties/xmlns:%s/xmlns:Nm/text()' % partner_type, namespaces=namespaces)[0] if transaction.xpath('xmlns:RltdPties/xmlns:%s/xmlns:Nm/text()' % partner_type, namespaces=namespaces) else None
                 partner_acc_nmb = transaction.xpath(
-                    'xmlns:RltdPties/xmlns:%sAcct/xmlns:Id/xmlns:IBAN/text() | xmlns:RltdPties/xmlns:%sAcct/xmlns:Id/xmlns:Othr/xmlns:Id/text()' 
+                    'xmlns:RltdPties/xmlns:%sAcct/xmlns:Id/xmlns:IBAN/text() | xmlns:RltdPties/xmlns:%sAcct/xmlns:Id/xmlns:Othr/xmlns:Id/text()'
                 % (partner_type, partner_type), namespaces=namespaces) or None
                 
                 if trans_AcctSvcrRef and (entry_AcctSvcrRef or entry_ref):
