@@ -10,6 +10,7 @@ These modules are included in all our hosting solutions.
 
 **Features list :**
     * Choose BVR account as partner_bank_id on an invoice.
+    * Copies the ISR reference to the invoice journal entry reference 
 
 **Author :** 
     * Open Net Sarl
@@ -26,6 +27,7 @@ Contributors
 ------------
 
 * David Coninckx <dco@open-net.ch>
+* Leonardo Franja <lfr@open-net.ch>
 
 Maintainer
 ----------
