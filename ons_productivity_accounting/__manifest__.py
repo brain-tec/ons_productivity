@@ -22,7 +22,8 @@
     'data': [
         'views/onsp_accounting.xml',
         'views/view_invoices.xml',
-        'views/view_partner_bank.xml'
+        'views/view_partner_bank.xml',
+        'views/view_account_move.xml'
     ],
     'js': [
     ],
