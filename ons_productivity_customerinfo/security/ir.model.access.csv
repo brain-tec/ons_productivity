@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_supplierinfo_stock_manager,product.supplierinfo stock_manager,model_product_customerinfo,stock.group_stock_manager,1,1,1,1
+access_product_supplierinfo_purchase_manager,product.supplierinfo purchase_manager,model_product_customerinfo,purchase.group_purchase_manager,1,1,1,1
+access_product_supplierinfo_user,product.supplierinfo.user,model_product_customerinfo,base.group_user,1,0,0,0
