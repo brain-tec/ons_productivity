@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <form string="Customer Information">
                     <group string="Customer">
-                        <field name="name"/>
+                        <field name="name" context="{'default_customer': 0, 'search_default_customer': 1, 'default_customer': 1}"/>
                         <field name="product_name"/>
                         <field name="product_code"/>
                     </group>
