@@ -38,13 +38,17 @@ class AccountBankStatementImport(models.TransientModel):
 
             for entry in statement.findall('ns:Ntry', ns):
                 for trans_dtls in entry.findall('ns:NtryDtls/ns:TxDtls', ns):
+                    _logger.info(trans_dtls.xpath('ns:Refs/ns:AcctSvcrRef/text()', namespaces=ns))
                     sequence += 1
                     entry_vals = {
                         'sequence': sequence,
                     }
 
                     # Amount 1..1
-                    amount = float(trans_dtls.xpath('ns:Amt/text()', namespaces=ns)[0])
+                    if trans_dtls.xpath('ns:Amt/text()', namespaces=ns):
+                        amount = float(trans_dtls.xpath('ns:Amt/text()', namespaces=ns)[0])
+                    else:
+                        amount = float(entry.xpath('ns:Amt/text()', namespaces=ns)[0])
 
                     # Credit Or Debit Indicator 1..1
                     sign = entry.xpath('ns:CdtDbtInd/text()', namespaces=ns)[0]
@@ -55,8 +59,12 @@ class AccountBankStatementImport(models.TransientModel):
                     entry_vals['amount'] = amount
 
                     # Amount currency
-                    instruc_amount = trans_dtls.xpath('ns:AmtDtls/ns:InstdAmt/ns:Amt/text()', namespaces=ns)
-                    instruc_curr = trans_dtls.xpath('ns:AmtDtls/ns:InstdAmt/ns:Amt/@Ccy', namespaces=ns)
+                    if trans_dtls.xpath('ns:AmtDtls', namespaces=ns):
+                        instruc_amount = trans_dtls.xpath('ns:AmtDtls/ns:InstdAmt/ns:Amt/text()', namespaces=ns)
+                        instruc_curr = trans_dtls.xpath('ns:AmtDtls/ns:InstdAmt/ns:Amt/@Ccy', namespaces=ns)
+                    else:
+                        instruc_amount = entry.xpath('ns:AmtDtls/ns:InstdAmt/ns:Amt/text()', namespaces=ns)
+                        instruc_curr = entry.xpath('ns:AmtDtls/ns:InstdAmt/ns:Amt/@Ccy', namespaces=ns)
                     if instruc_amount and instruc_curr and instruc_curr[0] != currency and instruc_curr[0] in curr_cache:
                         amount_currency = sum([float(x) for x in instruc_amount])
                         entry_vals['amount_currency'] = amount_currency if entry_vals['amount'] > 0 else -amount_currency
@@ -79,7 +87,7 @@ class AccountBankStatementImport(models.TransientModel):
                         matched_invoice = self._match_ref(ref, ref_type)
 
                     transaction_name = trans_dtls.xpath('ns:RmtInf/ns:Ustrd/text()', namespaces=ns)
-                    _logger.info(transaction_name)
+                    # _logger.info(transaction_name)
                     transaction_name = transaction_name or entry.xpath('ns:AddtlNtryInf/text()', namespaces=ns)
                     partner_name = entry.xpath('.//ns:RltdPties/ns:%s/ns:Nm/text()' % (counter_party,), namespaces=ns)
                     entry_vals['name'] = ref if ref else ' '.join(transaction_name) if transaction_name else '/'
