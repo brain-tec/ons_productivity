@@ -38,7 +38,6 @@ class AccountBankStatementImport(models.TransientModel):
 
             for entry in statement.findall('ns:Ntry', ns):
                 for trans_dtls in entry.findall('ns:NtryDtls/ns:TxDtls', ns):
-                    _logger.info(trans_dtls.xpath('ns:Refs/ns:AcctSvcrRef/text()', namespaces=ns))
                     sequence += 1
                     entry_vals = {
                         'sequence': sequence,
