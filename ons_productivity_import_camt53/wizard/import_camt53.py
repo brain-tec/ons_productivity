@@ -37,7 +37,8 @@ class AccountBankStatementImport(models.TransientModel):
             currency = statement.xpath('ns:Acct/ns:Ccy/text() | ns:Bal/ns:Amt/@Ccy', namespaces=ns)[0]
 
             for entry in statement.findall('ns:Ntry', ns):
-                for trans_dtls in entry.findall('ns:NtryDtls/ns:TxDtls', ns):
+                tx_details = entry.findall('ns:NtryDtls/ns:TxDtls', ns) or entry.findall('ns:NtryDtls', ns) or [entry]
+                for trans_dtls in tx_details:
                     sequence += 1
                     entry_vals = {
                         'sequence': sequence,
