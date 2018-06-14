@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="fix_account_account_types" model="ir.actions.server">
+        <field name="name">Fix les types des Account</field>
+        <field name="model_id" ref="account.model_account_account"/>
+        <field name="state">code</field>
+        <field name="code"><![CDATA[
+accounts = env['account.account'].search([])
+accounts._onsp_fix_accounts_types()
+        ]]></field>
+    </record>
+</odoo>
