@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_followup_followup_line_manager,followup.followup.line.manager,model_followup_followup_line,account.group_account_manager,1,1,1,1
+access_account_followup_followup_manager,followup.followup.manager,model_followup_followup,account.group_account_manager,1,1,1,1
+access_account_followup_followup_line_invoice,followup.followup.line.billing,model_followup_followup_line,account.group_account_invoice,1,0,0,0
+access_account_followup_followup_invoice,followup.followup.billing,model_followup_followup,account.group_account_invoice,1,0,0,0

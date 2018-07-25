@@ -1,0 +1,699 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* followup
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-28 14:57+0000\n"
+"PO-Revision-Date: 2018-05-28 14:57+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ons_productivity_followup
+#: model:mail.template,body_html:ons_productivity_followup.email_template_followup_level2
+msgid "\n"
+"				\n"
+"	  <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \"><p>Dear ${object.name},</p><p>\n"
+"	      Despite several reminders, your account is still not settled.\n"
+"	      Unless full payment is made in next 8 days, legal action for the recovery of the debt will be taken without\n"
+"	      further notice.\n"
+"	      I trust that this action will prove unnecessary and details of due payments is printed below.\n"
+"	      In case of any queries concerning this matter, do not hesitate to contact our accounting department.\n"
+"	    </p><br/>\n"
+"	    Best Regards,\n"
+"	    <br/><br/>\n"
+"	    ${user.name}\n"
+"	    <br/></div>\n"
+"	  \n"
+"			"
+msgstr "\n"
+"				\n"
+"	  <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \"><p>Dear ${object.name},</p><p>\n"
+"	      Despite several reminders, your account is still not settled.\n"
+"	      Unless full payment is made in next 8 days, legal action for the recovery of the debt will be taken without\n"
+"	      further notice.\n"
+"	      I trust that this action will prove unnecessary and details of due payments is printed below.\n"
+"	      In case of any queries concerning this matter, do not hesitate to contact our accounting department.\n"
+"	    </p><br/>\n"
+"	    Best Regards,\n"
+"	    <br/><br/>\n"
+"	    ${user.name}\n"
+"	    <br/></div>\n"
+"	  \n"
+"			"
+
+#. module: ons_productivity_followup
+#: model:mail.template,body_html:ons_productivity_followup.email_template_followup_default
+msgid "\n"
+"				\n"
+"	  <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \"><p>Dear ${object.name},</p><p>\n"
+"	      Exception made if there was a mistake of ours, it seems that the following amount stays unpaid. Please, take\n"
+"	      appropriate measures in order to carry out this payment in the next 8 days.\n"
+"	      Would your payment have been carried out after this mail was sent, please ignore this message. Do not hesitate to\n"
+"	      contact our accounting department.\n"
+"	    </p><br/>\n"
+"	    Best Regards,\n"
+"	    <br/><br/>\n"
+"	    ${user.name}\n"
+"	    <br/></div>\n"
+"	  \n"
+"			"
+msgstr "\n"
+"				\n"
+"	  <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \"><p>Dear ${object.name},</p><p>\n"
+"	      Exception made if there was a mistake of ours, it seems that the following amount stays unpaid. Please, take\n"
+"	      appropriate measures in order to carry out this payment in the next 8 days.\n"
+"	      Would your payment have been carried out after this mail was sent, please ignore this message. Do not hesitate to\n"
+"	      contact our accounting department.\n"
+"	    </p><br/>\n"
+"	    Best Regards,\n"
+"	    <br/><br/>\n"
+"	    ${user.name}\n"
+"	    <br/></div>\n"
+"	  \n"
+"			"
+
+#. module: ons_productivity_followup
+#: model:mail.template,body_html:ons_productivity_followup.email_template_followup_level0
+msgid "\n"
+"				\n"
+"	  <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \"><p>Dear ${object.name},</p><p>\n"
+"	      Exception made if there was a mistake of ours, it seems that the following amount stays unpaid. Please, take\n"
+"	      appropriate measures in order to carry out this payment in the next 8 days.\n"
+"\n"
+"	      Would your payment have been carried out after this mail was sent, please ignore this message. Do not hesitate to\n"
+"	      contact our accounting department.  \n"
+"\n"
+"	    </p><br/>\n"
+"	    Best Regards,\n"
+"	    <br/><br/>\n"
+"	    ${user.name}\n"
+"\n"
+"	    <br/></div>\n"
+"	  \n"
+"			"
+msgstr "\n"
+"				\n"
+"	  <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \"><p>Dear ${object.name},</p><p>\n"
+"	      Exception made if there was a mistake of ours, it seems that the following amount stays unpaid. Please, take\n"
+"	      appropriate measures in order to carry out this payment in the next 8 days.\n"
+"\n"
+"	      Would your payment have been carried out after this mail was sent, please ignore this message. Do not hesitate to\n"
+"	      contact our accounting department.  \n"
+"\n"
+"	    </p><br/>\n"
+"	    Best Regards,\n"
+"	    <br/><br/>\n"
+"	    ${user.name}\n"
+"\n"
+"	    <br/></div>\n"
+"	  \n"
+"			"
+
+#. module: ons_productivity_followup
+#: model:mail.template,body_html:ons_productivity_followup.email_template_followup_level1
+msgid "\n"
+"				\n"
+"	  <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \"><p>Dear ${object.name},</p><p>\n"
+"	      We are disappointed to see that despite sending a reminder, that your account is now seriously overdue.\n"
+"	      It is essential that immediate payment is made, otherwise we will have to consider placing a stop on your account\n"
+"	      which means that we will no longer be able to supply your company with (goods/services).\n"
+"	      Please, take appropriate measures in order to carry out this payment in the next 8 days.\n"
+"	      If there is a problem with paying invoice that we are not aware of, do not hesitate to contact our accounting\n"
+"	      department. so that we can resolve the matter quickly.\n"
+"	      Details of due payments is printed below.\n"
+"	    </p><br/>\n"
+"	    Best Regards,\n"
+"\n"
+"	    <br/><br/>\n"
+"	    ${user.name}\n"
+"	    <br/></div>\n"
+"	  \n"
+"			"
+msgstr "\n"
+"				\n"
+"	  <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \"><p>Dear ${object.name},</p><p>\n"
+"	      We are disappointed to see that despite sending a reminder, that your account is now seriously overdue.\n"
+"	      It is essential that immediate payment is made, otherwise we will have to consider placing a stop on your account\n"
+"	      which means that we will no longer be able to supply your company with (goods/services).\n"
+"	      Please, take appropriate measures in order to carry out this payment in the next 8 days.\n"
+"	      If there is a problem with paying invoice that we are not aware of, do not hesitate to contact our accounting\n"
+"	      department. so that we can resolve the matter quickly.\n"
+"	      Details of due payments is printed below.\n"
+"	    </p><br/>\n"
+"	    Best Regards,\n"
+"\n"
+"	    <br/><br/>\n"
+"	    ${user.name}\n"
+"	    <br/></div>\n"
+"	  \n"
+"			"
+
+#. module: ons_productivity_followup
+#: model:mail.template,subject:ons_productivity_followup.email_template_followup_default
+#: model:mail.template,subject:ons_productivity_followup.email_template_followup_level0
+#: model:mail.template,subject:ons_productivity_followup.email_template_followup_level1
+#: model:mail.template,subject:ons_productivity_followup.email_template_followup_level2
+msgid "${user.company_id.name} Payment Reminder"
+msgstr "${user.company_id.name} Rappel"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_print_followup_wizard
+msgid "<span attrs=\"{'invisible': [('step', '!=', 1)]}\">Account move line to be printed</span>\n"
+"          <span attrs=\"{'invisible': [('step', '!=', 2)]}\">Account move line printed.</span>"
+msgstr "<span attrs=\"{'invisible': [('step', '!=', 1)]}\">Lignes à imprimer</span>\n"
+"          <span attrs=\"{'invisible': [('step', '!=', 2)]}\">Imprimé</span>"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_send_followup_wizard
+msgid "<span>Correct them before sending follow-up emails.</span>"
+msgstr "<span>Corriger les avant d'envoyer les emails</span>"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.report_account_statement_template
+#: model:ir.ui.view,arch_db:ons_productivity_followup.report_followup_template
+msgid "<strong>Total</strong>"
+msgstr "<strong>Total</strong>"
+
+#. module: ons_productivity_followup
+#: model:ir.model,name:ons_productivity_followup.model_followup_followup
+msgid "Account Follow-up"
+msgstr "Account Follow-up"
+
+#. module: ons_productivity_followup
+#: model:ir.actions.act_window,name:ons_productivity_followup.action_account_statement_followup
+#: model:ir.ui.menu,name:ons_productivity_followup.menu_account_statement_followup
+msgid "Account Statement"
+msgstr "Relevé client"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_res_partner_account_move_line_letter_id
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_res_users_account_move_line_letter_id
+msgid "Account move line letter id"
+msgstr "Account move line letter id"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_print_account_statement_wizard
+msgid "Account statement"
+msgstr "Relevé client"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line_action
+msgid "Action"
+msgstr "Action"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line_manual_action_note
+msgid "Action To Do"
+msgstr "Action à effectuer"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_followup_followup_line_form
+msgid "After"
+msgstr "Après"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_account_move_line_residual
+msgid "Amount Due"
+msgstr "Montant dù"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.report_account_statement_template
+#: model:ir.ui.view,arch_db:ons_productivity_followup.report_followup_template
+msgid "Amout due"
+msgstr "Montant dù"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line_manual_action_responsible_id
+msgid "Assign a responsible"
+msgstr "Assign a responsible"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_print_account_statement_wizard
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_print_followup_wizard
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_send_followup_wizard
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.report_account_statement_template
+msgid "Cher client,<br/><br/>Veuillez trouver ci-dessous le relevé de vos factures.<br/><br/>Si votre paiement devait avoir croisé ce courrier, veuillez ne pas en\n"
+"tenir compte."
+msgstr "Cher client,<br/><br/>Veuillez trouver ci-dessous le relevé de vos factures.<br/><br/>Si votre paiement devait avoir croisé ce courrier, veuillez ne pas en\n"
+"tenir compte."
+
+#. module: ons_productivity_followup
+#: model:ir.actions.act_window,help:ons_productivity_followup.action_followup_definition_form
+msgid "Click to define follow-up levels and their related actions."
+msgstr "Cliquer pour définir vos niveaux de rappels"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_create_uid
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line_create_uid
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_account_statement_create_uid_4368
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_followup_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_create_date
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line_create_date
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_account_statement_create_date_4375
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_followup_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.account_statement_followup_tree
+#: model:ir.ui.view,arch_db:ons_productivity_followup.move_line_followup_tree
+#: model:ir.ui.view,arch_db:ons_productivity_followup.report_account_statement_template
+#: model:ir.ui.view,arch_db:ons_productivity_followup.report_followup_template
+msgid "Date"
+msgstr "Date "
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_account_move_line_day_late
+msgid "Day late"
+msgstr "Jours de retard"
+
+#. module: ons_productivity_followup
+#: model:ons_productivity_followup.followup_line,description:ons_productivity_followup.demo_followup_line3
+msgid "Despite several reminders, your account is still not settled.	  Unless full payment is made in next 8 days, then legal action for the recovery of the debt will be taken without further notice.	  I trust that this action will prove unnecessary and details of due payments is printed below.	  In case of any queries concerning this matter, do not hesitate to contact our accounting department.	  Best Regards,	"
+msgstr "A l'examen de votre compte, nous constatons que, sauf erreur ou omission de notre part, nous n'avons toujours pas reçu à ce jour de règlement des factures reprises sur le relevé ci-dessous. Nous vous remercions de bien vouloir régulariser cette situation dans les meilleurs délais.Si votre paiement devait avoir croisé ce courrier, veuillez ne pas en tenir compte.Veuillez recevoir nos meilleures salutations."
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_followup_followup_line_form
+msgid "Details"
+msgstr "Détails"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_display_name
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line_display_name
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_account_statement_display_name_4369
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_followup_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.move_line_followup_tree
+msgid "Due date"
+msgstr "Date d'échéance"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line_delay
+msgid "Due days"
+msgstr "Jours de délais"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line_email_template_id
+msgid "Email Template"
+msgstr "Template d'email"
+
+#. module: ons_productivity_followup
+#: model:ons_productivity_followup.followup_line,description:ons_productivity_followup.demo_followup_line1
+#: model:ons_productivity_followup.followup_line,description:ons_productivity_followup.demo_followup_line2
+msgid "Exception made if there was a mistake of ours, it seems that the following amount stays unpaid. Please, take appropriate measures in order to carry out this payment in the next 8 days.	  Would your payment have been carried out after this mail was sent, please ignore this message. Do not hesitate to contact our accounting department.  	  Best Regards,	"
+msgstr "A l'examen de votre compte, nous constatons que, sauf erreur ou omission de notre part, nous n'avons toujours pas reçu à ce jour de règlement des factures reprises sur le relevé ci-dessous. Nous vous remercions de bien vouloir régulariser cette situation dans les meilleurs délais.Si votre paiement devait avoir croisé ce courrier, veuillez ne pas en tenir compte.Veuillez recevoir nos meilleures salutations."
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.move_line_followup_tree
+msgid "Excluded"
+msgstr "Aucun suivi"
+
+#. module: ons_productivity_followup
+#: model:ir.actions.report.xml,name:ons_productivity_followup.action_report_account_statement
+#: model:ir.actions.report.xml,name:ons_productivity_followup.action_report_followup
+#: model:ir.actions.report.xml,name:ons_productivity_followup.action_report_followup_letter
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_followup_line
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line_followup_id
+#: model:ir.ui.menu,name:ons_productivity_followup.followup_main_menu
+#: model:ir.ui.view,arch_db:ons_productivity_followup.move_line_followup_search_view
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_followup_followup_form
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_followup_followup_tree
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_print_followup_wizard
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_send_followup_wizard
+msgid "Follow-up"
+msgstr "Rappel"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line_name
+msgid "Follow-up Action"
+msgstr "Action de rappel"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_account_move_line_follow_line_id
+#: model:ir.ui.view,arch_db:ons_productivity_followup.move_line_followup_search_view
+msgid "Follow-up Level"
+msgstr "Dernier rappel effectué"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.report_followup_template
+msgid "Follow-up Level"
+msgstr "Niveau de rappel"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.menu,name:ons_productivity_followup.followup_menu
+msgid "Follow-up Levels"
+msgstr "Niveaux de rappels"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_followup_followup_line_form
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_followup_followup_line_tree
+msgid "Follow-up Steps"
+msgstr "Etape de rappel"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.move_line_followup_tree
+msgid "Follow-up TO DO"
+msgstr "Rappel à faire"
+
+#. module: ons_productivity_followup
+#: model:ir.actions.act_window,name:ons_productivity_followup.action_account_move_line_followup
+#: model:ir.ui.menu,name:ons_productivity_followup.move_line_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.move_line_followup_search_view
+msgid "Follow-up To Do"
+msgstr "Rappel à faire"
+
+#. module: ons_productivity_followup
+#: model:ir.model,name:ons_productivity_followup.model_followup_followup_line
+msgid "Follow-up criteria"
+msgstr "Follow-up criteria"
+
+#. module: ons_productivity_followup
+#: model:ir.actions.act_window,help:ons_productivity_followup.action_followup_definition_form
+msgid "For each step, specify the actions to be taken and delay in days. It is	  possible to use print and e-mail templates to send specific messages to	  the customer."
+msgstr "Pour chaques etapes, précisé une action à effectuer"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,help:ons_productivity_followup.field_followup_followup_line_sequence
+msgid "Gives the sequence order when displaying a list of follow-ups lines."
+msgstr "Gives the sequence order when displaying a list of follow-ups lines."
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_id
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line_id
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_account_statement_id_4376
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_followup_id
+msgid "ID"
+msgstr "ID"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.account_statement_followup_tree
+#: model:ir.ui.view,arch_db:ons_productivity_followup.move_line_followup_tree
+#: model:ir.ui.view,arch_db:ons_productivity_followup.report_account_statement_template
+#: model:ir.ui.view,arch_db:ons_productivity_followup.report_followup_template
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_followup_is_partner_without_email
+msgid "Is partner without email"
+msgstr "Is partner without email"
+
+#. module: ons_productivity_followup
+#: model:ir.model,name:ons_productivity_followup.model_account_move_line
+msgid "Journal Item"
+msgstr "Écriture comptable"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup___last_update
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line___last_update
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_account_statement___last_update_4370
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_followup___last_update
+msgid "Last Modified on"
+msgstr "Dernière Modification le"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line_write_uid
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_write_uid
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_account_statement_write_uid_4372
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_followup_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line_write_date
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_write_date
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_account_statement_write_date_4374
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_followup_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.move_line_followup_tree
+msgid "Last follow-up date"
+msgstr "Date du dernier rappel"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_account_move_line_follow_date
+msgid "Latest Follow-up"
+msgstr "Date du dernier rappel"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_followup_lines
+msgid "Lines"
+msgstr "Lignes"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_followup_lines_letter
+msgid "Lines letter"
+msgstr "Lines letter"
+
+#. module: ons_productivity_followup
+#: selection:ons_productivity_followup.followup_line,action:0
+msgid "Manual action"
+msgstr "Action manuelle"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.report_account_statement_template
+#: model:ir.ui.view,arch_db:ons_productivity_followup.report_followup_template
+msgid "Maturity Date"
+msgstr "Date d'échéance"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.account_statement_followup_tree
+#: model:ir.ui.view,arch_db:ons_productivity_followup.move_line_followup_tree
+msgid "Move Line Follow-up"
+msgstr "Move Line Follow-up"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_account_move_line_next_follow_line_id
+msgid "Next follow line id"
+msgstr "Next follow line id"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_account_move_line_next_followup_date
+msgid "Next followup date"
+msgstr "Date du prochain rappel"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.move_line_followup_search_view
+msgid "Overdue"
+msgstr "en retard"
+
+#. module: ons_productivity_followup
+#: model:ir.model,name:ons_productivity_followup.model_res_partner
+#: model:ir.ui.view,arch_db:ons_productivity_followup.account_statement_followup_tree
+#: model:ir.ui.view,arch_db:ons_productivity_followup.move_line_followup_tree
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.account_move_line_partner_tree
+msgid "Partner entries"
+msgstr "Partner entries"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_followup_partner_without_email
+msgid "Partner without email"
+msgstr "partenaire sans email"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.menu,name:ons_productivity_followup.menu_finance_followup
+msgid "Payment Follow-up"
+msgstr "Suivi des rappels"
+
+#. module: ons_productivity_followup
+#: model:ir.actions.act_window,name:ons_productivity_followup.action_followup_definition_form
+msgid "Payment Follow-ups"
+msgstr "Suivi des rappels"
+
+#. module: ons_productivity_followup
+#: model:ir.actions.act_window,name:ons_productivity_followup.action_view_account_move_line_followup_letter
+#: model:ir.model,name:ons_productivity_followup.model_followup_print_followup
+msgid "Print Follow-up"
+msgstr "Imprimer les rappels"
+
+#. module: ons_productivity_followup
+#: model:ir.actions.act_window,name:ons_productivity_followup.action_view_account_statement
+#: model:ir.model,name:ons_productivity_followup.model_followup_print_account_statement
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_print_account_statement_wizard
+msgid "Print account statement"
+msgstr "Imprimer le relevé client"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_print_followup_wizard
+msgid "Print letter"
+msgstr "Imprimer les lettres"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line_description
+msgid "Printed Message"
+msgstr "Message inclu dans le PDF"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,help:ons_productivity_followup.field_account_move_line_residual
+msgid "Remaining amount due."
+msgstr "Montant restant"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.account_statement_followup_tree
+#: model:ir.ui.view,arch_db:ons_productivity_followup.move_line_followup_tree
+msgid "Residual amount"
+msgstr "Montant impayé"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_followup_filter
+msgid "Search Follow-up"
+msgstr "Search Follow-up"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.account_statement_search_view
+msgid "Search Journal Items"
+msgstr "Chercher des pièces"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_account_statement_selected_account_move_line_4371
+msgid "Selected account move line"
+msgstr "Lignes comptables sélectionnées"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_account_statement_selected_partner_4373
+msgid "Selected partner"
+msgstr "Partenaires sélectionnés"
+
+#. module: ons_productivity_followup
+#: selection:ons_productivity_followup.followup_line,action:0
+msgid "Send a letter"
+msgstr "Envoyer une lettre"
+
+#. module: ons_productivity_followup
+#: selection:ons_productivity_followup.followup_line,action:0
+msgid "Send an email"
+msgstr "Envoyer un email"
+
+#. module: ons_productivity_followup
+#: model:ir.actions.act_window,name:ons_productivity_followup.action_view_account_move_line_followup
+msgid "Send email Follow-up"
+msgstr "Envoyer les emails de rappels"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_send_followup_wizard
+msgid "Send emails"
+msgstr "Envoyer les emails"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_followup_line_sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_send_followup_wizard
+msgid "Some partner(s) don't have contact email"
+msgstr "Certains partenaires n'ont pas d'adresse email de contact."
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_followup_print_followup_step
+msgid "Step"
+msgstr "Etape"
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,help:ons_productivity_followup.field_followup_followup_line_delay
+msgid "The number of days after the due date of the invoice to wait before sending the reminder.  Could be negative if you want to send a polite alert beforehand."
+msgstr "Nombre de jours après la date d'échéance avant d'envoyer un rappel"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_followup_followup_form
+msgid "To remind customers of paying their invoices, you can	    define different actions depending on how severely	    overdue the customer is. These actions are bundled	    into follow-up levels that are triggered when the due	    date of an invoice has passed a certain	    number of days. If there are other overdue invoices for the 	    same customer, the actions of the most 	    overdue invoice will be executed."
+msgstr "Pour rappeller à vos clients de payer leurs factures, vous pouvez définir différentes actions en fonction du retard de leurs factures.\""
+
+#. module: ons_productivity_followup
+#: model:ir.model.fields,field_description:ons_productivity_followup.field_account_move_line_amount_total
+msgid "Total"
+msgstr "Total"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.account_statement_followup_tree
+#: model:ir.ui.view,arch_db:ons_productivity_followup.move_line_followup_tree
+#: model:ir.ui.view,arch_db:ons_productivity_followup.report_account_statement_template
+msgid "Total amount"
+msgstr "Montant total"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.account_move_line_partner_tree
+msgid "Total credit"
+msgstr "Crédit total"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.account_move_line_partner_tree
+msgid "Total debit"
+msgstr "Débit total"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_print_followup_wizard
+msgid "Validate"
+msgstr "Valider"
+
+#. module: ons_productivity_followup
+#: model:ir.model,name:ons_productivity_followup.model_account_config_settings
+msgid "account.config.settings"
+msgstr "account.config.settings"
+
+#. module: ons_productivity_followup
+#: model:ir.ui.view,arch_db:ons_productivity_followup.view_followup_followup_line_form
+msgid "days overdue, do the following actions:"
+msgstr "jours de retard, faire cette action :"
+
+<<<<<<< HEAD
+=======
+#. module: ons_productivity_followup
+#: model:ir.actions.report.xml,name:ons_productivity_followup.action_report_followup_letter
+msgid "Follow-up (current level)"
+msgstr "Rappel (niveau actuel)"
+
+#. module: ons_productivity_followup
+#: model:ir.actions.report.xml,name:ons_productivity_followup.action_report_followup_letter_last_lvl
+msgid "Follow-up (last level)"
+msgstr "Rappel (dernier niveau)"
+
+#. module: ons_productivity_followup
+#: selection:followup.followup_line,action:0
+msgid "Send a letter"
+msgstr "Envoyer une lettre"
+
+#. module: ons_productivity_followup
+#: selection:followup.followup_line,action:0
+msgid "Send an email"
+msgstr "Envoyer un courriel"
+
+#. module: ons_productivity_followup
+#: selection:followup.followup_line,action:0
+msgid "Manual action"
+msgstr "Action manuelle"
+>>>>>>> 9.0

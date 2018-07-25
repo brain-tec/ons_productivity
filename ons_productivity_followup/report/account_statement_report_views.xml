@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <report
+    string="Account statement"
+    id="action_report_account_statement"
+    model="account.move.line"
+    report_type="qweb-pdf"
+    name="ons_productivity_followup.report_account_statement"
+    file="ons_productivity_followup.report_account_statement">
+  </report>
+</odoo>
