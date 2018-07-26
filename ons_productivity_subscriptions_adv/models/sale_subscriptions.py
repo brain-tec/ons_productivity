@@ -197,7 +197,7 @@ class SaleSubscription(models.Model):
                     if line.recurring_rule_type and line.recurring_rule_type != 'none':
                         next_date = datetime.now()
                         if self.date_start:
-                            next_date = datetime.strptime(subs.date_start, '%Y-%m-%d')
+                            next_date = datetime.strptime(self.date_start, '%Y-%m-%d')
                             line_item.update({
                                 'recurring_next_date': next_date
                             })
@@ -562,7 +562,7 @@ class SaleSubscription(models.Model):
                         # Before creating a new sale, let's see if this partner still has one that is available
                         lst = False
 
-                        if not self.env['ir.values'].get_default('sale.config.settings', 'auto_done_setting'):
+                        if not self.env['ir.config_parameter'].sudo().get_param('sale.auto_done_setting'):
                             # Main setting: sale in 'sale' state may be modified
                             domain_sale = self.setup_sale_filter(sub, [
                                     ('partner_id', '=', sub.partner_id.id),
@@ -746,42 +746,42 @@ class SaleSubscriptionTemplate(models.Model):
         'Generates',
         default='invoice')
 
-class SaleSubscriptionTemplateLine(models.Model):
-    _inherit = "sale.subscription.template.line"
-
-    recurring_rule_type = fields.Selection([
-            ('none', 'None'),
-            ('daily', 'Day(s)'),
-            ('weekly', 'Week(s)'),
-            ('monthly', 'Month(s)'),
-            ('yearly', 'Year(s)')
-        ],
-        string='Recurrency',
-        required=True,
-        help="Invoice automatically repeat at specified interval",
-        default='none')
-
-    recurring_interval = fields.Integer(
-        string='Interval', 
-        help="Repeat every (Days/Week/Month/Year)",
-        default=1)
-
-    is_active = fields.Boolean(
-        string='Active',
-        default=True)
-
-    is_billable = fields.Boolean(
-        string='Billable',
-        default=True)
-
-    cancellation_deadline = fields.Integer(
-        string='Days before',
-        default=0)
-
-    use_new_so_inv = fields.Boolean(
-        string='New sale/invoice',
-        default=False)
-
-    sale_layout_cat_id = fields.Many2one(
-        'sale.layout_category',
-        string='Section')
+# class SaleSubscriptionTemplateLine(models.Model):
+#     _inherit = "sale.subscription.template.line"
+#
+#     recurring_rule_type = fields.Selection([
+#             ('none', 'None'),
+#             ('daily', 'Day(s)'),
+#             ('weekly', 'Week(s)'),
+#             ('monthly', 'Month(s)'),
+#             ('yearly', 'Year(s)')
+#         ],
+#         string='Recurrency',
+#         required=True,
+#         help="Invoice automatically repeat at specified interval",
+#         default='none')
+#
+#     recurring_interval = fields.Integer(
+#         string='Interval',
+#         help="Repeat every (Days/Week/Month/Year)",
+#         default=1)
+#
+#     is_active = fields.Boolean(
+#         string='Active',
+#         default=True)
+#
+#     is_billable = fields.Boolean(
+#         string='Billable',
+#         default=True)
+#
+#     cancellation_deadline = fields.Integer(
+#         string='Days before',
+#         default=0)
+#
+#     use_new_so_inv = fields.Boolean(
+#         string='New sale/invoice',
+#         default=False)
+#
+#     sale_layout_cat_id = fields.Many2one(
+#         'sale.layout_category',
+#         string='Section')

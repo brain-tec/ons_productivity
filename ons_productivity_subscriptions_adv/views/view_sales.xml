@@ -19,7 +19,9 @@
                 <xpath expr="//field[@name='subscription_id']" position="attributes">
                     <attribute name="attrs"/>
                 </xpath>
+                <!--
                 <xpath expr="//div[@class='alert alert-info']" position="replace"/>
+                -->
                 <xpath expr="//notebook/page[1]" position="attributes">
                     <attribute name="attrs">{'invisible':[('state','not in',['sale','done'])]}</attribute>
                 </xpath>
@@ -31,13 +33,12 @@
                                     <group>
                                         <field name="product_id"
                                             context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
-                                            attrs="{'readonly': ['|', ('qty_invoiced', '&gt;', 0), ('procurement_ids', '!=', [])]}"
+                                            attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"
                                            />
                                         <field name="layout_category_id" groups="sale.group_sale_layout"/>
                                         <field name="invoice_status"/>
                                         <field name="qty_to_invoice" invisible="1"/>
                                         <field name="qty_delivered_updateable" invisible="1"/>
-                                        <field name="procurement_ids" invisible="1"/>
                                         <field name="price_subtotal" invisible="1"/>
                                         <label for="product_uom_qty" string="Ordered Quantity"/>
                                         <div>
@@ -81,7 +82,7 @@
                             <tree string="Quotation Lines" decoration-info="invoice_status=='to invoice'">
                                 <field name="sequence" widget="handle"/>
                                 <field name="product_id"
-                                    attrs="{'readonly': ['|', ('qty_invoiced', '&gt;', 0), ('procurement_ids', '!=', [])]}"
+                                    attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"
                                     context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
                                    />
                                 <field name="name"/>
@@ -105,7 +106,6 @@
                                 <field name="discount" groups="sale.group_discount_per_so_line"/>
                                 <field name="price_subtotal" widget="monetary"/>
                                 <field name="qty_delivered_updateable" invisible="1"/>
-                                <field name="procurement_ids" invisible="1"/>
                                 <field name="state" invisible="1"/>
                                 <field name="invoice_status" invisible="1"/>
                                 <field name="customer_lead" invisible="1"/>
@@ -152,8 +152,10 @@
                                 <field name="product_id"/>
                                 <field name="name"/>
                                 <field name="quantity"/>
+                                <!--
                                 <field name="actual_quantity"/>
                                 <field name="sold_quantity"/>
+                                -->
                                 <field name="uom_id"/>
                                 <field name="recurring_rule_type"/>
                                 <field name="recurring_interval"/>

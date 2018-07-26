@@ -10,11 +10,11 @@
     'website': 'https://www.open-net.ch',
     'depends' : [
         'sale',
-        'sale_contract',
+        'sale_subscription',
         'sale_order_dates',
         'ons_productivity_sol_req',
         'account_asset',
-        'sale_contract_asset'
+        'sale_subscription_asset'
     ],
     'data': [
         'views/onsp_base.xml',
