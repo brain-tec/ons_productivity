@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="view_send_followup_wizard" model="ir.ui.view">
+      <field name="name">print.followup.full.form</field>
+      <field name="model">followup.print.followup</field>
+      <field name="arch" type="xml">
+        <form string="Follow-up">
+          <field name="step" invisible="1"/>
+          <field name="is_partner_without_email" invisible="1"/>
+          <group string="Some partner(s) don't have contact email" attrs="{'invisible': [('is_partner_without_email', '=', False)]}">
+            <field name="partner_without_email">
+              <tree>
+                <field name="display_name"/>
+              </tree>
+            </field>
+            <span>Correct them before sending follow-up emails.</span>
+          </group>
+          <field name="lines" attrs="{'invisible': [('is_partner_without_email', '=', True)]}">
+            <tree>
+              <field name="move_id"/>
+              <field name="partner_id"/>
+              <field name="amount_residual"/>
+            </tree>
+          </field>
+          <footer>
+            <button name="send_email" string="Send emails" type="object" class="oe_highlight" attrs="{'invisible': [('is_partner_without_email', '=', True), ('step', '!=', 1)]}"/>
+            <button string="Cancel" class="oe_link" special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_print_followup_wizard" model="ir.ui.view">
+      <field name="name">print.followup.full.form</field>
+      <field name="model">followup.print.followup</field>
+      <field name="arch" type="xml">
+        <form string="Follow-up">
+          <field name="step" invisible="1"/>
+          <span attrs="{'invisible': [('step', '!=', 1)]}">Account move line to be printed</span>
+          <span attrs="{'invisible': [('step', '!=', 2)]}">Account move line printed.</span>
+          <field name="lines_letter">
+            <tree>
+              <field name="move_id"/>
+              <field name="partner_id"/>
+              <field name="amount_residual"/>
+            </tree>
+          </field>
+          <footer>
+            <button name="print_letter" string="Print letter" type="object" class="oe_highlight" attrs="{'invisible': [('step', '!=', 1)]}"/>
+            <button special="cancel" string="Validate" type="object" class="oe_highlight" attrs="{'invisible': [('step', '!=', 2)]}"/>
+            <button string="Cancel" class="oe_link" special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_view_account_move_line_followup" model="ir.actions.act_window">
+      <field name="name">Send email Follow-up</field>
+      <field name="res_model">followup.print.followup</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="view_send_followup_wizard"/>
+      <field name="binding_model_id" ref="account.model_account_move_line" />
+      <field name="target">new</field>
+    </record>
+
+    <record id="action_view_account_move_line_followup_letter" model="ir.actions.act_window">
+      <field name="name">Print Follow-up</field>
+      <field name="res_model">followup.print.followup</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="view_print_followup_wizard"/>
+      <field name="binding_model_id" ref="account.model_account_move_line" />
+      <field name="target">new</field>
+    </record>
+
+    <record model="ir.actions.server" id="action_account_move_line_followup_value_letter">
+      <field name="model_id" ref="account.model_account_move_line" />
+      <field name="name">Print Follow-up</field>
+      <field name="key2">client_action_multi</field>
+      <field name="value" eval="'ir.actions.act_window,' +str(ref('action_view_account_move_line_followup_letter'))" />
+      <field name="key">action</field>
+      <field name="model">account.move.line</field>
+    </record>
+
+    <record model="ir.actions.server" id="action_account_move_line_followup_value">
+      <field name="model_id" ref="account.model_account_move_line" />
+      <field name="name">Send email Follow-up</field>
+      <field name="key2">client_action_multi</field>
+      <field name="value" eval="'ir.actions.act_window,' +str(ref('action_view_account_move_line_followup'))" />
+      <field name="key">action</field>
+      <field name="model">account.move.line</field>
+    </record>
+  </data>
+</odoo>
