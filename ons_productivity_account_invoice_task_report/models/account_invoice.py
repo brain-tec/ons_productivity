@@ -19,7 +19,7 @@ class AccountInvoice(models.Model):
 			for invoice_line in record.invoice_line_ids:
 				for sale_line in invoice_line.sale_line_ids:
 					if record.task_date_from:
-						for task in sale_line.task_ids:
+						for task in sale_line.task_id:
 							# records[task] = []
 							if task.timesheet_ids:
 								timesheets = []
