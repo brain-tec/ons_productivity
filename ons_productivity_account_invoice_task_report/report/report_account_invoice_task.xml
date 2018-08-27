@@ -4,7 +4,7 @@
         <template id="ons_report_template_account_invoice_task">
             <t t-call="report.html_container">
                 <t t-as="o" t-foreach="docs">
-                    <t t-call="report.external_layout">
+                    <t t-call="web.external_layout">
                         <div class="page">
                             <t t-call="ons_productivity_account_invoice_task_report.report_invoice_document"/>
                             <t t-set="tasks" t-value="o._get_tasks()"/>
