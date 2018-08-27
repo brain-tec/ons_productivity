@@ -470,9 +470,8 @@
             </t>
         </template>
 
-        <template id="report_invoice_document_bank_infos" inherit_id="account_payment_partner.report_invoice_payment_mode">
+        <!-- <template id="report_invoice_document_bank_infos" inherit_id="account_payment_partner.report_invoice_payment_mode">
             <xpath expr="//span[@t-field='o.partner_bank_id.bank_name']/../.." position="replace">
-                <!-- BANK INFO -->
                 <div style="page-break-inside: avoid;" t-if="o.type == 'out_invoice' and o.state == 'open' or o.state == 'paid'">
                     <div>
                         <strong>Relation bancaire:</strong>
@@ -502,7 +501,7 @@
                     <span t-field="o.fiscal_position_id.note"/>
                 </p>
             </xpath>
-        </template>
+        </template> -->
 
         <report
             file="ons_productivity_account_invoice_task_report.ons_report_template_account_invoice_task" 
