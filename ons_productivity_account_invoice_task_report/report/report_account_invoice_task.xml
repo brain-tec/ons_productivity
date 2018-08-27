@@ -363,8 +363,8 @@
                     <span t-if="o.partner_bank_id.acc_number">IBAN : CH64 0900 0000 1754 5075 1<br/></span>
                     <span t-if="o.partner_bank_id.bank_bic">SWIFT : <span t-field="o.partner_bank_id.bank_bic"/><br/></span>
                     <span t-if="o.partner_bank_id.ccp">CPP : <span t-field="o.partner_bank_id.ccp"/></span><br/>
-                    <span t-if="o.slip_ids.reference">Ref BVR : <span t-field="o.slip_ids.reference"/></span><br/>
-                    <span t-if="o.slip_ids.scan_line">Scan line : <span t-field="o.slip_ids.scan_line"/></span><br/><br/><br/>
+                    <!-- <span t-if="o.slip_ids.reference">Ref BVR : <span t-field="o.slip_ids.reference"/></span><br/>
+                    <span t-if="o.slip_ids.scan_line">Scan line : <span t-field="o.slip_ids.scan_line"/></span><br/><br/><br/> -->
                 </div>
                 <p t-if="o.comment">
                     <span t-field="o.comment"/>
